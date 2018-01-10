@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<accounts>
+	<account name="Bitstamp">
+		<username></username>
+		<apiKey>h1dWq4evMwnxfCm0VSGTAOa7ch7vDw0t</apiKey>
+		<key></key>
+	</account>
+	<account name="Bittrex">
+		<username></username>
+		<apiKey>dca62c9528b942c282568784ddd1eaf3</apiKey>
+		<key></key>
+	</account>
+</accounts>

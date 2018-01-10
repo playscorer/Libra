@@ -1,0 +1,23 @@
+<balances>
+  <balanceMap>
+    <Bitstamp>
+      <XRP>
+        <initialBalance>30</initialBalance>
+        <lastBalancedAmount>30</lastBalancedAmount>
+        <minResidualBalance>10</minResidualBalance>
+      </XRP>
+    </Bitstamp>
+    <Bittrex>
+      <XRP>
+        <initialBalance>39.94211667</initialBalance>
+        <lastBalancedAmount>39.94211667</lastBalancedAmount>
+        <minResidualBalance>10</minResidualBalance>
+      </XRP>
+      <XVG>
+        <initialBalance>55960.00594415</initialBalance>
+        <lastBalancedAmount>55960.00594415</lastBalancedAmount>
+        <minResidualBalance>10</minResidualBalance>
+      </XVG>
+    </Bittrex>
+  </balanceMap>
+</balances>
