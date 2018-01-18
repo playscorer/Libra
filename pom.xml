@@ -1,21 +1,29 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>coinbalancer</groupId>
-	<artifactId>coinbalancer</artifactId>
+	<groupId>arbitrail</groupId>
+	<artifactId>libra</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>CoinBalancer</name>
+	<name>Libra</name>
+
+	<repositories>
+	    <repository>
+	      <id>sonatype-oss-snapshot</id>
+	      <snapshots/>
+	      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+	    </repository>
+    </repositories>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-core</artifactId>
-			<version>4.3.2</version>
+			<version>4.3.3-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-examples</artifactId>
-			<version>4.3.2</version>
+			<version>4.3.3-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>log4j</groupId>

@@ -1,4 +1,4 @@
-package libra.model;
+package arbitrail.libra.model;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 

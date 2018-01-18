@@ -1,6 +1,7 @@
-package libra.model;
+package arbitrail.libra.model;
 
 import org.knowm.xchange.BaseExchange;
+import org.knowm.xchange.binance.BinanceExchange;
 import org.knowm.xchange.bitfinex.v1.BitfinexExchange;
 import org.knowm.xchange.bitstamp.BitstampExchange;
 import org.knowm.xchange.bittrex.BittrexExchange;
@@ -11,7 +12,7 @@ public enum AccountToExchange {
 	Bitstamp(BitstampExchange.class), 
 	Bittrex(BittrexExchange.class), 
 	Bitfinex(BitfinexExchange.class), 
-	//Binance(BinanceExchange.class), 
+	Binance(BinanceExchange.class), 
 	Hitbtc(HitbtcExchange.class), 
 	Cex(CexIOExchange.class);
 	

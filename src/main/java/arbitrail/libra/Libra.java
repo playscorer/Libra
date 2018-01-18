@@ -1,4 +1,4 @@
-package libra;
+package arbitrail.libra;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,12 +10,12 @@ import org.knowm.xchange.Exchange;
 import org.knowm.xchange.currency.Currency;
 import org.knowm.xchange.dto.account.AccountInfo;
 
-import libra.model.Balances;
-import libra.model.MyBalance;
-import libra.service.BalancerService;
-import libra.service.BalancerServiceImpl;
-import libra.utils.Parser;
-import libra.utils.Utils;
+import arbitrail.libra.model.Balances;
+import arbitrail.libra.model.MyBalance;
+import arbitrail.libra.service.BalancerService;
+import arbitrail.libra.service.BalancerServiceImpl;
+import arbitrail.libra.utils.Parser;
+import arbitrail.libra.utils.Utils;
 
 public class Libra extends Thread {
 
@@ -33,11 +33,13 @@ public class Libra extends Thread {
 
 	@Override
 	public void run() {
+		LOG.info("Libra has started!");
 		while (true) {
 			try {
+				balances = operations.balanceAccounts(exchangeMap, currencies, balances);
 				LOG.info("Sleeping for (ms) : " + frequency);
 				Thread.sleep(frequency);
-				balances = operations.balanceAccounts(exchangeMap, currencies, balances);
+				//TODO get the balances uptodate
 				Parser.saveAccountsBalanceToFile(balances);
 			} catch (InterruptedException | IOException e) {
 				LOG.error(e);

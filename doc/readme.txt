@@ -10,3 +10,7 @@ How to run the program ?
 1/ run Libra in init mode by setting the VM arg init to true
 2/ edit the balances.xml file by setting the desired minResidualBalance for each currency
 3/ run Libra in init mode false in order to start balancing the accounts
+
+Algorithm
+- under the computed threshold (balance_check_threshold * max(init_balance, last_balance)) a rebalance is triggered
+- amountToWithdraw = min((fullBalance - emptyBalance) / 2, fullBalance - minResidualBalance)

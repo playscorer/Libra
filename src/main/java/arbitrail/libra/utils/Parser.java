@@ -1,4 +1,4 @@
-package libra.utils;
+package arbitrail.libra.utils;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -14,9 +14,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
-import libra.model.Accounts;
-import libra.model.Balances;
-import libra.model.Currencies;
+import arbitrail.libra.model.Accounts;
+import arbitrail.libra.model.Balances;
+import arbitrail.libra.model.Currencies;
 
 
 public class Parser {

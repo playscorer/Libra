@@ -1,4 +1,4 @@
-package libra.service;
+package arbitrail.libra.service;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -19,15 +19,15 @@ import org.knowm.xchange.exceptions.ExchangeException;
 import org.knowm.xchange.exceptions.NotAvailableFromExchangeException;
 import org.knowm.xchange.exceptions.NotYetImplementedForExchangeException;
 
-import libra.model.Account;
-import libra.model.Accounts;
-import libra.model.Balances;
-import libra.model.Currencies;
-import libra.model.MyBalance;
-import libra.model.MyCurrency;
-import libra.utils.Parser;
-import libra.utils.Transformer;
-import libra.utils.Utils;
+import arbitrail.libra.model.Account;
+import arbitrail.libra.model.Accounts;
+import arbitrail.libra.model.Balances;
+import arbitrail.libra.model.Currencies;
+import arbitrail.libra.model.MyBalance;
+import arbitrail.libra.model.MyCurrency;
+import arbitrail.libra.utils.Parser;
+import arbitrail.libra.utils.Transformer;
+import arbitrail.libra.utils.Utils;
 
 public class BalancerServiceImpl implements BalancerService {
 	
@@ -208,7 +208,7 @@ public class BalancerServiceImpl implements BalancerService {
 					
 					try {
 						balance(toExchange, fromExchange, currency, fromAccountInitialBalance.getMinResidualBalance());
-						
+						//TODO externalize this code to wait for the withdrawal to be done
 						if (!simulate) {
 							Balance newIncreasedBalance = entry.getValue().getWallet().getBalance(currency);
 							Balance newDecreasedBalance = exchangeMap.get(fromExchange).getWallet().getBalance(currency);
@@ -233,19 +233,28 @@ public class BalancerServiceImpl implements BalancerService {
 		
 		Balance toBalance = toExchange.getAccountService().getAccountInfo().getWallet().getBalance(currency);
 		Balance fromBalance = fromExchange.getAccountService().getAccountInfo().getWallet().getBalance(currency);
-		LOG.info("Source exchange balance : " + fromBalance.getAvailable() + " / Destination exchange balance " + toBalance.getAvailable());
+		LOG.info("Source exchange [" + fromExchangeName + " -> " + currency.getDisplayName() + "] balance : "
+				+ fromBalance.getAvailable() + " / Destination exchange [" + toExchangeName + " -> "
+				+ currency.getDisplayName() + "] balance : " + toBalance.getAvailable());
 		
-		BigDecimal averageAmount = fromBalance.getAvailable().subtract(toBalance.getAvailable()).divide(BigDecimal.valueOf(2));
+		BigDecimal balancedOffset = fromBalance.getAvailable().subtract(toBalance.getAvailable()).divide(BigDecimal.valueOf(2));
 		BigDecimal allowedWithdrawableAmount = fromBalance.getAvailable().subtract(minResidualBalance);
-		BigDecimal amountToWithdraw = averageAmount.min(allowedWithdrawableAmount);
-		LOG.info("amountToWithdraw from account : " + fromExchangeName + " -> " + toExchangeName + " : " + amountToWithdraw);
+		BigDecimal amountToWithdraw = balancedOffset.min(allowedWithdrawableAmount);
+		
+		// amountToWithdraw cannot be negative
+		if (BigDecimal.ZERO.compareTo(amountToWithdraw) >= 0) {
+			LOG.error("Withdraw amount can't be negative or 0 - please check the minResidualBalance = " + minResidualBalance + " for " + fromExchangeName + " -> " + currency.getDisplayName());
+			return;
+		}
+		
+		LOG.info("amountToWithdraw [" + fromExchangeName + " -> " + toExchangeName + "] : " + amountToWithdraw);
 		
  		String depositAddress = toExchange.getAccountService().requestDepositAddress(currency);
-		LOG.debug("Deposit address account to deposit : " + depositAddress);
+		LOG.debug("Deposit address [" + toExchangeName + " -> " + currency.getDisplayName() + "] : " + depositAddress);
 
 		if (!simulate) {
 			String withdrawResult = fromExchange.getAccountService().withdrawFunds(currency, amountToWithdraw, depositAddress);
-			LOG.info("withdrawResult = " + withdrawResult);	
+			LOG.debug("withdrawResult = " + withdrawResult);	
 		}
 	}
 

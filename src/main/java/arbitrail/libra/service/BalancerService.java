@@ -1,4 +1,4 @@
-package libra.service;
+package arbitrail.libra.service;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -14,8 +14,8 @@ import org.knowm.xchange.exceptions.ExchangeException;
 import org.knowm.xchange.exceptions.NotAvailableFromExchangeException;
 import org.knowm.xchange.exceptions.NotYetImplementedForExchangeException;
 
-import libra.model.Balances;
-import libra.model.MyBalance;
+import arbitrail.libra.model.Balances;
+import arbitrail.libra.model.MyBalance;
 
 public interface BalancerService {
 	
