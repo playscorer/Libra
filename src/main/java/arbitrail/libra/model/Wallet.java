@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-public class MyBalance {
+public class Wallet {
 	
 	@JacksonXmlProperty(localName = "initialBalance")
 	private BigDecimal initialBalance;
@@ -15,15 +15,23 @@ public class MyBalance {
 	@JacksonXmlProperty(localName = "minResidualBalance")
 	private BigDecimal minResidualBalance;
 
-	public MyBalance() {
+	@JacksonXmlProperty(localName = "paymentIdForXRP")
+	private String paymentIdForXRP;
+	
+	public Wallet() {
 		super();
 	}
 
-	public MyBalance(BigDecimal initialBalance, BigDecimal lastBalancedAmount, BigDecimal minResidualBalance) {
+	public Wallet(BigDecimal initialBalance, BigDecimal lastBalancedAmount, BigDecimal minResidualBalance) {
+		this(initialBalance, lastBalancedAmount, minResidualBalance, null);
+	}
+
+	public Wallet(BigDecimal initialBalance, BigDecimal lastBalancedAmount, BigDecimal minResidualBalance, String paymentIdForXRP) {
 		super();
 		this.initialBalance = initialBalance;
 		this.lastBalancedAmount = lastBalancedAmount;
 		this.minResidualBalance = minResidualBalance;
+		this.paymentIdForXRP = paymentIdForXRP;
 	}
 
 	public BigDecimal getInitialBalance() {
@@ -54,10 +62,18 @@ public class MyBalance {
 		return initialBalance.max(lastBalancedAmount);
 	}
 
+	public String getPaymentIdForXRP() {
+		return paymentIdForXRP;
+	}
+
+	public void setPaymentIdForXRP(String paymentIdForXRP) {
+		this.paymentIdForXRP = paymentIdForXRP;
+	}
+
 	@Override
 	public String toString() {
-		return "MyBalance [initialBalance=" + initialBalance + ", lastBalancedAmount=" + lastBalancedAmount
-				+ ", minResidualBalance=" + minResidualBalance + "]";
+		return "Wallet [initialBalance=" + initialBalance + ", lastBalancedAmount=" + lastBalancedAmount
+				+ ", minResidualBalance=" + minResidualBalance + ", paymentIdForXRP=" + paymentIdForXRP + "]";
 	}
 
 }

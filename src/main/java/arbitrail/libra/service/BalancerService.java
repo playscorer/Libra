@@ -14,8 +14,8 @@ import org.knowm.xchange.exceptions.ExchangeException;
 import org.knowm.xchange.exceptions.NotAvailableFromExchangeException;
 import org.knowm.xchange.exceptions.NotYetImplementedForExchangeException;
 
-import arbitrail.libra.model.Balances;
-import arbitrail.libra.model.MyBalance;
+import arbitrail.libra.model.Wallet;
+import arbitrail.libra.model.Wallets;
 
 public interface BalancerService {
 	
@@ -33,14 +33,15 @@ public interface BalancerService {
 	
 	List<Exchange> listAllHandledAccounts();
 	
-	Balances loadAllAccountsBalance();
+	Wallets loadAllAccountsBalance();
 
-	Map<String, Map<String, MyBalance>> initAccountsBalance(Map<Exchange, AccountInfo> exchangeMap, List<Currency> currencyList);
+	Map<String, Map<String, Wallet>> initAccountsBalance(Map<Exchange, AccountInfo> exchangeMap, List<Currency> currencyList);
 	
 	Exchange findMostFilledBalance(Map<Exchange, AccountInfo> exchangeMap, Currency currency);
 	
-	Balances balanceAccounts(Map<Exchange, AccountInfo> exchangeMap, List<Currency> currencyList, Balances balances);
-	
-	void balance(Exchange toExchange, Exchange fromExchange, Currency currency, BigDecimal minResidualBalance) throws NotAvailableFromExchangeException, NotYetImplementedForExchangeException, ExchangeException, IOException;
+	Wallets balanceAccounts(Map<Exchange, AccountInfo> exchangeMap, List<Currency> currencyList, Wallets balances);
+
+	void balance(Exchange toExchange, Exchange fromExchange, Currency currency, BigDecimal minResidualBalance,
+			String paymentIdforXRP) throws NotAvailableFromExchangeException, NotYetImplementedForExchangeException, ExchangeException, IOException;
 
 }

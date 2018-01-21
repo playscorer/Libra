@@ -15,7 +15,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 import arbitrail.libra.model.Accounts;
-import arbitrail.libra.model.Balances;
+import arbitrail.libra.model.Wallets;
 import arbitrail.libra.model.Currencies;
 
 
@@ -23,7 +23,7 @@ public class Parser {
 	
 	public static final String CURRENCIES_FILENAME = "src/main/resources/data/currencies.xml";
 	public static final String ACCOUNTS_FILENAME = "src/main/resources/data/accounts.xml";
-	public static final String BALANCES_FILENAME = "src/main/resources/data/output/balances.xml";
+	public static final String WALLETS_FILENAME = "src/main/resources/data/output/wallets.xml";
 
 	public static Currencies parseCurrencies() throws JsonParseException, JsonMappingException, IOException {
         ObjectMapper objectMapper = new XmlMapper();
@@ -41,19 +41,19 @@ public class Parser {
         return accounts;
 	}
 	
-	public static Balances parseBalances() throws JsonParseException, JsonMappingException, IOException {
+	public static Wallets parseWallets() throws JsonParseException, JsonMappingException, IOException {
 		ObjectMapper objectMapper = new XmlMapper();
-		Balances balances = objectMapper.readValue(
-				StringUtils.toEncodedString(Files.readAllBytes(Paths.get(BALANCES_FILENAME)), StandardCharsets.UTF_8),
-				Balances.class);
+		Wallets balances = objectMapper.readValue(
+				StringUtils.toEncodedString(Files.readAllBytes(Paths.get(WALLETS_FILENAME)), StandardCharsets.UTF_8),
+				Wallets.class);
 		return balances;
 	}
 	
-	public static void saveAccountsBalanceToFile(Balances balances) throws JsonGenerationException, JsonMappingException, IOException {
-		Files.deleteIfExists(Paths.get(BALANCES_FILENAME));
+	public static void saveAccountsBalanceToFile(Wallets balances) throws JsonGenerationException, JsonMappingException, IOException {
+		Files.deleteIfExists(Paths.get(WALLETS_FILENAME));
 		ObjectMapper objectMapper = new XmlMapper();
 		objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-		objectMapper.writeValue(Paths.get(BALANCES_FILENAME).toFile(), balances);
+		objectMapper.writeValue(Paths.get(WALLETS_FILENAME).toFile(), balances);
 	}
 	
 }

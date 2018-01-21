@@ -1,17 +1,19 @@
-<balances>
-  <balanceMap>
+<wallets>
+  <walletMap>
     <Binance>
       <XRP>
         <initialBalance>40</initialBalance>
         <lastBalancedAmount>0E-8</lastBalancedAmount>
         <minResidualBalance>10</minResidualBalance>
+        <paymentIdForXRP>102449671</paymentIdForXRP>
       </XRP>
     </Binance>
     <Bitstamp>
       <XRP>
-        <initialBalance>4.1E-7</initialBalance>
+        <initialBalance>0</initialBalance>
         <lastBalancedAmount>4.1E-7</lastBalancedAmount>
         <minResidualBalance>10</minResidualBalance>
+        <paymentIdForXRP/>
       </XRP>
     </Bitstamp>
     <Bittrex>
@@ -19,7 +21,8 @@
         <initialBalance>39.89407235</initialBalance>
         <lastBalancedAmount>39.89407235</lastBalancedAmount>
         <minResidualBalance>35</minResidualBalance>
+        <paymentIdForXRP></paymentIdForXRP>
       </XRP>
     </Bittrex>
-  </balanceMap>
-</balances>
+  </walletMap>
+</wallets>
