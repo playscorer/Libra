@@ -10,7 +10,7 @@ import org.knowm.xchange.currency.Currency;
 import org.knowm.xchange.dto.account.FundingRecord;
 import org.knowm.xchange.dto.account.FundingRecord.Status;
 import org.knowm.xchange.dto.account.FundingRecord.Type;
-import org.knowm.xchange.service.trade.params.TradeHistoryParams;
+import org.knowm.xchange.service.trade.params.DefaultTradeHistoryParamCurrency;
 
 import arbitrail.libra.utils.ExchCcy;
 
@@ -33,13 +33,16 @@ public class PendingWithdrawalsService extends Thread {
 	public void pollPendingWithdrawals() {
 		for (Exchange exchange : exchanges) {
 			String exchangeName = exchange.getExchangeSpecification().getExchangeName();
-			TradeHistoryParams tradeHistoryParams = exchange.getAccountService().createFundingHistoryParams();
 
 			try {
-				List<FundingRecord> fundingRecords = exchange.getAccountService().getFundingHistory(tradeHistoryParams);
+				List<FundingRecord> fundingRecords = exchange.getAccountService().getFundingHistory(new DefaultTradeHistoryParamCurrency());
 				// we are interested in the pending / cancelled withdrawals from the source exchange and the completed deposits from the target exchange
 				for (FundingRecord fundingRecord : fundingRecords) {
 					String transactionId = fundingRecord.getExternalId();
+					if (transactionId == null) {
+						LOG.error("Unexpected error : transactionId retrieved from exchange is null");
+						System.exit(-1);
+					}
 					
 					// check if the transactions are part of recent transactions handled by Libra
 					if (pendingTransIdToToExchMap.keySet().contains(transactionId)) {
@@ -90,6 +93,7 @@ public class PendingWithdrawalsService extends Thread {
 		while (true) {
 			try {
 				pollPendingWithdrawals();
+				LOG.debug(pendingWithdrawalsMap);
 				LOG.info("Sleeping for (ms) : " + frequency);
 				Thread.sleep(frequency);
 			} catch (InterruptedException e) {

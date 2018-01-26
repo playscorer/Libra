@@ -51,5 +51,10 @@ public class ExchCcy {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "ExchCcy [exchangeName=" + exchangeName + ", currency=" + currency + "]";
+	}
 	
 }

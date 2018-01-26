@@ -7,7 +7,7 @@ import java.util.Properties;
 public class Utils {
 	
 	public enum Props {
-		balance_check_threshold, simulate, libra_frequency, min_residual_balance, pending_service_frequency
+		balance_check_threshold, simulate, libra_frequency, pending_service_frequency
 	}
 
 	public static Properties loadProperties(String filename) throws IOException {

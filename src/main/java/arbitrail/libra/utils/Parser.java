@@ -41,6 +41,10 @@ public class Parser {
         return accounts;
 	}
 	
+	public static boolean existsWalletsFile() {
+		return Files.exists(Paths.get(WALLETS_FILENAME));
+	}
+	
 	public static Wallets parseWallets() throws JsonParseException, JsonMappingException, IOException {
 		ObjectMapper objectMapper = new XmlMapper();
 		Wallets balances = objectMapper.readValue(

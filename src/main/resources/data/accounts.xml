@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <accounts>
-	<account name="Bitstamp">
-		<username></username>
-		<apiKey>h1dWq4evMwnxfCm0VSGTAOa7ch7vDw0t</apiKey>
-		<key></key>
-	</account>
+<!-- 	<account name="Bitstamp">
+		<username>gfmf4638</username>
+		<apiKey>a7B3hauRLHqFOVyKLiGimJl6juRGcx6S</apiKey>
+		<key>O9nVGx5UcpvDxfyKOjbFaTgDJNhRRpf9</key>
+	</account> -->
 	<account name="Bittrex">
-		<username></username>
+		<username>filipe.abalada@gmail.com</username>
 		<apiKey>dca62c9528b942c282568784ddd1eaf3</apiKey>
-		<key></key>
+		<key>156fd13b02f74d1f945d01d077019379</key>
+	</account>
+ 	<account name="Binance">
+		<username>Libra</username>
+		<apiKey>61CDScmsCi8hqPKtJu13hsmlbgWFBTGqw1DgSIQI3hsPeTJaKqRxf4lFcp4oeb66</apiKey>
+		<key>DkOhojGxYsmW1vn0P9TWd8IoSSnlOtqxI4BXBSlGKNvgG5sO86aSwRpTiWWTOddg</key>
 	</account>
 </accounts>

@@ -12,7 +12,6 @@ import org.knowm.xchange.Exchange;
 import org.knowm.xchange.currency.Currency;
 import org.knowm.xchange.dto.account.AccountInfo;
 
-import arbitrail.libra.model.Wallet;
 import arbitrail.libra.model.Wallets;
 import arbitrail.libra.service.BalancerService;
 import arbitrail.libra.service.BalancerServiceImpl;
@@ -40,14 +39,17 @@ public class Libra extends Thread {
 
 	@Override
 	public void run() {
+		int nbOperations;
 		LOG.info("Libra has started!");
 		while (true) {
 			try {
-				wallets = operations.balanceAccounts(exchangeMap, currencies, wallets);
+				nbOperations = operations.balanceAccounts(exchangeMap, currencies, wallets);
+				LOG.debug("Number of rebalancing operations : " + nbOperations);
+				if (nbOperations > 0) {
+					Parser.saveAccountsBalanceToFile(wallets); //TODO must be done once the withdrawal is complete
+				}
 				LOG.info("Sleeping for (ms) : " + frequency);
 				Thread.sleep(frequency);
-				//TODO get the wallets uptodate
-				Parser.saveAccountsBalanceToFile(wallets);
 			} catch (InterruptedException | IOException e) {
 				LOG.error(e);
 			}
@@ -68,20 +70,20 @@ public class Libra extends Thread {
 		
 		exchangeMap = operations.connectToExchanges(exchanges);
 		LOG.info("Connected to exchanges");
-
+		
 		String initArg = System.getProperty("init");
 		boolean init = Boolean.valueOf(initArg);
 
 		if (init) {
 			LOG.info("Init mode enabled");
 			LOG.debug("Initialization of the accounts balance");
-			Map<String, Map<String, Wallet>> balanceMap = operations.initAccountsBalance(exchangeMap, currencies);
-			wallets = new Wallets(balanceMap);
+			wallets = operations.loadAllAccountsBalance(exchangeMap, currencies, init);
 			try {
 				Parser.saveAccountsBalanceToFile(wallets);
 			} catch (IOException e) {
 				LOG.error(e);
 			}
+			
 		} else {
 			Boolean simulate = Boolean.valueOf(props.getProperty(Utils.Props.simulate.name()));
 			LOG.info("Simulation mode : " + simulate);
@@ -92,10 +94,8 @@ public class Libra extends Thread {
 			}
 			
 			LOG.debug("Loading the accounts balance");
-			wallets = operations.loadAllAccountsBalance();
+			wallets = operations.loadAllAccountsBalance(exchangeMap, currencies, init);
 			new Libra(props).start();
 		}
-
 	}
-
 }
