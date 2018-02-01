@@ -15,8 +15,8 @@ public class Wallet {
 	@JacksonXmlProperty(localName = "minResidualBalance")
 	private BigDecimal minResidualBalance;
 
-	@JacksonXmlProperty(localName = "paymentIdForXRP")
-	private String paymentIdForXRP;
+	@JacksonXmlProperty(localName = "tag")
+	private String tag;
 
 	@JacksonXmlProperty(localName = "depositFee")
 	private BigDecimal depositFee;
@@ -33,12 +33,12 @@ public class Wallet {
 	}
 
 	public Wallet(BigDecimal initialBalance, BigDecimal lastBalancedAmount, BigDecimal minResidualBalance,
-			String paymentIdForXRP, BigDecimal depositFee, BigDecimal withdrawalFee) {
+			String tag, BigDecimal depositFee, BigDecimal withdrawalFee) {
 		super();
 		this.initialBalance = initialBalance;
 		this.lastBalancedAmount = lastBalancedAmount;
 		this.minResidualBalance = minResidualBalance;
-		this.paymentIdForXRP = paymentIdForXRP;
+		this.tag = tag;
 		this.depositFee = depositFee;
 		this.withdrawalFee = withdrawalFee;
 	}
@@ -71,12 +71,12 @@ public class Wallet {
 		return initialBalance.max(lastBalancedAmount);
 	}
 
-	public String getPaymentIdForXRP() {
-		return paymentIdForXRP;
+	public String getTag() {
+		return tag;
 	}
 
-	public void setPaymentIdForXRP(String paymentIdForXRP) {
-		this.paymentIdForXRP = paymentIdForXRP;
+	public void setTag(String tag) {
+		this.tag = tag;
 	}
 
 	public BigDecimal getDepositFee() {
@@ -98,7 +98,7 @@ public class Wallet {
 	@Override
 	public String toString() {
 		return "Wallet [initialBalance=" + initialBalance + ", lastBalancedAmount=" + lastBalancedAmount
-				+ ", minResidualBalance=" + minResidualBalance + ", paymentIdForXRP=" + paymentIdForXRP
+				+ ", minResidualBalance=" + minResidualBalance + ", tag=" + tag
 				+ ", depositFee=" + depositFee + ", withdrawalFee=" + withdrawalFee + "]";
 	}
 

@@ -256,7 +256,7 @@ public class BalancerServiceImpl implements BalancerService {
 					
 					try {
 						// the rebalancing actually occured
-						if (balance(toExchange, fromExchange, currency, fromWallet.getMinResidualBalance(), toWallet.getPaymentIdForXRP())) {
+						if (balance(fromExchange, toExchange, currency, fromWallet, toWallet)) {
 							// TODO must update thoses balances once the withdrawal is complete
 							Balance newIncreasedBalance = toExchange.getAccountService().getAccountInfo().getWallet().getBalance(currency);
 							LOG.debug("newIncreasedBalance for " + toExchangeName + " -> " + currency.getDisplayName() + " : " + newIncreasedBalance.getAvailable());
@@ -277,7 +277,7 @@ public class BalancerServiceImpl implements BalancerService {
 		return nbOperations;
 	}
 
-	private boolean balance(Exchange toExchange, Exchange fromExchange, Currency currency, BigDecimal minResidualBalance, String paymentIdforXRP) 
+	private boolean balance(Exchange fromExchange, Exchange toExchange, Currency currency, Wallet fromWallet, Wallet toWallet) 
 			throws NotAvailableFromExchangeException, NotYetImplementedForExchangeException, ExchangeException, IOException {
 		String toExchangeName = toExchange.getExchangeSpecification().getExchangeName();
 		String fromExchangeName = fromExchange.getExchangeSpecification().getExchangeName();
@@ -289,13 +289,23 @@ public class BalancerServiceImpl implements BalancerService {
 				+ currency.getDisplayName() + "] balance : " + toBalance.getAvailable());
 		
 		BigDecimal balancedOffset = fromBalance.getAvailable().subtract(toBalance.getAvailable()).divide(BigDecimal.valueOf(2));
-		BigDecimal allowedWithdrawableAmount = fromBalance.getAvailable().subtract(minResidualBalance);
+		BigDecimal allowedWithdrawableAmount = fromBalance.getAvailable().subtract(fromWallet.getMinResidualBalance());
 		BigDecimal amountToWithdraw = balancedOffset.min(allowedWithdrawableAmount);
 		LOG.debug("amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (" + balancedOffset + ", " + allowedWithdrawableAmount + ")");
 		
 		// amountToWithdraw cannot be negative
 		if (BigDecimal.ZERO.compareTo(amountToWithdraw) >= 0) {
-			LOG.error("Withdraw amount can't be negative or 0 - please decrease the minResidualBalance = " + minResidualBalance + " for " + fromExchangeName + " -> " + currency.getDisplayName());
+			LOG.error("Withdraw amount can't be negative or 0 - please decrease the minResidualBalance = " + fromWallet.getMinResidualBalance() + " for " + fromExchangeName + " -> " + currency.getDisplayName());
+			return false;
+		}
+		
+		// if fees > 0.5% x amountToWithdraw
+		double percent = 0.5 / 100;
+		BigDecimal fees = fromWallet.getWithdrawalFee().add(toWallet.getDepositFee());
+		BigDecimal percentOfAmount = BigDecimal.valueOf(percent).multiply(amountToWithdraw);
+		if (fees.compareTo(percentOfAmount) > 0) {
+			LOG.error("Withdraw not authorized : fees are too high!");
+			LOG.debug("fees / percentOfAmount : " + fees + " / " + percentOfAmount);
 			return false;
 		}
 		
@@ -307,18 +317,17 @@ public class BalancerServiceImpl implements BalancerService {
 		if (!simulate) {
 			String internalId;
 			if (Currency.XRP.equals(currency)) {
-				internalId = fromExchange.getAccountService().withdrawFunds(new RippleWithdrawFundsParams(depositAddress, currency, amountToWithdraw, paymentIdforXRP));
+				internalId = fromExchange.getAccountService().withdrawFunds(new RippleWithdrawFundsParams(depositAddress, currency, amountToWithdraw, toWallet.getTag()));
 			} else {
 				internalId = fromExchange.getAccountService().withdrawFunds(currency, amountToWithdraw, depositAddress);
 			}
 			LOG.debug("internalId = " + internalId);
 			
 			// load the history in order to retrieve the matching externalId (transactionId) from the internalId returned by the withdrawFunds method
-			LOG.debug("Waiting for the transactionId...");
 			Optional<FundingRecord> matchingFundingRecord;
 			do {
 				try {
-					LOG.debug("Sleeping for (ms) : " + withdrawalWaitingDelay);
+					LOG.debug("Waiting for the transactionId... sleeping for (ms) : " + withdrawalWaitingDelay);
 					Thread.sleep(withdrawalWaitingDelay);
 				} catch (InterruptedException e) {
 					LOG.error("Unexpected error : " + e);
