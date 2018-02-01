@@ -2,7 +2,6 @@ package arbitrail.libra;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -10,7 +9,6 @@ import java.util.concurrent.ConcurrentMap;
 import org.apache.log4j.Logger;
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.currency.Currency;
-import org.knowm.xchange.dto.account.AccountInfo;
 
 import arbitrail.libra.model.Wallets;
 import arbitrail.libra.service.BalancerService;
@@ -26,8 +24,9 @@ public class Libra extends Thread {
 	
 	private static Wallets wallets;
 	private static BalancerService operations;
+	private static List<Exchange> exchanges;
 	private static List<Currency> currencies;
-	private static Map<Exchange, AccountInfo> exchangeMap;
+	//private static Map<Exchange, AccountInfo> exchangeMap;
 	private Integer frequency;
 
 	private static ConcurrentMap<ExchCcy, Boolean> pendingWithdrawalsMap = new ConcurrentHashMap<>();
@@ -43,7 +42,7 @@ public class Libra extends Thread {
 		LOG.info("Libra has started!");
 		while (true) {
 			try {
-				nbOperations = operations.balanceAccounts(exchangeMap, currencies, wallets);
+				nbOperations = operations.balanceAccounts(exchanges, currencies, wallets);
 				LOG.debug("Number of rebalancing operations : " + nbOperations);
 				if (nbOperations > 0) {
 					Parser.saveAccountsBalanceToFile(wallets); //TODO must be done once the withdrawal is complete
@@ -65,11 +64,11 @@ public class Libra extends Thread {
 		currencies = operations.listAllHandledCurrencies();
 		LOG.debug("List of loaded currencies : " + currencies);
 
-		List<Exchange> exchanges = operations.listAllHandledAccounts();
+		exchanges = operations.listAllHandledAccounts();
 		LOG.debug("List of loaded exchanges : " + exchanges);
 		
-		exchangeMap = operations.connectToExchanges(exchanges);
-		LOG.info("Connected to exchanges");
+		//exchangeMap = operations.connectToExchanges(exchanges);
+		//LOG.info("Connected to exchanges");
 		
 		String initArg = System.getProperty("init");
 		boolean init = Boolean.valueOf(initArg);
@@ -77,7 +76,7 @@ public class Libra extends Thread {
 		if (init) {
 			LOG.info("Init mode enabled");
 			LOG.debug("Initialization of the accounts balance");
-			wallets = operations.loadAllAccountsBalance(exchangeMap, currencies, init);
+			wallets = operations.loadAllAccountsBalance(exchanges, currencies, init);
 			try {
 				Parser.saveAccountsBalanceToFile(wallets);
 			} catch (IOException e) {
@@ -94,7 +93,7 @@ public class Libra extends Thread {
 			}
 			
 			LOG.debug("Loading the accounts balance");
-			wallets = operations.loadAllAccountsBalance(exchangeMap, currencies, init);
+			wallets = operations.loadAllAccountsBalance(exchanges, currencies, init);
 			new Libra(props).start();
 		}
 	}

@@ -3,8 +3,8 @@
     <Binance>
       <XRP>
         <initialBalance>40</initialBalance>
-        <lastBalancedAmount>11.89407200</lastBalancedAmount>
-        <minResidualBalance>0</minResidualBalance>
+        <lastBalancedAmount>3.89407200</lastBalancedAmount>
+        <minResidualBalance>1</minResidualBalance>
         <paymentIdForXRP>102449671</paymentIdForXRP>
         <depositFee>0</depositFee>
         <withdrawalFee>0</withdrawalFee>
@@ -13,16 +13,24 @@
     <Bittrex>
       <XRP>
         <initialBalance>30.00000000</initialBalance>
-        <lastBalancedAmount>25.00000000</lastBalancedAmount>
-        <minResidualBalance>20</minResidualBalance>
-        <paymentIdForXRP/>
+        <lastBalancedAmount>18.50000000</lastBalancedAmount>
+        <minResidualBalance>18.5</minResidualBalance>
+        <paymentIdForXRP>673968277</paymentIdForXRP>
         <depositFee>0</depositFee>
         <withdrawalFee>0</withdrawalFee>
       </XRP>
+      <IGNIS>
+        <initialBalance>188.75362685</initialBalance>
+        <lastBalancedAmount>188.75362685</lastBalancedAmount>
+        <minResidualBalance>0</minResidualBalance>
+        <paymentIdForXRP/>
+        <depositFee>0</depositFee>
+        <withdrawalFee>0</withdrawalFee>
+      </IGNIS>
     </Bittrex>
     <Bitstamp>
       <XRP>
-        <initialBalance>4.1E-7</initialBalance>
+        <initialBalance>40</initialBalance>
         <lastBalancedAmount>4.1E-7</lastBalancedAmount>
         <minResidualBalance>0</minResidualBalance>
         <paymentIdForXRP/>

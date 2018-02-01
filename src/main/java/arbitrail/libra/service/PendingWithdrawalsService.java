@@ -18,6 +18,7 @@ public class PendingWithdrawalsService extends Thread {
 	
 	private final static Logger LOG = Logger.getLogger(PendingWithdrawalsService.class);
 	
+	private TransactionService transxService = new TransactionServiceImpl();
 	private List<Exchange> exchanges;
 	private ConcurrentMap<ExchCcy, Boolean> pendingWithdrawalsMap;
 	private ConcurrentMap<String, String> pendingTransIdToToExchMap;
@@ -36,23 +37,34 @@ public class PendingWithdrawalsService extends Thread {
 
 			try {
 				List<FundingRecord> fundingRecords = exchange.getAccountService().getFundingHistory(new DefaultTradeHistoryParamCurrency());
+				fundingRecords = transxService.retrieveLastTwoDaysOf(fundingRecords);
+				//LOG.debug("FundingRecords for exchange " + exchangeName + " :");
+				//LOG.debug(fundingRecords);
+				
 				// we are interested in the pending / cancelled withdrawals from the source exchange and the completed deposits from the target exchange
 				for (FundingRecord fundingRecord : fundingRecords) {
-					String transactionId = fundingRecord.getExternalId();
-					if (transactionId == null) {
-						LOG.error("Unexpected error : transactionId retrieved from exchange is null");
-						System.exit(-1);
+					String externalId = fundingRecord.getExternalId();
+					if (externalId == null) {
+						LOG.error("This exchange does not handle the externalId : " + exchangeName);
+						continue;
 					}
+					//TODO useful for Bitstamp
+/*					Integer transxHashkey = transxService.transxHashkey(fundingRecord.getCurrency(), fundingRecord.getAmount(), fundingRecord.getAddress());
+					if (transxHashkey == null) {
+						LOG.error("Unexpected error : transxHashkey is null");
+						LOG.warn("Skipping transaction from exchange : " + exchangeName + " -> " + fundingRecord.getCurrency().getDisplayName());
+						continue;
+					}*/ 
 					
 					// check if the transactions are part of recent transactions handled by Libra
-					if (pendingTransIdToToExchMap.keySet().contains(transactionId)) {
+					if (pendingTransIdToToExchMap.keySet().contains(externalId)) {
 						Currency currency = fundingRecord.getCurrency();
 						
 						// filter pending withdrawals
 						if (Type.WITHDRAWAL.equals(fundingRecord.getType())) {
-							String toExchangeName = pendingTransIdToToExchMap.get(transactionId);
+							String toExchangeName = pendingTransIdToToExchMap.get(externalId);
 							if (toExchangeName == null) {
-								LOG.error("Unexpected error : Missing mapping transactionId to destination exchange name : " + transactionId);
+								LOG.error("Unexpected error : Missing mapping transactionId to destination exchange name : " + externalId);
 								LOG.warn("Skipping update of pending withdrawals status from exchange : " + exchangeName + " -> " + currency.getDisplayName());
 								continue;
 							}
@@ -64,8 +76,8 @@ public class PendingWithdrawalsService extends Thread {
 							}
 							// withdrawals cancelled
 							else if (Status.CANCELLED.equals(fundingRecord.getStatus())) {
-								pendingWithdrawalsMap.put(exchCcy, false);
-								pendingTransIdToToExchMap.remove(transactionId);
+								pendingWithdrawalsMap.put(exchCcy, false); 
+								pendingTransIdToToExchMap.remove(externalId);
 							}
 						}
 						
@@ -73,8 +85,8 @@ public class PendingWithdrawalsService extends Thread {
 						else if (Type.DEPOSIT.equals(fundingRecord.getType())) {
 							if (Status.COMPLETE.equals(fundingRecord.getStatus())) {
 								ExchCcy exchCcy = new ExchCcy(exchangeName, currency);
-								pendingWithdrawalsMap.put(exchCcy, false);
-								pendingTransIdToToExchMap.remove(transactionId);
+								pendingWithdrawalsMap.put(exchCcy, false); //TODO update wallets file with balance updated
+								pendingTransIdToToExchMap.remove(externalId);
 							}
 						}
 					}

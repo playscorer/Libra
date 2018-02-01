@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
+import java.util.Optional;
 import java.util.Properties;
 import java.util.concurrent.ConcurrentMap;
 
@@ -14,11 +14,12 @@ import org.apache.log4j.Logger;
 import org.knowm.xchange.BaseExchange;
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.currency.Currency;
-import org.knowm.xchange.dto.account.AccountInfo;
 import org.knowm.xchange.dto.account.Balance;
+import org.knowm.xchange.dto.account.FundingRecord;
 import org.knowm.xchange.exceptions.ExchangeException;
 import org.knowm.xchange.exceptions.NotAvailableFromExchangeException;
 import org.knowm.xchange.exceptions.NotYetImplementedForExchangeException;
+import org.knowm.xchange.service.trade.params.DefaultTradeHistoryParamCurrency;
 import org.knowm.xchange.service.trade.params.RippleWithdrawFundsParams;
 
 import arbitrail.libra.model.Account;
@@ -36,6 +37,8 @@ public class BalancerServiceImpl implements BalancerService {
 	
 	private final static Logger LOG = Logger.getLogger(BalancerServiceImpl.class);
 	
+	private int withdrawalWaitingDelay = 30000;
+	private TransactionService transxService = new TransactionServiceImpl();
 	private Double balanceCheckThreshold;
 	private Boolean simulate;
 	private ConcurrentMap<ExchCcy, Boolean> pendingWithdrawalsMap;
@@ -46,28 +49,6 @@ public class BalancerServiceImpl implements BalancerService {
 		simulate = Boolean.valueOf(properties.getProperty(Utils.Props.simulate.name()));
 		this.pendingWithdrawalsMap = pendingWithdrawalsMap;
 		this.pendingTransIdToToExchMap = pendingTransIdToToExchMap;
-	}
-
-	@Override
-	public Map<Exchange, AccountInfo> connectToExchanges(List<Exchange> exchangeList) {
-		Map<Exchange, AccountInfo> exchangeMap = new HashMap<>();
-		
-		for (Exchange exchange : exchangeList) {
-			String exchangeName = exchange.getExchangeSpecification().getExchangeName();
-			
-			AccountInfo accountInfo;
-			try {
-				accountInfo = exchange.getAccountService().getAccountInfo();
-			} catch (NotAvailableFromExchangeException | NotYetImplementedForExchangeException | ExchangeException
-					| IOException e) {
-				LOG.error("Failed to get account info for the exchange :" + exchangeName, e);
-				continue;
-			}
-			
-			exchangeMap.put(exchange, accountInfo);
-		}
-		
-		return exchangeMap;
 	}
 
 	@Override
@@ -106,21 +87,21 @@ public class BalancerServiceImpl implements BalancerService {
 	}
 	
 	@Override
-	public Wallets loadAllAccountsBalance(Map<Exchange, AccountInfo> exchangeMap, List<Currency> currencyList, boolean init) {
+	public Wallets loadAllAccountsBalance(List<Exchange> exchangeList, List<Currency> currencyList, boolean init) {
 		Wallets wallets = null;
 		
 		try {
 			if (Parser.existsWalletsFile()) {
 				wallets = Parser.parseWallets();
 				if (init) {
-					addNewWallets(wallets, exchangeMap, currencyList);
+					addNewWallets(wallets, exchangeList, currencyList);
 				}
 			} else {
 				if (!init) {
 					LOG.error("The wallets file does not exist or could not be found - please check the file or run Libra in init mode");
 					return null;
 				}
-				Map<String, Map<String, Wallet>> walletMap = initWallets(exchangeMap, currencyList);
+				Map<String, Map<String, Wallet>> walletMap = initWallets(exchangeList, currencyList);
 				wallets = new Wallets(walletMap);
 			}
 
@@ -134,11 +115,10 @@ public class BalancerServiceImpl implements BalancerService {
 	/*
 	 * Adds only new wallets from the list of exchanges and currencies to the existing wallets map
 	 */
-	private void addNewWallets(Wallets wallets, Map<Exchange, AccountInfo> exchangeMap, List<Currency> currencyList) {
+	private void addNewWallets(Wallets wallets, List<Exchange> exchangeList, List<Currency> currencyList) throws IOException {
 		Map<String, Map<String, Wallet>> walletMap = wallets.getWalletMap();
 		
-		for (Entry<Exchange, AccountInfo> entry : exchangeMap.entrySet()) {
-			Exchange toExchange = entry.getKey();
+		for (Exchange toExchange : exchangeList) {
 			String exchangeName = toExchange.getExchangeSpecification().getExchangeName();
 			
 			Map<String, Wallet> currencyMap = walletMap.get(exchangeName);
@@ -151,7 +131,7 @@ public class BalancerServiceImpl implements BalancerService {
 			for (Currency currency : currencyList) {
 				Wallet wallet = currencyMap.get(currency.getCurrencyCode());
 				if (wallet == null) {
-					Balance balance = entry.getValue().getWallet().getBalance(currency);
+					Balance balance = toExchange.getAccountService().getAccountInfo().getWallet().getBalance(currency);
 					if (BigDecimal.ZERO.equals(balance.getAvailable())) {
 						LOG.warn("Currency not available : " + currency.getDisplayName() +  " for Exchange : " + exchangeName);
 					} else {
@@ -167,17 +147,16 @@ public class BalancerServiceImpl implements BalancerService {
 	/*
 	 * Creates a new wallets map from the list of exchanges and currencies
 	 */
-	private Map<String, Map<String, Wallet>> initWallets(Map<Exchange, AccountInfo> exchangeMap, List<Currency> currencyList) {
+	private Map<String, Map<String, Wallet>> initWallets(List<Exchange> exchangeList, List<Currency> currencyList) throws IOException {
 		Map<String, Map<String, Wallet>> walletMap = new HashMap<>();
 		
-		for (Entry<Exchange, AccountInfo> entry : exchangeMap.entrySet()) {
-			Exchange toExchange = entry.getKey();
+		for (Exchange toExchange : exchangeList) {
 			String exchangeName = toExchange.getExchangeSpecification().getExchangeName();
 			HashMap<String, Wallet> currencyMap = new HashMap<>();
 			walletMap.put(exchangeName, currencyMap);
 			
 			for (Currency currency : currencyList) {
-				Balance balance = entry.getValue().getWallet().getBalance(currency);
+				Balance balance = toExchange.getAccountService().getAccountInfo().getWallet().getBalance(currency);
 				if (BigDecimal.ZERO.equals(balance.getAvailable())) {
 					LOG.warn("Currency not available : " + currency.getDisplayName() +  " for Exchange : " + exchangeName);
 				} else {
@@ -190,15 +169,14 @@ public class BalancerServiceImpl implements BalancerService {
 		return walletMap;
 	}
 	
-	@Override
-	public Exchange findMostFilledBalance(Map<Exchange, AccountInfo> exchangeMap, Currency currency) {
+	private Exchange findMostFilledBalance(List<Exchange> exchangeList, Currency currency) throws IOException {
 		Exchange maxExchange = null;
 		BigDecimal maxBalance = BigDecimal.ZERO;
 		
-		for (Entry<Exchange, AccountInfo> entry : exchangeMap.entrySet()) {
-			Balance balance = entry.getValue().getWallet().getBalance(currency);
+		for (Exchange exchange : exchangeList) {
+			Balance balance = exchange.getAccountService().getAccountInfo().getWallet().getBalance(currency);
 			if (maxBalance.compareTo(balance.getAvailable()) < 0) {
-				maxExchange = entry.getKey();
+				maxExchange = exchange;
 				maxBalance = balance.getAvailable();
 			}
 		}
@@ -207,12 +185,11 @@ public class BalancerServiceImpl implements BalancerService {
 	}
 	
 	@Override
-	public int balanceAccounts(Map<Exchange, AccountInfo> exchangeMap, List<Currency> currencyList, Wallets wallets) {
+	public int balanceAccounts(List<Exchange> exchangeList, List<Currency> currencyList, Wallets wallets) throws IOException {
 		Map<String, Map<String, Wallet>> walletMap = wallets.getWalletMap();
 		int nbOperations = 0;
 		
-		for (Entry<Exchange, AccountInfo> entry : exchangeMap.entrySet()) {
-			Exchange toExchange = entry.getKey();
+		for (Exchange toExchange : exchangeList) {
 			String toExchangeName = toExchange.getExchangeSpecification().getExchangeName();
 			Map<String, Wallet> toExchangeWallets = walletMap.get(toExchangeName);
 			// no currencies set up for the exchange
@@ -244,14 +221,19 @@ public class BalancerServiceImpl implements BalancerService {
 				}
 				
 				// the threshold represents the minimum amount from which the balance will be triggered
-				Balance currentBalance = entry.getValue().getWallet().getBalance(currency);
+				Balance currentBalance = toExchange.getAccountService().getAccountInfo().getWallet().getBalance(currency);
 				BigDecimal checkThresholdBalance = toWallet.maxBalance().multiply(new BigDecimal(balanceCheckThreshold));
 				LOG.debug("Exchange : " + toExchangeName + " -> " + currency.getDisplayName() + " / checkThresholdBalance = " + checkThresholdBalance + " / currentBalance = " + currentBalance.getAvailable());
 
 				// trigger the balancer
 				if (currentBalance.getAvailable().compareTo(checkThresholdBalance) < 0) {
-					LOG.info("Exchange needs to be balanced for currency : " + toExchangeName + " -> " + currency.getDisplayName());
-					Exchange fromExchange = findMostFilledBalance(exchangeMap, currency);
+					LOG.info("### Exchange needs to be balanced for currency : " + toExchangeName + " -> " + currency.getDisplayName());
+					Exchange fromExchange = findMostFilledBalance(exchangeList, currency);
+					if (fromExchange == null) {
+						LOG.error("Unexpected error : All the accounts balances are zero");
+						LOG.info("Skipping currency for exchange : " + toExchangeName + " -> " + currency.getDisplayName());
+						continue;
+					}
 					if (fromExchange.equals(toExchange)) {
 						LOG.error("Unexpected error : The source and the destination accounts are identical");
 						LOG.info("Skipping currency for exchange : " + toExchangeName + " -> " + currency.getDisplayName());
@@ -276,10 +258,10 @@ public class BalancerServiceImpl implements BalancerService {
 						// the rebalancing actually occured
 						if (balance(toExchange, fromExchange, currency, fromWallet.getMinResidualBalance(), toWallet.getPaymentIdForXRP())) {
 							// TODO must update thoses balances once the withdrawal is complete
-							Balance newIncreasedBalance = entry.getValue().getWallet().getBalance(currency);
-							LOG.debug("newIncreasedBalance for " + toExchangeName + " -> " + currency.getDisplayName());
-							Balance newDecreasedBalance = exchangeMap.get(fromExchange).getWallet().getBalance(currency);
-							LOG.debug("newDecreasedBalance for " + fromExchangeName + " -> " + currency.getDisplayName());
+							Balance newIncreasedBalance = toExchange.getAccountService().getAccountInfo().getWallet().getBalance(currency);
+							LOG.debug("newIncreasedBalance for " + toExchangeName + " -> " + currency.getDisplayName() + " : " + newIncreasedBalance.getAvailable());
+							Balance newDecreasedBalance = fromExchange.getAccountService().getAccountInfo().getWallet().getBalance(currency);
+							LOG.debug("newDecreasedBalance for " + fromExchangeName + " -> " + currency.getDisplayName() + " : " + newDecreasedBalance.getAvailable());
 							toWallet.setLastBalancedAmount(newIncreasedBalance.getAvailable());
 							fromWallet.setLastBalancedAmount(newDecreasedBalance.getAvailable());
 							nbOperations++;
@@ -295,8 +277,8 @@ public class BalancerServiceImpl implements BalancerService {
 		return nbOperations;
 	}
 
-	@Override
-	public boolean balance(Exchange toExchange, Exchange fromExchange, Currency currency, BigDecimal minResidualBalance, String paymentIdforXRP) throws NotAvailableFromExchangeException, NotYetImplementedForExchangeException, ExchangeException, IOException {
+	private boolean balance(Exchange toExchange, Exchange fromExchange, Currency currency, BigDecimal minResidualBalance, String paymentIdforXRP) 
+			throws NotAvailableFromExchangeException, NotYetImplementedForExchangeException, ExchangeException, IOException {
 		String toExchangeName = toExchange.getExchangeSpecification().getExchangeName();
 		String fromExchangeName = fromExchange.getExchangeSpecification().getExchangeName();
 		
@@ -323,20 +305,41 @@ public class BalancerServiceImpl implements BalancerService {
 		LOG.debug("Deposit address [" + toExchangeName + " -> " + currency.getDisplayName() + "] : " + depositAddress);
 
 		if (!simulate) {
-			String transactionId;
+			String internalId;
 			if (Currency.XRP.equals(currency)) {
-				transactionId = fromExchange.getAccountService().withdrawFunds(new RippleWithdrawFundsParams(depositAddress, currency, amountToWithdraw, paymentIdforXRP));
+				internalId = fromExchange.getAccountService().withdrawFunds(new RippleWithdrawFundsParams(depositAddress, currency, amountToWithdraw, paymentIdforXRP));
 			} else {
-				transactionId = fromExchange.getAccountService().withdrawFunds(currency, amountToWithdraw, depositAddress);
+				internalId = fromExchange.getAccountService().withdrawFunds(currency, amountToWithdraw, depositAddress);
 			}
-			LOG.debug("transactionId = " + transactionId);
+			LOG.debug("internalId = " + internalId);
+			
+			// load the history in order to retrieve the matching externalId (transactionId) from the internalId returned by the withdrawFunds method
+			LOG.debug("Waiting for the transactionId...");
+			Optional<FundingRecord> matchingFundingRecord;
+			do {
+				try {
+					LOG.debug("Sleeping for (ms) : " + withdrawalWaitingDelay);
+					Thread.sleep(withdrawalWaitingDelay);
+				} catch (InterruptedException e) {
+					LOG.error("Unexpected error : " + e);
+				}
+				List<FundingRecord> fundingRecords = fromExchange.getAccountService().getFundingHistory(new DefaultTradeHistoryParamCurrency(currency));	
+				matchingFundingRecord = transxService.retrieveExternalId(fundingRecords, internalId);
+			} while (!matchingFundingRecord.isPresent());
+			
+			String externalId = matchingFundingRecord.get().getExternalId();
+			if (externalId == null) {//TODO Bitstamp not supported at the moment
+				LOG.fatal("Unexpected error : Cannot monitor pending withdrawal for " + fromExchangeName + " -> " + currency.getDisplayName() + " with transactionId = " + internalId);
+				LOG.fatal("Libra has stopped!");
+				System.exit(-1);
+			}
 			
 			// set map pending transactions to true
 			ExchCcy exchCcy = new ExchCcy(toExchangeName, currency);
 			pendingWithdrawalsMap.put(exchCcy, true);
 
 			// add mapping destination exchange to transactionId
-			pendingTransIdToToExchMap.put(transactionId, toExchangeName);
+			pendingTransIdToToExchMap.put(externalId, toExchangeName);
 			
 			return true;
 		}
