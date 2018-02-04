@@ -7,7 +7,7 @@
         <minResidualBalance>0</minResidualBalance>
         <tag>102449671</tag>
         <depositFee>0</depositFee>
-        <withdrawalFee>0</withdrawalFee>
+        <withdrawalFee>0.25</withdrawalFee>
       </XRP>
     </Binance>
     <Bittrex>
@@ -17,7 +17,7 @@
         <minResidualBalance>11.5</minResidualBalance>
         <tag>673968277</tag>
         <depositFee>0</depositFee>
-        <withdrawalFee>0</withdrawalFee>
+        <withdrawalFee>1</withdrawalFee>
       </XRP>
     </Bittrex>
   </walletMap>

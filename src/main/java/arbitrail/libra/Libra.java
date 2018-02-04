@@ -9,12 +9,13 @@ import java.util.concurrent.ConcurrentMap;
 import org.apache.log4j.Logger;
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.currency.Currency;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import arbitrail.libra.model.ExchCcy;
 import arbitrail.libra.model.Wallets;
 import arbitrail.libra.service.BalancerService;
 import arbitrail.libra.service.BalancerServiceImpl;
 import arbitrail.libra.service.PendingWithdrawalsService;
-import arbitrail.libra.utils.ExchCcy;
 import arbitrail.libra.utils.Parser;
 import arbitrail.libra.utils.Utils;
 
@@ -26,7 +27,6 @@ public class Libra extends Thread {
 	private static BalancerService operations;
 	private static List<Exchange> exchanges;
 	private static List<Currency> currencies;
-	//private static Map<Exchange, AccountInfo> exchangeMap;
 	private Integer frequency;
 
 	private static ConcurrentMap<ExchCcy, Boolean> pendingWithdrawalsMap = new ConcurrentHashMap<>();
@@ -55,6 +55,7 @@ public class Libra extends Thread {
 		}
 	}
 
+	@SuppressWarnings("resource")
 	public static void main(String[] args) throws IOException {
 		Properties props = Utils.loadProperties("src/main/resources/conf.properties");
 		LOG.debug("Properties loaded : " + props);
@@ -66,9 +67,6 @@ public class Libra extends Thread {
 
 		exchanges = operations.listAllHandledAccounts();
 		LOG.debug("List of loaded exchanges : " + exchanges);
-		
-		//exchangeMap = operations.connectToExchanges(exchanges);
-		//LOG.info("Connected to exchanges");
 		
 		String initArg = System.getProperty("init");
 		boolean init = Boolean.valueOf(initArg);
@@ -84,6 +82,9 @@ public class Libra extends Thread {
 			}
 			
 		} else {
+			// loads spring context
+			new ClassPathXmlApplicationContext("classpath:/spring.xml");
+			
 			Boolean simulate = Boolean.valueOf(props.getProperty(Utils.Props.simulate.name()));
 			LOG.info("Simulation mode : " + simulate);
 			

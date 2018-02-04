@@ -12,13 +12,17 @@ import org.knowm.xchange.dto.account.FundingRecord.Status;
 import org.knowm.xchange.dto.account.FundingRecord.Type;
 import org.knowm.xchange.service.trade.params.DefaultTradeHistoryParamCurrency;
 
-import arbitrail.libra.utils.ExchCcy;
+import arbitrail.libra.model.ExchCcy;
+import arbitrail.libra.orm.service.PendingTransxService;
+import arbitrail.libra.orm.spring.ContextProvider;
 
 public class PendingWithdrawalsService extends Thread {
 	
 	private final static Logger LOG = Logger.getLogger(PendingWithdrawalsService.class);
 	
+	private PendingTransxService pendingTransxService = ContextProvider.getBean(PendingTransxService.class);
 	private TransactionService transxService = new TransactionServiceImpl();
+	
 	private List<Exchange> exchanges;
 	private ConcurrentMap<ExchCcy, Boolean> pendingWithdrawalsMap;
 	private ConcurrentMap<String, String> pendingTransIdToToExchMap;

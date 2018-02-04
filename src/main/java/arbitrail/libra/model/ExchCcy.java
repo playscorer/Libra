@@ -1,4 +1,4 @@
-package arbitrail.libra.utils;
+package arbitrail.libra.model;
 
 import org.knowm.xchange.currency.Currency;
 
