@@ -1,31 +1,28 @@
 package arbitrail.libra.model;
 
-import org.knowm.xchange.currency.Currency;
-
 public class ExchCcy {
 
 	private String exchangeName;
-	private Currency currency;
-	
-	public ExchCcy(String exchangeName, Currency currency) {
-		super();
+	private String currencyCode;
+
+	public ExchCcy(String exchangeName, String currencyCode) {
 		this.exchangeName = exchangeName;
-		this.currency = currency;
+		this.currencyCode = currencyCode;
 	}
 
 	public String getExchangeName() {
 		return exchangeName;
 	}
 
-	public Currency getCurrency() {
-		return currency;
+	public String getCurrencyCode() {
+		return currencyCode;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((currency == null) ? 0 : currency.hashCode());
+		result = prime * result + ((currencyCode == null) ? 0 : currencyCode.hashCode());
 		result = prime * result + ((exchangeName == null) ? 0 : exchangeName.hashCode());
 		return result;
 	}
@@ -39,10 +36,10 @@ public class ExchCcy {
 		if (getClass() != obj.getClass())
 			return false;
 		ExchCcy other = (ExchCcy) obj;
-		if (currency == null) {
-			if (other.currency != null)
+		if (currencyCode == null) {
+			if (other.currencyCode != null)
 				return false;
-		} else if (!currency.equals(other.currency))
+		} else if (!currencyCode.equals(other.currencyCode))
 			return false;
 		if (exchangeName == null) {
 			if (other.exchangeName != null)
@@ -54,7 +51,7 @@ public class ExchCcy {
 
 	@Override
 	public String toString() {
-		return "ExchCcy [exchangeName=" + exchangeName + ", currency=" + currency + "]";
+		return "ExchCcy [exchangeName=" + exchangeName + ", currencyCode=" + currencyCode + "]";
 	}
-	
+
 }

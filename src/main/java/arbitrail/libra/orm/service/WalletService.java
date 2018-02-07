@@ -17,11 +17,6 @@ public class WalletService {
 	private WalletDao walletDao;
 
 	@Transactional
-	public void save(WalletEntity wallet) {
-		walletDao.persist(wallet);
-	}
-	
-	@Transactional
 	public void saveAll(Collection<WalletEntity> walletCollection) {
 		for (WalletEntity wallet : walletCollection) {
 			walletDao.persist(wallet);

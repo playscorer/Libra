@@ -1,12 +1,16 @@
 package arbitrail.libra.orm.service;
 
-import java.util.Collection;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import arbitrail.libra.model.ExchCcy;
 import arbitrail.libra.orm.dao.PendingTransxDao;
 import arbitrail.libra.orm.model.PendingTransxEntity;
 
@@ -17,21 +21,25 @@ public class PendingTransxService {
 	private PendingTransxDao pendingTransxDao;
 
 	@Transactional
-	public void save(PendingTransxEntity pendingTransx) {
-		pendingTransxDao.persist(pendingTransx);
-	}
-	
-	@Transactional
-	public void saveAll(Collection<PendingTransxEntity> pendingTransxCollection) {
-		for (PendingTransxEntity pendingTransx : pendingTransxCollection) {
-			pendingTransxDao.persist(pendingTransx);
+	public void saveAll(Map<ExchCcy, Boolean> pendingWithdrawalsMap) {
+		for (Entry<ExchCcy, Boolean> entry : pendingWithdrawalsMap.entrySet()) {
+			ExchCcy exchCcy = entry.getKey();
+			Boolean status = entry.getValue();
+			pendingTransxDao.persist(new PendingTransxEntity(null, exchCcy.getExchangeName(), exchCcy.getCurrencyCode(), status));
 		}
 	}
 
 	@Transactional(readOnly = true)
-	public List<PendingTransxEntity> listAll() {
-		return pendingTransxDao.findAll();
-
+	public ConcurrentMap<ExchCcy, Boolean> listAll() {
+		List<PendingTransxEntity> entityList = pendingTransxDao.findAll();
+		
+		ConcurrentMap<ExchCcy, Boolean> pendingWithdrawalsMap = new ConcurrentHashMap<>();
+		for (PendingTransxEntity entity : entityList) {
+			ExchCcy exchCcy = new ExchCcy(entity.getExchange(), entity.getCurrency());
+			pendingWithdrawalsMap.put(exchCcy, entity.isStatus());
+		}
+		
+		return pendingWithdrawalsMap; 
 	}
 	
 }

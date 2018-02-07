@@ -3,7 +3,6 @@ package arbitrail.libra;
 import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 import org.apache.log4j.Logger;
@@ -13,6 +12,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import arbitrail.libra.model.ExchCcy;
 import arbitrail.libra.model.Wallets;
+import arbitrail.libra.orm.service.PendingTransxService;
+import arbitrail.libra.orm.service.PendingTransxToExchService;
+import arbitrail.libra.orm.spring.ContextProvider;
 import arbitrail.libra.service.BalancerService;
 import arbitrail.libra.service.BalancerServiceImpl;
 import arbitrail.libra.service.PendingWithdrawalsService;
@@ -23,14 +25,16 @@ public class Libra extends Thread {
 
 	private final static Logger LOG = Logger.getLogger(Libra.class);
 	
+	private static PendingTransxToExchService pendingTransxToExchService = ContextProvider.getBean(PendingTransxToExchService.class);
+	private static PendingTransxService pendingTransxService = ContextProvider.getBean(PendingTransxService.class);
 	private static Wallets wallets;
 	private static BalancerService operations;
 	private static List<Exchange> exchanges;
 	private static List<Currency> currencies;
 	private Integer frequency;
 
-	private static ConcurrentMap<ExchCcy, Boolean> pendingWithdrawalsMap = new ConcurrentHashMap<>();
-	private static ConcurrentMap<String, String> pendingTransIdToToExchMap = new ConcurrentHashMap<>();
+	private static ConcurrentMap<ExchCcy, Boolean> pendingWithdrawalsMap;
+	private static ConcurrentMap<String, String> pendingTransIdToToExchMap;
 
 	public Libra(Properties props) {
 		frequency = Integer.valueOf(props.getProperty(Utils.Props.libra_frequency.name()));
@@ -90,6 +94,10 @@ public class Libra extends Thread {
 			
 			if (!simulate) {
 				Integer pendingServiceFrequency = Integer.valueOf(props.getProperty(Utils.Props.pending_service_frequency.name()));
+				LOG.info("Loading the pending transactions");
+				pendingTransIdToToExchMap = pendingTransxToExchService.listAll();
+				LOG.info("Loading the status of the pending transactions");
+				pendingWithdrawalsMap = pendingTransxService.listAll();
 				new PendingWithdrawalsService(exchanges, pendingWithdrawalsMap, pendingTransIdToToExchMap, pendingServiceFrequency).start();
 			}
 			

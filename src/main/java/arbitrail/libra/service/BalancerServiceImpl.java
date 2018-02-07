@@ -42,7 +42,7 @@ public class BalancerServiceImpl implements BalancerService {
 	private Double balanceCheckThreshold;
 	private Boolean simulate;
 	private ConcurrentMap<ExchCcy, Boolean> pendingWithdrawalsMap;
-	private ConcurrentMap<String, String> pendingTransIdToToExchMap; //TODO need to persist this
+	private ConcurrentMap<String, String> pendingTransIdToToExchMap;
 	
 	public BalancerServiceImpl(Properties properties, ConcurrentMap<ExchCcy, Boolean> pendingWithdrawalsMap, ConcurrentMap<String, String> pendingTransIdToToExchMap) {
 		balanceCheckThreshold = Double.valueOf(properties.getProperty(Utils.Props.balance_check_threshold.name()));
@@ -200,7 +200,8 @@ public class BalancerServiceImpl implements BalancerService {
 			}
 			
 			for (Currency currency : currencyList) {
-				Wallet toWallet = toExchangeWallets.get(currency.getCurrencyCode());
+				String currencyCode = currency.getCurrencyCode();
+				Wallet toWallet = toExchangeWallets.get(currencyCode);
 				// this currency is not set up for the exchange
 				if (toWallet == null) {
 					LOG.warn("No wallet config found for destination account for currency : " + toExchangeName + " -> " + currency.getDisplayName());
@@ -209,7 +210,7 @@ public class BalancerServiceImpl implements BalancerService {
 				}
 
 				// do the rebalancing only if there is no pending withdrawal
-				Boolean pendingWithdrawal = pendingWithdrawalsMap.get(new ExchCcy(toExchangeName, currency));
+				Boolean pendingWithdrawal = pendingWithdrawalsMap.get(new ExchCcy(toExchangeName, currencyCode));
 				if (pendingWithdrawal != null && pendingWithdrawal) {
 					LOG.info("Pending withdrawal : Skipping currency for exchange : " + toExchangeName + " -> " + currency.getDisplayName());
 					continue;
@@ -247,7 +248,7 @@ public class BalancerServiceImpl implements BalancerService {
 						LOG.info("Skipping currency for exchange : " + toExchangeName + " -> " + currency.getDisplayName());
 						continue;
 					}
-					Wallet fromWallet = fromExchangeWallets.get(currency.getCurrencyCode());
+					Wallet fromWallet = fromExchangeWallets.get(currencyCode);
 					if (fromWallet == null) {
 						LOG.error("Unexpected error : Missing wallet config for source account for currency : " + fromExchangeName + " -> " + currency.getDisplayName());
 						LOG.info("Skipping currency for exchange : " + toExchangeName + " -> " + currency.getDisplayName());
@@ -258,10 +259,12 @@ public class BalancerServiceImpl implements BalancerService {
 						// the rebalancing actually occured
 						if (balance(fromExchange, toExchange, currency, fromWallet, toWallet)) {
 							// TODO must update thoses balances once the withdrawal is complete
+							Balance newDecreasedBalance = fromExchange.getAccountService().getAccountInfo().getWallet().getBalance(currency);
+							LOG.info("new provisional balance for " + fromExchangeName + " -> " + currency.getDisplayName() + " : " + newDecreasedBalance.getAvailable());
+							//TODO remove this
 							Balance newIncreasedBalance = toExchange.getAccountService().getAccountInfo().getWallet().getBalance(currency);
 							LOG.debug("newIncreasedBalance for " + toExchangeName + " -> " + currency.getDisplayName() + " : " + newIncreasedBalance.getAvailable());
-							Balance newDecreasedBalance = fromExchange.getAccountService().getAccountInfo().getWallet().getBalance(currency);
-							LOG.debug("newDecreasedBalance for " + fromExchangeName + " -> " + currency.getDisplayName() + " : " + newDecreasedBalance.getAvailable());
+							
 							toWallet.setLastBalancedAmount(newIncreasedBalance.getAvailable());
 							fromWallet.setLastBalancedAmount(newDecreasedBalance.getAvailable());
 							nbOperations++;
@@ -344,7 +347,7 @@ public class BalancerServiceImpl implements BalancerService {
 			}
 			
 			// set map pending transactions to true
-			ExchCcy exchCcy = new ExchCcy(toExchangeName, currency);
+			ExchCcy exchCcy = new ExchCcy(toExchangeName, currency.getCurrencyCode());
 			pendingWithdrawalsMap.put(exchCcy, true);
 
 			// add mapping destination exchange to transactionId

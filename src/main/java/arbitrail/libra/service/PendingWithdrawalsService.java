@@ -7,6 +7,7 @@ import java.util.concurrent.ConcurrentMap;
 import org.apache.log4j.Logger;
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.currency.Currency;
+import org.knowm.xchange.dto.account.Balance;
 import org.knowm.xchange.dto.account.FundingRecord;
 import org.knowm.xchange.dto.account.FundingRecord.Status;
 import org.knowm.xchange.dto.account.FundingRecord.Type;
@@ -14,12 +15,14 @@ import org.knowm.xchange.service.trade.params.DefaultTradeHistoryParamCurrency;
 
 import arbitrail.libra.model.ExchCcy;
 import arbitrail.libra.orm.service.PendingTransxService;
+import arbitrail.libra.orm.service.PendingTransxToExchService;
 import arbitrail.libra.orm.spring.ContextProvider;
 
 public class PendingWithdrawalsService extends Thread {
 	
 	private final static Logger LOG = Logger.getLogger(PendingWithdrawalsService.class);
 	
+	private PendingTransxToExchService pendingTransxToExchService = ContextProvider.getBean(PendingTransxToExchService.class);
 	private PendingTransxService pendingTransxService = ContextProvider.getBean(PendingTransxService.class);
 	private TransactionService transxService = new TransactionServiceImpl();
 	
@@ -72,25 +75,36 @@ public class PendingWithdrawalsService extends Thread {
 								LOG.warn("Skipping update of pending withdrawals status from exchange : " + exchangeName + " -> " + currency.getDisplayName());
 								continue;
 							}
-							ExchCcy exchCcy = new ExchCcy(toExchangeName, currency);
+							ExchCcy exchCcy = new ExchCcy(toExchangeName, currency.getCurrencyCode());
 							
 							// pending withdrawals
 							if (Status.PROCESSING.equals(fundingRecord.getStatus())) {
 								pendingWithdrawalsMap.put(exchCcy, true);
 							}
-							// withdrawals cancelled
-							else if (Status.CANCELLED.equals(fundingRecord.getStatus())) {
+							// withdrawals cancelled or failed
+							else if (Status.CANCELLED.equals(fundingRecord.getStatus()) || Status.FAILED.equals(fundingRecord.getStatus())) {
 								pendingWithdrawalsMap.put(exchCcy, false); 
 								pendingTransIdToToExchMap.remove(externalId);
+							}
+							// withdrawals completed
+							else if (Status.COMPLETE.equals(fundingRecord.getStatus())) {
+								//TODO update wallets file with balance updated
+								//Balance newDecreasedBalance = fromExchange.getAccountService().getAccountInfo().getWallet().getBalance(currency);
+								//LOG.info("newDecreasedBalance for " + fromExchangeName + " -> " + currency.getDisplayName() + " : " + newDecreasedBalance.getAvailable());
 							}
 						}
 						
 						// filter completed deposits
 						else if (Type.DEPOSIT.equals(fundingRecord.getType())) {
 							if (Status.COMPLETE.equals(fundingRecord.getStatus())) {
-								ExchCcy exchCcy = new ExchCcy(exchangeName, currency);
-								pendingWithdrawalsMap.put(exchCcy, false); //TODO update wallets file with balance updated
+								ExchCcy exchCcy = new ExchCcy(exchangeName, currency.getCurrencyCode());
+								pendingWithdrawalsMap.put(exchCcy, false); 
 								pendingTransIdToToExchMap.remove(externalId);
+								
+								//TODO update wallets file with balance updated
+								//Balance newIncreasedBalance = toExchange.getAccountService().getAccountInfo().getWallet().getBalance(currency);
+								//LOG.info("newIncreasedBalance for " + toExchangeName + " -> " + currency.getDisplayName() + " : " + newIncreasedBalance.getAvailable());
+								
 							}
 						}
 					}
@@ -109,7 +123,13 @@ public class PendingWithdrawalsService extends Thread {
 		while (true) {
 			try {
 				pollPendingWithdrawals();
-				LOG.debug(pendingWithdrawalsMap);
+				
+				LOG.debug("Persisting the pending transactions : " + pendingTransIdToToExchMap);
+				pendingTransxToExchService.saveAll(pendingTransIdToToExchMap);
+				
+				LOG.debug("Persisting the status of the pending transactions : " + pendingWithdrawalsMap);
+				pendingTransxService.saveAll(pendingWithdrawalsMap);
+				
 				LOG.info("Sleeping for (ms) : " + frequency);
 				Thread.sleep(frequency);
 			} catch (InterruptedException e) {

@@ -268,3 +268,22 @@ INFO  23:27:58,232 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQ
 INFO  23:27:58,314 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
 INFO  23:27:59,116 SchemaCreatorImpl  - HHH000476: Executing import script 'org.hibernate.tool.schema.internal.exec.ScriptSourceInputNonExistentImpl@2f860823'
 INFO  23:27:59,232 SchemaDropperImpl$DelayedDropActionImpl  - HHH000477: Starting delayed drop of schema as part of SessionFactory shut-down'
+INFO  00:33:41,470 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  00:33:41,623 Version  - HHH000412: Hibernate Core {5.2.12.Final}
+INFO  00:33:41,624 Environment  - HHH000206: hibernate.properties not found
+INFO  00:33:41,704 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  00:33:42,172 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+INFO  00:33:42,255 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
+INFO  00:33:42,958 SchemaCreatorImpl  - HHH000476: Executing import script 'org.hibernate.tool.schema.internal.exec.ScriptSourceInputNonExistentImpl@edf4f36'
+INFO  00:42:29,186 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  00:42:29,338 Version  - HHH000412: Hibernate Core {5.2.12.Final}
+INFO  00:42:29,339 Environment  - HHH000206: hibernate.properties not found
+INFO  00:42:29,526 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  00:42:29,953 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+INFO  00:42:30,041 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
+INFO  00:42:30,743 SchemaCreatorImpl  - HHH000476: Executing import script 'org.hibernate.tool.schema.internal.exec.ScriptSourceInputNonExistentImpl@673bb956'
+INFO  00:42:31,265 QueryTranslatorFactoryInitiator  - HHH000397: Using ASTQueryTranslatorFactory
