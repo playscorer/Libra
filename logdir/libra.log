@@ -287,3 +287,27 @@ INFO  00:42:29,953 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQ
 INFO  00:42:30,041 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
 INFO  00:42:30,743 SchemaCreatorImpl  - HHH000476: Executing import script 'org.hibernate.tool.schema.internal.exec.ScriptSourceInputNonExistentImpl@673bb956'
 INFO  00:42:31,265 QueryTranslatorFactoryInitiator  - HHH000397: Using ASTQueryTranslatorFactory
+DEBUG 00:53:08,638 Libra  - Properties loaded : {libra_frequency=60000, simulate=true, pending_service_frequency=30000, balance_check_threshold=0.45}
+DEBUG 01:12:08,331 Libra  - Properties loaded : {libra_frequency=60000, simulate=true, pending_service_frequency=30000, balance_check_threshold=0.45}
+DEBUG 01:12:51,604 Libra  - Properties loaded : {libra_frequency=60000, simulate=true, pending_service_frequency=30000, balance_check_threshold=0.45}
+DEBUG 01:12:52,227 Libra  - List of loaded currencies : [XRP]
+DEBUG 01:12:55,752 Libra  - List of loaded exchanges : [Bittrex#1605851606, Binance#1267556427]
+INFO  01:12:55,752 Libra  - Init mode enabled
+DEBUG 01:12:55,752 Libra  - Initialization of the accounts balance
+ERROR 01:12:55,773 InitServiceImpl  - Unrecognized field "lastBalancedAmount" (class arbitrail.libra.model.Wallet), not marked as ignorable (5 known properties: "initialBalance", "withdrawalFee", "tag", "minResidualBalance", "depositFee"])
+ at [Source: (StringReader); line: 6, column: 60] (through reference chain: arbitrail.libra.model.Wallets["walletMap"]->java.util.LinkedHashMap["Binance"]->java.util.LinkedHashMap["XRP"]->arbitrail.libra.model.Wallet["lastBalancedAmount"])
+DEBUG 01:14:51,526 Libra  - Properties loaded : {libra_frequency=60000, simulate=true, pending_service_frequency=30000, balance_check_threshold=0.45}
+DEBUG 01:14:51,896 Libra  - List of loaded currencies : [XRP]
+DEBUG 01:14:58,318 Libra  - List of loaded exchanges : [Bittrex#1605851606, Binance#1267556427]
+INFO  01:14:58,320 Libra  - Init mode enabled
+DEBUG 01:14:58,320 Libra  - Initialization of the accounts balance
+DEBUG 01:16:43,884 Libra  - Properties loaded : {libra_frequency=60000, simulate=true, pending_service_frequency=30000, balance_check_threshold=0.45}
+DEBUG 01:16:44,298 Libra  - List of loaded currencies : [XRP]
+DEBUG 01:16:48,371 Libra  - List of loaded exchanges : [Bittrex#748975217, Binance#1510087865]
+INFO  01:16:48,372 Libra  - Init mode enabled
+DEBUG 01:16:48,373 Libra  - Initialization of the accounts balance
+DEBUG 01:18:16,674 Libra  - Properties loaded : {libra_frequency=60000, simulate=true, pending_service_frequency=30000, balance_check_threshold=0.45}
+DEBUG 01:18:17,041 Libra  - List of loaded currencies : [XRP]
+DEBUG 01:18:24,459 Libra  - List of loaded exchanges : [Bittrex#1605851606, Binance#1267556427]
+INFO  01:18:24,459 Libra  - Init mode enabled
+DEBUG 01:18:24,459 Libra  - Initialization of the accounts balance

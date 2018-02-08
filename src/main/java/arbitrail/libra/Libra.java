@@ -21,6 +21,8 @@ import arbitrail.libra.orm.service.TransxIdToTargetExchService;
 import arbitrail.libra.orm.spring.ContextProvider;
 import arbitrail.libra.service.BalancerService;
 import arbitrail.libra.service.BalancerServiceImpl;
+import arbitrail.libra.service.InitService;
+import arbitrail.libra.service.InitServiceImpl;
 import arbitrail.libra.service.PendingWithdrawalsService;
 import arbitrail.libra.utils.Parser;
 import arbitrail.libra.utils.Utils;
@@ -29,10 +31,13 @@ public class Libra extends Thread {
 
 	private final static Logger LOG = Logger.getLogger(Libra.class);
 	
-	private static TransxIdToTargetExchService transxIdToTargetService = ContextProvider.getBean(TransxIdToTargetExchService.class);
-	private static PendingTransxService pendingTransxService = ContextProvider.getBean(PendingTransxService.class);
+	private static TransxIdToTargetExchService transxIdToTargetService;
+	private static PendingTransxService pendingTransxService;
+	
+	private static InitService initService = new InitServiceImpl();
+	private static BalancerService balancerService;
+
 	private static Wallets wallets;
-	private static BalancerService operations;
 	private static List<Exchange> exchanges;
 	private static List<Currency> currencies;
 	private Integer frequency;
@@ -41,6 +46,7 @@ public class Libra extends Thread {
 	private static ConcurrentMap<String, ExchStatus> transxIdToTargetExchMap;
 
 	public Libra(Properties props) {
+		balancerService = new BalancerServiceImpl(props, pendingWithdrawalsMap, transxIdToTargetExchMap);
 		frequency = Integer.valueOf(props.getProperty(Utils.Props.libra_frequency.name()));
 	}
 
@@ -51,9 +57,9 @@ public class Libra extends Thread {
 		while (true) {
 			try {
 				LocalDate before = LocalDate.now();
-				nbOperations = operations.balanceAccounts(exchanges, currencies, wallets);
+				nbOperations = balancerService.balanceAccounts(exchanges, currencies, wallets);
 				LocalDate after = LocalDate.now();
-				LOG.info("Number of rebalancing operations : " + nbOperations + " performed in (s) : " + ChronoUnit.SECONDS.between(before, after));
+				LOG.info("Number of rebalancing balancerService : " + nbOperations + " performed in (s) : " + ChronoUnit.SECONDS.between(before, after));
 				LOG.info("Sleeping for (ms) : " + frequency);
 				Thread.sleep(frequency);
 			} catch (InterruptedException | IOException e) {
@@ -67,10 +73,10 @@ public class Libra extends Thread {
 		Properties props = Utils.loadProperties("src/main/resources/conf.properties");
 		LOG.debug("Properties loaded : " + props);
 
-		currencies = operations.listAllHandledCurrencies();
+		currencies = initService.listAllHandledCurrencies();
 		LOG.debug("List of loaded currencies : " + currencies);
 
-		exchanges = operations.listAllHandledAccounts();
+		exchanges = initService.listAllHandledAccounts();
 		LOG.debug("List of loaded exchanges : " + exchanges);
 		
 		String initArg = System.getProperty("init");
@@ -79,7 +85,7 @@ public class Libra extends Thread {
 		if (init) {
 			LOG.info("Init mode enabled");
 			LOG.debug("Initialization of the accounts balance");
-			wallets = operations.loadAllAccountsBalance(exchanges, currencies, init);
+			wallets = initService.loadAllAccountsBalance(exchanges, currencies, init);
 			try {
 				Parser.saveAccountsBalanceToFile(wallets);
 			} catch (IOException e) {
@@ -94,6 +100,9 @@ public class Libra extends Thread {
 			LOG.info("Simulation mode : " + simulate);
 			
 			if (!simulate) {
+				transxIdToTargetService = ContextProvider.getBean(TransxIdToTargetExchService.class);
+				pendingTransxService = ContextProvider.getBean(PendingTransxService.class);
+				
 				LOG.info("Loading the transaction Ids");
 				transxIdToTargetExchMap = transxIdToTargetService.listAll();
 				
@@ -107,10 +116,8 @@ public class Libra extends Thread {
 				pendingWithdrawalsMap = new ConcurrentHashMap<>();
 			}
 			
-			operations = new BalancerServiceImpl(props, pendingWithdrawalsMap, transxIdToTargetExchMap);
-			
 			LOG.debug("Loading the accounts balance");
-			wallets = operations.loadAllAccountsBalance(exchanges, currencies, init);
+			wallets = initService.loadAllAccountsBalance(exchanges, currencies, init);
 			new Libra(props).start();
 		}
 	}
