@@ -25,7 +25,7 @@ public class PendingTransxService {
 		for (Entry<ExchCcy, Boolean> entry : pendingWithdrawalsMap.entrySet()) {
 			ExchCcy exchCcy = entry.getKey();
 			Boolean status = entry.getValue();
-			pendingTransxDao.persist(new PendingTransxEntity(null, exchCcy.getExchangeName(), exchCcy.getCurrencyCode(), status));
+			pendingTransxDao.persist(new PendingTransxEntity(exchCcy.getExchangeName(), exchCcy.getCurrencyCode(), status));
 		}
 	}
 

@@ -23,7 +23,7 @@ public class Parser {
 	
 	public static final String CURRENCIES_FILENAME = "src/main/resources/data/currencies.xml";
 	public static final String ACCOUNTS_FILENAME = "src/main/resources/data/accounts.xml";
-	public static final String WALLETS_FILENAME = "src/main/resources/data/output/wallets.xml";
+	public static final String WALLETS_FILENAME = "src/main/resources/data/generated/wallets.xml";
 
 	public static Currencies parseCurrencies() throws JsonParseException, JsonMappingException, IOException {
         ObjectMapper objectMapper = new XmlMapper();

@@ -10,31 +10,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import arbitrail.libra.orm.dao.PendingTransxToExchDao;
-import arbitrail.libra.orm.model.PendingTransxToExchEntity;
+import arbitrail.libra.model.ExchStatus;
+import arbitrail.libra.orm.dao.TransxIdToTargetExchDao;
+import arbitrail.libra.orm.model.TransxIdToTargetExchEntity;
 
 @Service
-public class PendingTransxToExchService {
+public class TransxIdToTargetExchService {
 
 	@Autowired
-	private PendingTransxToExchDao pendingTransxToExchDao;
+	private TransxIdToTargetExchDao transxIdToTargetExchDao;
 	
 	@Transactional
-	public void saveAll(Map<String, String> pendingTransIdToToExchMap) {
-		for (Entry<String, String> entry : pendingTransIdToToExchMap.entrySet()) {
+	public void saveAll(Map<String, ExchStatus> transxIdToTargetExchMqp) {
+		for (Entry<String, ExchStatus> entry : transxIdToTargetExchMqp.entrySet()) {
 			String transxId = entry.getKey();
-			String exchange = entry.getValue();
-			pendingTransxToExchDao.persist(new PendingTransxToExchEntity(null, transxId, exchange));
+			ExchStatus exchStatus = entry.getValue();
+			transxIdToTargetExchDao.persist(new TransxIdToTargetExchEntity(transxId, exchStatus.getExchangeName(), exchStatus.isWithdrawalComplete()));
 		}
 	}
 
 	@Transactional(readOnly = true)
-	public ConcurrentMap<String, String> listAll() {
-		List<PendingTransxToExchEntity> entityList = pendingTransxToExchDao.findAll();
+	public ConcurrentMap<String, ExchStatus> listAll() {
+		List<TransxIdToTargetExchEntity> entityList = transxIdToTargetExchDao.findAll();
 		
-		ConcurrentMap<String, String> pendingTransIdToToExchMap = new ConcurrentHashMap<>();
-		for (PendingTransxToExchEntity entity : entityList) {
-			pendingTransIdToToExchMap.put(entity.getTransxId(), entity.getExchange());
+		ConcurrentMap<String, ExchStatus> pendingTransIdToToExchMap = new ConcurrentHashMap<>();
+		for (TransxIdToTargetExchEntity entity : entityList) {
+			pendingTransIdToToExchMap.put(entity.getTransxId(), new ExchStatus(entity.getExchange(), entity.isWithdrawalComplete()));
 		}
 		
 		return pendingTransIdToToExchMap; 

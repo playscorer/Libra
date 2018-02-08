@@ -2,28 +2,24 @@ package arbitrail.libra.orm.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 
-@Entity
+import arbitrail.libra.model.ExchCcy;
+
+@Entity @IdClass(ExchCcy.class)
 public class PendingTransxEntity {
 
-	@Id
-	private Integer id;
-	private String exchange;
-	private String currency;
+	@Id private String exchange;
+	@Id private String currency;
 	private boolean status;
 
 	public PendingTransxEntity() {
 	}
 
-	public PendingTransxEntity(Integer id, String exchange, String currency, boolean status) {
-		this.id = id;
+	public PendingTransxEntity(String exchange, String currency, boolean status) {
 		this.exchange = exchange;
 		this.currency = currency;
 		this.status = status;
-	}
-
-	public Integer getId() {
-		return id;
 	}
 
 	public String getExchange() {

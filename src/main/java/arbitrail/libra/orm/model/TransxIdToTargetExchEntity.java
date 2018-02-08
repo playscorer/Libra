@@ -4,24 +4,19 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class PendingTransxToExchEntity {
+public class TransxIdToTargetExchEntity {
 
-	@Id
-	private Integer id;
-	private String transxId;
+	@Id private String transxId;
 	private String exchange;
+	private boolean withdrawalComplete;
 
-	public PendingTransxToExchEntity() {
+	public TransxIdToTargetExchEntity() {
 	}
 
-	public PendingTransxToExchEntity(Integer id, String transxId, String exchange) {
-		this.id = id;
+	public TransxIdToTargetExchEntity(String transxId, String exchange, boolean withdrawalComplete) {
 		this.transxId = transxId;
 		this.exchange = exchange;
-	}
-
-	public Integer getId() {
-		return id;
+		this.withdrawalComplete = withdrawalComplete;
 	}
 
 	public String getTransxId() {
@@ -30,6 +25,10 @@ public class PendingTransxToExchEntity {
 
 	public String getExchange() {
 		return exchange;
+	}
+
+	public boolean isWithdrawalComplete() {
+		return withdrawalComplete;
 	}
 
 }

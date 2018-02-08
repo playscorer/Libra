@@ -4,28 +4,24 @@ import java.math.BigDecimal;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 
-@Entity
+import arbitrail.libra.model.ExchCcy;
+
+@Entity @IdClass(ExchCcy.class)
 public class WalletEntity {
 
-	@Id
-	private Integer id;
-	private String exchange;
-	private String currency;
+	@Id private String exchange;
+	@Id private String currency;
 	private BigDecimal lastBalancedAmount;
 
 	public WalletEntity() {
 	}
 
-	public WalletEntity(Integer id, String exchange, String currency, BigDecimal lastBalancedAmount) {
-		this.id = id;
+	public WalletEntity(String exchange, String currency, BigDecimal lastBalancedAmount) {
 		this.exchange = exchange;
 		this.currency = currency;
 		this.lastBalancedAmount = lastBalancedAmount;
-	}
-
-	public Integer getId() {
-		return id;
 	}
 
 	public String getExchange() {

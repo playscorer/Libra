@@ -26,9 +26,12 @@ import arbitrail.libra.model.Account;
 import arbitrail.libra.model.Accounts;
 import arbitrail.libra.model.Currencies;
 import arbitrail.libra.model.ExchCcy;
+import arbitrail.libra.model.ExchStatus;
 import arbitrail.libra.model.MyCurrency;
 import arbitrail.libra.model.Wallet;
 import arbitrail.libra.model.Wallets;
+import arbitrail.libra.orm.service.WalletService;
+import arbitrail.libra.orm.spring.ContextProvider;
 import arbitrail.libra.utils.Parser;
 import arbitrail.libra.utils.Transformer;
 import arbitrail.libra.utils.Utils;
@@ -38,17 +41,18 @@ public class BalancerServiceImpl implements BalancerService {
 	private final static Logger LOG = Logger.getLogger(BalancerServiceImpl.class);
 	
 	private int withdrawalWaitingDelay = 30000;
+	private WalletService walletService = ContextProvider.getBean(WalletService.class);
 	private TransactionService transxService = new TransactionServiceImpl();
 	private Double balanceCheckThreshold;
 	private Boolean simulate;
 	private ConcurrentMap<ExchCcy, Boolean> pendingWithdrawalsMap;
-	private ConcurrentMap<String, String> pendingTransIdToToExchMap;
+	private ConcurrentMap<String, ExchStatus> transxIdToTargetExchMap;
 	
-	public BalancerServiceImpl(Properties properties, ConcurrentMap<ExchCcy, Boolean> pendingWithdrawalsMap, ConcurrentMap<String, String> pendingTransIdToToExchMap) {
+	public BalancerServiceImpl(Properties properties, ConcurrentMap<ExchCcy, Boolean> pendingWithdrawalsMap, ConcurrentMap<String, ExchStatus> transxIdToTargetExchMap) {
 		balanceCheckThreshold = Double.valueOf(properties.getProperty(Utils.Props.balance_check_threshold.name()));
 		simulate = Boolean.valueOf(properties.getProperty(Utils.Props.simulate.name()));
 		this.pendingWithdrawalsMap = pendingWithdrawalsMap;
-		this.pendingTransIdToToExchMap = pendingTransIdToToExchMap;
+		this.transxIdToTargetExchMap = transxIdToTargetExchMap;
 	}
 
 	@Override
@@ -123,7 +127,7 @@ public class BalancerServiceImpl implements BalancerService {
 			
 			Map<String, Wallet> currencyMap = walletMap.get(exchangeName);
 			if (currencyMap == null) {
-				LOG.debug("New exchanged to be added to wallets file : " + exchangeName);
+				LOG.debug("New exchange to be added to wallets file : " + exchangeName);
 				currencyMap = new HashMap<>();
 				walletMap.put(exchangeName, currencyMap);
 			}
@@ -136,7 +140,7 @@ public class BalancerServiceImpl implements BalancerService {
 						LOG.warn("Currency not available : " + currency.getDisplayName() +  " for Exchange : " + exchangeName);
 					} else {
 						LOG.debug("New currency wallet for : " + exchangeName + " -> " + currency.getDisplayName());
-						wallet = new Wallet(balance.getAvailable(), balance.getAvailable());
+						wallet = new Wallet(balance.getAvailable());
 						currencyMap.put(currency.getCurrencyCode(), wallet);
 					}
 				}
@@ -160,7 +164,7 @@ public class BalancerServiceImpl implements BalancerService {
 				if (BigDecimal.ZERO.equals(balance.getAvailable())) {
 					LOG.warn("Currency not available : " + currency.getDisplayName() +  " for Exchange : " + exchangeName);
 				} else {
-					Wallet wallet = new Wallet(balance.getAvailable(), balance.getAvailable());
+					Wallet wallet = new Wallet(balance.getAvailable());
 					currencyMap.put(currency.getCurrencyCode(), wallet);
 				}
 			}
@@ -223,7 +227,8 @@ public class BalancerServiceImpl implements BalancerService {
 				
 				// the threshold represents the minimum amount from which the balance will be triggered
 				Balance currentBalance = toExchange.getAccountService().getAccountInfo().getWallet().getBalance(currency);
-				BigDecimal checkThresholdBalance = toWallet.maxBalance().multiply(new BigDecimal(balanceCheckThreshold));
+				BigDecimal lastBalancedAmount = walletService.getLastBalancedAmount(toExchangeName, currencyCode);
+				BigDecimal checkThresholdBalance = toWallet.getInitialBalance().max(lastBalancedAmount).multiply(new BigDecimal(balanceCheckThreshold));
 				LOG.debug("Exchange : " + toExchangeName + " -> " + currency.getDisplayName() + " / checkThresholdBalance = " + checkThresholdBalance + " / currentBalance = " + currentBalance.getAvailable());
 
 				// trigger the balancer
@@ -258,15 +263,8 @@ public class BalancerServiceImpl implements BalancerService {
 					try {
 						// the rebalancing actually occured
 						if (balance(fromExchange, toExchange, currency, fromWallet, toWallet)) {
-							// TODO must update thoses balances once the withdrawal is complete
 							Balance newDecreasedBalance = fromExchange.getAccountService().getAccountInfo().getWallet().getBalance(currency);
 							LOG.info("new provisional balance for " + fromExchangeName + " -> " + currency.getDisplayName() + " : " + newDecreasedBalance.getAvailable());
-							//TODO remove this
-							Balance newIncreasedBalance = toExchange.getAccountService().getAccountInfo().getWallet().getBalance(currency);
-							LOG.debug("newIncreasedBalance for " + toExchangeName + " -> " + currency.getDisplayName() + " : " + newIncreasedBalance.getAvailable());
-							
-							toWallet.setLastBalancedAmount(newIncreasedBalance.getAvailable());
-							fromWallet.setLastBalancedAmount(newDecreasedBalance.getAvailable());
 							nbOperations++;
 						}
 						
@@ -351,7 +349,8 @@ public class BalancerServiceImpl implements BalancerService {
 			pendingWithdrawalsMap.put(exchCcy, true);
 
 			// add mapping destination exchange to transactionId
-			pendingTransIdToToExchMap.put(externalId, toExchangeName);
+			ExchStatus exchStatus = new ExchStatus(toExchangeName, false);
+			transxIdToTargetExchMap.put(externalId, exchStatus);
 			
 			return true;
 		}
