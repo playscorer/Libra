@@ -35,8 +35,8 @@ public class PendingTransxService {
 		
 		ConcurrentMap<ExchCcy, Boolean> pendingWithdrawalsMap = new ConcurrentHashMap<>();
 		for (PendingTransxEntity entity : entityList) {
-			ExchCcy exchCcy = new ExchCcy(entity.getExchange(), entity.getCurrency());
-			pendingWithdrawalsMap.put(exchCcy, entity.isStatus());
+			ExchCcy exchCcy = new ExchCcy(entity.getExchangeName(), entity.getCurrencyCode());
+			pendingWithdrawalsMap.put(exchCcy, entity.isPending());
 		}
 		
 		return pendingWithdrawalsMap; 

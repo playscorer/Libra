@@ -1,9 +1,17 @@
 package arbitrail.libra.model;
 
-public class ExchCcy {
+import java.io.Serializable;
+
+public class ExchCcy implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private String exchangeName;
 	private String currencyCode;
+
+	public ExchCcy() {
+		super();
+	}
 
 	public ExchCcy(String exchangeName, String currencyCode) {
 		this.exchangeName = exchangeName;

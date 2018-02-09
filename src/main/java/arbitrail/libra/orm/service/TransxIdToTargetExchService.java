@@ -35,7 +35,7 @@ public class TransxIdToTargetExchService {
 		
 		ConcurrentMap<String, ExchStatus> pendingTransIdToToExchMap = new ConcurrentHashMap<>();
 		for (TransxIdToTargetExchEntity entity : entityList) {
-			pendingTransIdToToExchMap.put(entity.getTransxId(), new ExchStatus(entity.getExchange(), entity.isWithdrawalComplete()));
+			pendingTransIdToToExchMap.put(entity.getTransxId(), new ExchStatus(entity.getExchangeName(), entity.isWithdrawalComplete()));
 		}
 		
 		return pendingTransIdToToExchMap; 

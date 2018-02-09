@@ -8,32 +8,40 @@ import javax.persistence.IdClass;
 
 import arbitrail.libra.model.ExchCcy;
 
-@Entity @IdClass(ExchCcy.class)
+@Entity
+@IdClass(ExchCcy.class)
 public class WalletEntity {
 
-	@Id private String exchange;
-	@Id private String currency;
+	@Id private String exchangeName;
+	@Id private String currencyCode;
 	private BigDecimal lastBalancedAmount;
 
 	public WalletEntity() {
 	}
 
-	public WalletEntity(String exchange, String currency, BigDecimal lastBalancedAmount) {
-		this.exchange = exchange;
-		this.currency = currency;
+	public WalletEntity(String exchangeName, String currencyCode, BigDecimal lastBalancedAmount) {
+		super();
+		this.exchangeName = exchangeName;
+		this.currencyCode = currencyCode;
 		this.lastBalancedAmount = lastBalancedAmount;
 	}
 
-	public String getExchange() {
-		return exchange;
+	public String getExchangeName() {
+		return exchangeName;
 	}
 
-	public String getCurrency() {
-		return currency;
+	public String getCurrencyCode() {
+		return currencyCode;
 	}
 
 	public BigDecimal getLastBalancedAmount() {
 		return lastBalancedAmount;
+	}
+
+	@Override
+	public String toString() {
+		return "WalletEntity [exchangeName=" + exchangeName + ", currencyCode=" + currencyCode + ", lastBalancedAmount="
+				+ lastBalancedAmount + "]";
 	}
 
 }

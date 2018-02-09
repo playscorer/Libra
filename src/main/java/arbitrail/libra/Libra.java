@@ -1,7 +1,7 @@
 package arbitrail.libra;
 
 import java.io.IOException;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Properties;
@@ -56,10 +56,10 @@ public class Libra extends Thread {
 		LOG.info("Libra has started!");
 		while (true) {
 			try {
-				LocalDate before = LocalDate.now();
+				LocalDateTime before = LocalDateTime.now();
 				nbOperations = balancerService.balanceAccounts(exchanges, currencies, wallets);
-				LocalDate after = LocalDate.now();
-				LOG.info("Number of rebalancing balancerService : " + nbOperations + " performed in (s) : " + ChronoUnit.SECONDS.between(before, after));
+				LocalDateTime after = LocalDateTime.now();
+				LOG.info("Number of rebalancing balancerService : " + nbOperations + " performed in (ms) : " + ChronoUnit.MILLIS.between(before, after));
 				LOG.info("Sleeping for (ms) : " + frequency);
 				Thread.sleep(frequency);
 			} catch (InterruptedException | IOException e) {

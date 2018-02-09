@@ -7,15 +7,16 @@ import javax.persistence.Id;
 public class TransxIdToTargetExchEntity {
 
 	@Id private String transxId;
-	private String exchange;
+	private String exchangeName;
 	private boolean withdrawalComplete;
 
 	public TransxIdToTargetExchEntity() {
 	}
 
-	public TransxIdToTargetExchEntity(String transxId, String exchange, boolean withdrawalComplete) {
+	public TransxIdToTargetExchEntity(String transxId, String exchangeName, boolean withdrawalComplete) {
+		super();
 		this.transxId = transxId;
-		this.exchange = exchange;
+		this.exchangeName = exchangeName;
 		this.withdrawalComplete = withdrawalComplete;
 	}
 
@@ -23,12 +24,18 @@ public class TransxIdToTargetExchEntity {
 		return transxId;
 	}
 
-	public String getExchange() {
-		return exchange;
+	public String getExchangeName() {
+		return exchangeName;
 	}
 
 	public boolean isWithdrawalComplete() {
 		return withdrawalComplete;
+	}
+
+	@Override
+	public String toString() {
+		return "TransxIdToTargetExchEntity [transxId=" + transxId + ", exchangeName=" + exchangeName
+				+ ", withdrawalComplete=" + withdrawalComplete + "]";
 	}
 
 }

@@ -6,32 +6,40 @@ import javax.persistence.IdClass;
 
 import arbitrail.libra.model.ExchCcy;
 
-@Entity @IdClass(ExchCcy.class)
+@Entity
+@IdClass(ExchCcy.class)
 public class PendingTransxEntity {
 
-	@Id private String exchange;
-	@Id private String currency;
-	private boolean status;
+	@Id private String exchangeName;
+	@Id private String currencyCode;
+	private boolean pending;
 
 	public PendingTransxEntity() {
 	}
 
-	public PendingTransxEntity(String exchange, String currency, boolean status) {
-		this.exchange = exchange;
-		this.currency = currency;
-		this.status = status;
+	public PendingTransxEntity(String exchangeName, String currencyCode, boolean pending) {
+		super();
+		this.exchangeName = exchangeName;
+		this.currencyCode = currencyCode;
+		this.pending = pending;
 	}
 
-	public String getExchange() {
-		return exchange;
+	public String getExchangeName() {
+		return exchangeName;
 	}
 
-	public String getCurrency() {
-		return currency;
+	public String getCurrencyCode() {
+		return currencyCode;
 	}
 
-	public boolean isStatus() {
-		return status;
+	public boolean isPending() {
+		return pending;
+	}
+
+	@Override
+	public String toString() {
+		return "PendingTransxEntity [exchangeName=" + exchangeName + ", currencyCode=" + currencyCode + ", pending="
+				+ pending + "]";
 	}
 
 }

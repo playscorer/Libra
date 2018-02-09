@@ -311,3 +311,305 @@ DEBUG 01:18:17,041 Libra  - List of loaded currencies : [XRP]
 DEBUG 01:18:24,459 Libra  - List of loaded exchanges : [Bittrex#1605851606, Binance#1267556427]
 INFO  01:18:24,459 Libra  - Init mode enabled
 DEBUG 01:18:24,459 Libra  - Initialization of the accounts balance
+DEBUG 00:08:05,636 Libra  - Properties loaded : {libra_frequency=60000, simulate=true, pending_service_frequency=30000, balance_check_threshold=0.45}
+DEBUG 00:08:06,150 Libra  - List of loaded currencies : [XRP]
+DEBUG 00:08:08,770 Libra  - List of loaded exchanges : [Bittrex#1605851606, Binance#1267556427]
+INFO  00:08:08,770 Libra  - Init mode enabled
+DEBUG 00:08:08,770 Libra  - Initialization of the accounts balance
+ERROR 00:08:08,785 InitServiceImpl  - Unrecognized field "lastBalancedAmount" (class arbitrail.libra.model.Wallet), not marked as ignorable (5 known properties: "initialBalance", "withdrawalFee", "tag", "minResidualBalance", "depositFee"])
+ at [Source: (StringReader); line: 6, column: 60] (through reference chain: arbitrail.libra.model.Wallets["walletMap"]->java.util.LinkedHashMap["Binance"]->java.util.LinkedHashMap["XRP"]->arbitrail.libra.model.Wallet["lastBalancedAmount"])
+DEBUG 00:10:10,927 Libra  - Properties loaded : {libra_frequency=60000, simulate=true, pending_service_frequency=30000, balance_check_threshold=0.45}
+DEBUG 00:10:11,439 Libra  - List of loaded currencies : [XRP]
+DEBUG 00:10:13,650 Libra  - List of loaded exchanges : [Bittrex#1605851606, Binance#1267556427]
+INFO  00:10:13,651 Libra  - Init mode enabled
+DEBUG 00:10:13,651 Libra  - Initialization of the accounts balance
+DEBUG 00:11:26,018 Libra  - Properties loaded : {libra_frequency=60000, simulate=true, pending_service_frequency=30000, balance_check_threshold=0.45}
+DEBUG 00:11:26,518 Libra  - List of loaded currencies : [XRP]
+DEBUG 00:11:27,497 Libra  - List of loaded exchanges : [Bitstamp#223693919, Bittrex#771418758]
+INFO  00:11:27,497 Libra  - Init mode enabled
+DEBUG 00:11:27,497 Libra  - Initialization of the accounts balance
+DEBUG 00:13:49,889 Libra  - Properties loaded : {libra_frequency=60000, simulate=true, pending_service_frequency=30000, balance_check_threshold=0.45}
+DEBUG 00:13:50,399 Libra  - List of loaded currencies : [XRP]
+DEBUG 00:13:51,520 Libra  - List of loaded exchanges : [Bitstamp#223693919, Bittrex#771418758]
+INFO  00:13:51,521 Libra  - Init mode enabled
+DEBUG 00:13:51,521 Libra  - Initialization of the accounts balance
+DEBUG 00:13:51,532 InitServiceImpl  - New exchange to be added to wallets file : Bitstamp
+DEBUG 00:13:51,857 InitServiceImpl  - New currency wallet for : Bitstamp -> Ripple
+DEBUG 00:16:56,896 Libra  - Properties loaded : {libra_frequency=60000, simulate=true, pending_service_frequency=30000, balance_check_threshold=0.45}
+DEBUG 00:16:57,387 Libra  - List of loaded currencies : [XRP]
+DEBUG 00:16:58,385 Libra  - List of loaded exchanges : [Bitstamp#223693919, Bittrex#771418758]
+INFO  00:16:58,386 Libra  - Init mode enabled
+DEBUG 00:16:58,386 Libra  - Initialization of the accounts balance
+DEBUG 00:18:18,737 Libra  - Properties loaded : {libra_frequency=60000, simulate=true, pending_service_frequency=30000, balance_check_threshold=0.45}
+DEBUG 00:18:19,221 Libra  - List of loaded currencies : [XRP]
+DEBUG 00:18:20,144 Libra  - List of loaded exchanges : [Bitstamp#223693919, Bittrex#771418758]
+INFO  00:18:20,144 Libra  - Init mode enabled
+DEBUG 00:18:20,144 Libra  - Initialization of the accounts balance
+DEBUG 00:19:09,761 Libra  - Properties loaded : {libra_frequency=60000, simulate=true, pending_service_frequency=30000, balance_check_threshold=0.45}
+DEBUG 00:19:10,229 Libra  - List of loaded currencies : [XRP]
+DEBUG 00:19:11,248 Libra  - List of loaded exchanges : [Bitstamp#223693919, Bittrex#771418758]
+INFO  00:19:12,187 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  00:19:12,361 Version  - HHH000412: Hibernate Core {5.2.12.Final}
+INFO  00:19:12,363 Environment  - HHH000206: hibernate.properties not found
+INFO  00:19:12,447 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  00:19:12,902 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+INFO  00:19:12,959 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
+DEBUG 00:20:26,078 Libra  - Properties loaded : {libra_frequency=60000, simulate=true, pending_service_frequency=30000, balance_check_threshold=0.45}
+DEBUG 00:20:26,428 Libra  - List of loaded currencies : [XRP]
+DEBUG 00:20:27,272 Libra  - List of loaded exchanges : [Bitstamp#223693919, Bittrex#771418758]
+INFO  00:20:27,272 Libra  - Init mode enabled
+DEBUG 00:20:27,272 Libra  - Initialization of the accounts balance
+DEBUG 00:21:22,284 Libra  - Properties loaded : {libra_frequency=60000, simulate=true, pending_service_frequency=30000, balance_check_threshold=0.45}
+DEBUG 00:21:22,647 Libra  - List of loaded currencies : [XRP]
+DEBUG 00:21:23,603 Libra  - List of loaded exchanges : [Bitstamp#223693919, Bittrex#771418758]
+INFO  00:21:24,427 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  00:21:24,550 Version  - HHH000412: Hibernate Core {5.2.12.Final}
+INFO  00:21:24,552 Environment  - HHH000206: hibernate.properties not found
+INFO  00:21:24,601 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  00:21:24,958 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+INFO  00:21:24,996 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
+DEBUG 00:24:02,119 Libra  - Properties loaded : {libra_frequency=60000, simulate=true, pending_service_frequency=30000, balance_check_threshold=0.45}
+DEBUG 00:24:02,597 Libra  - List of loaded currencies : [XRP]
+DEBUG 00:24:03,526 Libra  - List of loaded exchanges : [Bitstamp#223693919, Bittrex#771418758]
+INFO  00:24:04,421 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  00:24:04,584 Version  - HHH000412: Hibernate Core {5.2.12.Final}
+INFO  00:24:04,586 Environment  - HHH000206: hibernate.properties not found
+INFO  00:24:04,656 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  00:24:05,079 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+INFO  00:24:05,129 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
+DEBUG 00:28:40,343 Libra  - Properties loaded : {libra_frequency=60000, simulate=true, pending_service_frequency=30000, balance_check_threshold=0.45}
+DEBUG 00:28:40,869 Libra  - List of loaded currencies : [XRP]
+DEBUG 00:28:41,806 Libra  - List of loaded exchanges : [Bitstamp#223693919, Bittrex#771418758]
+INFO  00:28:42,627 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  00:28:42,771 Version  - HHH000412: Hibernate Core {5.2.12.Final}
+INFO  00:28:42,773 Environment  - HHH000206: hibernate.properties not found
+INFO  00:28:42,839 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  00:28:43,228 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+INFO  00:28:43,276 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
+INFO  00:28:43,604 PojoInstantiator  - HHH000182: No default (no-argument) constructor for class: arbitrail.libra.model.ExchCcy (class must be instantiated by Interceptor)
+DEBUG 00:29:27,705 Libra  - Properties loaded : {libra_frequency=60000, simulate=true, pending_service_frequency=30000, balance_check_threshold=0.45}
+DEBUG 00:29:28,219 Libra  - List of loaded currencies : [XRP]
+DEBUG 00:29:29,357 Libra  - List of loaded exchanges : [Bitstamp#223693919, Bittrex#771418758]
+INFO  00:29:30,298 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  00:29:30,469 Version  - HHH000412: Hibernate Core {5.2.12.Final}
+INFO  00:29:30,470 Environment  - HHH000206: hibernate.properties not found
+INFO  00:29:30,548 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  00:29:30,969 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+INFO  00:29:31,016 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
+INFO  00:29:31,380 PojoInstantiator  - HHH000182: No default (no-argument) constructor for class: arbitrail.libra.model.ExchCcy (class must be instantiated by Interceptor)
+INFO  00:29:31,382 PojoInstantiator  - HHH000182: No default (no-argument) constructor for class: arbitrail.libra.model.ExchCcy (class must be instantiated by Interceptor)
+INFO  00:29:31,595 PojoInstantiator  - HHH000182: No default (no-argument) constructor for class: arbitrail.libra.model.ExchCcy (class must be instantiated by Interceptor)
+INFO  00:29:31,659 PojoInstantiator  - HHH000182: No default (no-argument) constructor for class: arbitrail.libra.model.ExchCcy (class must be instantiated by Interceptor)
+INFO  00:29:31,896 SchemaCreatorImpl  - HHH000476: Executing import script 'org.hibernate.tool.schema.internal.exec.ScriptSourceInputNonExistentImpl@5fcfca62'
+INFO  00:29:32,190 Libra  - Simulation mode : true
+DEBUG 00:29:32,190 Libra  - Loading the accounts balance
+INFO  00:29:32,201 Libra  - Libra has started!
+INFO  00:29:32,214 BalancerServiceImpl  - No balancing has been done yet for Bitstamp -> Ripple
+INFO  00:29:32,736 QueryTranslatorFactoryInitiator  - HHH000397: Using ASTQueryTranslatorFactory
+DEBUG 00:31:43,332 Libra  - Properties loaded : {libra_frequency=60000, simulate=true, pending_service_frequency=30000, balance_check_threshold=0.45}
+DEBUG 00:31:43,799 Libra  - List of loaded currencies : [XRP]
+DEBUG 00:31:44,722 Libra  - List of loaded exchanges : [Bitstamp#223693919, Bittrex#771418758]
+INFO  00:31:45,561 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  00:31:45,718 Version  - HHH000412: Hibernate Core {5.2.12.Final}
+INFO  00:31:45,719 Environment  - HHH000206: hibernate.properties not found
+INFO  00:31:45,793 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  00:31:46,205 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+INFO  00:31:46,253 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
+INFO  00:31:46,584 PojoInstantiator  - HHH000182: No default (no-argument) constructor for class: arbitrail.libra.model.ExchCcy (class must be instantiated by Interceptor)
+INFO  00:31:46,585 PojoInstantiator  - HHH000182: No default (no-argument) constructor for class: arbitrail.libra.model.ExchCcy (class must be instantiated by Interceptor)
+INFO  00:31:46,755 PojoInstantiator  - HHH000182: No default (no-argument) constructor for class: arbitrail.libra.model.ExchCcy (class must be instantiated by Interceptor)
+INFO  00:31:46,815 PojoInstantiator  - HHH000182: No default (no-argument) constructor for class: arbitrail.libra.model.ExchCcy (class must be instantiated by Interceptor)
+INFO  00:31:47,041 SchemaCreatorImpl  - HHH000476: Executing import script 'org.hibernate.tool.schema.internal.exec.ScriptSourceInputNonExistentImpl@5fcfca62'
+INFO  00:31:47,305 Libra  - Simulation mode : true
+DEBUG 00:31:47,305 Libra  - Loading the accounts balance
+INFO  00:31:47,316 Libra  - Libra has started!
+INFO  00:31:47,323 BalancerServiceImpl  - No balancing has been done yet for Bitstamp -> Ripple
+INFO  00:31:47,770 QueryTranslatorFactoryInitiator  - HHH000397: Using ASTQueryTranslatorFactory
+DEBUG 00:32:41,194 Libra  - Properties loaded : {libra_frequency=60000, simulate=true, pending_service_frequency=30000, balance_check_threshold=0.45}
+DEBUG 00:32:41,707 Libra  - List of loaded currencies : [XRP]
+DEBUG 00:32:42,674 Libra  - List of loaded exchanges : [Bitstamp#223693919, Bittrex#771418758]
+INFO  00:32:43,569 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  00:32:43,730 Version  - HHH000412: Hibernate Core {5.2.12.Final}
+INFO  00:32:43,731 Environment  - HHH000206: hibernate.properties not found
+INFO  00:32:43,800 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  00:32:44,210 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+INFO  00:32:44,254 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
+INFO  00:32:44,572 PojoInstantiator  - HHH000182: No default (no-argument) constructor for class: arbitrail.libra.model.ExchCcy (class must be instantiated by Interceptor)
+INFO  00:32:44,574 PojoInstantiator  - HHH000182: No default (no-argument) constructor for class: arbitrail.libra.model.ExchCcy (class must be instantiated by Interceptor)
+INFO  00:32:44,755 PojoInstantiator  - HHH000182: No default (no-argument) constructor for class: arbitrail.libra.model.ExchCcy (class must be instantiated by Interceptor)
+INFO  00:32:44,810 PojoInstantiator  - HHH000182: No default (no-argument) constructor for class: arbitrail.libra.model.ExchCcy (class must be instantiated by Interceptor)
+INFO  00:32:45,049 SchemaCreatorImpl  - HHH000476: Executing import script 'org.hibernate.tool.schema.internal.exec.ScriptSourceInputNonExistentImpl@5fcfca62'
+INFO  00:32:45,339 Libra  - Simulation mode : true
+DEBUG 00:32:45,339 Libra  - Loading the accounts balance
+INFO  00:32:45,350 Libra  - Libra has started!
+INFO  00:32:45,358 BalancerServiceImpl  - No balancing has been done yet for Bitstamp -> Ripple
+INFO  00:32:45,860 QueryTranslatorFactoryInitiator  - HHH000397: Using ASTQueryTranslatorFactory
+DEBUG 00:37:40,254 Libra  - Properties loaded : {libra_frequency=60000, simulate=true, pending_service_frequency=30000, balance_check_threshold=0.45}
+DEBUG 00:37:40,737 Libra  - List of loaded currencies : [XRP]
+DEBUG 00:37:42,218 Libra  - List of loaded exchanges : [Bitstamp#223693919, Bittrex#771418758]
+INFO  00:37:43,044 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  00:37:43,190 Version  - HHH000412: Hibernate Core {5.2.12.Final}
+INFO  00:37:43,192 Environment  - HHH000206: hibernate.properties not found
+INFO  00:37:43,260 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  00:37:43,644 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+INFO  00:37:43,688 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
+INFO  00:37:43,994 PojoInstantiator  - HHH000182: No default (no-argument) constructor for class: arbitrail.libra.model.ExchCcy (class must be instantiated by Interceptor)
+INFO  00:37:43,995 PojoInstantiator  - HHH000182: No default (no-argument) constructor for class: arbitrail.libra.model.ExchCcy (class must be instantiated by Interceptor)
+INFO  00:37:44,170 PojoInstantiator  - HHH000182: No default (no-argument) constructor for class: arbitrail.libra.model.ExchCcy (class must be instantiated by Interceptor)
+INFO  00:37:44,223 PojoInstantiator  - HHH000182: No default (no-argument) constructor for class: arbitrail.libra.model.ExchCcy (class must be instantiated by Interceptor)
+INFO  00:37:44,439 SchemaCreatorImpl  - HHH000476: Executing import script 'org.hibernate.tool.schema.internal.exec.ScriptSourceInputNonExistentImpl@5fcfca62'
+INFO  00:37:44,705 Libra  - Simulation mode : true
+DEBUG 00:37:44,705 Libra  - Loading the accounts balance
+INFO  00:37:44,716 Libra  - Libra has started!
+INFO  00:37:44,723 BalancerServiceImpl  - No balancing has been done yet for Bitstamp -> Ripple
+INFO  00:37:46,245 QueryTranslatorFactoryInitiator  - HHH000397: Using ASTQueryTranslatorFactory
+DEBUG 00:37:46,405 BalancerServiceImpl  - Exchange : Bitstamp -> Ripple / checkThresholdBalance = 1.8450000000000000455191440096314181573688983917236328125E-7 / currentBalance = 4.1E-7
+INFO  00:37:46,405 BalancerServiceImpl  - No balancing has been done yet for Bittrex -> Ripple
+DEBUG 00:37:46,892 BalancerServiceImpl  - Exchange : Bittrex -> Ripple / checkThresholdBalance = 13.50000000000000033306690738754696212708950042724609375000000000 / currentBalance = 15.00000000
+DEBUG 00:45:31,002 Libra  - Properties loaded : {libra_frequency=60000, simulate=true, pending_service_frequency=30000, balance_check_threshold=0.45}
+DEBUG 00:45:31,511 Libra  - List of loaded currencies : [XRP]
+DEBUG 00:45:34,628 Libra  - List of loaded exchanges : [Bitstamp#223693919, Bittrex#771418758]
+INFO  00:45:35,527 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  00:45:35,683 Version  - HHH000412: Hibernate Core {5.2.12.Final}
+INFO  00:45:35,684 Environment  - HHH000206: hibernate.properties not found
+INFO  00:45:35,750 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  00:45:36,098 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+INFO  00:45:36,141 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
+INFO  00:45:36,489 PojoInstantiator  - HHH000182: No default (no-argument) constructor for class: arbitrail.libra.model.ExchCcy (class must be instantiated by Interceptor)
+INFO  00:45:36,490 PojoInstantiator  - HHH000182: No default (no-argument) constructor for class: arbitrail.libra.model.ExchCcy (class must be instantiated by Interceptor)
+INFO  00:45:36,678 PojoInstantiator  - HHH000182: No default (no-argument) constructor for class: arbitrail.libra.model.ExchCcy (class must be instantiated by Interceptor)
+INFO  00:45:36,734 PojoInstantiator  - HHH000182: No default (no-argument) constructor for class: arbitrail.libra.model.ExchCcy (class must be instantiated by Interceptor)
+INFO  00:45:36,965 SchemaCreatorImpl  - HHH000476: Executing import script 'org.hibernate.tool.schema.internal.exec.ScriptSourceInputNonExistentImpl@5fcfca62'
+INFO  00:45:37,249 Libra  - Simulation mode : true
+DEBUG 00:45:37,250 Libra  - Loading the accounts balance
+INFO  00:45:37,260 Libra  - Libra has started!
+INFO  00:45:37,269 BalancerServiceImpl  - No balancing has been done yet for Bitstamp -> Ripple
+INFO  00:45:38,095 QueryTranslatorFactoryInitiator  - HHH000397: Using ASTQueryTranslatorFactory
+DEBUG 00:45:38,289 BalancerServiceImpl  - Exchange : Bitstamp -> Ripple / checkThresholdBalance = 1.8450000000000000455191440096314181573688983917236328125E-7 / currentBalance = 4.1E-7
+INFO  00:45:38,290 BalancerServiceImpl  - No balancing has been done yet for Bittrex -> Ripple
+DEBUG 00:45:38,548 BalancerServiceImpl  - Exchange : Bittrex -> Ripple / checkThresholdBalance = 13.50000000000000033306690738754696212708950042724609375000000000 / currentBalance = 15.00000000
+INFO  00:45:38,549 Libra  - Number of rebalancing balancerService : 0 performed in (s) : 1
+INFO  00:45:38,549 Libra  - Sleeping for (ms) : 60000
+DEBUG 00:46:16,590 Libra  - Properties loaded : {libra_frequency=60000, simulate=true, pending_service_frequency=30000, balance_check_threshold=0.45}
+DEBUG 00:46:16,984 Libra  - List of loaded currencies : [XRP]
+DEBUG 00:46:17,862 Libra  - List of loaded exchanges : [Bitstamp#223693919, Bittrex#771418758]
+INFO  00:46:18,652 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  00:46:18,780 Version  - HHH000412: Hibernate Core {5.2.12.Final}
+INFO  00:46:18,781 Environment  - HHH000206: hibernate.properties not found
+INFO  00:46:18,824 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  00:46:19,175 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+INFO  00:46:19,213 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
+INFO  00:46:19,521 PojoInstantiator  - HHH000182: No default (no-argument) constructor for class: arbitrail.libra.model.ExchCcy (class must be instantiated by Interceptor)
+INFO  00:46:19,523 PojoInstantiator  - HHH000182: No default (no-argument) constructor for class: arbitrail.libra.model.ExchCcy (class must be instantiated by Interceptor)
+INFO  00:46:19,727 PojoInstantiator  - HHH000182: No default (no-argument) constructor for class: arbitrail.libra.model.ExchCcy (class must be instantiated by Interceptor)
+INFO  00:46:19,798 PojoInstantiator  - HHH000182: No default (no-argument) constructor for class: arbitrail.libra.model.ExchCcy (class must be instantiated by Interceptor)
+INFO  00:46:20,085 SchemaCreatorImpl  - HHH000476: Executing import script 'org.hibernate.tool.schema.internal.exec.ScriptSourceInputNonExistentImpl@5fcfca62'
+INFO  00:46:20,400 Libra  - Simulation mode : true
+DEBUG 00:46:20,400 Libra  - Loading the accounts balance
+INFO  00:46:20,416 Libra  - Libra has started!
+INFO  00:46:20,425 BalancerServiceImpl  - No balancing has been done yet for Bitstamp -> Ripple
+INFO  00:46:20,856 QueryTranslatorFactoryInitiator  - HHH000397: Using ASTQueryTranslatorFactory
+DEBUG 00:46:20,983 BalancerServiceImpl  - Exchange : Bitstamp -> Ripple / checkThresholdBalance = 1.8450000000000000455191440096314181573688983917236328125E-7 / currentBalance = 4.1E-7
+INFO  00:46:20,983 BalancerServiceImpl  - No balancing has been done yet for Bittrex -> Ripple
+DEBUG 00:46:21,178 BalancerServiceImpl  - Exchange : Bittrex -> Ripple / checkThresholdBalance = 13.50000000000000033306690738754696212708950042724609375000000000 / currentBalance = 15.00000000
+INFO  00:46:21,179 Libra  - Number of rebalancing balancerService : 0 performed in (s) : 0
+INFO  00:46:21,179 Libra  - Sleeping for (ms) : 60000
+INFO  00:47:21,181 BalancerServiceImpl  - No balancing has been done yet for Bitstamp -> Ripple
+DEBUG 00:47:21,429 BalancerServiceImpl  - Exchange : Bitstamp -> Ripple / checkThresholdBalance = 1.8450000000000000455191440096314181573688983917236328125E-7 / currentBalance = 4.1E-7
+INFO  00:47:21,429 BalancerServiceImpl  - No balancing has been done yet for Bittrex -> Ripple
+DEBUG 00:47:21,683 BalancerServiceImpl  - Exchange : Bittrex -> Ripple / checkThresholdBalance = 13.50000000000000033306690738754696212708950042724609375000000000 / currentBalance = 15.00000000
+INFO  00:47:21,684 Libra  - Number of rebalancing balancerService : 0 performed in (s) : 0
+INFO  00:47:21,684 Libra  - Sleeping for (ms) : 60000
+DEBUG 00:48:51,912 Libra  - Properties loaded : {libra_frequency=60000, simulate=true, pending_service_frequency=30000, balance_check_threshold=0.45}
+DEBUG 00:48:52,412 Libra  - List of loaded currencies : [XRP]
+DEBUG 00:48:53,334 Libra  - List of loaded exchanges : [Bitstamp#223693919, Bittrex#771418758]
+INFO  00:48:54,175 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  00:48:54,317 Version  - HHH000412: Hibernate Core {5.2.12.Final}
+INFO  00:48:54,319 Environment  - HHH000206: hibernate.properties not found
+INFO  00:48:54,384 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  00:48:54,791 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+INFO  00:48:54,833 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
+INFO  00:48:55,602 SchemaCreatorImpl  - HHH000476: Executing import script 'org.hibernate.tool.schema.internal.exec.ScriptSourceInputNonExistentImpl@5fcfca62'
+INFO  00:48:55,876 Libra  - Simulation mode : true
+DEBUG 00:48:55,877 Libra  - Loading the accounts balance
+INFO  00:48:55,888 Libra  - Libra has started!
+INFO  00:48:55,897 BalancerServiceImpl  - No balancing has been done yet for Bitstamp -> Ripple
+INFO  00:48:56,351 QueryTranslatorFactoryInitiator  - HHH000397: Using ASTQueryTranslatorFactory
+DEBUG 00:48:56,520 BalancerServiceImpl  - Exchange : Bitstamp -> Ripple / checkThresholdBalance = 1.8450000000000000455191440096314181573688983917236328125E-7 / currentBalance = 4.1E-7
+INFO  00:48:56,520 BalancerServiceImpl  - No balancing has been done yet for Bittrex -> Ripple
+DEBUG 00:48:56,722 BalancerServiceImpl  - Exchange : Bittrex -> Ripple / checkThresholdBalance = 13.50000000000000033306690738754696212708950042724609375000000000 / currentBalance = 15.00000000
+INFO  00:48:56,722 Libra  - Number of rebalancing balancerService : 0 performed in (ms) : 827
+INFO  00:48:56,722 Libra  - Sleeping for (ms) : 60000
+INFO  00:49:56,727 BalancerServiceImpl  - No balancing has been done yet for Bitstamp -> Ripple
+DEBUG 00:49:56,972 BalancerServiceImpl  - Exchange : Bitstamp -> Ripple / checkThresholdBalance = 1.8450000000000000455191440096314181573688983917236328125E-7 / currentBalance = 4.1E-7
+INFO  00:49:56,972 BalancerServiceImpl  - No balancing has been done yet for Bittrex -> Ripple
+DEBUG 00:49:57,223 BalancerServiceImpl  - Exchange : Bittrex -> Ripple / checkThresholdBalance = 13.50000000000000033306690738754696212708950042724609375000000000 / currentBalance = 15.00000000
+INFO  00:49:57,223 Libra  - Number of rebalancing balancerService : 0 performed in (ms) : 496
+INFO  00:49:57,223 Libra  - Sleeping for (ms) : 60000
+INFO  00:50:57,225 BalancerServiceImpl  - No balancing has been done yet for Bitstamp -> Ripple
+DEBUG 00:50:57,474 BalancerServiceImpl  - Exchange : Bitstamp -> Ripple / checkThresholdBalance = 1.8450000000000000455191440096314181573688983917236328125E-7 / currentBalance = 4.1E-7
+INFO  00:50:57,474 BalancerServiceImpl  - No balancing has been done yet for Bittrex -> Ripple
+DEBUG 00:50:57,753 BalancerServiceImpl  - Exchange : Bittrex -> Ripple / checkThresholdBalance = 13.50000000000000033306690738754696212708950042724609375000000000 / currentBalance = 15.00000000
+INFO  00:50:57,753 Libra  - Number of rebalancing balancerService : 0 performed in (ms) : 528
+INFO  00:50:57,753 Libra  - Sleeping for (ms) : 60000
+DEBUG 00:51:45,199 Libra  - Properties loaded : {libra_frequency=60000, simulate=true, pending_service_frequency=30000, balance_check_threshold=0.45}
+DEBUG 00:51:45,567 Libra  - List of loaded currencies : [XRP]
+DEBUG 00:51:46,438 Libra  - List of loaded exchanges : [Bitstamp#223693919, Bittrex#771418758]
+INFO  00:51:47,083 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  00:51:47,172 Version  - HHH000412: Hibernate Core {5.2.12.Final}
+INFO  00:51:47,173 Environment  - HHH000206: hibernate.properties not found
+INFO  00:51:47,214 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  00:51:47,524 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+INFO  00:51:47,564 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
+INFO  00:51:48,438 Libra  - Simulation mode : true
+DEBUG 00:51:48,438 Libra  - Loading the accounts balance
+INFO  00:51:48,450 Libra  - Libra has started!
+INFO  00:51:48,458 BalancerServiceImpl  - No balancing has been done yet for Bitstamp -> Ripple
+INFO  00:51:48,900 QueryTranslatorFactoryInitiator  - HHH000397: Using ASTQueryTranslatorFactory
+DEBUG 00:51:49,055 BalancerServiceImpl  - Exchange : Bitstamp -> Ripple / checkThresholdBalance = 1.8450000000000000455191440096314181573688983917236328125E-7 / currentBalance = 4.1E-7
+INFO  00:51:49,056 BalancerServiceImpl  - No balancing has been done yet for Bittrex -> Ripple
+DEBUG 00:51:49,267 BalancerServiceImpl  - Exchange : Bittrex -> Ripple / checkThresholdBalance = 13.50000000000000033306690738754696212708950042724609375000000000 / currentBalance = 15.00000000
+INFO  00:51:49,268 Libra  - Number of rebalancing balancerService : 0 performed in (ms) : 810
+INFO  00:51:49,268 Libra  - Sleeping for (ms) : 60000
+INFO  00:52:49,273 BalancerServiceImpl  - No balancing has been done yet for Bitstamp -> Ripple
+DEBUG 00:52:49,510 BalancerServiceImpl  - Exchange : Bitstamp -> Ripple / checkThresholdBalance = 1.8450000000000000455191440096314181573688983917236328125E-7 / currentBalance = 4.1E-7
+INFO  00:52:49,510 BalancerServiceImpl  - No balancing has been done yet for Bittrex -> Ripple
+DEBUG 00:52:58,333 BalancerServiceImpl  - Exchange : Bittrex -> Ripple / checkThresholdBalance = 13.50000000000000033306690738754696212708950042724609375000000000 / currentBalance = 15.00000000
+INFO  00:52:58,334 Libra  - Number of rebalancing balancerService : 0 performed in (ms) : 9061
+INFO  00:52:58,334 Libra  - Sleeping for (ms) : 60000
+INFO  00:53:58,336 BalancerServiceImpl  - No balancing has been done yet for Bitstamp -> Ripple
+DEBUG 00:53:58,589 BalancerServiceImpl  - Exchange : Bitstamp -> Ripple / checkThresholdBalance = 1.8450000000000000455191440096314181573688983917236328125E-7 / currentBalance = 4.1E-7
+INFO  00:53:58,589 BalancerServiceImpl  - No balancing has been done yet for Bittrex -> Ripple
+DEBUG 00:53:58,859 BalancerServiceImpl  - Exchange : Bittrex -> Ripple / checkThresholdBalance = 13.50000000000000033306690738754696212708950042724609375000000000 / currentBalance = 15.00000000
+INFO  00:53:58,859 Libra  - Number of rebalancing balancerService : 0 performed in (ms) : 523
+INFO  00:53:58,859 Libra  - Sleeping for (ms) : 60000
+INFO  00:54:58,864 BalancerServiceImpl  - No balancing has been done yet for Bitstamp -> Ripple
+DEBUG 00:54:59,163 BalancerServiceImpl  - Exchange : Bitstamp -> Ripple / checkThresholdBalance = 1.8450000000000000455191440096314181573688983917236328125E-7 / currentBalance = 4.1E-7
+INFO  00:54:59,163 BalancerServiceImpl  - No balancing has been done yet for Bittrex -> Ripple
+DEBUG 00:54:59,431 BalancerServiceImpl  - Exchange : Bittrex -> Ripple / checkThresholdBalance = 13.50000000000000033306690738754696212708950042724609375000000000 / currentBalance = 15.00000000
+INFO  00:54:59,431 Libra  - Number of rebalancing balancerService : 0 performed in (ms) : 567
+INFO  00:54:59,431 Libra  - Sleeping for (ms) : 60000
