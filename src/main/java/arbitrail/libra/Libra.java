@@ -59,7 +59,7 @@ public class Libra extends Thread {
 				LocalDateTime before = LocalDateTime.now();
 				nbOperations = balancerService.balanceAccounts(exchanges, currencies, wallets);
 				LocalDateTime after = LocalDateTime.now();
-				LOG.info("Number of rebalancing balancerService : " + nbOperations + " performed in (ms) : " + ChronoUnit.MILLIS.between(before, after));
+				LOG.info("Number of rebalancing operations : " + nbOperations + " performed in (ms) : " + ChronoUnit.MILLIS.between(before, after));
 				LOG.info("Sleeping for (ms) : " + frequency);
 				Thread.sleep(frequency);
 			} catch (InterruptedException | IOException e) {
