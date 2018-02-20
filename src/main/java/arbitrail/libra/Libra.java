@@ -49,7 +49,6 @@ public class Libra {
 
 	@PostConstruct
 	public void start() {
-		Wallets wallets;
 		ConcurrentMap<ExchCcy, Boolean> pendingWithdrawalsMap;
 		ConcurrentMap<String, ExchStatus> transxIdToTargetExchMap;
 		
@@ -62,10 +61,11 @@ public class Libra {
 		String initArg = System.getProperty("init");
 		boolean init = Boolean.valueOf(initArg);
 
+		LOG.debug("Initialization of the accounts balance");
+		Wallets wallets = initService.loadAllAccountsBalance(exchanges, currencies, init);
+
 		if (init) {
 			LOG.info("Init mode enabled");
-			LOG.debug("Initialization of the accounts balance");
-			wallets = initService.loadAllAccountsBalance(exchanges, currencies, init);
 			try {
 				Parser.saveAccountsBalanceToFile(wallets);
 			} catch (IOException e) {
@@ -74,9 +74,6 @@ public class Libra {
 			
 		} else {
 			LOG.info("Simulation mode : " + simulate);
-			
-			LOG.debug("Loading the accounts balance");
-			wallets = initService.loadAllAccountsBalance(exchanges, currencies, init);
 			
 			LOG.info("Loading the transaction Ids");
 			transxIdToTargetExchMap = transxIdToTargetService.listAll();

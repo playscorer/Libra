@@ -3771,3 +3771,59 @@ DEBUG 18:46:57,762 BalancerService  - Exchange : Bittrex -> Ripple / checkThresh
 INFO  18:46:57,762 BalancerService  - Number of rebalancing operations : 0 performed in (ms) : 792
 INFO  18:46:57,762 BalancerService  - Sleeping for (ms) : 60000
 ERROR 18:47:06,687 PendingWithdrawalsService  - This exchange does not handle the externalId : Bitstamp
+INFO  20:14:08,366 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  20:14:08,545 Version  - HHH000412: Hibernate Core {5.2.12.Final}
+INFO  20:14:08,548 Environment  - HHH000206: hibernate.properties not found
+INFO  20:14:08,630 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  20:14:09,077 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+INFO  20:14:09,158 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
+DEBUG 20:14:10,594 Libra  - List of loaded currencies : [XRP]
+DEBUG 20:14:11,655 Libra  - List of loaded exchanges : [Bitstamp#1758876146, Bittrex#987015126]
+DEBUG 20:14:11,656 Libra  - Initialization of the accounts balance
+INFO  20:14:11,665 Libra  - Simulation mode : true
+INFO  20:14:11,666 Libra  - Loading the transaction Ids
+INFO  20:14:11,846 QueryTranslatorFactoryInitiator  - HHH000397: Using ASTQueryTranslatorFactory
+INFO  20:14:12,012 Libra  - Loading the status of the pending transactions
+INFO  20:14:12,026 PendingWithdrawalsService  - PendingWithdrawals service has started!
+INFO  20:14:12,026 BalancerService  - Balancer service has started!
+INFO  20:14:12,040 BalancerService  - No balancing has been done yet for Bitstamp -> Ripple
+DEBUG 20:14:12,471 BalancerService  - Exchange : Bitstamp -> Ripple / checkThresholdBalance = 1.8450000000000000455191440096314181573688983917236328125E-7 / currentBalance = 4.1E-7
+INFO  20:14:12,472 BalancerService  - No balancing has been done yet for Bittrex -> Ripple
+DEBUG 20:14:14,122 BalancerService  - Exchange : Bittrex -> Ripple / checkThresholdBalance = 13.50000000000000033306690738754696212708950042724609375000000000 / currentBalance = 15.00000000
+INFO  20:14:14,123 BalancerService  - Number of rebalancing operations : 0 performed in (ms) : 2082
+INFO  20:14:14,123 BalancerService  - Sleeping for (ms) : 60000
+INFO  20:15:14,126 BalancerService  - No balancing has been done yet for Bitstamp -> Ripple
+DEBUG 20:15:14,502 BalancerService  - Exchange : Bitstamp -> Ripple / checkThresholdBalance = 1.8450000000000000455191440096314181573688983917236328125E-7 / currentBalance = 4.1E-7
+INFO  20:15:14,503 BalancerService  - No balancing has been done yet for Bittrex -> Ripple
+DEBUG 20:15:14,900 BalancerService  - Exchange : Bittrex -> Ripple / checkThresholdBalance = 13.50000000000000033306690738754696212708950042724609375000000000 / currentBalance = 15.00000000
+INFO  20:15:14,901 BalancerService  - Number of rebalancing operations : 0 performed in (ms) : 775
+INFO  20:15:14,901 BalancerService  - Sleeping for (ms) : 60000
+INFO  20:16:18,574 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  20:16:18,693 Version  - HHH000412: Hibernate Core {5.2.12.Final}
+INFO  20:16:18,695 Environment  - HHH000206: hibernate.properties not found
+INFO  20:16:18,758 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  20:16:19,167 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+INFO  20:16:19,205 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
+DEBUG 20:16:20,517 Libra  - List of loaded currencies : [XRP]
+DEBUG 20:16:21,468 Libra  - List of loaded exchanges : [Bitstamp#974168055, Bittrex#286947699]
+DEBUG 20:16:21,469 Libra  - Initialization of the accounts balance
+INFO  20:16:21,480 Libra  - Simulation mode : true
+INFO  20:16:21,480 Libra  - Loading the transaction Ids
+INFO  20:16:21,680 QueryTranslatorFactoryInitiator  - HHH000397: Using ASTQueryTranslatorFactory
+INFO  20:16:21,840 Libra  - Loading the status of the pending transactions
+INFO  20:16:21,856 PendingWithdrawalsService  - PendingWithdrawals service has started!
+INFO  20:16:21,856 BalancerService  - Balancer service has started!
+INFO  20:16:21,867 BalancerService  - No balancing has been done yet for Bitstamp -> Ripple
+ERROR 20:16:22,307 PendingWithdrawalsService  - This exchange does not handle the externalId : Bitstamp
+DEBUG 20:16:22,339 BalancerService  - Exchange : Bitstamp -> Ripple / checkThresholdBalance = 1.8450000000000000455191440096314181573688983917236328125E-7 / currentBalance = 4.1E-7
+INFO  20:16:22,340 BalancerService  - No balancing has been done yet for Bittrex -> Ripple
+DEBUG 20:16:22,957 BalancerService  - Exchange : Bittrex -> Ripple / checkThresholdBalance = 13.50000000000000033306690738754696212708950042724609375000000000 / currentBalance = 15.00000000
+INFO  20:16:22,957 BalancerService  - Number of rebalancing operations : 0 performed in (ms) : 1090
+INFO  20:16:22,957 BalancerService  - Sleeping for (ms) : 60000
+DEBUG 20:16:23,304 PendingWithdrawalsService  - Persisting the transaction Ids : {}
+DEBUG 20:16:23,305 PendingWithdrawalsService  - Persisting the status of the pending transactions : {}
+INFO  20:16:23,307 PendingWithdrawalsService  - Sleeping for (ms) : 30000
