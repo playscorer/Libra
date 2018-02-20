@@ -12,6 +12,7 @@ import org.knowm.xchange.BaseExchange;
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.currency.Currency;
 import org.knowm.xchange.dto.account.Balance;
+import org.springframework.stereotype.Component;
 
 import arbitrail.libra.model.Account;
 import arbitrail.libra.model.Accounts;
@@ -22,6 +23,7 @@ import arbitrail.libra.model.Wallets;
 import arbitrail.libra.utils.Parser;
 import arbitrail.libra.utils.Transformer;
 
+@Component
 public class InitServiceImpl implements InitService {
 	
 	private final static Logger LOG = Logger.getLogger(InitServiceImpl.class);

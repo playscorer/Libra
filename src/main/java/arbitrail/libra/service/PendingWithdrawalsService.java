@@ -12,6 +12,9 @@ import org.knowm.xchange.dto.account.FundingRecord;
 import org.knowm.xchange.dto.account.FundingRecord.Status;
 import org.knowm.xchange.dto.account.FundingRecord.Type;
 import org.knowm.xchange.service.trade.params.DefaultTradeHistoryParamCurrency;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import arbitrail.libra.model.ExchCcy;
 import arbitrail.libra.model.ExchStatus;
@@ -19,30 +22,43 @@ import arbitrail.libra.orm.model.WalletEntity;
 import arbitrail.libra.orm.service.PendingTransxService;
 import arbitrail.libra.orm.service.TransxIdToTargetExchService;
 import arbitrail.libra.orm.service.WalletService;
-import arbitrail.libra.orm.spring.ContextProvider;
 
+@Component
 public class PendingWithdrawalsService extends Thread {
 	
 	private final static Logger LOG = Logger.getLogger(PendingWithdrawalsService.class);
 	
-	private TransxIdToTargetExchService transxIdToTargetExchService = ContextProvider.getBean(TransxIdToTargetExchService.class);
-	private PendingTransxService pendingTransxService = ContextProvider.getBean(PendingTransxService.class);
-	private WalletService walletService = ContextProvider.getBean(WalletService.class);
-	private TransactionService transxService = new TransactionServiceImpl();
+	@Autowired
+	private TransxIdToTargetExchService transxIdToTargetExchService;
+	
+	@Autowired
+	private PendingTransxService pendingTransxService;
+	
+	@Autowired
+	private WalletService walletService;
+	
+	@Autowired
+	private TransactionService transxService;
 	
 	private List<Exchange> exchanges;
 	private ConcurrentMap<ExchCcy, Boolean> pendingWithdrawalsMap;
 	private ConcurrentMap<String, ExchStatus> transxIdToTargetExchMap;
+	
+	@Value("${pending_withdrawals_frequency}")
 	private Integer frequency;
 	
-	public PendingWithdrawalsService(List<Exchange> exchanges, ConcurrentMap<ExchCcy, Boolean> pendingWithdrawalsMap, ConcurrentMap<String, ExchStatus> transxIdToTargetExchMap, Integer frequency) {
-		this.exchanges = exchanges;
-		this.pendingWithdrawalsMap = pendingWithdrawalsMap;
-		this.transxIdToTargetExchMap = transxIdToTargetExchMap;
-		this.frequency = frequency;
+	public PendingWithdrawalsService() {
+		super();
 	}
 
-	public void pollPendingWithdrawals() {
+	public void init(ConcurrentMap<ExchCcy, Boolean> pendingWithdrawalsMap,
+			ConcurrentMap<String, ExchStatus> transxIdToTargetExchMap, List<Exchange> exchanges) {
+		this.exchanges = exchanges;
+		this.transxIdToTargetExchMap = transxIdToTargetExchMap;
+		this.pendingWithdrawalsMap = pendingWithdrawalsMap;
+	}
+
+	private void pollPendingWithdrawals() {
 		for (Exchange exchange : exchanges) {
 			String exchangeName = exchange.getExchangeSpecification().getExchangeName();
 
@@ -146,6 +162,18 @@ public class PendingWithdrawalsService extends Thread {
 				LOG.error(e);
 			}
 		}
+	}
+	
+	public void setExchanges(List<Exchange> exchanges) {
+		this.exchanges = exchanges;
+	}
+
+	public void setPendingWithdrawalsMap(ConcurrentMap<ExchCcy, Boolean> pendingWithdrawalsMap) {
+		this.pendingWithdrawalsMap = pendingWithdrawalsMap;
+	}
+
+	public void setTransxIdToTargetExchMap(ConcurrentMap<String, ExchStatus> transxIdToTargetExchMap) {
+		this.transxIdToTargetExchMap = transxIdToTargetExchMap;
 	}
 
 }

@@ -11,7 +11,9 @@ import java.util.stream.Collectors;
 import org.apache.log4j.Logger;
 import org.knowm.xchange.currency.Currency;
 import org.knowm.xchange.dto.account.FundingRecord;
+import org.springframework.stereotype.Component;
 
+@Component
 public class TransactionServiceImpl implements TransactionService {
 	
 	private final static Logger LOG = Logger.getLogger(TransactionServiceImpl.class);
