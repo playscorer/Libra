@@ -2,23 +2,23 @@
   <walletMap>
     <Binance>
       <XRP>
-        <initialBalance>40</initialBalance>
+        <initialBalance>30</initialBalance>
         <minResidualBalance>0</minResidualBalance>
-        <tag>102449671</tag>
+        <tag>109750021</tag>
         <depositFee>0</depositFee>
         <withdrawalFee>0.25</withdrawalFee>
       </XRP>
     </Binance>
-    <Bittrex>
+    <Hitbtc>
       <XRP>
-        <initialBalance>30.00000000</initialBalance>
+        <initialBalance>30</initialBalance>
         <minResidualBalance>11.5</minResidualBalance>
-        <tag>673968277</tag>
+        <tag>1955192449</tag>
         <depositFee>0</depositFee>
-        <withdrawalFee>1</withdrawalFee>
+        <withdrawalFee>1.5</withdrawalFee>
       </XRP>
-    </Bittrex>
-    <Bitstamp>
+    </Hitbtc>
+    <!--Bitstamp>
       <XRP>
         <initialBalance>4.1E-7</initialBalance>
         <minResidualBalance>0</minResidualBalance>
@@ -26,6 +26,6 @@
         <depositFee>0</depositFee>
         <withdrawalFee>0</withdrawalFee>
       </XRP>
-    </Bitstamp>
+    </Bitstamp-->
   </walletMap>
 </wallets>

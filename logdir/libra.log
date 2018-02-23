@@ -859,3 +859,489 @@ INFO  15:15:08,209 BalancerServiceImpl  - No balancing has been done yet for Bit
 DEBUG 15:15:08,698 BalancerServiceImpl  - Exchange : Bittrex -> Ripple / checkThresholdBalance = 13.50000000000000033306690738754696212708950042724609375000000000 / currentBalance = 15.00000000
 INFO  15:15:08,698 Libra  - Number of rebalancing balancerService : 0 performed in (ms) : 1111
 INFO  15:15:08,698 Libra  - Sleeping for (ms) : 60000
+DEBUG 00:46:03,583 Libra  - Properties loaded : {pending_service_frequency=30000, libra_frequency=60000, balance_check_threshold=0.45, simulate=true}
+DEBUG 00:46:04,111 Libra  - List of loaded currencies : [XRP]
+DEBUG 00:47:45,222 Libra  - Properties loaded : {pending_service_frequency=30000, libra_frequency=60000, balance_check_threshold=0.45, simulate=true}
+DEBUG 00:47:45,775 Libra  - List of loaded currencies : [XRP]
+DEBUG 00:47:49,775 Libra  - List of loaded exchanges : [Binance#1562764987, Hitbtc#216376974]
+DEBUG 00:51:02,569 Libra  - Properties loaded : {pending_service_frequency=30000, libra_frequency=60000, balance_check_threshold=0.45, simulate=true}
+DEBUG 00:51:03,123 Libra  - List of loaded currencies : [XRP]
+DEBUG 00:51:07,016 Libra  - List of loaded exchanges : [Binance#1562764987, Hitbtc#216376974]
+DEBUG 00:58:36,862 Libra  - Properties loaded : {pending_service_frequency=30000, libra_frequency=60000, balance_check_threshold=0.45, simulate=true}
+DEBUG 00:58:37,367 Libra  - List of loaded currencies : [XRP]
+DEBUG 00:58:41,224 Libra  - List of loaded exchanges : [Binance#1562764987, Hitbtc#216376974]
+DEBUG 01:03:44,311 Libra  - Properties loaded : {pending_service_frequency=30000, libra_frequency=60000, balance_check_threshold=0.45, simulate=true}
+DEBUG 01:03:44,828 Libra  - List of loaded currencies : [XRP]
+DEBUG 01:03:48,790 Libra  - List of loaded exchanges : [Binance#1562764987, Hitbtc#216376974]
+DEBUG 01:05:23,813 Libra  - Properties loaded : {pending_service_frequency=30000, libra_frequency=60000, balance_check_threshold=0.45, simulate=true}
+DEBUG 01:05:24,350 Libra  - List of loaded currencies : [XRP]
+DEBUG 01:05:28,376 Libra  - List of loaded exchanges : [Binance#1562764987, Hitbtc#216376974]
+DEBUG 01:09:31,233 Libra  - Properties loaded : {pending_service_frequency=30000, libra_frequency=60000, balance_check_threshold=0.45, simulate=true}
+DEBUG 01:09:31,734 Libra  - List of loaded currencies : [XRP]
+DEBUG 01:09:36,135 Libra  - List of loaded exchanges : [Binance#1562764987, Hitbtc#216376974]
+DEBUG 01:19:56,742 Libra  - Properties loaded : {pending_service_frequency=30000, libra_frequency=60000, balance_check_threshold=0.45, simulate=true}
+DEBUG 01:19:57,295 Libra  - List of loaded currencies : [XRP]
+DEBUG 01:20:01,066 Libra  - List of loaded exchanges : [Binance#1562764987, Hitbtc#216376974]
+DEBUG 01:24:52,058 Libra  - Properties loaded : {pending_service_frequency=30000, libra_frequency=60000, balance_check_threshold=0.45, simulate=true}
+DEBUG 01:24:52,589 Libra  - List of loaded currencies : [XRP]
+DEBUG 01:24:56,509 Libra  - List of loaded exchanges : [Binance#1562764987, Hitbtc#216376974]
+DEBUG 01:32:55,988 Libra  - Properties loaded : {pending_service_frequency=30000, libra_frequency=60000, balance_check_threshold=0.45, simulate=true}
+DEBUG 01:32:56,509 Libra  - List of loaded currencies : [XRP]
+DEBUG 01:33:00,366 Libra  - List of loaded exchanges : [Binance#1562764987, Hitbtc#216376974]
+DEBUG 01:34:18,073 Libra  - Properties loaded : {pending_service_frequency=30000, libra_frequency=60000, balance_check_threshold=0.45, simulate=true}
+DEBUG 01:34:18,591 Libra  - List of loaded currencies : [XRP]
+DEBUG 01:34:22,561 Libra  - List of loaded exchanges : [Binance#1562764987, Hitbtc#216376974]
+INFO  01:34:22,632 ClassPathXmlApplicationContext  - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@7a138fc5: startup date [Tue Feb 20 01:34:22 GMT 2018]; root of context hierarchy
+INFO  01:34:22,691 XmlBeanDefinitionReader  - Loading XML bean definitions from class path resource [spring.xml]
+DEBUG 01:38:37,090 Libra  - Properties loaded : {pending_service_frequency=30000, libra_frequency=60000, balance_check_threshold=0.45, simulate=true}
+DEBUG 01:38:37,622 Libra  - List of loaded currencies : [XRP]
+DEBUG 01:38:41,562 Libra  - List of loaded exchanges : [Binance#1562764987, Hitbtc#216376974]
+DEBUG 21:45:56,773 Libra  - Properties loaded : {pending_service_frequency=30000, libra_frequency=60000, balance_check_threshold=0.45, simulate=true}
+DEBUG 21:45:57,305 Libra  - List of loaded currencies : [XRP]
+DEBUG 21:46:01,063 Libra  - List of loaded exchanges : [Binance#1562764987, Hitbtc#216376974]
+DEBUG 21:50:49,833 Libra  - Properties loaded : {pending_service_frequency=30000, libra_frequency=60000, balance_check_threshold=0.45, simulate=true}
+DEBUG 21:50:50,375 Libra  - List of loaded currencies : [XRP]
+DEBUG 21:50:54,381 Libra  - List of loaded exchanges : [Binance#1562764987, Hitbtc#216376974]
+DEBUG 21:55:50,297 Libra  - Properties loaded : {pending_service_frequency=30000, libra_frequency=60000, balance_check_threshold=0.45, simulate=true}
+DEBUG 21:55:50,810 Libra  - List of loaded currencies : [XRP]
+DEBUG 21:55:54,647 Libra  - List of loaded exchanges : [Binance#1562764987, Hitbtc#216376974]
+DEBUG 21:59:33,745 Libra  - Properties loaded : {pending_service_frequency=30000, libra_frequency=60000, balance_check_threshold=0.45, simulate=true}
+DEBUG 21:59:34,207 Libra  - List of loaded currencies : [XRP]
+DEBUG 21:59:38,265 Libra  - List of loaded exchanges : [Binance#1562764987, Hitbtc#216376974]
+DEBUG 22:51:15,341 Libra  - Properties loaded : {pending_service_frequency=30000, libra_frequency=60000, balance_check_threshold=0.45, simulate=true}
+DEBUG 22:51:15,872 Libra  - List of loaded currencies : [XRP]
+DEBUG 22:51:19,569 Libra  - List of loaded exchanges : [Binance#1562764987, Hitbtc#216376974]
+DEBUG 22:56:28,926 Libra  - Properties loaded : {pending_service_frequency=30000, libra_frequency=60000, balance_check_threshold=0.45, simulate=true}
+DEBUG 22:56:29,462 Libra  - List of loaded currencies : [XRP]
+DEBUG 22:56:33,279 Libra  - List of loaded exchanges : [Binance#1562764987, Hitbtc#216376974]
+DEBUG 23:01:26,184 Libra  - Properties loaded : {pending_service_frequency=30000, libra_frequency=60000, balance_check_threshold=0.45, simulate=true}
+DEBUG 23:01:26,712 Libra  - List of loaded currencies : [XRP]
+DEBUG 23:01:30,485 Libra  - List of loaded exchanges : [Binance#1562764987, Hitbtc#216376974]
+DEBUG 23:04:38,942 Libra  - Properties loaded : {pending_service_frequency=30000, libra_frequency=60000, balance_check_threshold=0.45, simulate=true}
+DEBUG 23:04:39,461 Libra  - List of loaded currencies : [XRP]
+DEBUG 23:04:43,139 Libra  - List of loaded exchanges : [Binance#1562764987, Hitbtc#216376974]
+DEBUG 23:06:53,220 Libra  - Properties loaded : {pending_service_frequency=30000, libra_frequency=60000, balance_check_threshold=0.45, simulate=true}
+DEBUG 23:06:53,757 Libra  - List of loaded currencies : [XRP]
+DEBUG 23:06:57,526 Libra  - List of loaded exchanges : [Binance#1562764987, Hitbtc#216376974]
+INFO  23:06:58,546 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  23:06:58,657 Version  - HHH000412: Hibernate Core {[WORKING]}
+INFO  23:06:58,659 Environment  - HHH000206: hibernate.properties not found
+DEBUG 23:12:19,166 Libra  - Properties loaded : {pending_service_frequency=30000, libra_frequency=60000, balance_check_threshold=0.45, simulate=true}
+DEBUG 23:12:19,656 Libra  - List of loaded currencies : [XRP]
+DEBUG 23:12:23,489 Libra  - List of loaded exchanges : [Binance#1562764987, Hitbtc#216376974]
+INFO  23:12:24,485 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  23:12:24,603 Version  - HHH000412: Hibernate Core {[WORKING]}
+INFO  23:12:24,606 Environment  - HHH000206: hibernate.properties not found
+INFO  23:12:24,671 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+DEBUG 23:19:32,389 Libra  - Properties loaded : {pending_service_frequency=30000, libra_frequency=60000, balance_check_threshold=0.45, simulate=true}
+DEBUG 23:19:32,922 Libra  - List of loaded currencies : [XRP]
+DEBUG 23:19:36,650 Libra  - List of loaded exchanges : [Binance#1562764987, Hitbtc#216376974]
+INFO  23:19:37,654 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  23:19:37,767 Version  - HHH000412: Hibernate Core {[WORKING]}
+INFO  23:19:37,770 Environment  - HHH000206: hibernate.properties not found
+INFO  23:19:37,829 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+DEBUG 23:22:09,677 Libra  - Properties loaded : {pending_service_frequency=30000, libra_frequency=60000, balance_check_threshold=0.45, simulate=true}
+DEBUG 23:22:10,219 Libra  - List of loaded currencies : [XRP]
+DEBUG 23:22:14,012 Libra  - List of loaded exchanges : [Binance#1562764987, Hitbtc#216376974]
+DEBUG 23:35:41,287 Libra  - Properties loaded : {pending_service_frequency=30000, libra_frequency=60000, balance_check_threshold=0.45, simulate=true}
+DEBUG 23:35:41,817 Libra  - List of loaded currencies : [XRP]
+DEBUG 23:35:45,674 Libra  - List of loaded exchanges : [Binance#1228798862, Hitbtc#1562764987]
+INFO  23:35:46,668 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  23:35:46,777 Version  - HHH000412: Hibernate Core {[WORKING]}
+INFO  23:35:46,779 Environment  - HHH000206: hibernate.properties not found
+INFO  23:35:46,832 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+DEBUG 23:52:31,361 Libra  - Properties loaded : {pending_service_frequency=30000, libra_frequency=60000, balance_check_threshold=0.45, simulate=true}
+DEBUG 23:52:31,886 Libra  - List of loaded currencies : [XRP]
+DEBUG 23:52:35,571 Libra  - List of loaded exchanges : [Binance#1562764987, Hitbtc#216376974]
+INFO  23:52:36,605 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  23:52:36,721 Version  - HHH000412: Hibernate Core {[WORKING]}
+INFO  23:52:36,724 Environment  - HHH000206: hibernate.properties not found
+INFO  23:52:36,783 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+DEBUG 00:10:16,460 Libra  - Properties loaded : {pending_service_frequency=30000, libra_frequency=60000, balance_check_threshold=0.45, simulate=true}
+DEBUG 00:10:16,986 Libra  - List of loaded currencies : [XRP]
+DEBUG 00:10:20,832 Libra  - List of loaded exchanges : [Binance#1562764987, Hitbtc#216376974]
+INFO  00:10:21,869 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  00:10:21,972 Version  - HHH000412: Hibernate Core {[WORKING]}
+INFO  00:10:21,974 Environment  - HHH000206: hibernate.properties not found
+INFO  00:10:22,024 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+DEBUG 00:15:44,575 Libra  - Properties loaded : {pending_service_frequency=30000, libra_frequency=60000, balance_check_threshold=0.45, simulate=true}
+DEBUG 00:15:45,105 Libra  - List of loaded currencies : [XRP]
+DEBUG 00:15:49,030 Libra  - List of loaded exchanges : [Binance#1562764987, Hitbtc#216376974]
+INFO  00:15:50,035 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  00:15:50,147 Version  - HHH000412: Hibernate Core {[WORKING]}
+INFO  00:15:50,149 Environment  - HHH000206: hibernate.properties not found
+INFO  00:15:50,209 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+DEBUG 00:28:01,434 Libra  - Properties loaded : {pending_service_frequency=30000, libra_frequency=60000, balance_check_threshold=0.45, simulate=true}
+DEBUG 00:28:01,974 Libra  - List of loaded currencies : [XRP]
+DEBUG 00:28:05,952 Libra  - List of loaded exchanges : [Binance#1562764987, Hitbtc#216376974]
+INFO  00:28:06,963 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  00:28:07,084 Version  - HHH000412: Hibernate Core {[WORKING]}
+INFO  00:28:07,086 Environment  - HHH000206: hibernate.properties not found
+INFO  00:28:07,148 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  00:28:10,674 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+INFO  00:28:10,718 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
+INFO  00:28:11,644 Libra  - Simulation mode : true
+DEBUG 00:28:11,645 Libra  - Loading the accounts balance
+INFO  00:28:11,661 Libra  - Libra has started!
+INFO  00:28:11,677 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+INFO  00:28:12,979 QueryTranslatorFactoryInitiator  - HHH000397: Using ASTQueryTranslatorFactory
+DEBUG 00:28:13,221 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 4978.24881800
+WARN  00:28:13,222 BalancerServiceImpl  - No wallet config found for destination account : Hitbtc
+INFO  00:28:13,223 BalancerServiceImpl  - Skipping exchange : Hitbtc
+INFO  00:28:13,224 Libra  - Number of rebalancing operations : 0 performed in (ms) : 1548
+INFO  00:28:13,225 Libra  - Sleeping for (ms) : 60000
+INFO  00:29:13,273 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:29:14,405 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 4978.24881800
+WARN  00:29:14,406 BalancerServiceImpl  - No wallet config found for destination account : Hitbtc
+INFO  00:29:14,407 BalancerServiceImpl  - Skipping exchange : Hitbtc
+INFO  00:29:14,408 Libra  - Number of rebalancing operations : 0 performed in (ms) : 1134
+INFO  00:29:14,408 Libra  - Sleeping for (ms) : 60000
+INFO  00:30:14,457 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:30:15,613 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 4978.24881800
+WARN  00:30:15,614 BalancerServiceImpl  - No wallet config found for destination account : Hitbtc
+INFO  00:30:15,615 BalancerServiceImpl  - Skipping exchange : Hitbtc
+INFO  00:30:15,615 Libra  - Number of rebalancing operations : 0 performed in (ms) : 1158
+INFO  00:30:15,615 Libra  - Sleeping for (ms) : 60000
+INFO  00:31:15,664 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:31:16,771 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 4978.24881800
+WARN  00:31:16,772 BalancerServiceImpl  - No wallet config found for destination account : Hitbtc
+INFO  00:31:16,773 BalancerServiceImpl  - Skipping exchange : Hitbtc
+INFO  00:31:16,773 Libra  - Number of rebalancing operations : 0 performed in (ms) : 1109
+INFO  00:31:16,774 Libra  - Sleeping for (ms) : 60000
+INFO  00:32:16,822 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:32:18,012 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 4978.24881800
+WARN  00:32:18,014 BalancerServiceImpl  - No wallet config found for destination account : Hitbtc
+INFO  00:32:18,014 BalancerServiceImpl  - Skipping exchange : Hitbtc
+INFO  00:32:18,015 Libra  - Number of rebalancing operations : 0 performed in (ms) : 1193
+INFO  00:32:18,015 Libra  - Sleeping for (ms) : 60000
+INFO  00:33:18,056 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:33:19,168 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 4978.24881800
+WARN  00:33:19,169 BalancerServiceImpl  - No wallet config found for destination account : Hitbtc
+INFO  00:33:19,170 BalancerServiceImpl  - Skipping exchange : Hitbtc
+INFO  00:33:19,171 Libra  - Number of rebalancing operations : 0 performed in (ms) : 1114
+INFO  00:33:19,172 Libra  - Sleeping for (ms) : 60000
+INFO  00:34:19,190 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:34:20,364 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6707.72981800
+WARN  00:34:20,365 BalancerServiceImpl  - No wallet config found for destination account : Hitbtc
+INFO  00:34:20,366 BalancerServiceImpl  - Skipping exchange : Hitbtc
+INFO  00:34:20,366 Libra  - Number of rebalancing operations : 0 performed in (ms) : 1175
+INFO  00:34:20,367 Libra  - Sleeping for (ms) : 60000
+INFO  00:35:20,386 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:35:21,478 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6707.72981800
+WARN  00:35:21,479 BalancerServiceImpl  - No wallet config found for destination account : Hitbtc
+INFO  00:35:21,480 BalancerServiceImpl  - Skipping exchange : Hitbtc
+INFO  00:35:21,481 Libra  - Number of rebalancing operations : 0 performed in (ms) : 1095
+INFO  00:35:21,481 Libra  - Sleeping for (ms) : 60000
+INFO  00:36:21,501 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:36:22,639 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6707.72981800
+WARN  00:36:22,640 BalancerServiceImpl  - No wallet config found for destination account : Hitbtc
+INFO  00:36:22,641 BalancerServiceImpl  - Skipping exchange : Hitbtc
+INFO  00:36:22,641 Libra  - Number of rebalancing operations : 0 performed in (ms) : 1140
+INFO  00:36:22,641 Libra  - Sleeping for (ms) : 60000
+INFO  00:37:22,661 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:37:23,768 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6707.72981800
+WARN  00:37:23,770 BalancerServiceImpl  - No wallet config found for destination account : Hitbtc
+INFO  00:37:23,770 BalancerServiceImpl  - Skipping exchange : Hitbtc
+INFO  00:37:23,771 Libra  - Number of rebalancing operations : 0 performed in (ms) : 1110
+INFO  00:37:23,772 Libra  - Sleeping for (ms) : 60000
+INFO  00:38:23,787 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:38:24,869 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6707.72981800
+WARN  00:38:24,870 BalancerServiceImpl  - No wallet config found for destination account : Hitbtc
+INFO  00:38:24,871 BalancerServiceImpl  - Skipping exchange : Hitbtc
+INFO  00:38:24,871 Libra  - Number of rebalancing operations : 0 performed in (ms) : 1084
+INFO  00:38:24,872 Libra  - Sleeping for (ms) : 60000
+INFO  00:39:24,879 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:39:25,987 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6707.72981800
+WARN  00:39:25,987 BalancerServiceImpl  - No wallet config found for destination account : Hitbtc
+INFO  00:39:25,988 BalancerServiceImpl  - Skipping exchange : Hitbtc
+INFO  00:39:25,988 Libra  - Number of rebalancing operations : 0 performed in (ms) : 1108
+INFO  00:39:25,989 Libra  - Sleeping for (ms) : 60000
+DEBUG 00:39:55,945 Libra  - Properties loaded : {pending_service_frequency=10000, libra_frequency=20000, balance_check_threshold=0.45, simulate=true}
+DEBUG 00:39:56,445 Libra  - List of loaded currencies : [XRP]
+DEBUG 00:40:00,273 Libra  - List of loaded exchanges : [Binance#1562764987, Hitbtc#216376974]
+INFO  00:40:01,228 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  00:40:01,333 Version  - HHH000412: Hibernate Core {[WORKING]}
+INFO  00:40:01,335 Environment  - HHH000206: hibernate.properties not found
+INFO  00:40:01,393 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  00:40:04,905 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+INFO  00:40:04,949 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
+INFO  00:40:05,861 Libra  - Simulation mode : true
+DEBUG 00:40:05,862 Libra  - Loading the accounts balance
+INFO  00:40:05,879 Libra  - Libra has started!
+INFO  00:40:05,898 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+INFO  00:40:07,231 QueryTranslatorFactoryInitiator  - HHH000397: Using ASTQueryTranslatorFactory
+DEBUG 00:40:07,460 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6707.72981800
+WARN  00:40:07,461 BalancerServiceImpl  - No wallet config found for destination account : Hitbtc
+INFO  00:40:07,462 BalancerServiceImpl  - Skipping exchange : Hitbtc
+INFO  00:40:07,464 Libra  - Number of rebalancing operations : 0 performed in (ms) : 1567
+INFO  00:40:07,465 Libra  - Sleeping for (ms) : 20000
+INFO  00:40:27,468 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:40:28,592 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6707.72981800
+WARN  00:40:28,594 BalancerServiceImpl  - No wallet config found for destination account : Hitbtc
+INFO  00:40:28,595 BalancerServiceImpl  - Skipping exchange : Hitbtc
+INFO  00:40:28,595 Libra  - Number of rebalancing operations : 0 performed in (ms) : 1127
+INFO  00:40:28,596 Libra  - Sleeping for (ms) : 20000
+INFO  00:40:48,599 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:40:49,423 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6707.72981800
+WARN  00:40:49,424 BalancerServiceImpl  - No wallet config found for destination account : Hitbtc
+INFO  00:40:49,425 BalancerServiceImpl  - Skipping exchange : Hitbtc
+INFO  00:40:49,425 Libra  - Number of rebalancing operations : 0 performed in (ms) : 826
+INFO  00:40:49,426 Libra  - Sleeping for (ms) : 20000
+INFO  00:41:09,429 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:41:10,638 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6707.72981800
+WARN  00:41:10,639 BalancerServiceImpl  - No wallet config found for destination account : Hitbtc
+INFO  00:41:10,639 BalancerServiceImpl  - Skipping exchange : Hitbtc
+INFO  00:41:10,640 Libra  - Number of rebalancing operations : 0 performed in (ms) : 1211
+INFO  00:41:10,640 Libra  - Sleeping for (ms) : 20000
+INFO  00:41:30,644 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:41:31,533 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6707.72981800
+WARN  00:41:31,535 BalancerServiceImpl  - No wallet config found for destination account : Hitbtc
+INFO  00:41:31,535 BalancerServiceImpl  - Skipping exchange : Hitbtc
+INFO  00:41:31,536 Libra  - Number of rebalancing operations : 0 performed in (ms) : 892
+INFO  00:41:31,537 Libra  - Sleeping for (ms) : 20000
+INFO  00:41:51,540 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:41:52,459 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6707.72981800
+WARN  00:41:52,460 BalancerServiceImpl  - No wallet config found for destination account : Hitbtc
+INFO  00:41:52,462 BalancerServiceImpl  - Skipping exchange : Hitbtc
+INFO  00:41:52,462 Libra  - Number of rebalancing operations : 0 performed in (ms) : 922
+INFO  00:41:52,463 Libra  - Sleeping for (ms) : 20000
+INFO  00:42:12,467 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:42:13,322 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6707.72981800
+WARN  00:42:13,323 BalancerServiceImpl  - No wallet config found for destination account : Hitbtc
+INFO  00:42:13,324 BalancerServiceImpl  - Skipping exchange : Hitbtc
+INFO  00:42:13,325 Libra  - Number of rebalancing operations : 0 performed in (ms) : 858
+INFO  00:42:13,325 Libra  - Sleeping for (ms) : 20000
+INFO  00:42:33,329 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:42:34,513 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6707.72981800
+WARN  00:42:34,514 BalancerServiceImpl  - No wallet config found for destination account : Hitbtc
+INFO  00:42:34,515 BalancerServiceImpl  - Skipping exchange : Hitbtc
+INFO  00:42:34,515 Libra  - Number of rebalancing operations : 0 performed in (ms) : 1186
+INFO  00:42:34,517 Libra  - Sleeping for (ms) : 20000
+INFO  00:42:54,519 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:42:55,306 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6707.72981800
+WARN  00:42:55,307 BalancerServiceImpl  - No wallet config found for destination account : Hitbtc
+INFO  00:42:55,308 BalancerServiceImpl  - Skipping exchange : Hitbtc
+INFO  00:42:55,308 Libra  - Number of rebalancing operations : 0 performed in (ms) : 788
+INFO  00:42:55,309 Libra  - Sleeping for (ms) : 20000
+INFO  00:43:15,310 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:43:16,115 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6707.72981800
+WARN  00:43:16,116 BalancerServiceImpl  - No wallet config found for destination account : Hitbtc
+INFO  00:43:16,116 BalancerServiceImpl  - Skipping exchange : Hitbtc
+INFO  00:43:16,117 Libra  - Number of rebalancing operations : 0 performed in (ms) : 806
+INFO  00:43:16,118 Libra  - Sleeping for (ms) : 20000
+INFO  00:43:36,119 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:43:36,923 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6707.72981800
+WARN  00:43:36,924 BalancerServiceImpl  - No wallet config found for destination account : Hitbtc
+INFO  00:43:36,925 BalancerServiceImpl  - Skipping exchange : Hitbtc
+INFO  00:43:36,926 Libra  - Number of rebalancing operations : 0 performed in (ms) : 807
+INFO  00:43:36,927 Libra  - Sleeping for (ms) : 20000
+INFO  00:43:56,929 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:43:58,166 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6707.72981800
+WARN  00:43:58,167 BalancerServiceImpl  - No wallet config found for destination account : Hitbtc
+INFO  00:43:58,167 BalancerServiceImpl  - Skipping exchange : Hitbtc
+INFO  00:43:58,168 Libra  - Number of rebalancing operations : 0 performed in (ms) : 1239
+INFO  00:43:58,168 Libra  - Sleeping for (ms) : 20000
+INFO  00:44:18,169 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:44:19,071 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6707.72981800
+WARN  00:44:19,072 BalancerServiceImpl  - No wallet config found for destination account : Hitbtc
+INFO  00:44:19,073 BalancerServiceImpl  - Skipping exchange : Hitbtc
+INFO  00:44:19,073 Libra  - Number of rebalancing operations : 0 performed in (ms) : 904
+INFO  00:44:19,074 Libra  - Sleeping for (ms) : 20000
+INFO  00:44:39,076 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:44:40,157 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6707.72981800
+WARN  00:44:40,159 BalancerServiceImpl  - No wallet config found for destination account : Hitbtc
+INFO  00:44:40,159 BalancerServiceImpl  - Skipping exchange : Hitbtc
+INFO  00:44:40,160 Libra  - Number of rebalancing operations : 0 performed in (ms) : 1084
+INFO  00:44:40,160 Libra  - Sleeping for (ms) : 20000
+INFO  00:45:00,163 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:45:00,960 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6707.72981800
+WARN  00:45:00,961 BalancerServiceImpl  - No wallet config found for destination account : Hitbtc
+INFO  00:45:00,962 BalancerServiceImpl  - Skipping exchange : Hitbtc
+INFO  00:45:00,962 Libra  - Number of rebalancing operations : 0 performed in (ms) : 799
+INFO  00:45:00,963 Libra  - Sleeping for (ms) : 20000
+INFO  00:45:20,965 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:45:22,128 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6707.72981800
+WARN  00:45:22,130 BalancerServiceImpl  - No wallet config found for destination account : Hitbtc
+INFO  00:45:22,130 BalancerServiceImpl  - Skipping exchange : Hitbtc
+INFO  00:45:22,131 Libra  - Number of rebalancing operations : 0 performed in (ms) : 1166
+INFO  00:45:22,131 Libra  - Sleeping for (ms) : 20000
+INFO  00:45:42,134 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:45:42,997 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6707.72981800
+WARN  00:45:42,998 BalancerServiceImpl  - No wallet config found for destination account : Hitbtc
+INFO  00:45:42,998 BalancerServiceImpl  - Skipping exchange : Hitbtc
+INFO  00:45:42,999 Libra  - Number of rebalancing operations : 0 performed in (ms) : 865
+INFO  00:45:42,999 Libra  - Sleeping for (ms) : 20000
+INFO  00:46:03,001 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:46:03,847 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6707.72981800
+WARN  00:46:03,848 BalancerServiceImpl  - No wallet config found for destination account : Hitbtc
+INFO  00:46:03,849 BalancerServiceImpl  - Skipping exchange : Hitbtc
+INFO  00:46:03,849 Libra  - Number of rebalancing operations : 0 performed in (ms) : 847
+INFO  00:46:03,850 Libra  - Sleeping for (ms) : 20000
+INFO  00:46:23,851 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:46:24,730 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6707.72981800
+WARN  00:46:24,731 BalancerServiceImpl  - No wallet config found for destination account : Hitbtc
+INFO  00:46:24,731 BalancerServiceImpl  - Skipping exchange : Hitbtc
+INFO  00:46:24,732 Libra  - Number of rebalancing operations : 0 performed in (ms) : 881
+INFO  00:46:24,732 Libra  - Sleeping for (ms) : 20000
+INFO  00:46:44,735 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:46:45,833 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6707.72981800
+WARN  00:46:45,834 BalancerServiceImpl  - No wallet config found for destination account : Hitbtc
+INFO  00:46:45,835 BalancerServiceImpl  - Skipping exchange : Hitbtc
+INFO  00:46:45,835 Libra  - Number of rebalancing operations : 0 performed in (ms) : 1100
+INFO  00:46:45,836 Libra  - Sleeping for (ms) : 20000
+INFO  00:47:05,837 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:47:06,658 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6707.72981800
+WARN  00:47:06,659 BalancerServiceImpl  - No wallet config found for destination account : Hitbtc
+INFO  00:47:06,660 BalancerServiceImpl  - Skipping exchange : Hitbtc
+INFO  00:47:06,660 Libra  - Number of rebalancing operations : 0 performed in (ms) : 823
+INFO  00:47:06,661 Libra  - Sleeping for (ms) : 20000
+INFO  00:47:26,663 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:47:27,464 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6707.72981800
+WARN  00:47:27,465 BalancerServiceImpl  - No wallet config found for destination account : Hitbtc
+INFO  00:47:27,465 BalancerServiceImpl  - Skipping exchange : Hitbtc
+INFO  00:47:27,466 Libra  - Number of rebalancing operations : 0 performed in (ms) : 803
+INFO  00:47:27,466 Libra  - Sleeping for (ms) : 20000
+INFO  00:47:47,469 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:47:48,266 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6707.72981800
+WARN  00:47:48,267 BalancerServiceImpl  - No wallet config found for destination account : Hitbtc
+INFO  00:47:48,267 BalancerServiceImpl  - Skipping exchange : Hitbtc
+INFO  00:47:48,268 Libra  - Number of rebalancing operations : 0 performed in (ms) : 799
+INFO  00:47:48,268 Libra  - Sleeping for (ms) : 20000
+INFO  00:48:08,270 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:48:09,349 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6707.72981800
+WARN  00:48:09,351 BalancerServiceImpl  - No wallet config found for destination account : Hitbtc
+INFO  00:48:09,351 BalancerServiceImpl  - Skipping exchange : Hitbtc
+INFO  00:48:09,352 Libra  - Number of rebalancing operations : 0 performed in (ms) : 1082
+INFO  00:48:09,353 Libra  - Sleeping for (ms) : 20000
+INFO  00:48:29,354 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:48:30,126 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6707.72981800
+WARN  00:48:30,127 BalancerServiceImpl  - No wallet config found for destination account : Hitbtc
+INFO  00:48:30,127 BalancerServiceImpl  - Skipping exchange : Hitbtc
+INFO  00:48:30,128 Libra  - Number of rebalancing operations : 0 performed in (ms) : 774
+INFO  00:48:30,128 Libra  - Sleeping for (ms) : 20000
+INFO  00:48:50,130 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:48:51,282 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6707.72981800
+WARN  00:48:51,283 BalancerServiceImpl  - No wallet config found for destination account : Hitbtc
+INFO  00:48:51,284 BalancerServiceImpl  - Skipping exchange : Hitbtc
+INFO  00:48:51,284 Libra  - Number of rebalancing operations : 0 performed in (ms) : 1153
+INFO  00:48:51,285 Libra  - Sleeping for (ms) : 20000
+INFO  00:49:11,287 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:49:12,086 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6707.72981800
+WARN  00:49:12,087 BalancerServiceImpl  - No wallet config found for destination account : Hitbtc
+INFO  00:49:12,087 BalancerServiceImpl  - Skipping exchange : Hitbtc
+INFO  00:49:12,088 Libra  - Number of rebalancing operations : 0 performed in (ms) : 801
+INFO  00:49:12,089 Libra  - Sleeping for (ms) : 20000
+INFO  00:49:32,090 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:49:33,197 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6707.72981800
+WARN  00:49:33,198 BalancerServiceImpl  - No wallet config found for destination account : Hitbtc
+INFO  00:49:33,199 BalancerServiceImpl  - Skipping exchange : Hitbtc
+INFO  00:49:33,199 Libra  - Number of rebalancing operations : 0 performed in (ms) : 1109
+INFO  00:49:33,200 Libra  - Sleeping for (ms) : 20000
+INFO  00:49:53,201 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:49:54,009 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6707.72981800
+WARN  00:49:54,010 BalancerServiceImpl  - No wallet config found for destination account : Hitbtc
+INFO  00:49:54,010 BalancerServiceImpl  - Skipping exchange : Hitbtc
+INFO  00:49:54,011 Libra  - Number of rebalancing operations : 0 performed in (ms) : 810
+INFO  00:49:54,011 Libra  - Sleeping for (ms) : 20000
+INFO  00:50:14,013 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:50:14,868 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6707.72981800
+WARN  00:50:15,007 BalancerServiceImpl  - No wallet config found for destination account : Hitbtc
+INFO  00:50:15,007 BalancerServiceImpl  - Skipping exchange : Hitbtc
+INFO  00:50:15,008 Libra  - Number of rebalancing operations : 0 performed in (ms) : 995
+INFO  00:50:15,008 Libra  - Sleeping for (ms) : 20000
+DEBUG 22:39:21,386 Libra  - Properties loaded : {pending_service_frequency=10000, libra_frequency=20000, balance_check_threshold=0.45, simulate=true}
+DEBUG 22:39:21,921 Libra  - List of loaded currencies : [XRP]
+DEBUG 22:39:25,945 Libra  - List of loaded exchanges : [Binance#1562764987, Hitbtc#216376974]
+INFO  22:39:27,214 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  22:39:27,328 Version  - HHH000412: Hibernate Core {[WORKING]}
+INFO  22:39:27,330 Environment  - HHH000206: hibernate.properties not found
+INFO  22:39:27,390 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  22:39:30,776 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+INFO  22:39:30,819 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
+INFO  22:39:31,702 Libra  - Simulation mode : true
+DEBUG 22:39:31,702 Libra  - Loading the accounts balance
+INFO  22:39:31,719 Libra  - Libra has started!
+INFO  22:39:31,734 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+INFO  22:39:32,957 QueryTranslatorFactoryInitiator  - HHH000397: Using ASTQueryTranslatorFactory
+DEBUG 22:39:33,160 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 4537.53691800
+WARN  22:39:33,161 BalancerServiceImpl  - No wallet config found for destination account : Hitbtc
+INFO  22:39:33,162 BalancerServiceImpl  - Skipping exchange : Hitbtc
+INFO  22:39:33,164 Libra  - Number of rebalancing operations : 0 performed in (ms) : 1431
+INFO  22:39:33,164 Libra  - Sleeping for (ms) : 20000
+INFO  22:39:53,164 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 22:39:53,949 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 4537.53691800
+WARN  22:39:53,950 BalancerServiceImpl  - No wallet config found for destination account : Hitbtc
+INFO  22:39:53,951 BalancerServiceImpl  - Skipping exchange : Hitbtc
+INFO  22:39:53,952 Libra  - Number of rebalancing operations : 0 performed in (ms) : 788
+INFO  22:39:53,952 Libra  - Sleeping for (ms) : 20000
+DEBUG 22:42:50,177 Libra  - Properties loaded : {pending_service_frequency=10000, libra_frequency=20000, balance_check_threshold=0.45, simulate=true}
+DEBUG 22:42:50,694 Libra  - List of loaded currencies : [XRP]
+DEBUG 22:42:54,484 Libra  - List of loaded exchanges : [Binance#1562764987, Hitbtc#216376974]
+INFO  22:42:55,485 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  22:42:55,591 Version  - HHH000412: Hibernate Core {[WORKING]}
+INFO  22:42:55,607 Environment  - HHH000206: hibernate.properties not found
+INFO  22:42:55,665 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  22:42:58,961 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+INFO  22:42:59,007 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
+INFO  22:42:59,929 Libra  - Simulation mode : true
+DEBUG 22:42:59,930 Libra  - Loading the accounts balance
+ERROR 22:42:59,931 InitServiceImpl  - The wallets file does not exist or could not be found - please check the file or run Libra in init mode
+INFO  22:42:59,936 Libra  - Libra has started!
+DEBUG 22:43:59,685 Libra  - Properties loaded : {pending_service_frequency=10000, libra_frequency=20000, balance_check_threshold=0.45, simulate=true}
+DEBUG 22:44:00,189 Libra  - List of loaded currencies : [XRP]
+DEBUG 22:44:03,930 Libra  - List of loaded exchanges : [Binance#1562764987, Hitbtc#216376974]
+INFO  22:44:04,888 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  22:44:05,006 Version  - HHH000412: Hibernate Core {[WORKING]}
+INFO  22:44:05,009 Environment  - HHH000206: hibernate.properties not found
+INFO  22:44:05,072 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  22:44:08,671 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+INFO  22:44:08,713 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
+INFO  22:44:09,576 Libra  - Simulation mode : true
+DEBUG 22:44:09,577 Libra  - Loading the accounts balance
+INFO  22:44:09,595 Libra  - Libra has started!
+INFO  22:44:09,612 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+INFO  22:44:10,888 QueryTranslatorFactoryInitiator  - HHH000397: Using ASTQueryTranslatorFactory
+DEBUG 22:44:11,087 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 4537.53691800
+INFO  22:44:11,088 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 22:46:01,586 Libra  - Properties loaded : {pending_service_frequency=10000, libra_frequency=20000, balance_check_threshold=0.45, simulate=true}
+DEBUG 22:46:02,087 Libra  - List of loaded currencies : [XRP]
+DEBUG 22:46:06,104 Libra  - List of loaded exchanges : [Binance#1562764987, Hitbtc#216376974]
+INFO  22:46:07,097 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  22:46:07,211 Version  - HHH000412: Hibernate Core {[WORKING]}
+INFO  22:46:07,214 Environment  - HHH000206: hibernate.properties not found
+INFO  22:46:07,273 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  22:46:10,675 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+INFO  22:46:10,718 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
+INFO  22:46:11,606 Libra  - Simulation mode : true
+DEBUG 22:46:11,607 Libra  - Loading the accounts balance
+INFO  22:46:11,624 Libra  - Libra has started!
+INFO  22:46:11,639 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+INFO  22:46:12,942 QueryTranslatorFactoryInitiator  - HHH000397: Using ASTQueryTranslatorFactory
+DEBUG 22:46:13,171 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 4537.53691800
+INFO  22:46:13,172 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
