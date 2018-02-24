@@ -21,9 +21,9 @@ import arbitrail.libra.model.Currencies;
 
 public class Parser {
 	
-	public static final String CURRENCIES_FILENAME = "src/main/resources/data/currencies.xml";
-	public static final String ACCOUNTS_FILENAME = "src/main/resources/data/accounts.xml";
-	public static final String WALLETS_FILENAME = "src/main/resources/data/generated/wallets.xml";
+	public static final String CURRENCIES_FILENAME = "C:/Shared/Libra/conf/currencies.xml";
+	public static final String ACCOUNTS_FILENAME = "C:/Shared/Libra/conf/accounts.xml";
+	public static final String WALLETS_FILENAME = "C:/Shared/Libra/conf/wallets.xml";
 
 	public static Currencies parseCurrencies() throws JsonParseException, JsonMappingException, IOException {
         ObjectMapper objectMapper = new XmlMapper();

@@ -70,7 +70,7 @@ public class Libra extends Thread {
 
 	@SuppressWarnings("resource")
 	public static void main(String[] args) throws IOException {
-		Properties props = Utils.loadProperties("src/main/resources/conf.properties");
+		Properties props = Utils.loadProperties("C:/Shared/Libra/conf/conf.properties");
 		LOG.debug("Properties loaded : " + props);
 
 		currencies = initService.listAllHandledCurrencies();
