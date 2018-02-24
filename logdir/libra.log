@@ -1417,3 +1417,80 @@ INFO  01:02:51,079 BalancerServiceImpl  - No balancing has been done yet for Bin
 INFO  01:02:52,347 QueryTranslatorFactoryInitiator  - HHH000397: Using ASTQueryTranslatorFactory
 DEBUG 01:02:52,550 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 4537.53691800
 INFO  01:02:52,551 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 13:01:24,412 Libra  - Properties loaded : {pending_service_frequency=10000, libra_frequency=20000, balance_check_threshold=0.45, simulate=true}
+DEBUG 13:01:24,929 Libra  - List of loaded currencies : [XRP]
+DEBUG 13:01:28,610 Libra  - List of loaded exchanges : [Binance#1562764987, Hitbtc#216376974]
+INFO  13:01:29,666 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  13:01:29,779 Version  - HHH000412: Hibernate Core {[WORKING]}
+INFO  13:01:29,783 Environment  - HHH000206: hibernate.properties not found
+INFO  13:01:29,841 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  13:01:33,275 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+INFO  13:01:33,320 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
+INFO  13:01:34,216 Libra  - Simulation mode : true
+DEBUG 13:01:34,217 Libra  - Loading the accounts balance
+INFO  13:01:34,233 Libra  - Libra has started!
+INFO  13:01:34,248 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+INFO  13:01:35,495 QueryTranslatorFactoryInitiator  - HHH000397: Using ASTQueryTranslatorFactory
+DEBUG 13:01:35,701 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 10935.13291800
+INFO  13:01:35,703 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 13:03:22,461 Libra  - Properties loaded : {pending_service_frequency=10000, libra_frequency=20000, balance_check_threshold=0.45, simulate=true}
+DEBUG 13:03:22,975 Libra  - List of loaded currencies : [XRP]
+DEBUG 13:03:26,880 Libra  - List of loaded exchanges : [Binance#1562764987, Hitbtc#216376974]
+INFO  13:03:27,881 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  13:03:27,975 Version  - HHH000412: Hibernate Core {[WORKING]}
+INFO  13:03:27,977 Environment  - HHH000206: hibernate.properties not found
+INFO  13:03:28,025 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  13:03:31,341 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+INFO  13:03:31,386 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
+INFO  13:03:32,280 Libra  - Simulation mode : true
+DEBUG 13:03:32,281 Libra  - Loading the accounts balance
+INFO  13:03:32,300 Libra  - Libra has started!
+INFO  13:03:32,316 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+INFO  13:03:33,606 QueryTranslatorFactoryInitiator  - HHH000397: Using ASTQueryTranslatorFactory
+DEBUG 13:03:33,827 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 10935.13291800
+INFO  13:03:33,828 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 13:06:19,362 Libra  - Properties loaded : {pending_service_frequency=10000, libra_frequency=20000, balance_check_threshold=0.45, simulate=true}
+DEBUG 13:06:19,917 Libra  - List of loaded currencies : [XRP]
+DEBUG 13:06:24,024 Libra  - List of loaded exchanges : [Binance#1562764987, Hitbtc#216376974]
+INFO  13:06:24,994 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  13:06:25,097 Version  - HHH000412: Hibernate Core {[WORKING]}
+INFO  13:06:25,100 Environment  - HHH000206: hibernate.properties not found
+INFO  13:06:25,162 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  13:06:28,622 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+INFO  13:06:28,665 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
+INFO  13:06:29,520 Libra  - Simulation mode : true
+DEBUG 13:06:29,521 Libra  - Loading the accounts balance
+INFO  13:06:29,537 Libra  - Libra has started!
+INFO  13:06:29,553 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+INFO  13:06:30,780 QueryTranslatorFactoryInitiator  - HHH000397: Using ASTQueryTranslatorFactory
+DEBUG 13:06:30,970 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 10935.13291800
+INFO  13:06:30,971 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 13:11:50,108 Libra  - Properties loaded : {pending_service_frequency=10000, libra_frequency=20000, balance_check_threshold=0.45, simulate=true}
+DEBUG 13:11:50,605 Libra  - List of loaded currencies : [XRP]
+DEBUG 13:11:54,018 Libra  - List of loaded exchanges : [Binance#2024711353]
+INFO  13:11:55,077 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  13:11:55,187 Version  - HHH000412: Hibernate Core {[WORKING]}
+INFO  13:11:55,190 Environment  - HHH000206: hibernate.properties not found
+INFO  13:11:55,248 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  13:11:58,489 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+INFO  13:11:58,533 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
+INFO  13:11:59,394 Libra  - Simulation mode : true
+DEBUG 13:11:59,395 Libra  - Loading the accounts balance
+INFO  13:11:59,412 Libra  - Libra has started!
+INFO  13:11:59,427 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+INFO  13:12:00,681 QueryTranslatorFactoryInitiator  - HHH000397: Using ASTQueryTranslatorFactory
+DEBUG 13:12:00,891 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 10935.13291800
+INFO  13:12:00,892 Libra  - Number of rebalancing operations : 0 performed in (ms) : 1468
+INFO  13:12:00,893 Libra  - Sleeping for (ms) : 20000
+INFO  13:12:20,895 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 13:12:21,735 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 10935.13291800
+INFO  13:12:21,737 Libra  - Number of rebalancing operations : 0 performed in (ms) : 842
+INFO  13:12:21,737 Libra  - Sleeping for (ms) : 20000

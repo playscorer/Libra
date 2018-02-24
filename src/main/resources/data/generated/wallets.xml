@@ -9,7 +9,7 @@
         <withdrawalFee>0.25</withdrawalFee>
       </XRP>
     </Binance>
-    <Hitbtc>
+    <!--Hitbtc>
       <XRP>
         <initialBalance>30</initialBalance>
         <minResidualBalance>11.5</minResidualBalance>
@@ -17,7 +17,7 @@
         <depositFee>0</depositFee>
         <withdrawalFee>1.5</withdrawalFee>
       </XRP>
-    </Hitbtc>
+    </Hitbtc-->
     <!--Bitstamp>
       <XRP>
         <initialBalance>4.1E-7</initialBalance>
