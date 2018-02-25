@@ -1494,3 +1494,749 @@ INFO  13:12:20,895 BalancerServiceImpl  - No balancing has been done yet for Bin
 DEBUG 13:12:21,735 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 10935.13291800
 INFO  13:12:21,737 Libra  - Number of rebalancing operations : 0 performed in (ms) : 842
 INFO  13:12:21,737 Libra  - Sleeping for (ms) : 20000
+DEBUG 22:53:34,132 Libra  - Properties loaded : {pending_service_frequency=10000, libra_frequency=20000, balance_check_threshold=0.45, simulate=true}
+ERROR 22:53:35,185 InitServiceImpl  - C:\Shared\Libra\conf\currencies.xml
+DEBUG 22:53:35,187 Libra  - List of loaded currencies : []
+ERROR 22:53:35,204 InitServiceImpl  - C:\Shared\Libra\conf\accounts.xml
+DEBUG 22:53:35,206 Libra  - List of loaded exchanges : []
+DEBUG 22:54:18,956 Libra  - Properties loaded : {pending_service_frequency=10000, libra_frequency=20000, balance_check_threshold=0.45, simulate=true}
+DEBUG 22:54:19,800 Libra  - List of loaded currencies : [XRP]
+DEBUG 22:56:28,179 Libra  - Properties loaded : {pending_service_frequency=10000, libra_frequency=20000, balance_check_threshold=0.45, simulate=true}
+DEBUG 22:56:28,609 Libra  - List of loaded currencies : [XRP]
+DEBUG 22:57:27,503 Libra  - Properties loaded : {pending_service_frequency=10000, libra_frequency=20000, balance_check_threshold=0.45, simulate=true}
+DEBUG 22:57:27,941 Libra  - List of loaded currencies : [XRP]
+DEBUG 23:00:16,455 Libra  - Properties loaded : {pending_service_frequency=10000, libra_frequency=20000, balance_check_threshold=0.45, simulate=true}
+DEBUG 23:00:16,893 Libra  - List of loaded currencies : [XRP]
+DEBUG 23:00:23,100 Libra  - List of loaded exchanges : [Binance#1228798862, Hitbtc#1562764987]
+INFO  23:00:24,592 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  23:00:25,284 Version  - HHH000412: Hibernate Core {[WORKING]}
+INFO  23:00:25,290 Environment  - HHH000206: hibernate.properties not found
+INFO  23:00:25,668 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  23:00:32,024 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+INFO  23:00:32,134 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
+INFO  23:00:32,958 Libra  - Simulation mode : true
+DEBUG 23:00:32,959 Libra  - Loading the accounts balance
+INFO  23:00:32,985 Libra  - Libra has started!
+INFO  23:00:33,009 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 23:05:51,684 Libra  - Properties loaded : {pending_service_frequency=10000, libra_frequency=20000, balance_check_threshold=0.45, simulate=true}
+DEBUG 23:05:54,623 Libra  - List of loaded currencies : [XRP]
+DEBUG 23:06:02,120 Libra  - List of loaded exchanges : [Binance#1160652496, Hitbtc#1185618138]
+INFO  23:06:06,259 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  23:06:07,148 Version  - HHH000412: Hibernate Core {5.2.13.Final}
+INFO  23:06:07,154 Environment  - HHH000206: hibernate.properties not found
+INFO  23:06:07,440 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  23:06:11,366 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+INFO  23:06:11,535 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
+INFO  23:06:14,071 Libra  - Simulation mode : true
+DEBUG 23:06:14,071 Libra  - Loading the accounts balance
+INFO  23:06:14,150 Libra  - Libra has started!
+INFO  23:06:14,162 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 23:09:46,744 Libra  - Properties loaded : {pending_service_frequency=10000, libra_frequency=20000, balance_check_threshold=0.45, simulate=true}
+DEBUG 23:09:47,256 Libra  - List of loaded currencies : [XRP]
+DEBUG 23:09:51,156 Libra  - List of loaded exchanges : [Binance#1160652496, Hitbtc#1185618138]
+INFO  23:09:52,290 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  23:09:52,410 Version  - HHH000412: Hibernate Core {5.2.13.Final}
+INFO  23:09:52,412 Environment  - HHH000206: hibernate.properties not found
+INFO  23:09:52,510 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  23:09:53,431 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+INFO  23:09:53,472 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
+INFO  23:09:54,370 Libra  - Simulation mode : true
+DEBUG 23:09:54,371 Libra  - Loading the accounts balance
+INFO  23:09:54,384 Libra  - Libra has started!
+INFO  23:09:54,398 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 23:14:24,206 Libra  - Properties loaded : {pending_service_frequency=10000, libra_frequency=20000, balance_check_threshold=0.45, simulate=true}
+DEBUG 23:14:24,742 Libra  - List of loaded currencies : [XRP]
+DEBUG 23:14:28,637 Libra  - List of loaded exchanges : [Binance#1160652496, Hitbtc#1185618138]
+INFO  23:14:29,591 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  23:14:29,705 Version  - HHH000412: Hibernate Core {5.2.13.Final}
+INFO  23:14:29,705 Environment  - HHH000206: hibernate.properties not found
+INFO  23:14:29,807 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  23:14:31,365 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+INFO  23:14:31,401 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
+INFO  23:14:32,257 Libra  - Simulation mode : true
+DEBUG 23:14:32,257 Libra  - Loading the accounts balance
+INFO  23:14:32,272 Libra  - Libra has started!
+INFO  23:14:32,288 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+INFO  23:14:33,474 QueryTranslatorFactoryInitiator  - HHH000397: Using ASTQueryTranslatorFactory
+DEBUG 23:14:33,818 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 7080.48491800
+INFO  23:14:33,824 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 01:43:17,035 Libra  - Properties loaded : {pending_service_frequency=10000, libra_frequency=20000, balance_check_threshold=0.45, simulate=true}
+DEBUG 01:43:17,564 Libra  - List of loaded currencies : [XRP]
+DEBUG 01:43:22,920 Libra  - List of loaded exchanges : [Binance#1160652496, Hitbtc#1185618138]
+INFO  01:43:23,870 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  01:43:23,987 Version  - HHH000412: Hibernate Core {5.2.13.Final}
+INFO  01:43:23,989 Environment  - HHH000206: hibernate.properties not found
+INFO  01:43:24,083 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  01:43:25,354 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+INFO  01:43:25,402 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
+INFO  01:43:26,355 Libra  - Simulation mode : true
+DEBUG 01:43:26,355 Libra  - Loading the accounts balance
+INFO  01:43:26,370 Libra  - Libra has started!
+INFO  01:43:26,386 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+INFO  01:43:27,521 QueryTranslatorFactoryInitiator  - HHH000397: Using ASTQueryTranslatorFactory
+DEBUG 01:43:27,763 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 7080.48491800
+INFO  01:43:27,763 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 01:44:52,129 Libra  - Properties loaded : {pending_service_frequency=10000, libra_frequency=20000, balance_check_threshold=0.45, simulate=true}
+DEBUG 01:44:52,621 Libra  - List of loaded currencies : [XRP]
+DEBUG 01:44:56,990 Libra  - List of loaded exchanges : [Binance#1160652496, Hitbtc#1185618138]
+INFO  01:44:57,906 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  01:44:58,038 Version  - HHH000412: Hibernate Core {5.2.13.Final}
+INFO  01:44:58,038 Environment  - HHH000206: hibernate.properties not found
+INFO  01:44:58,116 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  01:44:58,790 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+INFO  01:44:58,837 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
+INFO  01:44:59,736 Libra  - Simulation mode : true
+DEBUG 01:44:59,736 Libra  - Loading the accounts balance
+INFO  01:44:59,748 Libra  - Libra has started!
+INFO  01:44:59,763 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+INFO  01:45:00,842 QueryTranslatorFactoryInitiator  - HHH000397: Using ASTQueryTranslatorFactory
+DEBUG 01:45:01,049 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 7080.48491800
+INFO  01:45:01,049 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 01:45:11,531 Libra  - Properties loaded : {pending_service_frequency=10000, libra_frequency=20000, balance_check_threshold=0.45, simulate=true}
+DEBUG 01:45:12,080 Libra  - List of loaded currencies : [XRP]
+DEBUG 01:45:16,200 Libra  - List of loaded exchanges : [Binance#2074492901, Hitbtc#1933077874]
+INFO  01:45:17,246 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  01:45:17,460 Version  - HHH000412: Hibernate Core {5.2.13.Final}
+INFO  01:45:17,464 Environment  - HHH000206: hibernate.properties not found
+INFO  01:45:17,560 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  01:45:18,349 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+INFO  01:45:18,403 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
+INFO  01:45:19,468 Libra  - Simulation mode : true
+DEBUG 01:45:19,468 Libra  - Loading the accounts balance
+INFO  01:45:19,545 Libra  - Libra has started!
+INFO  01:45:19,560 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+INFO  01:48:27,021 QueryTranslatorFactoryInitiator  - HHH000397: Using ASTQueryTranslatorFactory
+DEBUG 01:48:27,266 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 7080.48491800
+INFO  01:48:27,266 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 01:51:13,280 Libra  - Properties loaded : {pending_service_frequency=10000, libra_frequency=20000, balance_check_threshold=0.45, simulate=true}
+DEBUG 01:51:13,786 Libra  - List of loaded currencies : [XRP]
+DEBUG 01:51:17,994 Libra  - List of loaded exchanges : [Binance#1160652496, Hitbtc#1185618138]
+INFO  01:51:18,995 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  01:51:19,114 Version  - HHH000412: Hibernate Core {5.2.13.Final}
+INFO  01:51:19,114 Environment  - HHH000206: hibernate.properties not found
+INFO  01:51:19,192 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  01:51:20,544 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+INFO  01:51:20,582 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
+INFO  01:51:21,459 Libra  - Simulation mode : true
+DEBUG 01:51:21,459 Libra  - Loading the accounts balance
+INFO  01:51:21,474 Libra  - Libra has started!
+INFO  01:51:21,483 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+INFO  01:51:22,563 QueryTranslatorFactoryInitiator  - HHH000397: Using ASTQueryTranslatorFactory
+DEBUG 01:51:22,797 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 7080.48491800
+INFO  01:51:22,800 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 01:51:23,162 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6558.77546000
+INFO  01:51:23,162 Libra  - Number of rebalancing operations : 0 performed in (ms) : 1679
+INFO  01:51:23,162 Libra  - Sleeping for (ms) : 20000
+INFO  01:51:43,174 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 01:51:44,303 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 7080.48491800
+INFO  01:51:44,318 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 01:51:44,726 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6558.77546000
+INFO  01:51:44,726 Libra  - Number of rebalancing operations : 0 performed in (ms) : 1552
+INFO  01:51:44,726 Libra  - Sleeping for (ms) : 20000
+INFO  01:52:04,739 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 01:52:06,079 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 7080.48491800
+INFO  01:52:06,079 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 01:52:06,788 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6558.77546000
+INFO  01:52:06,788 Libra  - Number of rebalancing operations : 0 performed in (ms) : 2049
+INFO  01:52:06,788 Libra  - Sleeping for (ms) : 20000
+INFO  01:52:26,801 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 01:52:27,849 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 7080.48491800
+INFO  01:52:27,849 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 01:52:28,162 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6558.77546000
+INFO  01:52:28,162 Libra  - Number of rebalancing operations : 0 performed in (ms) : 1360
+INFO  01:52:28,162 Libra  - Sleeping for (ms) : 20000
+INFO  01:52:48,168 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 01:52:49,506 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 7080.48491800
+INFO  01:52:49,506 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 01:52:49,957 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6558.77546000
+INFO  01:52:49,957 Libra  - Number of rebalancing operations : 0 performed in (ms) : 1789
+INFO  01:52:49,957 Libra  - Sleeping for (ms) : 20000
+INFO  01:53:09,969 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 01:53:11,036 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 7080.48491800
+INFO  01:53:11,036 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 01:53:11,347 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6558.77546000
+INFO  01:53:11,347 Libra  - Number of rebalancing operations : 0 performed in (ms) : 1377
+INFO  01:53:11,347 Libra  - Sleeping for (ms) : 20000
+INFO  01:53:31,348 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 01:53:32,814 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 7080.48491800
+INFO  01:53:32,814 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 01:53:33,174 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6558.77546000
+INFO  01:53:33,174 Libra  - Number of rebalancing operations : 0 performed in (ms) : 1825
+INFO  01:53:33,174 Libra  - Sleeping for (ms) : 20000
+INFO  01:53:53,178 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 01:53:54,302 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 7080.48491800
+INFO  01:53:54,302 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 01:53:54,610 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6558.77546000
+INFO  01:53:54,610 Libra  - Number of rebalancing operations : 0 performed in (ms) : 1432
+INFO  01:53:54,610 Libra  - Sleeping for (ms) : 20000
+INFO  01:54:14,621 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 01:54:15,673 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 7080.48491800
+INFO  01:54:15,673 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 01:54:16,249 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6558.77546000
+INFO  01:54:16,249 Libra  - Number of rebalancing operations : 0 performed in (ms) : 1628
+INFO  01:54:16,249 Libra  - Sleeping for (ms) : 20000
+INFO  01:54:36,250 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 01:54:37,311 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 7080.48491800
+INFO  01:54:37,311 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 01:54:37,574 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6558.77546000
+INFO  01:54:37,574 Libra  - Number of rebalancing operations : 0 performed in (ms) : 1324
+INFO  01:54:37,574 Libra  - Sleeping for (ms) : 20000
+INFO  01:54:57,580 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 01:54:59,006 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 7080.48491800
+INFO  01:54:59,006 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 01:54:59,303 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 0
+INFO  01:54:59,303 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+DEBUG 02:03:43,652 Libra  - Properties loaded : {pending_service_frequency=10000, libra_frequency=20000, balance_check_threshold=0.45, simulate=true}
+DEBUG 02:03:44,152 Libra  - List of loaded currencies : [XRP]
+DEBUG 02:03:48,033 Libra  - List of loaded exchanges : [Binance#1160652496, Hitbtc#1185618138]
+INFO  02:03:49,023 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  02:03:49,191 Version  - HHH000412: Hibernate Core {5.2.13.Final}
+INFO  02:03:49,191 Environment  - HHH000206: hibernate.properties not found
+INFO  02:03:49,284 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  02:03:50,536 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+INFO  02:03:50,580 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
+INFO  02:03:51,762 Libra  - Simulation mode : true
+DEBUG 02:03:51,766 Libra  - Loading the accounts balance
+INFO  02:03:51,768 Libra  - Libra has started!
+INFO  02:03:51,783 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+INFO  02:03:52,835 QueryTranslatorFactoryInitiator  - HHH000397: Using ASTQueryTranslatorFactory
+DEBUG 02:03:53,043 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 7080.48491800
+INFO  02:03:53,043 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 02:03:53,473 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6558.77546000
+INFO  02:03:53,473 Libra  - Number of rebalancing operations : 0 performed in (ms) : 1689
+INFO  02:03:53,473 Libra  - Sleeping for (ms) : 20000
+INFO  02:04:13,474 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 02:04:14,583 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 7080.48491800
+INFO  02:04:14,583 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 02:04:14,895 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6558.77546000
+INFO  02:04:14,895 Libra  - Number of rebalancing operations : 0 performed in (ms) : 1421
+INFO  02:04:14,895 Libra  - Sleeping for (ms) : 20000
+INFO  02:04:34,900 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 02:04:36,498 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 7080.48491800
+INFO  02:04:36,498 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 02:04:36,864 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6558.77546000
+INFO  02:04:36,864 Libra  - Number of rebalancing operations : 0 performed in (ms) : 1964
+INFO  02:04:36,864 Libra  - Sleeping for (ms) : 20000
+INFO  02:04:56,869 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 02:04:58,121 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 7080.48491800
+INFO  02:04:58,121 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 02:04:58,455 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 0
+INFO  02:04:58,455 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+DEBUG 02:07:26,160 Libra  - Properties loaded : {pending_service_frequency=10000, libra_frequency=20000, balance_check_threshold=0.45, simulate=true}
+DEBUG 02:07:26,642 Libra  - List of loaded currencies : [XRP]
+DEBUG 02:07:30,302 Libra  - List of loaded exchanges : [Binance#1160652496, Hitbtc#1185618138]
+INFO  02:07:31,287 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  02:07:31,402 Version  - HHH000412: Hibernate Core {5.2.13.Final}
+INFO  02:07:31,402 Environment  - HHH000206: hibernate.properties not found
+INFO  02:07:31,497 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  02:07:32,508 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+INFO  02:07:32,543 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
+INFO  02:07:33,473 Libra  - Simulation mode : true
+DEBUG 02:07:33,474 Libra  - Loading the accounts balance
+INFO  02:07:33,491 Libra  - Libra has started!
+INFO  02:07:33,491 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+INFO  02:07:34,542 QueryTranslatorFactoryInitiator  - HHH000397: Using ASTQueryTranslatorFactory
+DEBUG 02:07:34,886 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 7080.48491800
+INFO  02:07:34,896 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 02:07:35,143 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 0
+INFO  02:07:35,143 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+DEBUG 02:09:42,540 Libra  - Properties loaded : {pending_service_frequency=10000, libra_frequency=20000, balance_check_threshold=0.45, simulate=true}
+DEBUG 02:09:43,056 Libra  - List of loaded currencies : [XRP]
+DEBUG 02:09:47,007 Libra  - List of loaded exchanges : [Binance#1160652496, Hitbtc#1185618138]
+INFO  02:09:47,954 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  02:09:48,058 Version  - HHH000412: Hibernate Core {5.2.13.Final}
+INFO  02:09:48,058 Environment  - HHH000206: hibernate.properties not found
+INFO  02:09:48,152 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  02:09:49,377 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+INFO  02:09:49,418 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
+INFO  02:09:50,302 Libra  - Simulation mode : true
+DEBUG 02:09:50,302 Libra  - Loading the accounts balance
+INFO  02:09:50,318 Libra  - Libra has started!
+INFO  02:09:50,334 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+INFO  02:09:51,319 QueryTranslatorFactoryInitiator  - HHH000397: Using ASTQueryTranslatorFactory
+DEBUG 02:09:51,546 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 7080.48491800
+INFO  02:09:51,546 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 02:09:51,859 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6558.77546000
+INFO  02:09:51,859 Libra  - Number of rebalancing operations : 0 performed in (ms) : 1525
+INFO  02:09:51,859 Libra  - Sleeping for (ms) : 20000
+INFO  02:10:11,865 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 02:10:12,928 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 7080.48491800
+INFO  02:10:12,928 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 02:10:14,090 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 6558.77546000
+INFO  02:10:14,105 Libra  - Number of rebalancing operations : 0 performed in (ms) : 2240
+INFO  02:10:14,105 Libra  - Sleeping for (ms) : 20000
+INFO  02:10:34,118 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 02:10:35,628 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 7080.48491800
+INFO  02:10:35,628 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 02:10:35,924 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 0
+INFO  02:10:35,924 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+INFO  02:10:37,568 BalancerServiceImpl  - Source exchange [Binance -> Ripple] balance : 7080.48491800 / Destination exchange [Hitbtc -> Ripple] balance : 0
+DEBUG 02:10:37,599 BalancerServiceImpl  - amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (3540.24245900, 7080.48491800)
+INFO  02:10:37,599 BalancerServiceImpl  - amountToWithdraw [Binance -> Hitbtc] : 3540.24245900
+DEBUG 02:10:37,834 BalancerServiceImpl  - Deposit address [Hitbtc -> Ripple] : rhL5Va5tDbUUuozS9isvEuv7Uk1uuJaY1T
+INFO  02:10:37,834 Libra  - Number of rebalancing operations : 0 performed in (ms) : 3715
+INFO  02:10:37,834 Libra  - Sleeping for (ms) : 20000
+INFO  02:10:57,847 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 02:10:58,971 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 7080.48491800
+INFO  02:10:58,971 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 02:10:59,246 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 0
+INFO  02:10:59,246 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+INFO  02:11:00,682 BalancerServiceImpl  - Source exchange [Binance -> Ripple] balance : 7080.48491800 / Destination exchange [Hitbtc -> Ripple] balance : 0
+DEBUG 02:11:00,682 BalancerServiceImpl  - amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (3540.24245900, 7080.48491800)
+INFO  02:11:00,682 BalancerServiceImpl  - amountToWithdraw [Binance -> Hitbtc] : 3540.24245900
+DEBUG 02:11:00,807 BalancerServiceImpl  - Deposit address [Hitbtc -> Ripple] : rhL5Va5tDbUUuozS9isvEuv7Uk1uuJaY1T
+INFO  02:11:00,823 Libra  - Number of rebalancing operations : 0 performed in (ms) : 2959
+INFO  02:11:00,823 Libra  - Sleeping for (ms) : 20000
+INFO  02:11:20,835 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 02:11:22,824 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 7080.48491800
+INFO  02:11:22,824 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 02:11:23,132 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 0
+INFO  02:11:23,132 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+INFO  02:11:24,864 BalancerServiceImpl  - Source exchange [Binance -> Ripple] balance : 7080.48491800 / Destination exchange [Hitbtc -> Ripple] balance : 0
+DEBUG 02:11:24,864 BalancerServiceImpl  - amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (3540.24245900, 7080.48491800)
+INFO  02:11:24,875 BalancerServiceImpl  - amountToWithdraw [Binance -> Hitbtc] : 3540.24245900
+DEBUG 02:11:25,009 BalancerServiceImpl  - Deposit address [Hitbtc -> Ripple] : rhL5Va5tDbUUuozS9isvEuv7Uk1uuJaY1T
+INFO  02:11:25,009 Libra  - Number of rebalancing operations : 0 performed in (ms) : 4174
+INFO  02:11:25,009 Libra  - Sleeping for (ms) : 20000
+INFO  02:11:45,016 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 02:11:46,080 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 7080.48491800
+INFO  02:11:46,080 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 02:11:46,409 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 0
+INFO  02:11:46,409 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+INFO  02:11:47,848 BalancerServiceImpl  - Source exchange [Binance -> Ripple] balance : 7080.48491800 / Destination exchange [Hitbtc -> Ripple] balance : 0
+DEBUG 02:11:47,848 BalancerServiceImpl  - amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (3540.24245900, 7080.48491800)
+INFO  02:11:47,848 BalancerServiceImpl  - amountToWithdraw [Binance -> Hitbtc] : 3540.24245900
+DEBUG 02:11:47,958 BalancerServiceImpl  - Deposit address [Hitbtc -> Ripple] : rhL5Va5tDbUUuozS9isvEuv7Uk1uuJaY1T
+INFO  02:11:47,958 Libra  - Number of rebalancing operations : 0 performed in (ms) : 2941
+INFO  02:11:47,958 Libra  - Sleeping for (ms) : 20000
+INFO  02:12:07,966 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 02:12:09,364 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 7080.48491800
+INFO  02:12:09,364 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 02:12:09,643 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 0
+INFO  02:12:09,643 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+INFO  02:12:11,158 BalancerServiceImpl  - Source exchange [Binance -> Ripple] balance : 7080.48491800 / Destination exchange [Hitbtc -> Ripple] balance : 0
+DEBUG 02:12:11,158 BalancerServiceImpl  - amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (3540.24245900, 7080.48491800)
+INFO  02:12:11,158 BalancerServiceImpl  - amountToWithdraw [Binance -> Hitbtc] : 3540.24245900
+DEBUG 02:12:11,237 BalancerServiceImpl  - Deposit address [Hitbtc -> Ripple] : rhL5Va5tDbUUuozS9isvEuv7Uk1uuJaY1T
+INFO  02:12:11,238 Libra  - Number of rebalancing operations : 0 performed in (ms) : 3271
+INFO  02:12:11,238 Libra  - Sleeping for (ms) : 20000
+INFO  02:12:31,239 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 02:12:32,387 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 7080.48491800
+INFO  02:12:32,387 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 02:12:32,671 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 0
+INFO  02:12:32,672 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+INFO  02:12:34,094 BalancerServiceImpl  - Source exchange [Binance -> Ripple] balance : 7080.48491800 / Destination exchange [Hitbtc -> Ripple] balance : 0
+DEBUG 02:12:34,094 BalancerServiceImpl  - amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (3540.24245900, 7080.48491800)
+INFO  02:12:34,094 BalancerServiceImpl  - amountToWithdraw [Binance -> Hitbtc] : 3540.24245900
+DEBUG 02:12:34,898 BalancerServiceImpl  - Deposit address [Hitbtc -> Ripple] : rhL5Va5tDbUUuozS9isvEuv7Uk1uuJaY1T
+INFO  02:12:34,898 Libra  - Number of rebalancing operations : 0 performed in (ms) : 3659
+INFO  02:12:34,898 Libra  - Sleeping for (ms) : 20000
+INFO  02:12:54,898 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 02:12:56,306 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 7080.48491800
+INFO  02:12:56,306 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 02:12:56,582 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 0
+INFO  02:12:56,582 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+INFO  02:12:58,008 BalancerServiceImpl  - Source exchange [Binance -> Ripple] balance : 7080.48491800 / Destination exchange [Hitbtc -> Ripple] balance : 0
+DEBUG 02:12:58,008 BalancerServiceImpl  - amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (3540.24245900, 7080.48491800)
+INFO  02:12:58,008 BalancerServiceImpl  - amountToWithdraw [Binance -> Hitbtc] : 3540.24245900
+DEBUG 02:12:58,080 BalancerServiceImpl  - Deposit address [Hitbtc -> Ripple] : rhL5Va5tDbUUuozS9isvEuv7Uk1uuJaY1T
+INFO  02:12:58,080 Libra  - Number of rebalancing operations : 0 performed in (ms) : 3182
+INFO  02:12:58,080 Libra  - Sleeping for (ms) : 20000
+INFO  02:13:18,081 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 02:13:19,206 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 7080.48491800
+INFO  02:13:19,207 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 02:13:19,538 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 0
+INFO  02:13:19,539 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+INFO  02:13:21,124 BalancerServiceImpl  - Source exchange [Binance -> Ripple] balance : 7080.48491800 / Destination exchange [Hitbtc -> Ripple] balance : 0
+DEBUG 02:13:21,124 BalancerServiceImpl  - amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (3540.24245900, 7080.48491800)
+INFO  02:13:21,124 BalancerServiceImpl  - amountToWithdraw [Binance -> Hitbtc] : 3540.24245900
+DEBUG 02:13:21,236 BalancerServiceImpl  - Deposit address [Hitbtc -> Ripple] : rhL5Va5tDbUUuozS9isvEuv7Uk1uuJaY1T
+INFO  02:13:21,236 Libra  - Number of rebalancing operations : 0 performed in (ms) : 3155
+INFO  02:13:21,236 Libra  - Sleeping for (ms) : 20000
+INFO  02:13:41,237 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 02:13:42,603 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 7080.48491800
+INFO  02:13:42,603 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 02:13:42,989 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 0
+INFO  02:13:42,989 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+INFO  02:13:44,437 BalancerServiceImpl  - Source exchange [Binance -> Ripple] balance : 7080.48491800 / Destination exchange [Hitbtc -> Ripple] balance : 0
+DEBUG 02:13:44,438 BalancerServiceImpl  - amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (3540.24245900, 7080.48491800)
+INFO  02:13:44,438 BalancerServiceImpl  - amountToWithdraw [Binance -> Hitbtc] : 3540.24245900
+DEBUG 02:13:44,545 BalancerServiceImpl  - Deposit address [Hitbtc -> Ripple] : rhL5Va5tDbUUuozS9isvEuv7Uk1uuJaY1T
+INFO  02:13:44,545 Libra  - Number of rebalancing operations : 0 performed in (ms) : 3308
+INFO  02:13:44,545 Libra  - Sleeping for (ms) : 20000
+INFO  02:14:04,547 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 02:14:05,731 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 7080.48491800
+INFO  02:14:05,731 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 02:14:07,016 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 0
+INFO  02:14:07,016 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+INFO  02:14:08,524 BalancerServiceImpl  - Source exchange [Binance -> Ripple] balance : 7080.48491800 / Destination exchange [Hitbtc -> Ripple] balance : 0
+DEBUG 02:14:08,524 BalancerServiceImpl  - amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (3540.24245900, 7080.48491800)
+INFO  02:14:08,525 BalancerServiceImpl  - amountToWithdraw [Binance -> Hitbtc] : 3540.24245900
+DEBUG 02:14:08,608 BalancerServiceImpl  - Deposit address [Hitbtc -> Ripple] : rhL5Va5tDbUUuozS9isvEuv7Uk1uuJaY1T
+INFO  02:14:08,608 Libra  - Number of rebalancing operations : 0 performed in (ms) : 4061
+INFO  02:14:08,609 Libra  - Sleeping for (ms) : 20000
+INFO  02:14:28,610 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 02:14:30,047 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 880.48491800
+INFO  02:14:30,047 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 02:14:30,523 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 0
+INFO  02:14:30,523 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+INFO  02:14:32,291 BalancerServiceImpl  - Source exchange [Binance -> Ripple] balance : 880.48491800 / Destination exchange [Hitbtc -> Ripple] balance : 0
+DEBUG 02:14:32,291 BalancerServiceImpl  - amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (440.24245900, 880.48491800)
+INFO  02:14:32,291 BalancerServiceImpl  - amountToWithdraw [Binance -> Hitbtc] : 440.24245900
+DEBUG 02:14:32,379 BalancerServiceImpl  - Deposit address [Hitbtc -> Ripple] : rhL5Va5tDbUUuozS9isvEuv7Uk1uuJaY1T
+INFO  02:14:32,379 Libra  - Number of rebalancing operations : 0 performed in (ms) : 3769
+INFO  02:14:32,379 Libra  - Sleeping for (ms) : 20000
+INFO  02:14:52,380 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 02:14:53,445 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 880.48491800
+INFO  02:14:53,445 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 02:14:53,691 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 0
+INFO  02:14:53,691 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+INFO  02:14:55,085 BalancerServiceImpl  - Source exchange [Binance -> Ripple] balance : 880.48491800 / Destination exchange [Hitbtc -> Ripple] balance : 0
+DEBUG 02:14:55,086 BalancerServiceImpl  - amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (440.24245900, 880.48491800)
+INFO  02:14:55,086 BalancerServiceImpl  - amountToWithdraw [Binance -> Hitbtc] : 440.24245900
+DEBUG 02:14:55,156 BalancerServiceImpl  - Deposit address [Hitbtc -> Ripple] : rhL5Va5tDbUUuozS9isvEuv7Uk1uuJaY1T
+INFO  02:14:55,156 Libra  - Number of rebalancing operations : 0 performed in (ms) : 2776
+INFO  02:14:55,156 Libra  - Sleeping for (ms) : 20000
+INFO  02:15:15,158 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 02:15:16,207 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 880.48491800
+INFO  02:15:16,207 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 02:15:16,525 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 0
+INFO  02:15:16,525 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+INFO  02:15:18,032 BalancerServiceImpl  - Source exchange [Binance -> Ripple] balance : 880.48491800 / Destination exchange [Hitbtc -> Ripple] balance : 0
+DEBUG 02:15:18,033 BalancerServiceImpl  - amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (440.24245900, 880.48491800)
+INFO  02:15:18,033 BalancerServiceImpl  - amountToWithdraw [Binance -> Hitbtc] : 440.24245900
+DEBUG 02:15:18,081 BalancerServiceImpl  - Deposit address [Hitbtc -> Ripple] : rhL5Va5tDbUUuozS9isvEuv7Uk1uuJaY1T
+INFO  02:15:18,081 Libra  - Number of rebalancing operations : 0 performed in (ms) : 2923
+INFO  02:15:18,081 Libra  - Sleeping for (ms) : 20000
+INFO  02:15:38,082 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 02:15:39,135 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 880.48491800
+INFO  02:15:39,135 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 02:15:39,462 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 0
+INFO  02:15:39,463 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+INFO  02:15:40,868 BalancerServiceImpl  - Source exchange [Binance -> Ripple] balance : 880.48491800 / Destination exchange [Hitbtc -> Ripple] balance : 0
+DEBUG 02:15:40,868 BalancerServiceImpl  - amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (440.24245900, 880.48491800)
+INFO  02:15:40,868 BalancerServiceImpl  - amountToWithdraw [Binance -> Hitbtc] : 440.24245900
+DEBUG 02:15:40,975 BalancerServiceImpl  - Deposit address [Hitbtc -> Ripple] : rhL5Va5tDbUUuozS9isvEuv7Uk1uuJaY1T
+INFO  02:15:40,975 Libra  - Number of rebalancing operations : 0 performed in (ms) : 2893
+INFO  02:15:40,975 Libra  - Sleeping for (ms) : 20000
+INFO  02:16:00,989 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 02:16:02,316 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 880.48491800
+INFO  02:16:02,316 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 02:16:02,613 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 0
+INFO  02:16:02,613 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+INFO  02:16:04,064 BalancerServiceImpl  - Source exchange [Binance -> Ripple] balance : 880.48491800 / Destination exchange [Hitbtc -> Ripple] balance : 0
+DEBUG 02:16:04,064 BalancerServiceImpl  - amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (440.24245900, 880.48491800)
+INFO  02:16:04,064 BalancerServiceImpl  - amountToWithdraw [Binance -> Hitbtc] : 440.24245900
+DEBUG 02:16:04,151 BalancerServiceImpl  - Deposit address [Hitbtc -> Ripple] : rhL5Va5tDbUUuozS9isvEuv7Uk1uuJaY1T
+INFO  02:16:04,152 Libra  - Number of rebalancing operations : 0 performed in (ms) : 3163
+INFO  02:16:04,152 Libra  - Sleeping for (ms) : 20000
+INFO  02:16:24,167 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 02:16:25,414 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 880.48491800
+INFO  02:16:25,414 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 02:16:25,657 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 0
+INFO  02:16:25,657 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+INFO  02:16:27,402 BalancerServiceImpl  - Source exchange [Binance -> Ripple] balance : 880.48491800 / Destination exchange [Hitbtc -> Ripple] balance : 0
+DEBUG 02:16:27,402 BalancerServiceImpl  - amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (440.24245900, 880.48491800)
+INFO  02:16:27,402 BalancerServiceImpl  - amountToWithdraw [Binance -> Hitbtc] : 440.24245900
+DEBUG 02:16:27,537 BalancerServiceImpl  - Deposit address [Hitbtc -> Ripple] : rhL5Va5tDbUUuozS9isvEuv7Uk1uuJaY1T
+INFO  02:16:27,537 Libra  - Number of rebalancing operations : 0 performed in (ms) : 3370
+INFO  02:16:27,537 Libra  - Sleeping for (ms) : 20000
+INFO  02:16:47,537 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 02:16:49,022 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 880.48491800
+INFO  02:16:49,022 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 02:16:49,308 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 0
+INFO  02:16:49,308 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+INFO  02:16:50,670 BalancerServiceImpl  - Source exchange [Binance -> Ripple] balance : 880.48491800 / Destination exchange [Hitbtc -> Ripple] balance : 0
+DEBUG 02:16:50,670 BalancerServiceImpl  - amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (440.24245900, 880.48491800)
+INFO  02:16:50,670 BalancerServiceImpl  - amountToWithdraw [Binance -> Hitbtc] : 440.24245900
+DEBUG 02:16:50,748 BalancerServiceImpl  - Deposit address [Hitbtc -> Ripple] : rhL5Va5tDbUUuozS9isvEuv7Uk1uuJaY1T
+INFO  02:16:50,748 Libra  - Number of rebalancing operations : 0 performed in (ms) : 3211
+INFO  02:16:50,748 Libra  - Sleeping for (ms) : 20000
+INFO  02:17:10,748 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 02:17:11,779 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 880.48491800
+INFO  02:17:11,779 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 02:17:12,137 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 0
+INFO  02:17:12,137 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+INFO  02:17:13,478 BalancerServiceImpl  - Source exchange [Binance -> Ripple] balance : 880.48491800 / Destination exchange [Hitbtc -> Ripple] balance : 0
+DEBUG 02:17:13,478 BalancerServiceImpl  - amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (440.24245900, 880.48491800)
+INFO  02:17:13,478 BalancerServiceImpl  - amountToWithdraw [Binance -> Hitbtc] : 440.24245900
+DEBUG 02:17:13,586 BalancerServiceImpl  - Deposit address [Hitbtc -> Ripple] : rhL5Va5tDbUUuozS9isvEuv7Uk1uuJaY1T
+INFO  02:17:13,586 Libra  - Number of rebalancing operations : 0 performed in (ms) : 2837
+INFO  02:17:13,586 Libra  - Sleeping for (ms) : 20000
+INFO  02:17:33,586 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 02:17:34,907 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 880.48491800
+INFO  02:17:34,907 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 02:17:35,169 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 0
+INFO  02:17:35,169 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+INFO  02:17:36,581 BalancerServiceImpl  - Source exchange [Binance -> Ripple] balance : 880.48491800 / Destination exchange [Hitbtc -> Ripple] balance : 0
+DEBUG 02:17:36,582 BalancerServiceImpl  - amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (440.24245900, 880.48491800)
+INFO  02:17:36,582 BalancerServiceImpl  - amountToWithdraw [Binance -> Hitbtc] : 440.24245900
+DEBUG 02:17:36,674 BalancerServiceImpl  - Deposit address [Hitbtc -> Ripple] : rhL5Va5tDbUUuozS9isvEuv7Uk1uuJaY1T
+INFO  02:17:36,674 Libra  - Number of rebalancing operations : 0 performed in (ms) : 3088
+INFO  02:17:36,674 Libra  - Sleeping for (ms) : 20000
+INFO  02:17:56,688 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 02:17:57,728 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 880.48491800
+INFO  02:17:57,728 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 02:18:00,218 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 0
+INFO  02:18:00,218 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+INFO  02:18:01,859 BalancerServiceImpl  - Source exchange [Binance -> Ripple] balance : 880.48491800 / Destination exchange [Hitbtc -> Ripple] balance : 0
+DEBUG 02:18:01,859 BalancerServiceImpl  - amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (440.24245900, 880.48491800)
+INFO  02:18:01,859 BalancerServiceImpl  - amountToWithdraw [Binance -> Hitbtc] : 440.24245900
+DEBUG 02:18:02,000 BalancerServiceImpl  - Deposit address [Hitbtc -> Ripple] : rhL5Va5tDbUUuozS9isvEuv7Uk1uuJaY1T
+INFO  02:18:02,000 Libra  - Number of rebalancing operations : 0 performed in (ms) : 5311
+INFO  02:18:02,000 Libra  - Sleeping for (ms) : 20000
+INFO  02:18:22,000 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 02:18:23,412 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 880.48491800
+INFO  02:18:23,413 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 02:18:23,713 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 0
+INFO  02:18:23,713 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+INFO  02:18:25,206 BalancerServiceImpl  - Source exchange [Binance -> Ripple] balance : 880.48491800 / Destination exchange [Hitbtc -> Ripple] balance : 0
+DEBUG 02:18:25,207 BalancerServiceImpl  - amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (440.24245900, 880.48491800)
+INFO  02:18:25,207 BalancerServiceImpl  - amountToWithdraw [Binance -> Hitbtc] : 440.24245900
+DEBUG 02:18:25,289 BalancerServiceImpl  - Deposit address [Hitbtc -> Ripple] : rhL5Va5tDbUUuozS9isvEuv7Uk1uuJaY1T
+INFO  02:18:25,290 Libra  - Number of rebalancing operations : 0 performed in (ms) : 3290
+INFO  02:18:25,290 Libra  - Sleeping for (ms) : 20000
+INFO  02:18:45,290 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 02:18:46,375 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 880.48491800
+INFO  02:18:46,375 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 02:18:46,652 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 0
+INFO  02:18:46,652 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+INFO  02:18:48,058 BalancerServiceImpl  - Source exchange [Binance -> Ripple] balance : 880.48491800 / Destination exchange [Hitbtc -> Ripple] balance : 0
+DEBUG 02:18:48,058 BalancerServiceImpl  - amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (440.24245900, 880.48491800)
+INFO  02:18:48,058 BalancerServiceImpl  - amountToWithdraw [Binance -> Hitbtc] : 440.24245900
+DEBUG 02:18:48,123 BalancerServiceImpl  - Deposit address [Hitbtc -> Ripple] : rhL5Va5tDbUUuozS9isvEuv7Uk1uuJaY1T
+INFO  02:18:48,124 Libra  - Number of rebalancing operations : 0 performed in (ms) : 2832
+INFO  02:18:48,124 Libra  - Sleeping for (ms) : 20000
+INFO  02:19:08,125 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 02:19:09,524 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 880.48491800
+INFO  02:19:09,524 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 02:19:09,944 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 0
+INFO  02:19:09,944 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+INFO  02:19:11,414 BalancerServiceImpl  - Source exchange [Binance -> Ripple] balance : 880.48491800 / Destination exchange [Hitbtc -> Ripple] balance : 0
+DEBUG 02:19:11,414 BalancerServiceImpl  - amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (440.24245900, 880.48491800)
+INFO  02:19:11,414 BalancerServiceImpl  - amountToWithdraw [Binance -> Hitbtc] : 440.24245900
+DEBUG 02:19:11,532 BalancerServiceImpl  - Deposit address [Hitbtc -> Ripple] : rhL5Va5tDbUUuozS9isvEuv7Uk1uuJaY1T
+INFO  02:19:11,532 Libra  - Number of rebalancing operations : 0 performed in (ms) : 3407
+INFO  02:19:11,532 Libra  - Sleeping for (ms) : 20000
+INFO  02:19:31,533 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 02:19:32,619 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 880.48491800
+INFO  02:19:32,620 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 02:19:32,999 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 0
+INFO  02:19:32,999 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+INFO  02:19:34,462 BalancerServiceImpl  - Source exchange [Binance -> Ripple] balance : 880.48491800 / Destination exchange [Hitbtc -> Ripple] balance : 0
+DEBUG 02:19:34,462 BalancerServiceImpl  - amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (440.24245900, 880.48491800)
+INFO  02:19:34,463 BalancerServiceImpl  - amountToWithdraw [Binance -> Hitbtc] : 440.24245900
+DEBUG 02:19:34,538 BalancerServiceImpl  - Deposit address [Hitbtc -> Ripple] : rhL5Va5tDbUUuozS9isvEuv7Uk1uuJaY1T
+INFO  02:19:34,538 Libra  - Number of rebalancing operations : 0 performed in (ms) : 3004
+INFO  02:19:34,538 Libra  - Sleeping for (ms) : 20000
+INFO  02:19:54,538 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 02:19:55,624 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 880.48491800
+INFO  02:19:55,624 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 02:19:55,966 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 0
+INFO  02:19:55,966 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+INFO  02:19:57,431 BalancerServiceImpl  - Source exchange [Binance -> Ripple] balance : 880.48491800 / Destination exchange [Hitbtc -> Ripple] balance : 0
+DEBUG 02:19:57,432 BalancerServiceImpl  - amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (440.24245900, 880.48491800)
+INFO  02:19:57,432 BalancerServiceImpl  - amountToWithdraw [Binance -> Hitbtc] : 440.24245900
+DEBUG 02:19:57,500 BalancerServiceImpl  - Deposit address [Hitbtc -> Ripple] : rhL5Va5tDbUUuozS9isvEuv7Uk1uuJaY1T
+INFO  02:19:57,501 Libra  - Number of rebalancing operations : 0 performed in (ms) : 2963
+INFO  02:19:57,501 Libra  - Sleeping for (ms) : 20000
+INFO  02:20:17,501 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 02:20:18,595 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 880.48491800
+INFO  02:20:18,595 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 02:20:18,976 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 0
+INFO  02:20:18,977 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+INFO  02:20:20,417 BalancerServiceImpl  - Source exchange [Binance -> Ripple] balance : 880.48491800 / Destination exchange [Hitbtc -> Ripple] balance : 0
+DEBUG 02:20:20,418 BalancerServiceImpl  - amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (440.24245900, 880.48491800)
+INFO  02:20:20,418 BalancerServiceImpl  - amountToWithdraw [Binance -> Hitbtc] : 440.24245900
+DEBUG 02:20:20,531 BalancerServiceImpl  - Deposit address [Hitbtc -> Ripple] : rhL5Va5tDbUUuozS9isvEuv7Uk1uuJaY1T
+INFO  02:20:20,532 Libra  - Number of rebalancing operations : 0 performed in (ms) : 3030
+INFO  02:20:20,532 Libra  - Sleeping for (ms) : 20000
+INFO  02:20:40,532 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 02:20:41,855 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 880.48491800
+INFO  02:20:41,855 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 02:20:42,333 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 0
+INFO  02:20:42,334 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+INFO  02:20:43,793 BalancerServiceImpl  - Source exchange [Binance -> Ripple] balance : 880.48491800 / Destination exchange [Hitbtc -> Ripple] balance : 0
+DEBUG 02:20:43,793 BalancerServiceImpl  - amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (440.24245900, 880.48491800)
+INFO  02:20:43,793 BalancerServiceImpl  - amountToWithdraw [Binance -> Hitbtc] : 440.24245900
+DEBUG 02:20:43,892 BalancerServiceImpl  - Deposit address [Hitbtc -> Ripple] : rhL5Va5tDbUUuozS9isvEuv7Uk1uuJaY1T
+INFO  02:20:43,893 Libra  - Number of rebalancing operations : 0 performed in (ms) : 3360
+INFO  02:20:43,893 Libra  - Sleeping for (ms) : 20000
+INFO  02:21:03,893 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 02:21:05,122 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 880.48491800
+INFO  02:21:05,122 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 02:21:05,651 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 0
+INFO  02:21:05,652 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+INFO  02:21:07,119 BalancerServiceImpl  - Source exchange [Binance -> Ripple] balance : 880.48491800 / Destination exchange [Hitbtc -> Ripple] balance : 0
+DEBUG 02:21:07,119 BalancerServiceImpl  - amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (440.24245900, 880.48491800)
+INFO  02:21:07,120 BalancerServiceImpl  - amountToWithdraw [Binance -> Hitbtc] : 440.24245900
+DEBUG 02:21:07,212 BalancerServiceImpl  - Deposit address [Hitbtc -> Ripple] : rhL5Va5tDbUUuozS9isvEuv7Uk1uuJaY1T
+INFO  02:21:07,212 Libra  - Number of rebalancing operations : 0 performed in (ms) : 3318
+INFO  02:21:07,212 Libra  - Sleeping for (ms) : 20000
+INFO  02:21:27,213 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 02:21:28,302 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 880.48491800
+INFO  02:21:28,302 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 02:21:28,575 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 0
+INFO  02:21:28,576 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+INFO  02:21:29,989 BalancerServiceImpl  - Source exchange [Binance -> Ripple] balance : 880.48491800 / Destination exchange [Hitbtc -> Ripple] balance : 0
+DEBUG 02:21:29,990 BalancerServiceImpl  - amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (440.24245900, 880.48491800)
+INFO  02:21:29,990 BalancerServiceImpl  - amountToWithdraw [Binance -> Hitbtc] : 440.24245900
+DEBUG 02:21:30,066 BalancerServiceImpl  - Deposit address [Hitbtc -> Ripple] : rhL5Va5tDbUUuozS9isvEuv7Uk1uuJaY1T
+INFO  02:21:30,066 Libra  - Number of rebalancing operations : 0 performed in (ms) : 2852
+INFO  02:21:30,066 Libra  - Sleeping for (ms) : 20000
+INFO  02:21:50,067 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 02:21:51,133 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 880.48491800
+INFO  02:21:51,133 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 02:21:51,419 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 0
+INFO  02:21:51,419 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+INFO  02:21:52,940 BalancerServiceImpl  - Source exchange [Binance -> Ripple] balance : 880.48491800 / Destination exchange [Hitbtc -> Ripple] balance : 0
+DEBUG 02:21:52,944 BalancerServiceImpl  - amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (440.24245900, 880.48491800)
+INFO  02:21:52,944 BalancerServiceImpl  - amountToWithdraw [Binance -> Hitbtc] : 440.24245900
+DEBUG 02:21:52,999 BalancerServiceImpl  - Deposit address [Hitbtc -> Ripple] : rhL5Va5tDbUUuozS9isvEuv7Uk1uuJaY1T
+INFO  02:21:52,999 Libra  - Number of rebalancing operations : 0 performed in (ms) : 2931
+INFO  02:21:52,999 Libra  - Sleeping for (ms) : 20000
+INFO  02:22:12,999 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 02:22:14,364 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 880.48491800
+INFO  02:22:14,364 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 02:22:14,605 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 0
+INFO  02:22:14,605 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+INFO  02:22:16,242 BalancerServiceImpl  - Source exchange [Binance -> Ripple] balance : 880.48491800 / Destination exchange [Hitbtc -> Ripple] balance : 0
+DEBUG 02:22:16,242 BalancerServiceImpl  - amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (440.24245900, 880.48491800)
+INFO  02:22:16,242 BalancerServiceImpl  - amountToWithdraw [Binance -> Hitbtc] : 440.24245900
+DEBUG 02:22:16,336 BalancerServiceImpl  - Deposit address [Hitbtc -> Ripple] : rhL5Va5tDbUUuozS9isvEuv7Uk1uuJaY1T
+INFO  02:22:16,336 Libra  - Number of rebalancing operations : 0 performed in (ms) : 3336
+INFO  02:22:16,336 Libra  - Sleeping for (ms) : 20000
+DEBUG 02:25:08,183 Libra  - Properties loaded : {pending_service_frequency=10000, libra_frequency=20000, balance_check_threshold=0.45, simulate=false}
+DEBUG 02:25:08,694 Libra  - List of loaded currencies : [XRP]
+DEBUG 02:25:12,656 Libra  - List of loaded exchanges : [Binance#1160652496, Hitbtc#1185618138]
+INFO  02:25:13,605 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  02:25:13,724 Version  - HHH000412: Hibernate Core {5.2.13.Final}
+INFO  02:25:13,724 Environment  - HHH000206: hibernate.properties not found
+INFO  02:25:13,802 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  02:25:15,159 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+INFO  02:25:15,199 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
+INFO  02:25:16,075 Libra  - Simulation mode : false
+INFO  02:25:16,075 Libra  - Loading the transaction Ids
+INFO  02:25:16,200 QueryTranslatorFactoryInitiator  - HHH000397: Using ASTQueryTranslatorFactory
+INFO  02:25:16,497 Libra  - Loading the status of the pending transactions
+DEBUG 02:25:16,497 Libra  - Loading the accounts balance
+INFO  02:25:16,497 PendingWithdrawalsService  - PendingWithdrawals service has started!
+INFO  02:25:16,529 Libra  - Libra has started!
+INFO  02:25:16,544 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+ERROR 02:25:17,611 PendingWithdrawalsService  - This exchange does not handle the externalId : Binance
+DEBUG 02:25:18,042 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 880.48491800
+INFO  02:25:18,042 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 02:25:18,536 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 700.00000000
+INFO  02:25:18,538 Libra  - Number of rebalancing operations : 0 performed in (ms) : 1993
+INFO  02:25:18,538 Libra  - Sleeping for (ms) : 20000
+INFO  02:25:38,539 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 02:25:39,739 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 880.48491800
+INFO  02:25:39,739 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 02:25:40,079 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 700.00000000
+INFO  02:25:40,079 Libra  - Number of rebalancing operations : 0 performed in (ms) : 1539
+INFO  02:25:40,079 Libra  - Sleeping for (ms) : 20000
+INFO  02:26:00,079 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 02:26:01,489 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 880.48491800
+INFO  02:26:01,489 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 02:26:01,930 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 700.00000000
+INFO  02:26:01,930 Libra  - Number of rebalancing operations : 0 performed in (ms) : 1850
+INFO  02:26:01,930 Libra  - Sleeping for (ms) : 20000
+INFO  02:26:21,930 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 02:26:23,049 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 880.48491800
+INFO  02:26:23,063 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 02:26:23,331 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 700.00000000
+INFO  02:26:23,331 Libra  - Number of rebalancing operations : 0 performed in (ms) : 1400
+INFO  02:26:23,331 Libra  - Sleeping for (ms) : 20000
+INFO  02:26:43,340 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 02:26:45,167 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 880.48491800
+INFO  02:26:45,167 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 02:26:45,605 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 0
+INFO  02:26:45,605 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+INFO  02:26:47,208 BalancerServiceImpl  - Source exchange [Binance -> Ripple] balance : 880.48491800 / Destination exchange [Hitbtc -> Ripple] balance : 0
+DEBUG 02:26:47,208 BalancerServiceImpl  - amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (440.24245900, 880.48491800)
+INFO  02:26:47,208 BalancerServiceImpl  - amountToWithdraw [Binance -> Hitbtc] : 440.24245900
+DEBUG 02:26:47,317 BalancerServiceImpl  - Deposit address [Hitbtc -> Ripple] : rhL5Va5tDbUUuozS9isvEuv7Uk1uuJaY1T
+DEBUG 02:26:47,836 BalancerServiceImpl  - internalId = 99dba91c16414b9b9f7a4c09d90341e4
+DEBUG 02:26:47,836 BalancerServiceImpl  - Waiting for the transactionId... sleeping for (ms) : 30000
+FATAL 02:27:19,668 BalancerServiceImpl  - Unexpected error : Cannot monitor pending withdrawal for Binance -> Ripple with transactionId = 99dba91c16414b9b9f7a4c09d90341e4
+FATAL 02:27:19,668 BalancerServiceImpl  - Libra has stopped!
+DEBUG 02:39:04,247 Libra  - Properties loaded : {pending_service_frequency=10000, libra_frequency=20000, balance_check_threshold=0.45, simulate=false}
+DEBUG 02:39:05,099 Libra  - List of loaded currencies : [XRP]
+DEBUG 02:39:09,421 Libra  - List of loaded exchanges : [Binance#1160652496, Hitbtc#1185618138]
+INFO  02:39:10,363 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  02:39:10,502 Version  - HHH000412: Hibernate Core {5.2.13.Final}
+INFO  02:39:10,502 Environment  - HHH000206: hibernate.properties not found
+INFO  02:39:10,595 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  02:39:12,219 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+INFO  02:39:12,255 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
+INFO  02:39:13,129 Libra  - Simulation mode : false
+INFO  02:39:13,129 Libra  - Loading the transaction Ids
+INFO  02:39:13,286 QueryTranslatorFactoryInitiator  - HHH000397: Using ASTQueryTranslatorFactory
+INFO  02:39:13,519 Libra  - Loading the status of the pending transactions
+DEBUG 02:39:13,519 Libra  - Loading the accounts balance
+INFO  02:39:13,519 PendingWithdrawalsService  - PendingWithdrawals service has started!
+INFO  02:39:13,566 Libra  - Libra has started!
+INFO  02:39:13,581 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+ERROR 02:39:14,568 PendingWithdrawalsService  - This exchange does not handle the externalId : Binance
+DEBUG 02:39:15,051 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 440.24245900
+INFO  02:39:15,051 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 02:39:15,573 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 600.00000000
+INFO  02:39:15,579 Libra  - Number of rebalancing operations : 0 performed in (ms) : 2007
+INFO  02:39:15,579 Libra  - Sleeping for (ms) : 20000
+DEBUG 02:50:01,736 Libra  - Properties loaded : {pending_service_frequency=10000, libra_frequency=20000, balance_check_threshold=0.45, simulate=false}
+DEBUG 02:50:02,243 Libra  - List of loaded currencies : [XRP]
+DEBUG 02:50:06,205 Libra  - List of loaded exchanges : [Binance#1160652496, Hitbtc#1185618138]
+INFO  02:50:07,157 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  02:50:07,289 Version  - HHH000412: Hibernate Core {5.2.13.Final}
+INFO  02:50:07,289 Environment  - HHH000206: hibernate.properties not found
+INFO  02:50:07,382 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  02:50:11,047 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+INFO  02:50:11,094 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
+INFO  02:50:11,947 Libra  - Simulation mode : false
+INFO  02:50:11,947 Libra  - Loading the transaction Ids
+INFO  02:50:12,079 QueryTranslatorFactoryInitiator  - HHH000397: Using ASTQueryTranslatorFactory
+INFO  02:50:12,313 Libra  - Loading the status of the pending transactions
+DEBUG 02:50:12,329 Libra  - Loading the accounts balance
+INFO  02:50:12,329 PendingWithdrawalsService  - PendingWithdrawals service has started!
+INFO  02:50:12,344 Libra  - Libra has started!
+INFO  02:50:12,360 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 02:50:13,936 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 440.24245900
+INFO  02:50:13,936 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+ERROR 02:50:14,186 PendingWithdrawalsService  - This exchange does not handle the externalId : Binance
+DEBUG 02:50:14,290 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 600.00000000
+INFO  02:50:14,295 Libra  - Number of rebalancing operations : 0 performed in (ms) : 1930
+INFO  02:50:14,296 Libra  - Sleeping for (ms) : 20000
+INFO  02:50:34,318 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 02:50:35,699 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 440.24245900
+INFO  02:50:35,699 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 02:50:36,134 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 13.500000000000000333066907387546962127089500427246093750 / currentBalance = 600.00000000
+INFO  02:50:36,134 Libra  - Number of rebalancing operations : 0 performed in (ms) : 1815
+INFO  02:50:36,134 Libra  - Sleeping for (ms) : 20000

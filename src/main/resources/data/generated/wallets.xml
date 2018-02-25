@@ -3,21 +3,21 @@
     <Binance>
       <XRP>
         <initialBalance>30</initialBalance>
-        <minResidualBalance>0</minResidualBalance>
+        <minResidualBalance>500</minResidualBalance>
         <tag>109750021</tag>
         <depositFee>0</depositFee>
         <withdrawalFee>0.25</withdrawalFee>
       </XRP>
     </Binance>
-    <!--Hitbtc>
+    <Hitbtc>
       <XRP>
         <initialBalance>30</initialBalance>
-        <minResidualBalance>11.5</minResidualBalance>
+        <minResidualBalance>500</minResidualBalance>
         <tag>1955192449</tag>
         <depositFee>0</depositFee>
         <withdrawalFee>1.5</withdrawalFee>
-      </XRP>
-    </Hitbtc-->
+        <label>Trading</label></XRP>
+    </Hitbtc>
     <!--Bitstamp>
       <XRP>
         <initialBalance>4.1E-7</initialBalance>

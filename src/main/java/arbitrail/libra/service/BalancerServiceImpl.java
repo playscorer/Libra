@@ -48,12 +48,12 @@ public class BalancerServiceImpl implements BalancerService {
 
 
 	
-	private Exchange findMostFilledBalance(List<Exchange> exchangeList, Currency currency) throws IOException {
+	private Exchange findMostFilledBalance(List<Exchange> exchangeList, Map<String, Map<String, Wallet>> walletMap, Currency currency) throws IOException {
 		Exchange maxExchange = null;
 		BigDecimal maxBalance = BigDecimal.ZERO;
 		
 		for (Exchange exchange : exchangeList) {
-			Balance balance = exchange.getAccountService().getAccountInfo().getWallet().getBalance(currency);
+			Balance balance = getWallet(exchange, walletMap.get(exchange.getExchangeSpecification().getExchangeName()).get(currency.getCurrencyCode())).getBalance(currency);
 			if (maxBalance.compareTo(balance.getAvailable()) < 0) {
 				maxExchange = exchange;
 				maxBalance = balance.getAvailable();
@@ -61,6 +61,26 @@ public class BalancerServiceImpl implements BalancerService {
 		}
 		
 		return maxExchange;
+	}
+	
+	// handles exchanges with single or multiple wallets per currency
+	private org.knowm.xchange.dto.account.Wallet getWallet(Exchange exchange, Wallet wallet) throws IOException	{
+		org.knowm.xchange.dto.account.Wallet exchgWallet = null;
+		Map<String, org.knowm.xchange.dto.account.Wallet> walletsTmp = exchange.getAccountService().getAccountInfo().getWallets();
+		if (walletsTmp.size() > 1)
+		{
+			for (Map.Entry<String, org.knowm.xchange.dto.account.Wallet> entry : walletsTmp.entrySet())
+			{
+				if (wallet.getLabel().equals(entry.getKey()))
+				{
+					exchgWallet = entry.getValue();
+					break;
+				}
+			}
+		}
+		else
+			exchgWallet = exchange.getAccountService().getAccountInfo().getWallet();
+		return exchgWallet;
 	}
 	
 	@Override
@@ -98,10 +118,10 @@ public class BalancerServiceImpl implements BalancerService {
 				// there has been no rebalancing yet and the pending service may not be running
 				else if (pendingWithdrawal == null) {
 					LOG.info("No balancing has been done yet for " + toExchangeName + " -> " + currency.getDisplayName());
-				}
+				}				
 				
 				// the threshold represents the minimum amount from which the balance will be triggered
-				Balance currentBalance = toExchange.getAccountService().getAccountInfo().getWallet().getBalance(currency);
+				Balance currentBalance = getWallet(toExchange, toWallet).getBalance(currency);
 				BigDecimal lastBalancedAmount = walletService.getLastBalancedAmount(toExchangeName, currencyCode);
 				BigDecimal checkThresholdBalance = toWallet.getInitialBalance().max(lastBalancedAmount).multiply(new BigDecimal(balanceCheckThreshold));
 				LOG.debug("Exchange : " + toExchangeName + " -> " + currency.getDisplayName() + " / checkThresholdBalance = " + checkThresholdBalance + " / currentBalance = " + currentBalance.getAvailable());
@@ -109,7 +129,7 @@ public class BalancerServiceImpl implements BalancerService {
 				// trigger the balancer
 				if (currentBalance.getAvailable().compareTo(checkThresholdBalance) < 0) {
 					LOG.info("### Exchange needs to be balanced for currency : " + toExchangeName + " -> " + currency.getDisplayName());
-					Exchange fromExchange = findMostFilledBalance(exchangeList, currency);
+					Exchange fromExchange = findMostFilledBalance(exchangeList, walletMap, currency);
 					if (fromExchange == null) {
 						LOG.error("Unexpected error : All the accounts balances are zero");
 						LOG.info("Skipping currency for exchange : " + toExchangeName + " -> " + currency.getDisplayName());
@@ -138,7 +158,7 @@ public class BalancerServiceImpl implements BalancerService {
 					try {
 						// the rebalancing actually occured
 						if (balance(fromExchange, toExchange, currency, fromWallet, toWallet)) {
-							Balance newDecreasedBalance = fromExchange.getAccountService().getAccountInfo().getWallet().getBalance(currency);
+							Balance newDecreasedBalance = getWallet(fromExchange, toWallet).getBalance(currency);
 							LOG.info("new provisional balance for " + fromExchangeName + " -> " + currency.getDisplayName() + " : " + newDecreasedBalance.getAvailable());
 							nbOperations++;
 						}
@@ -158,8 +178,8 @@ public class BalancerServiceImpl implements BalancerService {
 		String toExchangeName = toExchange.getExchangeSpecification().getExchangeName();
 		String fromExchangeName = fromExchange.getExchangeSpecification().getExchangeName();
 		
-		Balance toBalance = toExchange.getAccountService().getAccountInfo().getWallet().getBalance(currency);
-		Balance fromBalance = fromExchange.getAccountService().getAccountInfo().getWallet().getBalance(currency);
+		Balance toBalance = getWallet(toExchange, toWallet).getBalance(currency);
+		Balance fromBalance = getWallet(fromExchange, fromWallet).getBalance(currency);
 		LOG.info("Source exchange [" + fromExchangeName + " -> " + currency.getDisplayName() + "] balance : "
 				+ fromBalance.getAvailable() + " / Destination exchange [" + toExchangeName + " -> "
 				+ currency.getDisplayName() + "] balance : " + toBalance.getAvailable());
