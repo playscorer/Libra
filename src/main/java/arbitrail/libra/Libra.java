@@ -43,7 +43,7 @@ public class Libra extends Thread {
 	private Integer frequency;
 
 	private static ConcurrentMap<ExchCcy, Boolean> pendingWithdrawalsMap;
-	private static ConcurrentMap<String, ExchStatus> transxIdToTargetExchMap;
+	private static ConcurrentMap<Integer, ExchStatus> transxIdToTargetExchMap;
 
 	public Libra(Properties props) {
 		balancerService = new BalancerServiceImpl(props, pendingWithdrawalsMap, transxIdToTargetExchMap);
@@ -99,6 +99,9 @@ public class Libra extends Thread {
 			Boolean simulate = Boolean.valueOf(props.getProperty(Utils.Props.simulate.name()));
 			LOG.info("Simulation mode : " + simulate);
 			
+			LOG.debug("Loading the accounts balance");
+			wallets = initService.loadAllAccountsBalance(exchanges, currencies, init);
+			
 			if (!simulate) {
 				transxIdToTargetService = ContextProvider.getBean(TransxIdToTargetExchService.class);
 				pendingTransxService = ContextProvider.getBean(PendingTransxService.class);
@@ -110,14 +113,11 @@ public class Libra extends Thread {
 				pendingWithdrawalsMap = pendingTransxService.listAll();
 
 				Integer pendingServiceFrequency = Integer.valueOf(props.getProperty(Utils.Props.pending_service_frequency.name()));
-				new PendingWithdrawalsService(exchanges, pendingWithdrawalsMap, transxIdToTargetExchMap, pendingServiceFrequency).start();
+				new PendingWithdrawalsService(exchanges, wallets, pendingWithdrawalsMap, transxIdToTargetExchMap, pendingServiceFrequency).start();
 			} else {
 				transxIdToTargetExchMap = new ConcurrentHashMap<>();
 				pendingWithdrawalsMap = new ConcurrentHashMap<>();
 			}
-			
-			LOG.debug("Loading the accounts balance");
-			wallets = initService.loadAllAccountsBalance(exchanges, currencies, init);
 			new Libra(props).start();
 		}
 	}

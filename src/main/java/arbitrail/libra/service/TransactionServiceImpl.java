@@ -19,11 +19,17 @@ public class TransactionServiceImpl implements TransactionService {
 	@Override
 	public Integer transxHashkey(Currency currency, BigDecimal amountToWithdraw, String depositAddress) {
 		if (currency == null || amountToWithdraw == null) {
-			LOG.error("Unexpected error : The two first parameters are mandatory to generate the hashkey is null (currency, amountToWithdraw, depositAddress) : ("
-							+ currency + ", " + amountToWithdraw + ", " + depositAddress + ")");
+			LOG.error("Unexpected error : The parameters are mandatory to generate the hashkey (currency, amountToWithdraw) : ("
+							+ currency + ", " + amountToWithdraw);
 			return null;
 		}
-		return currency.hashCode() + amountToWithdraw.hashCode() + (depositAddress == null ? 0 : depositAddress.hashCode());
+		Integer hashCode = currency.getCurrencyCode().hashCode() * ((Double)amountToWithdraw.doubleValue()).hashCode();
+		if (depositAddress != null) {
+			hashCode *= depositAddress.hashCode();
+			//LOG.info("Computed a hashkey (currency, amountToWithdraw, depositAddress, hashkey) : ("
+			//	+ currency + ", " + amountToWithdraw+ ", " + depositAddress+ ", " + hashCode + ")");
+		}
+		return hashCode;
 	}
 
 	@Override

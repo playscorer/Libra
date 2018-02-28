@@ -21,21 +21,21 @@ public class TransxIdToTargetExchService {
 	private TransxIdToTargetExchDao transxIdToTargetExchDao;
 	
 	@Transactional
-	public void saveAll(Map<String, ExchStatus> transxIdToTargetExchMqp) {
-		for (Entry<String, ExchStatus> entry : transxIdToTargetExchMqp.entrySet()) {
-			String transxId = entry.getKey();
+	public void saveAll(Map<Integer, ExchStatus> transxIdToTargetExchMqp) {
+		for (Entry<Integer, ExchStatus> entry : transxIdToTargetExchMqp.entrySet()) {
+			Integer transxId = entry.getKey();
 			ExchStatus exchStatus = entry.getValue();
-			transxIdToTargetExchDao.persist(new TransxIdToTargetExchEntity(transxId, exchStatus.getExchangeName(), exchStatus.isWithdrawalComplete()));
+			transxIdToTargetExchDao.persist(new TransxIdToTargetExchEntity(transxId.toString(), exchStatus.getExchangeName(), exchStatus.isWithdrawalComplete()));
 		}
 	}
 
 	@Transactional(readOnly = true)
-	public ConcurrentMap<String, ExchStatus> listAll() {
+	public ConcurrentMap<Integer, ExchStatus> listAll() {
 		List<TransxIdToTargetExchEntity> entityList = transxIdToTargetExchDao.findAll();
 		
-		ConcurrentMap<String, ExchStatus> pendingTransIdToToExchMap = new ConcurrentHashMap<>();
+		ConcurrentMap<Integer, ExchStatus> pendingTransIdToToExchMap = new ConcurrentHashMap<>();
 		for (TransxIdToTargetExchEntity entity : entityList) {
-			pendingTransIdToToExchMap.put(entity.getTransxId(), new ExchStatus(entity.getExchangeName(), entity.isWithdrawalComplete()));
+			pendingTransIdToToExchMap.put(Integer.parseInt(entity.getTransxId()), new ExchStatus(entity.getExchangeName(), entity.isWithdrawalComplete()));
 		}
 		
 		return pendingTransIdToToExchMap; 

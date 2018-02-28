@@ -2,6 +2,7 @@ package arbitrail.libra.service;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -16,8 +17,13 @@ import org.knowm.xchange.dto.account.FundingRecord;
 import org.knowm.xchange.exceptions.ExchangeException;
 import org.knowm.xchange.exceptions.NotAvailableFromExchangeException;
 import org.knowm.xchange.exceptions.NotYetImplementedForExchangeException;
+import org.knowm.xchange.hitbtc.v2.service.HitbtcAccountService;
+import org.knowm.xchange.hitbtc.v2.service.HitbtcFundingHistoryParams;
 import org.knowm.xchange.service.trade.params.DefaultTradeHistoryParamCurrency;
+import org.knowm.xchange.service.trade.params.DefaultWithdrawFundsParams;
 import org.knowm.xchange.service.trade.params.RippleWithdrawFundsParams;
+import org.knowm.xchange.service.trade.params.TradeHistoryParams;
+import org.knowm.xchange.service.trade.params.WithdrawFundsParams;
 
 import arbitrail.libra.model.ExchCcy;
 import arbitrail.libra.model.ExchStatus;
@@ -37,9 +43,9 @@ public class BalancerServiceImpl implements BalancerService {
 	private Double balanceCheckThreshold;
 	private Boolean simulate;
 	private ConcurrentMap<ExchCcy, Boolean> pendingWithdrawalsMap;
-	private ConcurrentMap<String, ExchStatus> transxIdToTargetExchMap;
+	private ConcurrentMap<Integer, ExchStatus> transxIdToTargetExchMap;
 	
-	public BalancerServiceImpl(Properties properties, ConcurrentMap<ExchCcy, Boolean> pendingWithdrawalsMap, ConcurrentMap<String, ExchStatus> transxIdToTargetExchMap) {
+	public BalancerServiceImpl(Properties properties, ConcurrentMap<ExchCcy, Boolean> pendingWithdrawalsMap, ConcurrentMap<Integer, ExchStatus> transxIdToTargetExchMap) {
 		balanceCheckThreshold = Double.valueOf(properties.getProperty(Utils.Props.balance_check_threshold.name()));
 		simulate = Boolean.valueOf(properties.getProperty(Utils.Props.simulate.name()));
 		this.pendingWithdrawalsMap = pendingWithdrawalsMap;
@@ -53,7 +59,9 @@ public class BalancerServiceImpl implements BalancerService {
 		BigDecimal maxBalance = BigDecimal.ZERO;
 		
 		for (Exchange exchange : exchangeList) {
-			Balance balance = getWallet(exchange, walletMap.get(exchange.getExchangeSpecification().getExchangeName()).get(currency.getCurrencyCode())).getBalance(currency);
+			Balance balance = walletService.getBalance(walletService.getWallet(exchange, walletMap.get(exchange.getExchangeSpecification().getExchangeName()).get(currency.getCurrencyCode())), currency);
+			if (balance == null) 
+				continue;
 			if (maxBalance.compareTo(balance.getAvailable()) < 0) {
 				maxExchange = exchange;
 				maxBalance = balance.getAvailable();
@@ -61,26 +69,6 @@ public class BalancerServiceImpl implements BalancerService {
 		}
 		
 		return maxExchange;
-	}
-	
-	// handles exchanges with single or multiple wallets per currency
-	private org.knowm.xchange.dto.account.Wallet getWallet(Exchange exchange, Wallet wallet) throws IOException	{
-		org.knowm.xchange.dto.account.Wallet exchgWallet = null;
-		Map<String, org.knowm.xchange.dto.account.Wallet> walletsTmp = exchange.getAccountService().getAccountInfo().getWallets();
-		if (walletsTmp.size() > 1)
-		{
-			for (Map.Entry<String, org.knowm.xchange.dto.account.Wallet> entry : walletsTmp.entrySet())
-			{
-				if (wallet.getLabel().equals(entry.getKey()))
-				{
-					exchgWallet = entry.getValue();
-					break;
-				}
-			}
-		}
-		else
-			exchgWallet = exchange.getAccountService().getAccountInfo().getWallet();
-		return exchgWallet;
 	}
 	
 	@Override
@@ -121,7 +109,11 @@ public class BalancerServiceImpl implements BalancerService {
 				}				
 				
 				// the threshold represents the minimum amount from which the balance will be triggered
-				Balance currentBalance = getWallet(toExchange, toWallet).getBalance(currency);
+				Balance currentBalance = walletService.getBalance(walletService.getWallet(toExchange, toWallet), currency);
+				if (currentBalance == null) {
+					LOG.info("Source exchange [" + toExchangeName + " -> " + currency.getDisplayName() + "] balance unavailable ");
+					continue;
+				}
 				BigDecimal lastBalancedAmount = walletService.getLastBalancedAmount(toExchangeName, currencyCode);
 				BigDecimal checkThresholdBalance = toWallet.getInitialBalance().max(lastBalancedAmount).multiply(new BigDecimal(balanceCheckThreshold));
 				LOG.debug("Exchange : " + toExchangeName + " -> " + currency.getDisplayName() + " / checkThresholdBalance = " + checkThresholdBalance + " / currentBalance = " + currentBalance.getAvailable());
@@ -158,7 +150,7 @@ public class BalancerServiceImpl implements BalancerService {
 					try {
 						// the rebalancing actually occured
 						if (balance(fromExchange, toExchange, currency, fromWallet, toWallet)) {
-							Balance newDecreasedBalance = getWallet(fromExchange, toWallet).getBalance(currency);
+							Balance newDecreasedBalance = walletService.getWallet(fromExchange, fromWallet).getBalance(currency);
 							LOG.info("new provisional balance for " + fromExchangeName + " -> " + currency.getDisplayName() + " : " + newDecreasedBalance.getAvailable());
 							nbOperations++;
 						}
@@ -172,31 +164,75 @@ public class BalancerServiceImpl implements BalancerService {
 		}
 		return nbOperations;
 	}
+	
+	private TradeHistoryParams getTradeHistoryParams(Exchange exchange, Currency currency)
+	{
+		String exchangeName = exchange.getExchangeSpecification().getExchangeName();
+		if (exchangeName.equals("Hitbtc")) {
+			HitbtcFundingHistoryParams.Builder builder = new HitbtcFundingHistoryParams.Builder();
+			return builder.currency(currency).offset(0).limit(100).build();
+		}
+		else
+			return new DefaultTradeHistoryParamCurrency(currency);
+	}
+	
+	private BigDecimal roundAmount(BigDecimal amount, Currency currency) {
+		int scale = 6; // max 6 decimals is enough, helps avoiding bad rounding issues, and makes transfers easier to read
+		if (Currency.XRP.equals(currency))
+			scale = 0;
+		amount = amount.setScale(scale, RoundingMode.HALF_UP);
+		return amount;
+	}
+	
+	private String withdrawFunds(Exchange exchange, String withdrawAddress, Currency currency, BigDecimal amountToWithdraw, String paymentId) throws IOException {
+		String exchangeName = exchange.getExchangeSpecification().getExchangeName();
+		if (exchangeName.equals("Hitbtc")) {
+			HitbtcAccountService hitbtcAccountService = (HitbtcAccountService)exchange.getAccountService();
+			hitbtcAccountService.transferToMain(currency, amountToWithdraw);
+			return hitbtcAccountService.withdrawFundsRaw(currency, amountToWithdraw, withdrawAddress, paymentId);
+		}
+		else {
+			if (Currency.XRP.equals(currency)) {
+				WithdrawFundsParams withdrawParams = new RippleWithdrawFundsParams(withdrawAddress, currency, amountToWithdraw, paymentId);
+				return exchange.getAccountService().withdrawFunds(withdrawParams);
+			}
+			else
+				return exchange.getAccountService().withdrawFunds(currency, amountToWithdraw, withdrawAddress);
+		}
+	}
 
 	private boolean balance(Exchange fromExchange, Exchange toExchange, Currency currency, Wallet fromWallet, Wallet toWallet) 
 			throws NotAvailableFromExchangeException, NotYetImplementedForExchangeException, ExchangeException, IOException {
 		String toExchangeName = toExchange.getExchangeSpecification().getExchangeName();
 		String fromExchangeName = fromExchange.getExchangeSpecification().getExchangeName();
 		
-		Balance toBalance = getWallet(toExchange, toWallet).getBalance(currency);
-		Balance fromBalance = getWallet(fromExchange, fromWallet).getBalance(currency);
+		Balance toBalance = walletService.getBalance(walletService.getWallet(toExchange, toWallet), currency);
+		if (toBalance == null) {
+			LOG.info("Source exchange [" + toExchangeName + " -> " + currency.getDisplayName() + "] balance unavailable ");
+			return false;
+		}
+		Balance fromBalance = walletService.getBalance(walletService.getWallet(fromExchange, fromWallet), currency);
+		if (fromBalance == null) {
+			LOG.info("Source exchange [" + fromExchangeName + " -> " + currency.getDisplayName() + "] balance unavailable ");
+			return false;
+		}
 		LOG.info("Source exchange [" + fromExchangeName + " -> " + currency.getDisplayName() + "] balance : "
 				+ fromBalance.getAvailable() + " / Destination exchange [" + toExchangeName + " -> "
 				+ currency.getDisplayName() + "] balance : " + toBalance.getAvailable());
 		
 		BigDecimal balancedOffset = fromBalance.getAvailable().subtract(toBalance.getAvailable()).divide(BigDecimal.valueOf(2));
 		BigDecimal allowedWithdrawableAmount = fromBalance.getAvailable().subtract(fromWallet.getMinResidualBalance());
-		BigDecimal amountToWithdraw = balancedOffset.min(allowedWithdrawableAmount);
+		BigDecimal amountToWithdraw = roundAmount(balancedOffset.min(allowedWithdrawableAmount), currency);
 		LOG.debug("amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (" + balancedOffset + ", " + allowedWithdrawableAmount + ")");
 		
-		// amountToWithdraw cannot be negative
-		if (BigDecimal.ZERO.compareTo(amountToWithdraw) >= 0) {
-			LOG.error("Withdraw amount can't be negative or 0 - please decrease the minResidualBalance = " + fromWallet.getMinResidualBalance() + " for " + fromExchangeName + " -> " + currency.getDisplayName());
+		// amountToWithdraw must be higher than the minimum amount specified in the config
+		if (amountToWithdraw.compareTo(fromWallet.getMinWithdrawalAmount()) < 0) {
+			LOG.error("Withdraw amount is too low - lower than minWithdrawAmount = " + fromWallet.getMinWithdrawalAmount() + " for " + fromExchangeName + " -> " + currency.getDisplayName());
 			return false;
 		}
 		
 		// if fees > 0.5% x amountToWithdraw
-		double percent = 0.5 / 100;
+		double percent = 2.5 / 100;
 		BigDecimal fees = fromWallet.getWithdrawalFee().add(toWallet.getDepositFee());
 		BigDecimal percentOfAmount = BigDecimal.valueOf(percent).multiply(amountToWithdraw);
 		if (fees.compareTo(percentOfAmount) > 0) {
@@ -210,34 +246,33 @@ public class BalancerServiceImpl implements BalancerService {
  		String depositAddress = toExchange.getAccountService().requestDepositAddress(currency);
 		LOG.debug("Deposit address [" + toExchangeName + " -> " + currency.getDisplayName() + "] : " + depositAddress);
 
-		if (!simulate) {
-			String internalId;
-			if (Currency.XRP.equals(currency)) {
-				internalId = fromExchange.getAccountService().withdrawFunds(new RippleWithdrawFundsParams(depositAddress, currency, amountToWithdraw, toWallet.getTag()));
-			} else {
-				internalId = fromExchange.getAccountService().withdrawFunds(currency, amountToWithdraw, depositAddress);
-			}
+		if (!simulate) {			
+			String internalId = withdrawFunds(fromExchange, depositAddress, currency, amountToWithdraw, toWallet.getTag());
 			LOG.debug("internalId = " + internalId);
 			
 			// load the history in order to retrieve the matching externalId (transactionId) from the internalId returned by the withdrawFunds method
-			Optional<FundingRecord> matchingFundingRecord;
+			Integer transxHashkey = -1;
+			int numAttempts = 0;
 			do {
 				try {
 					LOG.debug("Waiting for the transactionId... sleeping for (ms) : " + withdrawalWaitingDelay);
 					Thread.sleep(withdrawalWaitingDelay);
-				} catch (InterruptedException e) {
-					LOG.error("Unexpected error : " + e);
+					
+					TradeHistoryParams ccyHistoryParams = getTradeHistoryParams(fromExchange, currency);
+					List<FundingRecord> fundingRecords = fromExchange.getAccountService().getFundingHistory(ccyHistoryParams);	
+					Optional<FundingRecord> matchingFundingRecord = transxService.retrieveExternalId(fundingRecords, internalId);
+					if (matchingFundingRecord.isPresent())
+						transxHashkey = transxService.transxHashkey(matchingFundingRecord.get().getCurrency(), matchingFundingRecord.get().getAmount(), depositAddress);
+					numAttempts++;
+					if (numAttempts == 100)
+						throw new Exception("Maximum number of attempts reached: " + numAttempts);
+				} catch (Exception e) {
+					LOG.fatal("Unexpected error : Cannot monitor pending withdrawal for " + fromExchangeName + " -> " + currency.getDisplayName() + " with transactionId = " + internalId);
+					LOG.fatal("Exception : " + e);
+					LOG.fatal("Libra has stopped!");
+					System.exit(-1);
 				}
-				List<FundingRecord> fundingRecords = fromExchange.getAccountService().getFundingHistory(new DefaultTradeHistoryParamCurrency(currency));	
-				matchingFundingRecord = transxService.retrieveExternalId(fundingRecords, internalId);
-			} while (!matchingFundingRecord.isPresent());
-			
-			String externalId = matchingFundingRecord.get().getExternalId();
-			if (externalId == null) {//TODO Bitstamp not supported at the moment
-				LOG.fatal("Unexpected error : Cannot monitor pending withdrawal for " + fromExchangeName + " -> " + currency.getDisplayName() + " with transactionId = " + internalId);
-				LOG.fatal("Libra has stopped!");
-				System.exit(-1);
-			}
+			} while (transxHashkey == -1);
 			
 			// set map pending transactions to true
 			ExchCcy exchCcy = new ExchCcy(toExchangeName, currency.getCurrencyCode());
@@ -245,7 +280,7 @@ public class BalancerServiceImpl implements BalancerService {
 
 			// add mapping destination exchange to transactionId
 			ExchStatus exchStatus = new ExchStatus(toExchangeName, false);
-			transxIdToTargetExchMap.put(externalId, exchStatus);
+			transxIdToTargetExchMap.put(transxHashkey, exchStatus);
 			
 			return true;
 		}
