@@ -187,15 +187,22 @@ public class BalancerServiceImpl implements BalancerService {
 			while(--nbTry > 0)
 			{
 				try {
+					LOG.info("Sending withdraw order - address: " + withdrawAddress + " id: " + paymentId + " [" + exchangeName + " -> " + currency.getDisplayName() + "] amount: " + amountToWithdraw);
 					return hitbtcAccountService.withdrawFundsRaw(currency, amountToWithdraw, withdrawAddress, paymentId);
 				}
 				catch(HttpStatusIOException exc) {
-					Thread.sleep(5000);
+					if (nbTry == 1){
+						// revert the withdraw
+						hitbtcAccountService.transferToTrading(currency, amountToWithdraw);
+						throw exc;
+					}
+					Thread.sleep(2000);
 				}
 			}
 			return null;
 		}
 		else {
+			LOG.info("Sending withdraw order - address: " + withdrawAddress + " id: " + paymentId + " [" + exchangeName + " -> " + currency.getDisplayName() + "] amount: " + amountToWithdraw);
 			if (Currency.XRP.equals(currency)) {
 				WithdrawFundsParams withdrawParams = new RippleWithdrawFundsParams(withdrawAddress, currency, amountToWithdraw, paymentId);
 				return exchange.getAccountService().withdrawFunds(withdrawParams);
@@ -268,7 +275,7 @@ public class BalancerServiceImpl implements BalancerService {
 					if (matchingFundingRecord.isPresent())
 						transxHashkey = transxService.transxHashkey(matchingFundingRecord.get().getCurrency(), matchingFundingRecord.get().getAmount(), depositAddress);
 					numAttempts++;
-					if (numAttempts == 100)
+					if (numAttempts == 10)
 						throw new Exception("Maximum number of attempts reached: " + numAttempts);
 				} catch (Exception e) {
 					LOG.fatal("Unexpected error : Cannot monitor pending withdrawal for " + fromExchangeName + " -> " + currency.getDisplayName() + " with transactionId = " + internalId);
