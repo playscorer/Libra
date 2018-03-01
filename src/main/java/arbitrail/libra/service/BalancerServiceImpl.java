@@ -3,6 +3,7 @@ package arbitrail.libra.service;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -174,15 +175,7 @@ public class BalancerServiceImpl implements BalancerService {
 		}
 		else
 			return new DefaultTradeHistoryParamCurrency(currency);
-	}
-	
-	private BigDecimal roundAmount(BigDecimal amount, Currency currency) {
-		int scale = 6; // max 6 decimals is enough, helps avoiding bad rounding issues, and makes transfers easier to read
-		if (Currency.XRP.equals(currency))
-			scale = 0;
-		amount = amount.setScale(scale, RoundingMode.HALF_UP);
-		return amount;
-	}
+	}	
 	
 	private String withdrawFunds(Exchange exchange, String withdrawAddress, Currency currency, BigDecimal amountToWithdraw, String paymentId) throws IOException {
 		String exchangeName = exchange.getExchangeSpecification().getExchangeName();
@@ -222,7 +215,7 @@ public class BalancerServiceImpl implements BalancerService {
 		
 		BigDecimal balancedOffset = fromBalance.getAvailable().subtract(toBalance.getAvailable()).divide(BigDecimal.valueOf(2));
 		BigDecimal allowedWithdrawableAmount = fromBalance.getAvailable().subtract(fromWallet.getMinResidualBalance());
-		BigDecimal amountToWithdraw = roundAmount(balancedOffset.min(allowedWithdrawableAmount), currency);
+		BigDecimal amountToWithdraw = transxService.roundAmount(balancedOffset.min(allowedWithdrawableAmount), currency);
 		LOG.debug("amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (" + balancedOffset + ", " + allowedWithdrawableAmount + ")");
 		
 		// amountToWithdraw must be higher than the minimum amount specified in the config
@@ -279,7 +272,7 @@ public class BalancerServiceImpl implements BalancerService {
 			pendingWithdrawalsMap.put(exchCcy, true);
 
 			// add mapping destination exchange to transactionId
-			ExchStatus exchStatus = new ExchStatus(toExchangeName, false);
+			ExchStatus exchStatus = new ExchStatus(toExchangeName, false, LocalTime.now());
 			transxIdToTargetExchMap.put(transxHashkey, exchStatus);
 			
 			return true;

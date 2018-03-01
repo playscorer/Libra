@@ -1,6 +1,8 @@
 package arbitrail.libra.service;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.concurrent.ConcurrentMap;
 
@@ -90,6 +92,9 @@ public class PendingWithdrawalsService extends Thread {
 								LOG.warn("Skipping update of pending withdrawals status from exchange : " + exchangeName + " -> " + currency.getDisplayName());
 								continue;
 							}
+							// filter trades recorded before the withdrawal
+							if (!exchStatus.isLive(LocalTime.now()))
+								continue;
 							String toExchangeName = exchStatus.getExchangeName();
 							ExchCcy exchCcy = new ExchCcy(toExchangeName, currency.getCurrencyCode());
 							
@@ -113,7 +118,8 @@ public class PendingWithdrawalsService extends Thread {
 						}
 					}						
 					// filter completed deposits
-					Integer depositHashkey = transxService.transxHashkey(fundingRecord.getCurrency(), fundingRecord.getAmount(), exchange.getAccountService().requestDepositAddress(currency));
+					BigDecimal roundedAmount = transxService.roundAmount(fundingRecord.getAmount(), fundingRecord.getCurrency());
+					Integer depositHashkey = transxService.transxHashkey(fundingRecord.getCurrency(), roundedAmount, exchange.getAccountService().requestDepositAddress(currency));
 					if (depositHashkey == null) {
 						LOG.error("Unexpected error : depositHashkey is null");
 						LOG.warn("Skipping transaction from exchange : " + exchangeName + " -> " + fundingRecord.getCurrency().getDisplayName());
@@ -121,10 +127,13 @@ public class PendingWithdrawalsService extends Thread {
 					}
 					if (transxIdToTargetExchMap.keySet().contains(depositHashkey)) {
 						if (Type.DEPOSIT.equals(fundingRecord.getType())) {
+							// filter trades recorded before the withdrawal
+							if (!transxIdToTargetExchMap.get(depositHashkey).isLive(LocalTime.now()))
+								continue;
 							if (Status.COMPLETE.equals(fundingRecord.getStatus())) {
 								ExchCcy exchCcy = new ExchCcy(exchangeName, currency.getCurrencyCode());
 								pendingWithdrawalsMap.put(exchCcy, false); 
-								transxIdToTargetExchMap.remove(transxHashkey);
+								transxIdToTargetExchMap.remove(depositHashkey);
 								saveUpdatedBalance(exchange, exchangeName, wallets.getWalletMap().get(exchangeName).get(currency.getCurrencyCode()), currency);
 								if (exchangeName.equals("Hitbtc")) {
 									HitbtcAccountService hitbtcAccountService = (HitbtcAccountService)exchange.getAccountService();

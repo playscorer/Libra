@@ -2,6 +2,7 @@ package arbitrail.libra.orm.service;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -73,6 +74,5 @@ public class WalletService {
 		if (balance.getAvailable().doubleValue() == 0.0)
 			return null;
 		return balance;
-	}
-	
+	}	
 }

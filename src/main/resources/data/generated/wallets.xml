@@ -2,18 +2,18 @@
   <walletMap>
     <Binance>
       <XRP>
-        <initialBalance>1200</initialBalance>
-        <minResidualBalance>100</minResidualBalance>
-        <minWithdrawalAmount>50</minWithdrawalAmount><tag>109750021</tag>
+        <initialBalance>1000</initialBalance>
+        <minResidualBalance>2000</minResidualBalance>
+        <minWithdrawalAmount>1000</minWithdrawalAmount><tag>109750021</tag>
         <depositFee>0</depositFee>
         <withdrawalFee>0.25</withdrawalFee>
         </XRP>
     </Binance>
     <Hitbtc>
       <XRP>
-        <initialBalance>1200</initialBalance>
-        <minResidualBalance>100</minResidualBalance>
-        <minWithdrawalAmount>50</minWithdrawalAmount><tag>1955192449</tag>
+        <initialBalance>1000</initialBalance>
+        <minResidualBalance>2000</minResidualBalance>
+        <minWithdrawalAmount>1000</minWithdrawalAmount><tag>1955192449</tag>
         <depositFee>0</depositFee>
         <withdrawalFee>1.5</withdrawalFee>
         <label>Trading</label>

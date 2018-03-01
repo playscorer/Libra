@@ -1,6 +1,7 @@
 package arbitrail.libra.service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
@@ -57,6 +58,15 @@ public class TransactionServiceImpl implements TransactionService {
 				.filter(fundingRecord -> fundingRecord.getInternalId().equals(internalId)).findFirst();
 		
 		return matchingFundingRecord;
+	}
+	
+	@Override
+	public BigDecimal roundAmount(BigDecimal amount, Currency currency) {
+		int scale = 6; // max 6 decimals is enough, helps avoiding bad rounding issues, and makes transfers easier to read
+		if (Currency.XRP.equals(currency))
+			scale = 0;
+		amount = amount.setScale(scale, RoundingMode.HALF_UP);
+		return amount;
 	}
 
 }

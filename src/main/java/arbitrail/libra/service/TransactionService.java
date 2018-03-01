@@ -26,4 +26,8 @@ public interface TransactionService {
 	 */
 	Optional<FundingRecord> retrieveExternalId(List<FundingRecord> fundingRecords, String internalId);
 	
+	/**
+	 * Formats the transaction amount for the given currency
+	 */
+	BigDecimal roundAmount(BigDecimal amount, Currency currency);	
 }
