@@ -178,11 +178,11 @@ public class BalancerServiceImpl implements BalancerService {
 			return new DefaultTradeHistoryParamCurrency(currency);
 	}	
 	
-	private String withdrawFunds(Exchange exchange, String withdrawAddress, Currency currency, BigDecimal amountToWithdraw, String paymentId) throws IOException, InterruptedException {
+	private String withdrawFunds(Exchange exchange, String withdrawAddress, Currency currency, BigDecimal amountToWithdraw, String paymentId, BigDecimal fee) throws IOException, InterruptedException {
 		String exchangeName = exchange.getExchangeSpecification().getExchangeName();
 		if (exchangeName.equals("Hitbtc")) {
 			HitbtcAccountService hitbtcAccountService = (HitbtcAccountService)exchange.getAccountService();
-			hitbtcAccountService.transferToMain(currency, amountToWithdraw);
+			hitbtcAccountService.transferToMain(currency, amountToWithdraw.add(fee));
 			int nbTry = 3;
 			while(--nbTry > 0)
 			{
@@ -258,7 +258,7 @@ public class BalancerServiceImpl implements BalancerService {
 		LOG.debug("Deposit address [" + toExchangeName + " -> " + currency.getDisplayName() + "] : " + depositAddress);
 
 		if (!simulate) {			
-			String internalId = withdrawFunds(fromExchange, depositAddress, currency, amountToWithdraw, toWallet.getTag());
+			String internalId = withdrawFunds(fromExchange, depositAddress, currency, amountToWithdraw, toWallet.getTag(), fees);
 			LOG.debug("internalId = " + internalId);
 			
 			// load the history in order to retrieve the matching externalId (transactionId) from the internalId returned by the withdrawFunds method
