@@ -33,6 +33,7 @@ import arbitrail.libra.model.Wallets;
 import arbitrail.libra.orm.service.WalletService;
 import arbitrail.libra.orm.spring.ContextProvider;
 import arbitrail.libra.utils.Utils;
+import si.mazi.rescu.HttpStatusIOException;
 
 public class BalancerServiceImpl implements BalancerService {
 	
@@ -182,8 +183,17 @@ public class BalancerServiceImpl implements BalancerService {
 		if (exchangeName.equals("Hitbtc")) {
 			HitbtcAccountService hitbtcAccountService = (HitbtcAccountService)exchange.getAccountService();
 			hitbtcAccountService.transferToMain(currency, amountToWithdraw);
-			Thread.sleep(5000);
-			return hitbtcAccountService.withdrawFundsRaw(currency, amountToWithdraw, withdrawAddress, paymentId);
+			int nbTry = 3;
+			while(--nbTry > 0)
+			{
+				try {
+					return hitbtcAccountService.withdrawFundsRaw(currency, amountToWithdraw, withdrawAddress, paymentId);
+				}
+				catch(HttpStatusIOException exc) {
+					Thread.sleep(5000);
+				}
+			}
+			return null;
 		}
 		else {
 			if (Currency.XRP.equals(currency)) {
