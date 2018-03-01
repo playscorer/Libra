@@ -236,7 +236,7 @@ public class BalancerServiceImpl implements BalancerService {
 		}
 		
 		// if fees > 0.1% x amountToWithdraw
-		double percent = 2.5 / 100;
+		double percent = 0.1 / 100;
 		BigDecimal fees = fromWallet.getWithdrawalFee().add(toWallet.getDepositFee());
 		BigDecimal percentOfAmount = BigDecimal.valueOf(percent).multiply(amountToWithdraw);
 		if (fees.compareTo(percentOfAmount) > 0) {
