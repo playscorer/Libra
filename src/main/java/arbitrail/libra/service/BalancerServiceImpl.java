@@ -73,7 +73,7 @@ public class BalancerServiceImpl implements BalancerService {
 	}
 	
 	@Override
-	public int balanceAccounts(List<Exchange> exchangeList, List<Currency> currencyList, Wallets wallets) throws IOException {
+	public int balanceAccounts(List<Exchange> exchangeList, List<Currency> currencyList, Wallets wallets) throws IOException, InterruptedException {
 		Map<String, Map<String, Wallet>> walletMap = wallets.getWalletMap();
 		int nbOperations = 0;
 		
@@ -177,11 +177,12 @@ public class BalancerServiceImpl implements BalancerService {
 			return new DefaultTradeHistoryParamCurrency(currency);
 	}	
 	
-	private String withdrawFunds(Exchange exchange, String withdrawAddress, Currency currency, BigDecimal amountToWithdraw, String paymentId) throws IOException {
+	private String withdrawFunds(Exchange exchange, String withdrawAddress, Currency currency, BigDecimal amountToWithdraw, String paymentId) throws IOException, InterruptedException {
 		String exchangeName = exchange.getExchangeSpecification().getExchangeName();
 		if (exchangeName.equals("Hitbtc")) {
 			HitbtcAccountService hitbtcAccountService = (HitbtcAccountService)exchange.getAccountService();
 			hitbtcAccountService.transferToMain(currency, amountToWithdraw);
+			Thread.sleep(5000);
 			return hitbtcAccountService.withdrawFundsRaw(currency, amountToWithdraw, withdrawAddress, paymentId);
 		}
 		else {
@@ -195,7 +196,7 @@ public class BalancerServiceImpl implements BalancerService {
 	}
 
 	private boolean balance(Exchange fromExchange, Exchange toExchange, Currency currency, Wallet fromWallet, Wallet toWallet) 
-			throws NotAvailableFromExchangeException, NotYetImplementedForExchangeException, ExchangeException, IOException {
+			throws NotAvailableFromExchangeException, NotYetImplementedForExchangeException, ExchangeException, IOException, InterruptedException {
 		String toExchangeName = toExchange.getExchangeSpecification().getExchangeName();
 		String fromExchangeName = fromExchange.getExchangeSpecification().getExchangeName();
 		
@@ -225,7 +226,7 @@ public class BalancerServiceImpl implements BalancerService {
 		}
 		
 		// if fees > 0.1% x amountToWithdraw
-		double percent = 0.1 / 100;
+		double percent = 2.5 / 100;
 		BigDecimal fees = fromWallet.getWithdrawalFee().add(toWallet.getDepositFee());
 		BigDecimal percentOfAmount = BigDecimal.valueOf(percent).multiply(amountToWithdraw);
 		if (fees.compareTo(percentOfAmount) > 0) {

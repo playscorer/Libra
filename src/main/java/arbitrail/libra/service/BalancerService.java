@@ -10,6 +10,6 @@ import arbitrail.libra.model.Wallets;
 
 public interface BalancerService {
 	
-	int balanceAccounts(List<Exchange> exchangeList, List<Currency> currencyList, Wallets balances) throws IOException;
+	int balanceAccounts(List<Exchange> exchangeList, List<Currency> currencyList, Wallets balances) throws IOException, InterruptedException;
 
 }
