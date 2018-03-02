@@ -27958,3 +27958,225 @@ INFO  00:11:48,185 BalancerServiceImpl  - Skipping currency for exchange : Hitbt
 INFO  00:11:48,185 BalancerServiceImpl  - Pending withdrawal : Skipping currency for exchange : Hitbtc -> Verge
 INFO  00:11:48,185 Libra  - Number of rebalancing operations : 0 performed in (ms) : 4411
 INFO  00:11:48,185 Libra  - Sleeping for (ms) : 20000
+INFO  00:12:05,908 PendingWithdrawalsService  - Sleeping for (ms) : 10000
+INFO  00:12:08,185 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:12:10,655 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 2700.000000000000066613381477509392425417900085449218750000 / currentBalance = 106.38137800
+INFO  00:12:10,655 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Binance -> Ripple
+INFO  00:12:14,242 BalancerServiceImpl  - Source exchange [Hitbtc -> Ripple] balance : 498.93100000 / Destination exchange [Binance -> Ripple] balance : 106.38137800
+DEBUG 00:12:14,242 BalancerServiceImpl  - amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (196.27481100, -1.06900000)
+ERROR 00:12:14,242 BalancerServiceImpl  - Withdraw amount is too low - lower than minWithdrawAmount = 100 for Hitbtc -> Ripple
+INFO  00:12:14,243 BalancerServiceImpl  - Pending withdrawal : Skipping currency for exchange : Binance -> Verge
+INFO  00:12:14,243 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 00:12:14,505 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 2700.000000000000066613381477509392425417900085449218750000 / currentBalance = 498.93100000
+INFO  00:12:14,505 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+ERROR 00:12:16,206 BalancerServiceImpl  - Unexpected error : The source and the destination accounts are identical
+INFO  00:12:16,207 BalancerServiceImpl  - Skipping currency for exchange : Hitbtc -> Ripple
+INFO  00:12:16,207 BalancerServiceImpl  - Pending withdrawal : Skipping currency for exchange : Hitbtc -> Verge
+INFO  00:12:16,207 Libra  - Number of rebalancing operations : 0 performed in (ms) : 8021
+INFO  00:12:16,207 Libra  - Sleeping for (ms) : 20000
+INFO  00:12:20,487 PendingWithdrawalsService  - newBalance for Binance -> Verge : 3507.33901100
+INFO  00:12:36,207 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:12:36,870 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 2700.000000000000066613381477509392425417900085449218750000 / currentBalance = 106.38137800
+INFO  00:12:36,870 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Binance -> Ripple
+INFO  00:12:39,853 BalancerServiceImpl  - Source exchange [Hitbtc -> Ripple] balance : 498.93100000 / Destination exchange [Binance -> Ripple] balance : 106.38137800
+DEBUG 00:12:39,853 BalancerServiceImpl  - amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (196.27481100, -1.06900000)
+ERROR 00:12:39,853 BalancerServiceImpl  - Withdraw amount is too low - lower than minWithdrawAmount = 100 for Hitbtc -> Ripple
+DEBUG 00:12:40,503 BalancerServiceImpl  - Exchange : Binance -> Verge / checkThresholdBalance = 4500.000000000000111022302462515654042363166809082031250000 / currentBalance = 3507.33901100
+INFO  00:12:40,503 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Binance -> Verge
+ERROR 00:12:42,574 BalancerServiceImpl  - Unexpected error : The source and the destination accounts are identical
+INFO  00:12:42,574 BalancerServiceImpl  - Skipping currency for exchange : Binance -> Verge
+INFO  00:12:42,574 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 00:12:43,418 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 2700.000000000000066613381477509392425417900085449218750000 / currentBalance = 498.93100000
+INFO  00:12:43,418 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+ERROR 00:12:45,870 BalancerServiceImpl  - Unexpected error : The source and the destination accounts are identical
+INFO  00:12:45,870 BalancerServiceImpl  - Skipping currency for exchange : Hitbtc -> Ripple
+INFO  00:12:45,870 BalancerServiceImpl  - Pending withdrawal : Skipping currency for exchange : Hitbtc -> Verge
+INFO  00:12:45,870 Libra  - Number of rebalancing operations : 0 performed in (ms) : 9662
+INFO  00:12:45,870 Libra  - Sleeping for (ms) : 20000
+INFO  00:12:52,743 PendingWithdrawalsService  - Sleeping for (ms) : 10000
+INFO  00:13:05,870 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:13:08,809 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 2700.000000000000066613381477509392425417900085449218750000 / currentBalance = 106.38137800
+INFO  00:13:08,809 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Binance -> Ripple
+INFO  00:13:16,554 BalancerServiceImpl  - Source exchange [Hitbtc -> Ripple] balance : 498.93100000 / Destination exchange [Binance -> Ripple] balance : 106.38137800
+DEBUG 00:13:16,554 BalancerServiceImpl  - amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (196.27481100, -1.06900000)
+ERROR 00:13:16,555 BalancerServiceImpl  - Withdraw amount is too low - lower than minWithdrawAmount = 100 for Hitbtc -> Ripple
+DEBUG 00:13:18,058 BalancerServiceImpl  - Exchange : Binance -> Verge / checkThresholdBalance = 4500.000000000000111022302462515654042363166809082031250000 / currentBalance = 3507.33901100
+INFO  00:13:18,058 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Binance -> Verge
+ERROR 00:13:19,542 BalancerServiceImpl  - Unexpected error : The source and the destination accounts are identical
+INFO  00:13:19,542 BalancerServiceImpl  - Skipping currency for exchange : Binance -> Verge
+INFO  00:13:19,542 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 00:13:19,985 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 2700.000000000000066613381477509392425417900085449218750000 / currentBalance = 498.93100000
+INFO  00:13:19,985 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+ERROR 00:13:21,370 BalancerServiceImpl  - Unexpected error : The source and the destination accounts are identical
+INFO  00:13:21,371 BalancerServiceImpl  - Skipping currency for exchange : Hitbtc -> Ripple
+INFO  00:13:21,371 BalancerServiceImpl  - Pending withdrawal : Skipping currency for exchange : Hitbtc -> Verge
+INFO  00:13:21,371 Libra  - Number of rebalancing operations : 0 performed in (ms) : 15500
+INFO  00:13:21,371 Libra  - Sleeping for (ms) : 20000
+INFO  00:13:41,371 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:13:44,819 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 2700.000000000000066613381477509392425417900085449218750000 / currentBalance = 106.38137800
+INFO  00:13:44,819 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Binance -> Ripple
+INFO  00:13:50,186 BalancerServiceImpl  - Source exchange [Hitbtc -> Ripple] balance : 498.93100000 / Destination exchange [Binance -> Ripple] balance : 106.38137800
+DEBUG 00:13:50,187 BalancerServiceImpl  - amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (196.27481100, -1.06900000)
+ERROR 00:13:50,187 BalancerServiceImpl  - Withdraw amount is too low - lower than minWithdrawAmount = 100 for Hitbtc -> Ripple
+DEBUG 00:13:51,139 BalancerServiceImpl  - Exchange : Binance -> Verge / checkThresholdBalance = 4500.000000000000111022302462515654042363166809082031250000 / currentBalance = 3507.33901100
+INFO  00:13:51,139 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Binance -> Verge
+INFO  00:13:51,877 PendingWithdrawalsService  - Sleeping for (ms) : 10000
+ERROR 00:13:53,263 BalancerServiceImpl  - Unexpected error : The source and the destination accounts are identical
+INFO  00:13:53,263 BalancerServiceImpl  - Skipping currency for exchange : Binance -> Verge
+INFO  00:13:53,263 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 00:13:53,845 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 2700.000000000000066613381477509392425417900085449218750000 / currentBalance = 498.93100000
+INFO  00:13:53,845 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+ERROR 00:13:54,997 BalancerServiceImpl  - Unexpected error : The source and the destination accounts are identical
+INFO  00:13:54,998 BalancerServiceImpl  - Skipping currency for exchange : Hitbtc -> Ripple
+INFO  00:13:54,998 BalancerServiceImpl  - Pending withdrawal : Skipping currency for exchange : Hitbtc -> Verge
+INFO  00:13:54,998 Libra  - Number of rebalancing operations : 0 performed in (ms) : 13626
+INFO  00:13:54,998 Libra  - Sleeping for (ms) : 20000
+INFO  00:14:14,999 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:14:16,201 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 2700.000000000000066613381477509392425417900085449218750000 / currentBalance = 106.38137800
+INFO  00:14:16,201 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Binance -> Ripple
+INFO  00:14:18,848 BalancerServiceImpl  - Source exchange [Hitbtc -> Ripple] balance : 498.93100000 / Destination exchange [Binance -> Ripple] balance : 106.38137800
+DEBUG 00:14:18,848 BalancerServiceImpl  - amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (196.27481100, -1.06900000)
+ERROR 00:14:18,848 BalancerServiceImpl  - Withdraw amount is too low - lower than minWithdrawAmount = 100 for Hitbtc -> Ripple
+DEBUG 00:14:19,472 BalancerServiceImpl  - Exchange : Binance -> Verge / checkThresholdBalance = 4500.000000000000111022302462515654042363166809082031250000 / currentBalance = 3507.33901100
+INFO  00:14:19,473 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Binance -> Verge
+ERROR 00:14:20,471 BalancerServiceImpl  - Unexpected error : The source and the destination accounts are identical
+INFO  00:14:20,471 BalancerServiceImpl  - Skipping currency for exchange : Binance -> Verge
+INFO  00:14:20,471 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 00:14:20,882 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 2700.000000000000066613381477509392425417900085449218750000 / currentBalance = 498.93100000
+INFO  00:14:20,882 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+ERROR 00:14:21,644 BalancerServiceImpl  - Unexpected error : The source and the destination accounts are identical
+INFO  00:14:21,644 BalancerServiceImpl  - Skipping currency for exchange : Hitbtc -> Ripple
+INFO  00:14:21,644 BalancerServiceImpl  - Pending withdrawal : Skipping currency for exchange : Hitbtc -> Verge
+INFO  00:14:21,644 Libra  - Number of rebalancing operations : 0 performed in (ms) : 6645
+INFO  00:14:21,644 Libra  - Sleeping for (ms) : 20000
+INFO  00:14:28,333 PendingWithdrawalsService  - Sleeping for (ms) : 10000
+INFO  00:14:41,644 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:14:45,886 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 2700.000000000000066613381477509392425417900085449218750000 / currentBalance = 106.38137800
+INFO  00:14:45,886 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Binance -> Ripple
+INFO  00:14:48,039 BalancerServiceImpl  - Source exchange [Hitbtc -> Ripple] balance : 498.93100000 / Destination exchange [Binance -> Ripple] balance : 106.38137800
+DEBUG 00:14:48,039 BalancerServiceImpl  - amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (196.27481100, -1.06900000)
+ERROR 00:14:48,039 BalancerServiceImpl  - Withdraw amount is too low - lower than minWithdrawAmount = 100 for Hitbtc -> Ripple
+DEBUG 00:14:48,663 BalancerServiceImpl  - Exchange : Binance -> Verge / checkThresholdBalance = 4500.000000000000111022302462515654042363166809082031250000 / currentBalance = 3507.33901100
+INFO  00:14:48,663 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Binance -> Verge
+ERROR 00:14:49,797 BalancerServiceImpl  - Unexpected error : The source and the destination accounts are identical
+INFO  00:14:49,798 BalancerServiceImpl  - Skipping currency for exchange : Binance -> Verge
+INFO  00:14:49,798 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 00:14:50,076 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 2700.000000000000066613381477509392425417900085449218750000 / currentBalance = 498.93100000
+INFO  00:14:50,076 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+ERROR 00:14:50,920 BalancerServiceImpl  - Unexpected error : The source and the destination accounts are identical
+INFO  00:14:50,920 BalancerServiceImpl  - Skipping currency for exchange : Hitbtc -> Ripple
+INFO  00:14:50,920 BalancerServiceImpl  - Pending withdrawal : Skipping currency for exchange : Hitbtc -> Verge
+INFO  00:14:50,920 Libra  - Number of rebalancing operations : 0 performed in (ms) : 9275
+INFO  00:14:50,920 Libra  - Sleeping for (ms) : 20000
+INFO  00:15:01,209 PendingWithdrawalsService  - Sleeping for (ms) : 10000
+INFO  00:15:10,920 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:15:12,351 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 2700.000000000000066613381477509392425417900085449218750000 / currentBalance = 106.38137800
+INFO  00:15:12,351 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Binance -> Ripple
+INFO  00:15:14,804 BalancerServiceImpl  - Source exchange [Hitbtc -> Ripple] balance : 498.93100000 / Destination exchange [Binance -> Ripple] balance : 106.38137800
+DEBUG 00:15:14,804 BalancerServiceImpl  - amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (196.27481100, -1.06900000)
+ERROR 00:15:14,804 BalancerServiceImpl  - Withdraw amount is too low - lower than minWithdrawAmount = 100 for Hitbtc -> Ripple
+DEBUG 00:15:15,376 BalancerServiceImpl  - Exchange : Binance -> Verge / checkThresholdBalance = 4500.000000000000111022302462515654042363166809082031250000 / currentBalance = 3507.33901100
+INFO  00:15:15,376 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Binance -> Verge
+ERROR 00:15:16,319 BalancerServiceImpl  - Unexpected error : The source and the destination accounts are identical
+INFO  00:15:16,319 BalancerServiceImpl  - Skipping currency for exchange : Binance -> Verge
+INFO  00:15:16,320 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 00:15:16,548 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 2700.000000000000066613381477509392425417900085449218750000 / currentBalance = 498.93100000
+INFO  00:15:16,548 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+ERROR 00:15:17,528 BalancerServiceImpl  - Unexpected error : The source and the destination accounts are identical
+INFO  00:15:17,528 BalancerServiceImpl  - Skipping currency for exchange : Hitbtc -> Ripple
+INFO  00:15:17,528 BalancerServiceImpl  - Pending withdrawal : Skipping currency for exchange : Hitbtc -> Verge
+INFO  00:15:17,528 Libra  - Number of rebalancing operations : 0 performed in (ms) : 6608
+INFO  00:15:17,528 Libra  - Sleeping for (ms) : 20000
+INFO  00:15:36,355 PendingWithdrawalsService  - Sleeping for (ms) : 10000
+INFO  00:15:37,529 BalancerServiceImpl  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:15:39,410 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 2700.000000000000066613381477509392425417900085449218750000 / currentBalance = 106.38137800
+INFO  00:15:39,410 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Binance -> Ripple
+INFO  00:15:41,526 BalancerServiceImpl  - Source exchange [Hitbtc -> Ripple] balance : 748.93100000 / Destination exchange [Binance -> Ripple] balance : 106.38137800
+DEBUG 00:15:41,526 BalancerServiceImpl  - amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (321.27481100, 248.93100000)
+INFO  00:15:41,557 BalancerServiceImpl  - amountToWithdraw [Hitbtc -> Binance] : 249
+DEBUG 00:15:42,032 BalancerServiceImpl  - Deposit address [Binance -> Ripple] : rEb8TK3gBgk5auZkwc6sHnwrGVJH8DuaLh
+INFO  00:15:42,278 BalancerServiceImpl  - Sending withdraw order - address: rEb8TK3gBgk5auZkwc6sHnwrGVJH8DuaLh id: 109750021 [Hitbtc -> Ripple] amount: 249
+DEBUG 00:15:45,884 BalancerServiceImpl  - internalId = ec006d70-4e77-4a38-a6bc-fb239eea10b6
+DEBUG 00:15:45,884 BalancerServiceImpl  - Waiting for the transactionId... sleeping for (ms) : 30000
+INFO  00:16:07,373 PendingWithdrawalsService  - Sleeping for (ms) : 10000
+INFO  00:16:16,550 BalancerServiceImpl  - new provisional balance for Hitbtc -> Ripple : 499.33100000
+DEBUG 00:16:18,027 BalancerServiceImpl  - Exchange : Binance -> Verge / checkThresholdBalance = 4500.000000000000111022302462515654042363166809082031250000 / currentBalance = 3507.33901100
+INFO  00:16:18,028 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Binance -> Verge
+ERROR 00:16:19,185 BalancerServiceImpl  - Unexpected error : The source and the destination accounts are identical
+INFO  00:16:19,185 BalancerServiceImpl  - Skipping currency for exchange : Binance -> Verge
+INFO  00:16:19,185 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 00:16:19,365 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 2700.000000000000066613381477509392425417900085449218750000 / currentBalance = 499.33100000
+INFO  00:16:19,365 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+ERROR 00:16:20,142 BalancerServiceImpl  - Unexpected error : The source and the destination accounts are identical
+INFO  00:16:20,142 BalancerServiceImpl  - Skipping currency for exchange : Hitbtc -> Ripple
+INFO  00:16:20,142 BalancerServiceImpl  - Pending withdrawal : Skipping currency for exchange : Hitbtc -> Verge
+INFO  00:16:20,142 Libra  - Number of rebalancing operations : 1 performed in (ms) : 42613
+INFO  00:16:20,142 Libra  - Sleeping for (ms) : 20000
+INFO  00:16:38,108 PendingWithdrawalsService  - Sleeping for (ms) : 10000
+INFO  00:16:40,156 BalancerServiceImpl  - Pending withdrawal : Skipping currency for exchange : Binance -> Ripple
+DEBUG 00:16:41,487 BalancerServiceImpl  - Exchange : Binance -> Verge / checkThresholdBalance = 4500.000000000000111022302462515654042363166809082031250000 / currentBalance = 3507.33901100
+INFO  00:16:41,487 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Binance -> Verge
+ERROR 00:16:42,604 BalancerServiceImpl  - Unexpected error : The source and the destination accounts are identical
+INFO  00:16:42,604 BalancerServiceImpl  - Skipping currency for exchange : Binance -> Verge
+INFO  00:16:42,604 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 00:16:42,801 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 2700.000000000000066613381477509392425417900085449218750000 / currentBalance = 499.33100000
+INFO  00:16:42,801 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+ERROR 00:16:43,698 BalancerServiceImpl  - Unexpected error : The source and the destination accounts are identical
+INFO  00:16:43,698 BalancerServiceImpl  - Skipping currency for exchange : Hitbtc -> Ripple
+INFO  00:16:43,699 BalancerServiceImpl  - Pending withdrawal : Skipping currency for exchange : Hitbtc -> Verge
+INFO  00:16:43,699 Libra  - Number of rebalancing operations : 0 performed in (ms) : 3542
+INFO  00:16:43,699 Libra  - Sleeping for (ms) : 20000
+INFO  00:16:50,321 PendingWithdrawalsService  - newBalance for Binance -> Ripple : 355.38137800
+DEBUG 00:17:04,535 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 2700.000000000000066613381477509392425417900085449218750000 / currentBalance = 355.38137800
+INFO  00:17:04,535 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Binance -> Ripple
+INFO  00:17:06,172 BalancerServiceImpl  - Source exchange [Hitbtc -> Ripple] balance : 499.33100000 / Destination exchange [Binance -> Ripple] balance : 355.38137800
+DEBUG 00:17:06,172 BalancerServiceImpl  - amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (71.97481100, -0.66900000)
+ERROR 00:17:06,172 BalancerServiceImpl  - Withdraw amount is too low - lower than minWithdrawAmount = 100 for Hitbtc -> Ripple
+DEBUG 00:17:07,099 BalancerServiceImpl  - Exchange : Binance -> Verge / checkThresholdBalance = 4500.000000000000111022302462515654042363166809082031250000 / currentBalance = 3507.33901100
+INFO  00:17:07,099 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Binance -> Verge
+ERROR 00:17:08,124 BalancerServiceImpl  - Unexpected error : The source and the destination accounts are identical
+INFO  00:17:08,124 BalancerServiceImpl  - Skipping currency for exchange : Binance -> Verge
+INFO  00:17:08,124 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 00:17:08,558 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 2700.000000000000066613381477509392425417900085449218750000 / currentBalance = 499.33100000
+INFO  00:17:08,558 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+ERROR 00:17:09,326 BalancerServiceImpl  - Unexpected error : The source and the destination accounts are identical
+INFO  00:17:09,326 BalancerServiceImpl  - Skipping currency for exchange : Hitbtc -> Ripple
+INFO  00:17:09,326 BalancerServiceImpl  - Pending withdrawal : Skipping currency for exchange : Hitbtc -> Verge
+INFO  00:17:09,326 Libra  - Number of rebalancing operations : 0 performed in (ms) : 5626
+INFO  00:17:09,326 Libra  - Sleeping for (ms) : 20000
+INFO  00:17:10,483 PendingWithdrawalsService  - Sleeping for (ms) : 10000
+DEBUG 00:17:30,482 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 2700.000000000000066613381477509392425417900085449218750000 / currentBalance = 355.38137800
+INFO  00:17:30,482 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Binance -> Ripple
+INFO  00:17:32,539 BalancerServiceImpl  - Source exchange [Hitbtc -> Ripple] balance : 499.33100000 / Destination exchange [Binance -> Ripple] balance : 355.38137800
+DEBUG 00:17:32,539 BalancerServiceImpl  - amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (71.97481100, -0.66900000)
+ERROR 00:17:32,539 BalancerServiceImpl  - Withdraw amount is too low - lower than minWithdrawAmount = 100 for Hitbtc -> Ripple
+DEBUG 00:17:33,152 BalancerServiceImpl  - Exchange : Binance -> Verge / checkThresholdBalance = 4500.000000000000111022302462515654042363166809082031250000 / currentBalance = 3507.33901100
+INFO  00:17:33,152 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Binance -> Verge
+ERROR 00:17:34,447 BalancerServiceImpl  - Unexpected error : The source and the destination accounts are identical
+INFO  00:17:34,447 BalancerServiceImpl  - Skipping currency for exchange : Binance -> Verge
+INFO  00:17:34,447 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 00:17:34,768 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 2700.000000000000066613381477509392425417900085449218750000 / currentBalance = 499.33100000
+INFO  00:17:34,768 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+ERROR 00:17:36,148 BalancerServiceImpl  - Unexpected error : The source and the destination accounts are identical
+INFO  00:17:36,148 BalancerServiceImpl  - Skipping currency for exchange : Hitbtc -> Ripple
+INFO  00:17:36,148 BalancerServiceImpl  - Pending withdrawal : Skipping currency for exchange : Hitbtc -> Verge
+INFO  00:17:36,148 Libra  - Number of rebalancing operations : 0 performed in (ms) : 6821
+INFO  00:17:36,148 Libra  - Sleeping for (ms) : 20000
+INFO  00:17:45,639 PendingWithdrawalsService  - Sleeping for (ms) : 10000
+DEBUG 00:17:57,610 BalancerServiceImpl  - Exchange : Binance -> Ripple / checkThresholdBalance = 2700.000000000000066613381477509392425417900085449218750000 / currentBalance = 355.38137800
+INFO  00:17:57,610 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Binance -> Ripple
+INFO  00:17:59,545 BalancerServiceImpl  - Source exchange [Hitbtc -> Ripple] balance : 499.33100000 / Destination exchange [Binance -> Ripple] balance : 355.38137800
+DEBUG 00:17:59,545 BalancerServiceImpl  - amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (71.97481100, -0.66900000)
+ERROR 00:17:59,545 BalancerServiceImpl  - Withdraw amount is too low - lower than minWithdrawAmount = 100 for Hitbtc -> Ripple
+DEBUG 00:18:00,136 BalancerServiceImpl  - Exchange : Binance -> Verge / checkThresholdBalance = 4500.000000000000111022302462515654042363166809082031250000 / currentBalance = 3507.33901100
+INFO  00:18:00,137 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Binance -> Verge
+ERROR 00:18:01,250 BalancerServiceImpl  - Unexpected error : The source and the destination accounts are identical
+INFO  00:18:01,251 BalancerServiceImpl  - Skipping currency for exchange : Binance -> Verge
+INFO  00:18:01,251 BalancerServiceImpl  - No balancing has been done yet for Hitbtc -> Ripple
+DEBUG 00:18:01,444 BalancerServiceImpl  - Exchange : Hitbtc -> Ripple / checkThresholdBalance = 2700.000000000000066613381477509392425417900085449218750000 / currentBalance = 499.33100000
+INFO  00:18:01,444 BalancerServiceImpl  - ### Exchange needs to be balanced for currency : Hitbtc -> Ripple
+ERROR 00:18:02,257 BalancerServiceImpl  - Unexpected error : The source and the destination accounts are identical
+INFO  00:18:02,257 BalancerServiceImpl  - Skipping currency for exchange : Hitbtc -> Ripple
+INFO  00:18:02,257 BalancerServiceImpl  - Pending withdrawal : Skipping currency for exchange : Hitbtc -> Verge
+INFO  00:18:02,257 Libra  - Number of rebalancing operations : 0 performed in (ms) : 6107
+INFO  00:18:02,257 Libra  - Sleeping for (ms) : 20000
