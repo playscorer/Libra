@@ -7,5 +7,5 @@
 	<currency code="BTC"/>
 	<currency code="ETH"/>
 	<currency code="LTC"/>
-	<currency code="XVG"/> -->
+	<currency code="XVG"/> --><currency code="XVG"></currency>
 </currencies>

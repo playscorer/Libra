@@ -2,31 +2,49 @@
   <walletMap>
     <Binance>
       <XRP>
-        <initialBalance>7000</initialBalance>
+        <initialBalance>6000</initialBalance>
         <minResidualBalance>2000</minResidualBalance>
-        <minWithdrawalAmount>1000</minWithdrawalAmount><tag>109750021</tag>
+        <minWithdrawalAmount>1000</minWithdrawalAmount>
+        <tag>109750021</tag>
         <depositFee>0</depositFee>
         <withdrawalFee>0.25</withdrawalFee>
-        </XRP>
+      </XRP>
+      <XVG>
+        <initialBalance>80000</initialBalance>
+        <minResidualBalance>25000</minResidualBalance>
+        <minWithdrawalAmount>30000</minWithdrawalAmount>
+        <depositFee>0</depositFee>
+        <withdrawalFee>0.1</withdrawalFee>
+      </XVG>
     </Binance>
     <Hitbtc>
       <XRP>
-        <initialBalance>7000</initialBalance>
+        <initialBalance>6000</initialBalance>
         <minResidualBalance>2000</minResidualBalance>
-        <minWithdrawalAmount>1000</minWithdrawalAmount><tag>1955192449</tag>
+        <minWithdrawalAmount>1000</minWithdrawalAmount>
+        <tag>1955192449</tag>
         <depositFee>0</depositFee>
         <withdrawalFee>0.6</withdrawalFee>
         <label>Trading</label>
-        </XRP>
-    </Hitbtc>
-    <!--Bitstamp>
-      <XRP>
-        <initialBalance>4.1E-7</initialBalance>
-        <minResidualBalance>0</minResidualBalance>
-        <tag/>
-        <depositFee>0</depositFee>
-        <withdrawalFee>0</withdrawalFee>
       </XRP>
-    </Bitstamp-->
+      <XVG>
+        <initialBalance>80000</initialBalance>
+        <minResidualBalance>25000</minResidualBalance>
+        <minWithdrawalAmount>30000</minWithdrawalAmount>
+        <depositFee>0</depositFee>
+        <withdrawalFee>1.5</withdrawalFee>
+        <label>Trading</label>
+      </XVG>
+    </Hitbtc>
+    <!--BitFinex>
+      <XRP>
+        <initialBalance>6000</initialBalance>
+        <minResidualBalance>2000</minResidualBalance>
+        <minWithdrawalAmount>1000</minWithdrawalAmount>
+        <tag>3353271445</tag>
+        <depositFee>0</depositFee>
+        <withdrawalFee>0.02</withdrawalFee>
+      </XRP>
+    </BitFinex-->
   </walletMap>
 </wallets>

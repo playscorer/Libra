@@ -58,6 +58,12 @@ public class PendingWithdrawalsService extends Thread {
 			HitbtcFundingHistoryParams.Builder builder = new HitbtcFundingHistoryParams.Builder();
 			return builder.offset(0).limit(100).build();
 		}
+		else if (exchangeName.equals("BitFinex")) {
+			// TODO: Support multi-currency TradeHistoryParams. in the meantime we return the first on the list
+			for (String currencyName : wallets.getWalletMap().get(exchangeName).keySet())
+				return new DefaultTradeHistoryParamCurrency(new Currency(currencyName));
+			return null;
+		}
 		else
 			return new DefaultTradeHistoryParamCurrency();
 	}
