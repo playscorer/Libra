@@ -99,8 +99,11 @@ public class PendingWithdrawalsService extends Thread {
 								continue;
 							}
 							// filter trades recorded before the withdrawal
-							if (!exchStatus.isLive(LocalTime.now()))
+							if (!exchStatus.isLive(fundingRecord.getDate())) {
+								LOG.warn("Filtered a withdraw : " + exchangeName + " -> " + fundingRecord.getCurrency().getDisplayName());
 								continue;
+							}
+							LOG.warn("Detected a withdraw : " + exchangeName + " -> " + fundingRecord.getCurrency().getDisplayName());
 							String toExchangeName = exchStatus.getExchangeName();
 							ExchCcy exchCcy = new ExchCcy(toExchangeName, currency.getCurrencyCode());
 							
@@ -134,8 +137,11 @@ public class PendingWithdrawalsService extends Thread {
 					if (transxIdToTargetExchMap.keySet().contains(depositHashkey)) {
 						if (Type.DEPOSIT.equals(fundingRecord.getType())) {
 							// filter trades recorded before the withdrawal
-							if (!transxIdToTargetExchMap.get(depositHashkey).isLive(LocalTime.now()))
+							if (!transxIdToTargetExchMap.get(depositHashkey).isLive(fundingRecord.getDate())) {
+								LOG.warn("Filtered a deposit : " + exchangeName + " -> " + fundingRecord.getCurrency().getDisplayName());
 								continue;
+							}
+							LOG.warn("Detected a deposit : " + exchangeName + " -> " + fundingRecord.getCurrency().getDisplayName());
 							if (Status.COMPLETE.equals(fundingRecord.getStatus())) {
 								ExchCcy exchCcy = new ExchCcy(exchangeName, currency.getCurrencyCode());
 								pendingWithdrawalsMap.put(exchCcy, false); 

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalTime;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -290,7 +291,7 @@ public class BalancerServiceImpl implements BalancerService {
 			pendingWithdrawalsMap.put(exchCcy, true);
 
 			// add mapping destination exchange to transactionId
-			ExchStatus exchStatus = new ExchStatus(toExchangeName, false, LocalTime.now());
+			ExchStatus exchStatus = new ExchStatus(toExchangeName, false, Calendar.getInstance().getTime());
 			transxIdToTargetExchMap.put(transxHashkey, exchStatus);
 			
 			return true;

@@ -1,15 +1,14 @@
 package arbitrail.libra.model;
 
-import java.time.LocalTime;
 import java.util.Date;
 
 public class ExchStatus {
 
 	private String exchangeName;
 	private boolean withdrawalComplete;
-	private LocalTime withdrawalTime;
+	private Date withdrawalTime;
 
-	public ExchStatus(String exchangeName, boolean withdrawalComplete, LocalTime withdrawalTime) {
+	public ExchStatus(String exchangeName, boolean withdrawalComplete, Date withdrawalTime) {
 		this.exchangeName = exchangeName;
 		this.withdrawalComplete = withdrawalComplete;
 		this.withdrawalTime = withdrawalTime;
@@ -19,12 +18,12 @@ public class ExchStatus {
 		return exchangeName;
 	}
 	
-	public LocalTime withdrawTime() {
+	public Date withdrawTime() {
 		return this.withdrawalTime;
 	}
 	
-	public boolean isLive(LocalTime curTime) {
-		return curTime.isAfter(this.withdrawalTime);
+	public boolean isLive(Date curTime) {
+		return curTime.after(this.withdrawalTime);
 	}
 
 	public boolean isWithdrawalComplete() {
