@@ -62,10 +62,12 @@ public class TransactionServiceImpl implements TransactionService {
 	
 	@Override
 	public BigDecimal roundAmount(BigDecimal amount, Currency currency) {
-		int scale = 6; // max 6 decimals is enough, helps avoiding bad rounding issues, and makes transfers easier to read
+		int scale = 3; // max 3 decimals is enough, helps avoiding bad rounding issues, and makes transfers easier to read
 		if (Currency.XRP.equals(currency))
 			scale = 0;
-		amount = amount.setScale(scale, RoundingMode.HALF_UP);
+		else if (Currency.XVG.equals(currency))
+			scale = 0;
+		amount = amount.setScale(scale, RoundingMode.FLOOR);
 		return amount;
 	}
 

@@ -1,6 +1,6 @@
 package arbitrail.libra.orm.model;
 
-import java.time.LocalTime;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -11,12 +11,12 @@ public class TransxIdToTargetExchEntity {
 	@Id private String transxId;
 	private String exchangeName;
 	private boolean withdrawalComplete;
-	private LocalTime withdrawalTime;
+	private Date withdrawalTime;
 
 	public TransxIdToTargetExchEntity() {
 	}
 
-	public TransxIdToTargetExchEntity(String transxId, String exchangeName, boolean withdrawalComplete, LocalTime withdrawalTime) {
+	public TransxIdToTargetExchEntity(String transxId, String exchangeName, boolean withdrawalComplete, Date withdrawalTime) {
 		super();
 		this.transxId = transxId;
 		this.exchangeName = exchangeName;
@@ -36,7 +36,7 @@ public class TransxIdToTargetExchEntity {
 		return withdrawalComplete;
 	}
 	
-	public LocalTime withdrawTime() {
+	public Date withdrawTime() {
 		return this.withdrawalTime;
 	}
 

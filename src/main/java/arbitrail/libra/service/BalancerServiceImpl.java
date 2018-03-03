@@ -183,13 +183,13 @@ public class BalancerServiceImpl implements BalancerService {
 		String exchangeName = exchange.getExchangeSpecification().getExchangeName();
 		if (exchangeName.equals("Hitbtc")) {
 			HitbtcAccountService hitbtcAccountService = (HitbtcAccountService)exchange.getAccountService();
-			hitbtcAccountService.transferToMain(currency, amountToWithdraw.add(fee));
+			hitbtcAccountService.transferToMain(currency, amountToWithdraw);
 			int nbTry = 3;
 			while(--nbTry > 0)
 			{
 				try {
 					LOG.info("Sending withdraw order - address: " + withdrawAddress + " id: " + paymentId + " [" + exchangeName + " -> " + currency.getDisplayName() + "] amount: " + amountToWithdraw);
-					return hitbtcAccountService.withdrawFundsRaw(currency, amountToWithdraw, withdrawAddress, paymentId);
+					return hitbtcAccountService.withdrawFundsRaw(currency, amountToWithdraw.subtract(fee), withdrawAddress, paymentId);
 				}
 				catch(HttpStatusIOException exc) {
 					if (nbTry == 1){
@@ -205,11 +205,11 @@ public class BalancerServiceImpl implements BalancerService {
 		else {
 			LOG.info("Sending withdraw order - address: " + withdrawAddress + " id: " + paymentId + " [" + exchangeName + " -> " + currency.getDisplayName() + "] amount: " + amountToWithdraw);
 			if (Currency.XRP.equals(currency)) {
-				WithdrawFundsParams withdrawParams = new RippleWithdrawFundsParams(withdrawAddress, currency, amountToWithdraw, paymentId);
+				WithdrawFundsParams withdrawParams = new RippleWithdrawFundsParams(withdrawAddress, currency, amountToWithdraw.subtract(fee), paymentId);
 				return exchange.getAccountService().withdrawFunds(withdrawParams);
 			}
 			else
-				return exchange.getAccountService().withdrawFunds(currency, amountToWithdraw, withdrawAddress);
+				return exchange.getAccountService().withdrawFunds(currency, amountToWithdraw.subtract(fee), withdrawAddress);
 		}
 	}
 
@@ -234,7 +234,7 @@ public class BalancerServiceImpl implements BalancerService {
 		
 		BigDecimal balancedOffset = fromBalance.getAvailable().subtract(toBalance.getAvailable()).divide(BigDecimal.valueOf(2));
 		BigDecimal allowedWithdrawableAmount = fromBalance.getAvailable().subtract(fromWallet.getMinResidualBalance());
-		BigDecimal amountToWithdraw = transxService.roundAmount(balancedOffset.min(allowedWithdrawableAmount), currency);
+		BigDecimal amountToWithdraw = transxService.roundAmount(balancedOffset.min(allowedWithdrawableAmount), currency).add(fromWallet.getWithdrawalFee());
 		LOG.debug("amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (" + balancedOffset + ", " + allowedWithdrawableAmount + ")");
 		
 		// amountToWithdraw must be higher than the minimum amount specified in the config
@@ -273,8 +273,10 @@ public class BalancerServiceImpl implements BalancerService {
 					TradeHistoryParams ccyHistoryParams = getTradeHistoryParams(fromExchange, currency);
 					List<FundingRecord> fundingRecords = fromExchange.getAccountService().getFundingHistory(ccyHistoryParams);	
 					Optional<FundingRecord> matchingFundingRecord = transxService.retrieveExternalId(fundingRecords, internalId);
-					if (matchingFundingRecord.isPresent())
-						transxHashkey = transxService.transxHashkey(matchingFundingRecord.get().getCurrency(), matchingFundingRecord.get().getAmount(), depositAddress);
+					if (matchingFundingRecord.isPresent()){
+						BigDecimal roundedAmount = transxService.roundAmount(matchingFundingRecord.get().getAmount(), matchingFundingRecord.get().getCurrency());
+						transxHashkey = transxService.transxHashkey(matchingFundingRecord.get().getCurrency(), roundedAmount, depositAddress);
+					}
 					numAttempts++;
 					if (numAttempts == 10)
 						throw new Exception("Maximum number of attempts reached: " + numAttempts);
