@@ -59,8 +59,8 @@ public class Libra extends Thread {
 				LocalDateTime before = LocalDateTime.now();
 				nbOperations = balancerService.balanceAccounts(exchanges, currencies, wallets);
 				LocalDateTime after = LocalDateTime.now();
-				LOG.info("Number of rebalancing operations : " + nbOperations + " performed in (ms) : " + ChronoUnit.MILLIS.between(before, after));
-				LOG.info("Sleeping for (ms) : " + frequency);
+				LOG.debug("Number of rebalancing operations : " + nbOperations + " performed in (ms) : " + ChronoUnit.MILLIS.between(before, after));
+				LOG.debug("Sleeping for (ms) : " + frequency);
 				Thread.sleep(frequency);
 			} catch (InterruptedException | IOException e) {
 				LOG.error(e);
@@ -106,10 +106,10 @@ public class Libra extends Thread {
 				transxIdToTargetService = ContextProvider.getBean(TransxIdToTargetExchService.class);
 				pendingTransxService = ContextProvider.getBean(PendingTransxService.class);
 				
-				LOG.info("Loading the transaction Ids");
+				LOG.debug("Loading the transaction Ids");
 				transxIdToTargetExchMap = transxIdToTargetService.listAll();
 				
-				LOG.info("Loading the status of the pending transactions");
+				LOG.debug("Loading the status of the pending transactions");
 				pendingWithdrawalsMap = pendingTransxService.listAll();
 
 				Integer pendingServiceFrequency = Integer.valueOf(props.getProperty(Utils.Props.pending_service_frequency.name()));

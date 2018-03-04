@@ -25,11 +25,8 @@ public class TransactionServiceImpl implements TransactionService {
 			return null;
 		}
 		Integer hashCode = currency.getCurrencyCode().hashCode() * ((Double)amountToWithdraw.doubleValue()).hashCode();
-		if (depositAddress != null) {
+		if (depositAddress != null)
 			hashCode *= depositAddress.hashCode();
-			//LOG.info("Computed a hashkey (currency, amountToWithdraw, depositAddress, hashkey) : ("
-			//	+ currency + ", " + amountToWithdraw+ ", " + depositAddress+ ", " + hashCode + ")");
-		}
 		return hashCode;
 	}
 

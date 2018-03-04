@@ -188,7 +188,7 @@ public class PendingWithdrawalsService extends Thread {
 				//LOG.debug("Persisting the status of the pending transactions : " + pendingWithdrawalsMap);
 				//pendingTransxService.saveAll(pendingWithdrawalsMap);
 				
-				LOG.info("Sleeping for (ms) : " + frequency);
+				LOG.debug("Sleeping for (ms) : " + frequency);
 				Thread.sleep(frequency);
 			} catch (InterruptedException e) {
 				LOG.error(e);

@@ -102,13 +102,13 @@ public class BalancerServiceImpl implements BalancerService {
 				// do the rebalancing only if there is no pending withdrawal
 				Boolean pendingWithdrawal = pendingWithdrawalsMap.get(new ExchCcy(toExchangeName, currencyCode));
 				if (pendingWithdrawal != null && pendingWithdrawal) {
-					LOG.info("Pending withdrawal : Skipping currency for exchange : " + toExchangeName + " -> " + currency.getDisplayName());
+					LOG.debug("Pending withdrawal : Skipping currency for exchange : " + toExchangeName + " -> " + currency.getDisplayName());
 					continue;
 				}
 				
 				// there has been no rebalancing yet and the pending service may not be running
 				else if (pendingWithdrawal == null) {
-					LOG.info("No balancing has been done yet for " + toExchangeName + " -> " + currency.getDisplayName());
+					LOG.debug("No balancing has been done yet for " + toExchangeName + " -> " + currency.getDisplayName());
 				}				
 				
 				// the threshold represents the minimum amount from which the balance will be triggered
@@ -253,7 +253,7 @@ public class BalancerServiceImpl implements BalancerService {
 			return false;
 		}
 		
-		LOG.info("amountToWithdraw [" + fromExchangeName + " -> " + toExchangeName + "] : " + amountToWithdraw);
+		LOG.debug("amountToWithdraw [" + fromExchangeName + " -> " + toExchangeName + "] : " + amountToWithdraw);
 		
  		String depositAddress = toExchange.getAccountService().requestDepositAddress(currency);
 		LOG.debug("Deposit address [" + toExchangeName + " -> " + currency.getDisplayName() + "] : " + depositAddress);
