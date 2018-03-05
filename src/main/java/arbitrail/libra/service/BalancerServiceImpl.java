@@ -205,11 +205,11 @@ public class BalancerServiceImpl implements BalancerService {
 		else {
 			LOG.info("Sending withdraw order - address: " + withdrawAddress + " id: " + paymentId + " [" + exchangeName + " -> " + currency.getDisplayName() + "] amount: " + amountToWithdraw);
 			if (Currency.XRP.equals(currency)) {
-				WithdrawFundsParams withdrawParams = new RippleWithdrawFundsParams(withdrawAddress, currency, amountToWithdraw.subtract(fee), paymentId);
+				WithdrawFundsParams withdrawParams = new RippleWithdrawFundsParams(withdrawAddress, currency, amountToWithdraw, paymentId);
 				return exchange.getAccountService().withdrawFunds(withdrawParams);
 			}
 			else
-				return exchange.getAccountService().withdrawFunds(currency, amountToWithdraw.subtract(fee), withdrawAddress);
+				return exchange.getAccountService().withdrawFunds(currency, amountToWithdraw, withdrawAddress);
 		}
 	}
 
