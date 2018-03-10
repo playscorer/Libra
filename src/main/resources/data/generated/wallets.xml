@@ -16,6 +16,13 @@
         <depositFee>0</depositFee>
         <withdrawalFee>0.1</withdrawalFee>
       </XVG>
+      <NEO>
+        <initialBalance>20</initialBalance>
+        <minResidualBalance>5</minResidualBalance>
+        <minWithdrawalAmount>5</minWithdrawalAmount>
+        <depositFee>0</depositFee>
+        <withdrawalFee>0</withdrawalFee>
+      </NEO>
     </Binance>
     <Hitbtc>
       <XRP>
@@ -35,6 +42,14 @@
         <withdrawalFee>1.5</withdrawalFee>
         <label>Trading</label>
       </XVG>
+      <NEO>
+        <initialBalance>20</initialBalance>
+        <minResidualBalance>5</minResidualBalance>
+        <minWithdrawalAmount>5</minWithdrawalAmount>
+        <depositFee>0</depositFee>
+        <withdrawalFee>0</withdrawalFee>
+        <label>Trading</label>
+      </NEO>
     </Hitbtc>
     <!--BitFinex>
       <XRP>

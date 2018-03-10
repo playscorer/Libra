@@ -2,10 +2,6 @@
 
 <currencies>
 	<currency code="XRP"/>
-<!--	<currency code="IGNIS"/>
- 	<currency code="NEO"/>
-	<currency code="BTC"/>
-	<currency code="ETH"/>
-	<currency code="LTC"/>
-	<currency code="XVG"/> --><currency code="XVG"></currency>
+	<currency code="XVG"/>
+	<currency code="NEO"/>
 </currencies>
