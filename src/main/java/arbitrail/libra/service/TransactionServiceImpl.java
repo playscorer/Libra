@@ -61,9 +61,11 @@ public class TransactionServiceImpl implements TransactionService {
 	public BigDecimal roundAmount(BigDecimal amount, Currency currency) {
 		int scale = 3; // max 3 decimals is enough, helps avoiding bad rounding issues, and makes transfers easier to read
 		if (Currency.XRP.equals(currency))
-			scale = 0;
+			scale = 0; // low value ccy
 		else if (Currency.XVG.equals(currency))
-			scale = 0;
+			scale = 0; // low value ccy
+		else if (Currency.NEO.equals(currency))
+			scale = 0; // NEO blockchain only accepts integer
 		amount = amount.setScale(scale, RoundingMode.FLOOR);
 		return amount;
 	}
