@@ -36,6 +36,7 @@ public class Libra extends Thread {
 	
 	private static InitService initService = new InitServiceImpl();
 	private static BalancerService balancerService;
+	private static PendingWithdrawalsService pendingWithdrawalsService;
 
 	private static Wallets wallets;
 	private static List<Exchange> exchanges;
@@ -59,10 +60,11 @@ public class Libra extends Thread {
 				LocalDateTime before = LocalDateTime.now();
 				nbOperations = balancerService.balanceAccounts(exchanges, currencies, wallets);
 				LocalDateTime after = LocalDateTime.now();
+				pendingWithdrawalsService.pollPendingWithdrawals();
 				LOG.debug("Number of rebalancing operations : " + nbOperations + " performed in (ms) : " + ChronoUnit.MILLIS.between(before, after));
 				LOG.debug("Sleeping for (ms) : " + frequency);
 				Thread.sleep(frequency);
-			} catch (InterruptedException | IOException e) {
+			} catch (Exception e) {
 				LOG.error(e);
 			}
 		}
@@ -113,7 +115,7 @@ public class Libra extends Thread {
 				pendingWithdrawalsMap = pendingTransxService.listAll();
 
 				Integer pendingServiceFrequency = Integer.valueOf(props.getProperty(Utils.Props.pending_service_frequency.name()));
-				new PendingWithdrawalsService(exchanges, wallets, pendingWithdrawalsMap, transxIdToTargetExchMap, pendingServiceFrequency).start();
+				pendingWithdrawalsService = new PendingWithdrawalsService(exchanges, wallets, pendingWithdrawalsMap, transxIdToTargetExchMap, pendingServiceFrequency);
 			} else {
 				transxIdToTargetExchMap = new ConcurrentHashMap<>();
 				pendingWithdrawalsMap = new ConcurrentHashMap<>();
