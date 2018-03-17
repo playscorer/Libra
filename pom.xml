@@ -50,12 +50,12 @@
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-core</artifactId>
-			<version>4.3.3-SNAPSHOT</version>
+			<version>4.3.4</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-examples</artifactId>
-			<version>4.3.3-SNAPSHOT</version>
+			<version>4.3.4</version>
 		</dependency>
 		
 		<!-- Spring -->
