@@ -50,7 +50,7 @@ public class Libra {
 	@PostConstruct
 	public void start() {
 		ConcurrentMap<ExchCcy, Boolean> pendingWithdrawalsMap;
-		ConcurrentMap<String, ExchStatus> transxIdToTargetExchMap;
+		ConcurrentMap<Integer, ExchStatus> transxIdToTargetExchMap;
 		
 		List<Currency> currencies = initService.listAllHandledCurrencies();
 		LOG.debug("List of loaded currencies : " + currencies);

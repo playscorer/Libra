@@ -2,30 +2,64 @@
   <walletMap>
     <Binance>
       <XRP>
-        <initialBalance>40</initialBalance>
-        <minResidualBalance>0</minResidualBalance>
-        <tag>102449671</tag>
+        <initialBalance>6000</initialBalance>
+        <minResidualBalance>2000</minResidualBalance>
+        <minWithdrawalAmount>1000</minWithdrawalAmount>
+        <tag>109750021</tag>
         <depositFee>0</depositFee>
         <withdrawalFee>0.25</withdrawalFee>
       </XRP>
-    </Binance>
-    <Bittrex>
-      <XRP>
-        <initialBalance>30.00000000</initialBalance>
-        <minResidualBalance>11.5</minResidualBalance>
-        <tag>673968277</tag>
+      <XVG>
+        <initialBalance>80000</initialBalance>
+        <minResidualBalance>25000</minResidualBalance>
+        <minWithdrawalAmount>30000</minWithdrawalAmount>
         <depositFee>0</depositFee>
-        <withdrawalFee>1</withdrawalFee>
-      </XRP>
-    </Bittrex>
-    <Bitstamp>
-      <XRP>
-        <initialBalance>4.1E-7</initialBalance>
-        <minResidualBalance>0</minResidualBalance>
-        <tag/>
+        <withdrawalFee>0.1</withdrawalFee>
+      </XVG>
+      <NEO>
+        <initialBalance>20</initialBalance>
+        <minResidualBalance>5</minResidualBalance>
+        <minWithdrawalAmount>5</minWithdrawalAmount>
         <depositFee>0</depositFee>
         <withdrawalFee>0</withdrawalFee>
+      </NEO>
+    </Binance>
+    <Hitbtc>
+      <XRP>
+        <initialBalance>6000</initialBalance>
+        <minResidualBalance>2000</minResidualBalance>
+        <minWithdrawalAmount>1000</minWithdrawalAmount>
+        <tag>1955192449</tag>
+        <depositFee>0</depositFee>
+        <withdrawalFee>0.509</withdrawalFee>
+        <label>Trading</label>
       </XRP>
-    </Bitstamp>
+      <XVG>
+        <initialBalance>80000</initialBalance>
+        <minResidualBalance>25000</minResidualBalance>
+        <minWithdrawalAmount>30000</minWithdrawalAmount>
+        <depositFee>0</depositFee>
+        <withdrawalFee>1.5</withdrawalFee>
+        <label>Trading</label>
+      </XVG>
+      <NEO>
+        <initialBalance>20</initialBalance>
+        <minResidualBalance>5</minResidualBalance>
+        <minWithdrawalAmount>5</minWithdrawalAmount>
+        <depositFee>0</depositFee>
+        <withdrawalFee>0</withdrawalFee>
+        <label>Trading</label>
+      </NEO>
+    </Hitbtc>
+    <!--BitFinex>
+      <XRP>
+        <initialBalance>6000</initialBalance>
+        <minResidualBalance>2000</minResidualBalance>
+        <minWithdrawalAmount>1000</minWithdrawalAmount>
+        <tag>3353271445</tag>
+        <depositFee>0</depositFee>
+        <withdrawalFee>0.02</withdrawalFee>
+      </XRP>
+    </BitFinex-->
   </walletMap>
 </wallets>

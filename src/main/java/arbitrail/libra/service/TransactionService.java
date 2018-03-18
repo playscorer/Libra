@@ -4,8 +4,12 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
+import org.knowm.xchange.Exchange;
 import org.knowm.xchange.currency.Currency;
 import org.knowm.xchange.dto.account.FundingRecord;
+import org.knowm.xchange.service.trade.params.TradeHistoryParams;
+
+import arbitrail.libra.model.Wallets;
 
 public interface TransactionService {
 
@@ -21,8 +25,22 @@ public interface TransactionService {
 	List<FundingRecord> retrieveLastTwoDaysOf(List<FundingRecord> fundingRecords);
 	
 	/**
-	 * Retrieves the externalId matching the given internalId
+	 * Retrieves the transaction matching the given internalId
 	 */
-	Optional<FundingRecord> retrieveExternalId(List<FundingRecord> fundingRecords, String internalId);
+	Optional<FundingRecord> filterByInternalId(List<FundingRecord> fundingRecords, String internalId);
 	
+	/**
+	 * Formats the transaction amount for the given currency
+	 */
+	BigDecimal roundAmount(BigDecimal amount, Currency currency);	
+	
+	/**
+	 * 
+	 */
+	public TradeHistoryParams getTradeHistoryParams(Exchange exchange, Currency currency);
+
+	/**
+	 * 
+	 */
+	public TradeHistoryParams getTradeHistoryParams(Exchange exchange, Wallets wallets);
 }

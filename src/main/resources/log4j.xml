@@ -10,10 +10,17 @@
   </appender> 
   
   <appender name="file" class="org.apache.log4j.RollingFileAppender">
-    	<param name="file" value="logdir/libra.log"/>
-    	<param name="MaxBackupIndex" value="5"/>
+    <param name="file" value="logdir/libra.log"/>
+    <param name="MaxBackupIndex" value="5"/>
     <layout class="org.apache.log4j.PatternLayout">
         <param name="ConversionPattern" value="%-5p %d{HH:mm:ss,SSS} %c{1} %x - %m%n" />
+    </layout>
+  </appender>
+  
+  <appender name="NT_LOG" class="org.apache.log4j.nt.NTEventLogAppender">
+    <param name="source" value="Libra"/>
+    <layout class="org.apache.log4j.PatternLayout">
+        <param name="ConversionPattern" value="%m"/>
     </layout>
   </appender>
   
@@ -22,9 +29,10 @@
   </logger>
   
   <root> 
-    <priority value="info" /> 
+    <priority value="INFO" /> 
     <appender-ref ref="console" />
     <appender-ref ref="file" /> 
+    <appender-ref ref="NT_LOG" /> 
   </root>
   
 </log4j:configuration>
