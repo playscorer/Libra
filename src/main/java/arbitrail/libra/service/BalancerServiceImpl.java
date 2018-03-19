@@ -76,8 +76,9 @@ public class BalancerServiceImpl implements BalancerService {
 	
 	@Override
 	public int balanceAccounts(List<Exchange> exchangeList, List<Currency> currencyList, Wallets wallets) throws IOException, InterruptedException {
-		Map<String, Map<String, Wallet>> walletMap = wallets.getWalletMap();
 		int nbOperations = 0;
+		try {
+		Map<String, Map<String, Wallet>> walletMap = wallets.getWalletMap();
 		
 		for (Exchange toExchange : exchangeList) {
 			String toExchangeName = toExchange.getExchangeSpecification().getExchangeName();
@@ -150,20 +151,19 @@ public class BalancerServiceImpl implements BalancerService {
 						continue;
 					}
 					
-					try {
-						// the rebalancing actually occured
-						if (balance(fromExchange, toExchange, currency, fromWallet, toWallet)) {
-							Balance newDecreasedBalance = walletService.getWallet(fromExchange, fromWallet).getBalance(currency);
-							LOG.info("new provisional balance for " + fromExchangeName + " -> " + currency.getDisplayName() + " : " + newDecreasedBalance.getAvailable());
-							nbOperations++;
-						}
-						
-					} catch (NotAvailableFromExchangeException | NotYetImplementedForExchangeException
-							| ExchangeException | IOException | IllegalStateException e) {
-						LOG.error("Exception occured when trying to balance accounts", e);
+					
+					// the rebalancing actually occured
+					if (balance(fromExchange, toExchange, currency, fromWallet, toWallet)) {
+						Balance newDecreasedBalance = walletService.getWallet(fromExchange, fromWallet).getBalance(currency);
+						LOG.info("new provisional balance for " + fromExchangeName + " -> " + currency.getDisplayName() + " : " + newDecreasedBalance.getAvailable());
+						nbOperations++;
 					}
 				}
 			}
+		}
+		}
+		catch (Exception e) {
+			LOG.error("Exception occured when trying to balance accounts. " + e.getClass() + ": " +  e.getMessage() + ": " + e.getCause() + "\n" +  e.getStackTrace().toString(), e);
 		}
 		return nbOperations;
 	}
