@@ -50,8 +50,10 @@ public class WalletService {
 	
 	// handles exchanges with single or multiple wallets per currency
 	public org.knowm.xchange.dto.account.Wallet getWallet(Exchange exchange, Wallet wallet) throws IOException	{
+		if (wallet == null)
+			return null;
 		org.knowm.xchange.dto.account.Wallet exchgWallet = null;
-		if (wallet != null && wallet.getLabel() != null)
+		if (wallet.getLabel() != null)
 		{
 			Map<String, org.knowm.xchange.dto.account.Wallet> walletsTmp = exchange.getAccountService().getAccountInfo().getWallets();
 			for (Map.Entry<String, org.knowm.xchange.dto.account.Wallet> entry : walletsTmp.entrySet())
