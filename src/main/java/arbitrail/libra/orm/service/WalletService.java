@@ -72,6 +72,8 @@ public class WalletService {
 	
 	// handles synchronization bugs with exchange (exclude zero update)
 	public org.knowm.xchange.dto.account.Balance getBalance(org.knowm.xchange.dto.account.Wallet wallet, Currency currency) throws IOException	{
+		if (wallet == null)
+			return null;
 		org.knowm.xchange.dto.account.Balance balance = wallet.getBalance(currency);
 		if (balance.getAvailable().doubleValue() == 0.0)
 			return null;
