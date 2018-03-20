@@ -48,6 +48,9 @@ public class WalletService {
 	
 	/** Handles exchanges with single or multiple wallets per currency */
 	public Wallet getWallet(Exchange exchange, arbitrail.libra.model.Wallet libraWallet) throws IOException	{
+		if (libraWallet == null) {
+			return null;
+		}
 		if (libraWallet.getLabel() == null) {
 			return exchange.getAccountService().getAccountInfo().getWallet();
 		}
@@ -56,6 +59,9 @@ public class WalletService {
 	
 	/** Handles synchronization bugs with exchange (exclude zero update) */
 	public Balance getBalance(Wallet wallet, Currency currency) throws IOException	{
+		if (wallet == null) {
+			return null;
+		}
 		Balance balance = wallet.getBalance(currency);
 		return BigDecimal.ZERO.equals(balance.getAvailable()) ? null : balance;
 	}	

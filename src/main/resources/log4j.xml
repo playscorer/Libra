@@ -17,12 +17,12 @@
     </layout>
   </appender>
   
-  <appender name="NT_LOG" class="org.apache.log4j.nt.NTEventLogAppender">
+<!--   <appender name="NT_LOG" class="org.apache.log4j.nt.NTEventLogAppender">
     <param name="source" value="Libra"/>
     <layout class="org.apache.log4j.PatternLayout">
         <param name="ConversionPattern" value="%m"/>
     </layout>
-  </appender>
+  </appender> -->
   
   <logger name="arbitrail.libra">
   	<level value="debug"/>
