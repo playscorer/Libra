@@ -84,14 +84,14 @@ public class BalancerService extends Thread {
 			Map<String, MyWallet> walletsForExchange = walletMap.get(exchangeName);
 			// no currencies set up for the exchange
 			if (walletsForExchange == null) {
-				LOG.warn("Could not find any wallet configuration for exchange : " + exchangeName);
+				LOG.warn("Could not find any wallet configuration for account : " + exchangeName);
 				LOG.info("Skipping exchange : " + exchangeName);
 				continue;
 			}
 			MyWallet myWallet = walletsForExchange.get(currency.getCurrencyCode());
 			// this currency is not set up for the exchange
 			if (myWallet == null) {
-				LOG.warn("No wallet config found for destination account for currency : " + exchangeName + " -> " + currency.getDisplayName());
+				LOG.warn("No wallet config found for this account for currency : " + exchangeName + " -> " + currency.getDisplayName());
 				LOG.info("Skipping currency for exchange : " + exchangeName + " -> " + currency.getDisplayName());
 				continue;
 			}

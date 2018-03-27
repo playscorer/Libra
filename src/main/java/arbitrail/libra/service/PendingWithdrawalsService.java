@@ -3,6 +3,7 @@ package arbitrail.libra.service;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentMap;
 
 import org.apache.log4j.Logger;
@@ -85,7 +86,23 @@ public class PendingWithdrawalsService extends Thread {
 					}					
 					// check if the transactions are part of recent transactions handled by Libra
 					Currency currency = fundingRecord.getCurrency();
-					MyWallet myWallet = wallets.getWalletMap().get(exchangeName).get(currency.getCurrencyCode()); //TODO might cause a NPE
+
+					Map<String, MyWallet> walletsForExchange = wallets.getWalletMap().get(exchangeName);
+					// no currencies set up for the exchange
+					if (walletsForExchange == null) {
+						LOG.error("Could not find any wallet configuration for account : " + exchangeName);
+						LOG.warn("Skipping exchange : " + exchangeName);
+						continue;
+					}
+					
+					MyWallet myWallet = walletsForExchange.get(currency.getCurrencyCode());
+					// this currency is not set up for the exchange
+					if (myWallet == null) {
+						LOG.error("No wallet config found for this account for currency : " + exchangeName + " -> " + currency.getDisplayName());
+						LOG.warn("Skipping currency for exchange : " + exchangeName + " -> " + currency.getDisplayName());
+						continue;
+					}
+					
 					if (transxIdToTargetExchMap.keySet().contains(transxHashkey)) {							
 						// filter pending withdrawals
 						if (Type.WITHDRAWAL.equals(fundingRecord.getType())) {
