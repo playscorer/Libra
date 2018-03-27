@@ -68,6 +68,14 @@ public class PendingWithdrawalsService extends Thread {
 		for (Exchange exchange : exchanges) {
 			String exchangeName = exchange.getExchangeSpecification().getExchangeName();
 
+			Map<String, MyWallet> walletsForExchange = wallets.getWalletMap().get(exchangeName);
+			// no currencies set up for the exchange
+			if (walletsForExchange == null) {
+				LOG.error("Could not find any wallet configuration for account : " + exchangeName);
+				LOG.warn("Skipping exchange : " + exchangeName);
+				continue;
+			}
+
 			try {
 				List<FundingRecord> fundingRecords = exchange.getAccountService().getFundingHistory(transxService.getTradeHistoryParams(exchange, wallets));
 				fundingRecords = transxService.retrieveLastTwoDaysOf(fundingRecords);
@@ -87,14 +95,6 @@ public class PendingWithdrawalsService extends Thread {
 					}					
 					// check if the transactions are part of recent transactions handled by Libra
 					Currency currency = fundingRecord.getCurrency();
-
-					Map<String, MyWallet> walletsForExchange = wallets.getWalletMap().get(exchangeName);
-					// no currencies set up for the exchange
-					if (walletsForExchange == null) {
-						LOG.error("Could not find any wallet configuration for account : " + exchangeName);
-						LOG.warn("Skipping exchange : " + exchangeName);
-						continue;
-					}
 					
 					MyWallet myWallet = walletsForExchange.get(currency.getCurrencyCode());
 					// this currency is not set up for the exchange
