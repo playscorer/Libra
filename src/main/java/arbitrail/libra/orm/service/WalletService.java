@@ -18,7 +18,7 @@ import arbitrail.libra.orm.model.WalletEntity;
 
 @Service
 public class WalletService {
-
+	
 	@Autowired
 	private WalletDao walletDao;
 
@@ -46,23 +46,20 @@ public class WalletService {
 
 	}
 	
-	/** Handles exchanges with single or multiple wallets per currency */
-	public Wallet getWallet(Exchange exchange, arbitrail.libra.model.Wallet libraWallet) throws IOException	{
-		if (libraWallet == null) {
-			return null;
+	/**
+	 * Handles single and multiple wallets per currency and exclude the zero balance
+	 * in order to avoid synchronization bugs with the exchange.
+	 */
+	public BigDecimal getAvailableBalance(Exchange exchange, String walletId, Currency currency) throws IOException {
+		// find the wallet depending if it is an exchange with multiple wallets per currency
+		Wallet wallet;
+		if (walletId == null) {
+			wallet = exchange.getAccountService().getAccountInfo().getWallet();
+		} else {
+			wallet = exchange.getAccountService().getAccountInfo().getWallet(walletId);
 		}
-		if (libraWallet.getLabel() == null) {
-			return exchange.getAccountService().getAccountInfo().getWallet();
-		}
-		return exchange.getAccountService().getAccountInfo().getWallet(libraWallet.getLabel());
-	}
-	
-	/** Handles synchronization bugs with exchange (exclude zero update) */
-	public Balance getBalance(Wallet wallet, Currency currency) throws IOException	{
-		if (wallet == null) {
-			return null;
-		}
+		// return the available balance if it is not zero
 		Balance balance = wallet.getBalance(currency);
-		return BigDecimal.ZERO.equals(balance.getAvailable()) ? null : balance;
-	}	
+		return BigDecimal.ZERO.equals(balance.getAvailable()) ? null : balance.getAvailable();
+	}
 }

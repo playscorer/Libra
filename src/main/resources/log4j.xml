@@ -32,7 +32,7 @@
     <priority value="INFO" /> 
     <appender-ref ref="console" />
     <appender-ref ref="file" /> 
-    <appender-ref ref="NT_LOG" /> 
+    <!-- <appender-ref ref="NT_LOG" />  -->
   </root>
   
 </log4j:configuration>

@@ -8,7 +8,7 @@ import org.knowm.xchange.bittrex.BittrexExchange;
 import org.knowm.xchange.cexio.CexIOExchange;
 import org.knowm.xchange.hitbtc.v2.HitbtcExchange;
 
-public enum AccountToExchange {
+public enum ExchangeType {
 	Bitstamp(BitstampExchange.class), 
 	Bittrex(BittrexExchange.class), 
 	Bitfinex(BitfinexExchange.class), 
@@ -18,7 +18,7 @@ public enum AccountToExchange {
 	
 	private Class<? extends BaseExchange> exchangeClass;
 
-	private AccountToExchange(Class<? extends BaseExchange> exchangeClass) {
+	private ExchangeType(Class<? extends BaseExchange> exchangeClass) {
 		this.exchangeClass = exchangeClass;
 	}
 

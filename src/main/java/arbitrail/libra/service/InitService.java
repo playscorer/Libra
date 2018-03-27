@@ -23,6 +23,6 @@ public interface InitService {
 	
 	List<Exchange> listAllHandledAccounts();
 	
-	Wallets loadAllAccountsBalance(List<Exchange> exchangeList, List<Currency> currencyList, boolean init);
+	Wallets loadAllWallets(List<Exchange> exchangeList, List<Currency> currencyList, boolean init);
 	
 }

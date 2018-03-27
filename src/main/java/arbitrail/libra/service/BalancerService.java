@@ -13,7 +13,6 @@ import java.util.concurrent.ConcurrentMap;
 import org.apache.log4j.Logger;
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.currency.Currency;
-import org.knowm.xchange.dto.account.Balance;
 import org.knowm.xchange.dto.account.FundingRecord;
 import org.knowm.xchange.exceptions.ExchangeException;
 import org.knowm.xchange.exceptions.NotAvailableFromExchangeException;
@@ -29,7 +28,8 @@ import org.springframework.stereotype.Component;
 
 import arbitrail.libra.model.ExchCcy;
 import arbitrail.libra.model.ExchStatus;
-import arbitrail.libra.model.Wallet;
+import arbitrail.libra.model.ExchangeType;
+import arbitrail.libra.model.MyWallet;
 import arbitrail.libra.model.Wallets;
 import arbitrail.libra.orm.service.WalletService;
 import si.mazi.rescu.HttpStatusIOException;
@@ -75,19 +75,33 @@ public class BalancerService extends Thread {
 		this.transxIdToTargetExchMap = transxIdToTargetExchMap;
 	}
 	
-	private Exchange findMostFilledBalance(List<Exchange> exchangeList, Map<String, Map<String, Wallet>> walletMap, Currency currency) throws IOException {
+	private Exchange findMostFilledBalance(List<Exchange> exchangeList, Map<String, Map<String, MyWallet>> walletMap, Currency currency) throws IOException {
 		Exchange maxExchange = null;
 		BigDecimal maxBalance = BigDecimal.ZERO;
 		
 		for (Exchange exchange : exchangeList) {
-			org.knowm.xchange.dto.account.Wallet wallet = walletService.getWallet(exchange, walletMap.get(exchange.getExchangeSpecification().getExchangeName()).get(currency.getCurrencyCode()));
-			Balance balance = walletService.getBalance(wallet, currency);
+			String exchangeName = exchange.getExchangeSpecification().getExchangeName();
+			Map<String, MyWallet> walletsForExchange = walletMap.get(exchangeName);
+			// no currencies set up for the exchange
+			if (walletsForExchange == null) {
+				LOG.warn("Could not find any wallet configuration for exchange : " + exchangeName);
+				LOG.info("Skipping exchange : " + exchangeName);
+				continue;
+			}
+			MyWallet myWallet = walletsForExchange.get(currency.getCurrencyCode());
+			// this currency is not set up for the exchange
+			if (myWallet == null) {
+				LOG.warn("No wallet config found for destination account for currency : " + exchangeName + " -> " + currency.getDisplayName());
+				LOG.info("Skipping currency for exchange : " + exchangeName + " -> " + currency.getDisplayName());
+				continue;
+			}
+			BigDecimal balance = walletService.getAvailableBalance(exchange, myWallet.getLabel(), currency);
 			if (balance == null) {
 				continue;
 			}
-			if (maxBalance.compareTo(balance.getAvailable()) < 0) {
+			if (maxBalance.compareTo(balance) < 0) {
 				maxExchange = exchange;
-				maxBalance = balance.getAvailable();
+				maxBalance = balance;
 			}
 		}
 		
@@ -95,12 +109,12 @@ public class BalancerService extends Thread {
 	}
 	
 	private int balanceAccounts(List<Exchange> exchangeList, List<Currency> currencyList, Wallets wallets) throws IOException, InterruptedException {
-		Map<String, Map<String, Wallet>> walletMap = wallets.getWalletMap();
+		Map<String, Map<String, MyWallet>> walletMap = wallets.getWalletMap();
 		int nbOperations = 0;
 		
 		for (Exchange toExchange : exchangeList) {
 			String toExchangeName = toExchange.getExchangeSpecification().getExchangeName();
-			Map<String, Wallet> toExchangeWallets = walletMap.get(toExchangeName);
+			Map<String, MyWallet> toExchangeWallets = walletMap.get(toExchangeName);
 			// no currencies set up for the exchange
 			if (toExchangeWallets == null) {
 				LOG.warn("No wallet config found for destination account : " + toExchangeName);
@@ -110,7 +124,7 @@ public class BalancerService extends Thread {
 			
 			for (Currency currency : currencyList) {
 				String currencyCode = currency.getCurrencyCode();
-				Wallet toWallet = toExchangeWallets.get(currencyCode);
+				MyWallet toWallet = toExchangeWallets.get(currencyCode);
 				// this currency is not set up for the exchange
 				if (toWallet == null) {
 					LOG.warn("No wallet config found for destination account for currency : " + toExchangeName + " -> " + currency.getDisplayName());
@@ -131,17 +145,17 @@ public class BalancerService extends Thread {
 				}
 				
 				// the threshold represents the minimum amount from which the balance will be triggered
-				Balance currentBalance = walletService.getBalance(walletService.getWallet(toExchange, toWallet), currency);
+				BigDecimal currentBalance = walletService.getAvailableBalance(toExchange, toWallet.getLabel(), currency);
 				if (currentBalance == null) {
 					LOG.info("Source exchange [" + toExchangeName + " -> " + currency.getDisplayName() + "] balance unavailable ");
 					continue;
 				}
 				BigDecimal lastBalancedAmount = walletService.getLastBalancedAmount(toExchangeName, currencyCode);
 				BigDecimal checkThresholdBalance = toWallet.getInitialBalance().max(lastBalancedAmount).multiply(new BigDecimal(balanceCheckThreshold));
-				LOG.debug("Exchange : " + toExchangeName + " -> " + currency.getDisplayName() + " / checkThresholdBalance = " + checkThresholdBalance + " / currentBalance = " + currentBalance.getAvailable());
+				LOG.debug("Exchange : " + toExchangeName + " -> " + currency.getDisplayName() + " / checkThresholdBalance = " + checkThresholdBalance + " / currentBalance = " + currentBalance);
 
 				// trigger the balancer
-				if (currentBalance.getAvailable().compareTo(checkThresholdBalance) < 0) {
+				if (currentBalance.compareTo(checkThresholdBalance) < 0) {
 					LOG.info("### Exchange needs to be balanced for currency : " + toExchangeName + " -> " + currency.getDisplayName());
 					Exchange fromExchange = findMostFilledBalance(exchangeList, walletMap, currency);
 					if (fromExchange == null) {
@@ -156,13 +170,13 @@ public class BalancerService extends Thread {
 					}
 					
 					String fromExchangeName = fromExchange.getExchangeSpecification().getExchangeName();
-					Map<String, Wallet> fromExchangeWallets = walletMap.get(fromExchangeName);
+					Map<String, MyWallet> fromExchangeWallets = walletMap.get(fromExchangeName);
 					if (fromExchangeWallets == null) {
 						LOG.error("Unexpected error : Missing wallet config for source account : " + fromExchangeName);
 						LOG.info("Skipping currency for exchange : " + toExchangeName + " -> " + currency.getDisplayName());
 						continue;
 					}
-					Wallet fromWallet = fromExchangeWallets.get(currencyCode);
+					MyWallet fromWallet = fromExchangeWallets.get(currencyCode);
 					if (fromWallet == null) {
 						LOG.error("Unexpected error : Missing wallet config for source account for currency : " + fromExchangeName + " -> " + currency.getDisplayName());
 						LOG.info("Skipping currency for exchange : " + toExchangeName + " -> " + currency.getDisplayName());
@@ -172,8 +186,8 @@ public class BalancerService extends Thread {
 					try {
 						// the rebalancing actually occured
 						if (balance(fromExchange, toExchange, currency, fromWallet, toWallet)) {
-							Balance newDecreasedBalance = walletService.getWallet(fromExchange, fromWallet).getBalance(currency);
-							LOG.info("new provisional balance for " + fromExchangeName + " -> " + currency.getDisplayName() + " : " + newDecreasedBalance.getAvailable());
+							BigDecimal newDecreasedBalance = walletService.getAvailableBalance(fromExchange, fromWallet.getLabel(), currency);
+							LOG.info("new provisional balance for " + fromExchangeName + " -> " + currency.getDisplayName() + " : " + newDecreasedBalance);
 							nbOperations++;
 						}
 						
@@ -190,7 +204,7 @@ public class BalancerService extends Thread {
 	private TradeHistoryParams getTradeHistoryParams(Exchange exchange, Currency currency) {
 		String exchangeName = exchange.getExchangeSpecification().getExchangeName();
 		// TODO to check that code
-		if ("Hitbtc".equals(exchangeName)) {
+		if (ExchangeType.Hitbtc.name().equals(exchangeName)) {
 			HitbtcFundingHistoryParams.Builder builder = new HitbtcFundingHistoryParams.Builder();
 			return builder.currency(currency).offset(0).limit(100).build();
 		} else {
@@ -201,7 +215,7 @@ public class BalancerService extends Thread {
 	private String withdrawFunds(Exchange exchange, String withdrawAddress, Currency currency, BigDecimal amountToWithdraw, String paymentId, BigDecimal fee) throws IOException, InterruptedException {
 		String exchangeName = exchange.getExchangeSpecification().getExchangeName();
 		// TODO to check that code
-		if ("Hitbtc".equals(exchangeName)) {
+		if (ExchangeType.Hitbtc.name().equals(exchangeName)) {
 			HitbtcAccountService hitbtcAccountService = (HitbtcAccountService)exchange.getAccountService();
 			hitbtcAccountService.transferToMain(currency, amountToWithdraw);
 			int nbTry = 3;
@@ -232,28 +246,28 @@ public class BalancerService extends Thread {
 		}
 	}
 	
-	private boolean balance(Exchange fromExchange, Exchange toExchange, Currency currency, Wallet fromWallet, Wallet toWallet) 
+	private boolean balance(Exchange fromExchange, Exchange toExchange, Currency currency, MyWallet fromWallet, MyWallet toWallet) 
 			throws NotAvailableFromExchangeException, NotYetImplementedForExchangeException, ExchangeException, IOException, InterruptedException {
 		String toExchangeName = toExchange.getExchangeSpecification().getExchangeName();
 		String fromExchangeName = fromExchange.getExchangeSpecification().getExchangeName();
 		
-		Balance toBalance = walletService.getBalance(walletService.getWallet(toExchange, toWallet), currency);
+		BigDecimal toBalance = walletService.getAvailableBalance(toExchange, toWallet.getLabel(), currency);
 		if (toBalance == null) {
 			LOG.info("Source exchange [" + toExchangeName + " -> " + currency.getDisplayName() + "] balance unavailable ");
 			return false;
 		}
-		Balance fromBalance = walletService.getBalance(walletService.getWallet(fromExchange, fromWallet), currency);
+		BigDecimal fromBalance = walletService.getAvailableBalance(fromExchange, fromWallet.getLabel(), currency);
 		if (fromBalance == null) {
 			LOG.info("Source exchange [" + fromExchangeName + " -> " + currency.getDisplayName() + "] balance unavailable ");
 			return false;
 		}
 		
 		LOG.info("Source exchange [" + fromExchangeName + " -> " + currency.getDisplayName() + "] balance : "
-				+ fromBalance.getAvailable() + " / Destination exchange [" + toExchangeName + " -> "
-				+ currency.getDisplayName() + "] balance : " + toBalance.getAvailable());
+				+ fromBalance + " / Destination exchange [" + toExchangeName + " -> "
+				+ currency.getDisplayName() + "] balance : " + toBalance);
 		
-		BigDecimal balancedOffset = fromBalance.getAvailable().subtract(toBalance.getAvailable()).divide(BigDecimal.valueOf(2));
-		BigDecimal allowedWithdrawableAmount = fromBalance.getAvailable().subtract(fromWallet.getMinResidualBalance());
+		BigDecimal balancedOffset = fromBalance.subtract(toBalance).divide(BigDecimal.valueOf(2));
+		BigDecimal allowedWithdrawableAmount = fromBalance.subtract(fromWallet.getMinResidualBalance());
 		BigDecimal amountToWithdraw = transxService.roundAmount(balancedOffset.min(allowedWithdrawableAmount), currency).add(fromWallet.getWithdrawalFee());
 		LOG.debug("amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (" + balancedOffset + ", " + allowedWithdrawableAmount + ")");
 		

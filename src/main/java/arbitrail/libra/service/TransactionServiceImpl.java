@@ -18,6 +18,7 @@ import org.knowm.xchange.service.trade.params.DefaultTradeHistoryParamCurrency;
 import org.knowm.xchange.service.trade.params.TradeHistoryParams;
 import org.springframework.stereotype.Component;
 
+import arbitrail.libra.model.ExchangeType;
 import arbitrail.libra.model.Wallets;
 
 @Component
@@ -83,7 +84,7 @@ public class TransactionServiceImpl implements TransactionService {
 	public TradeHistoryParams getTradeHistoryParams(Exchange exchange, Currency currency) {
 		String exchangeName = exchange.getExchangeSpecification().getExchangeName();
 		// TODO to check that code
-		if ("Hitbtc".equals(exchangeName)) {
+		if (ExchangeType.Hitbtc.name().equals(exchangeName)) {
 			HitbtcFundingHistoryParams.Builder builder = new HitbtcFundingHistoryParams.Builder();
 			return builder.currency(currency).offset(0).limit(100).build();
 		} else {
@@ -95,10 +96,10 @@ public class TransactionServiceImpl implements TransactionService {
 	public TradeHistoryParams getTradeHistoryParams(Exchange exchange, Wallets wallets) {
 		String exchangeName = exchange.getExchangeSpecification().getExchangeName();
 		// TODO to check that code
-		if ("Hitbtc".equals(exchangeName)) {
+		if (ExchangeType.Hitbtc.name().equals(exchangeName)) {
 			HitbtcFundingHistoryParams.Builder builder = new HitbtcFundingHistoryParams.Builder();
 			return builder.offset(0).limit(100).build();
-		} else if ("BitFinex".equals(exchangeName)) {
+		} else if (ExchangeType.Bitfinex.name().equals(exchangeName)) {
 			// TODO: Support multi-currency TradeHistoryParams. in the meantime we return
 			// the first on the list
 			for (String currencyName : wallets.getWalletMap().get(exchangeName).keySet()) {

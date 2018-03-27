@@ -20,9 +20,9 @@ import arbitrail.libra.model.Wallets;
 import arbitrail.libra.orm.service.PendingTransxService;
 import arbitrail.libra.orm.service.TransxIdToTargetExchService;
 import arbitrail.libra.service.BalancerService;
+import arbitrail.libra.service.FileService;
 import arbitrail.libra.service.InitService;
 import arbitrail.libra.service.PendingWithdrawalsService;
-import arbitrail.libra.utils.Parser;
 
 @Component
 public class Libra {
@@ -42,6 +42,9 @@ public class Libra {
 	private InitService initService;
 	
 	@Autowired
+	private FileService fileService;
+	
+	@Autowired
 	private BalancerService balancerService;
 	
 	@Autowired
@@ -53,23 +56,39 @@ public class Libra {
 		ConcurrentMap<Integer, ExchStatus> transxIdToTargetExchMap;
 		
 		List<Currency> currencies = initService.listAllHandledCurrencies();
-		LOG.debug("List of loaded currencies : " + currencies);
+		if (currencies.isEmpty()) {
+			LOG.fatal("Currency list is empty - please check the currencies file!");
+			LOG.fatal("Libra has stopped!");
+			System.exit(-1);
+		}
+		LOG.info("List of loaded currencies : " + currencies);
 
 		List<Exchange> exchanges = initService.listAllHandledAccounts();
-		LOG.debug("List of loaded exchanges : " + exchanges);
+		if (exchanges.isEmpty()) {
+			LOG.fatal("Exchange list is empty - please check the accounts file!");
+			LOG.fatal("Libra has stopped!");
+			System.exit(-1);
+		}
+		LOG.info("List of loaded exchanges : " + exchanges);
 		
 		String initArg = System.getProperty("init");
 		boolean init = Boolean.valueOf(initArg);
 
-		LOG.debug("Initialization of the accounts balance");
-		Wallets wallets = initService.loadAllAccountsBalance(exchanges, currencies, init);
+		LOG.info("Initialization of the wallets settings");
+		Wallets wallets = initService.loadAllWallets(exchanges, currencies, init);
+		if (wallets == null) {
+			LOG.fatal("Wallets settings could not be loaded - please check the wallets file!");
+			LOG.fatal("Libra has stopped!");
+			System.exit(-1);
+		}
+		LOG.info("Done.");
 
 		if (init) {
 			LOG.info("Init mode enabled");
 			try {
-				Parser.saveAccountsBalanceToFile(wallets);
+				fileService.saveWalletsToFile(wallets);
 			} catch (IOException e) {
-				LOG.error(e);
+				LOG.error("Error when saving wallets to file", e);
 			}
 			
 		} else {

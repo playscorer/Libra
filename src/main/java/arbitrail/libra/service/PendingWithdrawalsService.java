@@ -7,8 +7,8 @@ import java.util.concurrent.ConcurrentMap;
 
 import org.apache.log4j.Logger;
 import org.knowm.xchange.Exchange;
+import org.knowm.xchange.bitstamp.service.BitstampAccountService;
 import org.knowm.xchange.currency.Currency;
-import org.knowm.xchange.dto.account.Balance;
 import org.knowm.xchange.dto.account.FundingRecord;
 import org.knowm.xchange.dto.account.FundingRecord.Status;
 import org.knowm.xchange.dto.account.FundingRecord.Type;
@@ -19,6 +19,8 @@ import org.springframework.stereotype.Component;
 
 import arbitrail.libra.model.ExchCcy;
 import arbitrail.libra.model.ExchStatus;
+import arbitrail.libra.model.ExchangeType;
+import arbitrail.libra.model.MyWallet;
 import arbitrail.libra.model.Wallets;
 import arbitrail.libra.orm.model.WalletEntity;
 import arbitrail.libra.orm.service.PendingTransxService;
@@ -67,8 +69,10 @@ public class PendingWithdrawalsService extends Thread {
 			try {
 				List<FundingRecord> fundingRecords = exchange.getAccountService().getFundingHistory(transxService.getTradeHistoryParams(exchange, wallets));
 				fundingRecords = transxService.retrieveLastTwoDaysOf(fundingRecords);
-				//LOG.debug("FundingRecords for exchange " + exchangeName + " :");
-				//LOG.debug(fundingRecords);
+				LOG.debug("##################################################################################################################################################");
+				LOG.debug("FundingRecords for exchange " + exchangeName + " :");
+				LOG.debug(fundingRecords);
+				LOG.debug("##################################################################################################################################################");
 				
 				// we are interested in the pending / cancelled withdrawals from the source exchange and the completed deposits from the target exchange
 				for (FundingRecord fundingRecord : fundingRecords) {
@@ -81,6 +85,7 @@ public class PendingWithdrawalsService extends Thread {
 					}					
 					// check if the transactions are part of recent transactions handled by Libra
 					Currency currency = fundingRecord.getCurrency();
+					MyWallet myWallet = wallets.getWalletMap().get(exchangeName).get(currency.getCurrencyCode()); //TODO might cause a NPE
 					if (transxIdToTargetExchMap.keySet().contains(transxHashkey)) {							
 						// filter pending withdrawals
 						if (Type.WITHDRAWAL.equals(fundingRecord.getType())) {
@@ -113,15 +118,22 @@ public class PendingWithdrawalsService extends Thread {
 								// first check to avoid multiple updates of the balance
 								if (!exchStatus.isWithdrawalComplete()) {
 									exchStatus.setWithdrawalComplete(true);
-									saveUpdatedBalance(exchange, exchangeName, wallets.getWalletMap().get(exchangeName).get(currency.getCurrencyCode()), currency);
+									saveUpdatedBalance(exchange, exchangeName, myWallet.getLabel(), currency);
 								}
 							}
 						}
 					}				
 					
 					// compute hashkey for the deposit
+					String depositAddress;
 					BigDecimal roundedAmount = transxService.roundAmount(fundingRecord.getAmount(), fundingRecord.getCurrency());
-					Integer depositHashkey = transxService.transxHashkey(fundingRecord.getCurrency(), roundedAmount, exchange.getAccountService().requestDepositAddress(currency));
+					// specific case for XRP and Bitstamp TODO
+					if (Currency.XRP.equals(fundingRecord.getCurrency()) && ExchangeType.Bitstamp.name().equals(exchangeName)) {
+						depositAddress = ((BitstampAccountService) exchange.getAccountService()).getRippleDepositAddress().getAddress();
+					} else {
+						depositAddress = exchange.getAccountService().requestDepositAddress(currency);
+					}
+					Integer depositHashkey = transxService.transxHashkey(fundingRecord.getCurrency(), roundedAmount, depositAddress);
 					if (depositHashkey == null) {
 						LOG.error("Unexpected error : depositHashkey is null");
 						LOG.warn("Skipping transaction from exchange : " + exchangeName + " -> " + fundingRecord.getCurrency().getDisplayName());
@@ -140,9 +152,9 @@ public class PendingWithdrawalsService extends Thread {
 								ExchCcy exchCcy = new ExchCcy(exchangeName, currency.getCurrencyCode());
 								pendingWithdrawalsMap.put(exchCcy, false); 
 								transxIdToTargetExchMap.remove(depositHashkey);
-								saveUpdatedBalance(exchange, exchangeName, wallets.getWalletMap().get(exchangeName).get(currency.getCurrencyCode()), currency);
+								saveUpdatedBalance(exchange, exchangeName, myWallet.getLabel(), currency);
 								//TODO check code
-								if ("Hitbtc".equals(exchangeName)) {
+								if (ExchangeType.Hitbtc.name().equals(exchangeName)) {
 									HitbtcAccountService hitbtcAccountService = (HitbtcAccountService) exchange.getAccountService();
 									hitbtcAccountService.transferToTrading(currency, fundingRecord.getAmount());
 								}
@@ -158,11 +170,11 @@ public class PendingWithdrawalsService extends Thread {
 		}
 	}
 
-	private void saveUpdatedBalance(Exchange exchange, String exchangeName, arbitrail.libra.model.Wallet wallet, Currency currency) throws IOException {
-		Balance newBalance = walletService.getBalance(walletService.getWallet(exchange, wallet), currency);
+	private void saveUpdatedBalance(Exchange exchange, String exchangeName, String walletId, Currency currency) throws IOException {
+		BigDecimal newBalance = walletService.getAvailableBalance(exchange, walletId, currency);
 		if (newBalance != null) {
-			LOG.info("newBalance for " + exchangeName + " -> " + currency.getDisplayName() + " : " + newBalance.getAvailable());
-			WalletEntity walletEntity = new WalletEntity(exchangeName, currency.getCurrencyCode(), newBalance.getAvailable());
+			LOG.info("newBalance for " + exchangeName + " -> " + currency.getDisplayName() + " : " + newBalance);
+			WalletEntity walletEntity = new WalletEntity(exchangeName, currency.getCurrencyCode(), newBalance);
 			walletService.save(walletEntity);
 		} else {
 			LOG.error("cannot save balance for " + exchangeName + " -> " + currency.getDisplayName() + " : balance unavailable");

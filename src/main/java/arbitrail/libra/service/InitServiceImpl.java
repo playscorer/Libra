@@ -12,28 +12,31 @@ import org.knowm.xchange.BaseExchange;
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.currency.Currency;
 import org.knowm.xchange.dto.account.Balance;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import arbitrail.libra.model.Account;
 import arbitrail.libra.model.Accounts;
 import arbitrail.libra.model.Currencies;
 import arbitrail.libra.model.MyCurrency;
-import arbitrail.libra.model.Wallet;
+import arbitrail.libra.model.MyWallet;
 import arbitrail.libra.model.Wallets;
-import arbitrail.libra.utils.Parser;
 import arbitrail.libra.utils.Transformer;
 
 @Component
 public class InitServiceImpl implements InitService {
 	
 	private final static Logger LOG = Logger.getLogger(InitServiceImpl.class);
+	
+	@Autowired
+	private FileService fileService;
 
 	@Override
 	public List<Currency> listAllHandledCurrencies() {
 		List<Currency> currencyList = new ArrayList<>();
 		
 		try {
-			Currencies currencies = Parser.parseCurrencies();
+			Currencies currencies = fileService.parseCurrencies();
 			for (MyCurrency myCurrency : currencies.getCurrency()) {
 				currencyList.add(Transformer.fromCurrency(myCurrency));
 			}
@@ -50,7 +53,7 @@ public class InitServiceImpl implements InitService {
 		List<Exchange> exchangeList = new ArrayList<>();
 		
 		try {
-			Accounts accounts = Parser.parseAccounts();
+			Accounts accounts = fileService.parseAccounts();
 			for (Account account : accounts.getAccount()) {
 				BaseExchange exchange = Transformer.fromAccount(account);
 				exchangeList.add(createExchange(exchange, account.getUsername(), account.getApiKey(), account.getKey()));
@@ -64,12 +67,12 @@ public class InitServiceImpl implements InitService {
 	}
 	
 	@Override
-	public Wallets loadAllAccountsBalance(List<Exchange> exchangeList, List<Currency> currencyList, boolean init) {
+	public Wallets loadAllWallets(List<Exchange> exchangeList, List<Currency> currencyList, boolean init) {
 		Wallets wallets = null;
 		
 		try {
-			if (Parser.existsWalletsFile()) {
-				wallets = Parser.parseWallets();
+			if (fileService.existsWalletsFile()) {
+				wallets = fileService.parseWallets();
 				if (init) {
 					addNewWallets(wallets, exchangeList, currencyList);
 				}
@@ -78,7 +81,7 @@ public class InitServiceImpl implements InitService {
 					LOG.error("The wallets file does not exist or could not be found - please check the file or run Libra in init mode");
 					return null;
 				}
-				Map<String, Map<String, Wallet>> walletMap = initWallets(exchangeList, currencyList);
+				Map<String, Map<String, MyWallet>> walletMap = initWallets(exchangeList, currencyList);
 				wallets = new Wallets(walletMap);
 			}
 
@@ -93,12 +96,12 @@ public class InitServiceImpl implements InitService {
 	 * Adds only new wallets from the list of exchanges and currencies to the existing wallets map
 	 */
 	private void addNewWallets(Wallets wallets, List<Exchange> exchangeList, List<Currency> currencyList) throws IOException {
-		Map<String, Map<String, Wallet>> walletMap = wallets.getWalletMap();
+		Map<String, Map<String, MyWallet>> walletMap = wallets.getWalletMap();
 		
 		for (Exchange toExchange : exchangeList) {
 			String exchangeName = toExchange.getExchangeSpecification().getExchangeName();
 			
-			Map<String, Wallet> currencyMap = walletMap.get(exchangeName);
+			Map<String, MyWallet> currencyMap = walletMap.get(exchangeName);
 			if (currencyMap == null) {
 				LOG.debug("New exchange to be added to wallets file : " + exchangeName);
 				currencyMap = new HashMap<>();
@@ -106,14 +109,14 @@ public class InitServiceImpl implements InitService {
 			}
 			
 			for (Currency currency : currencyList) {
-				Wallet wallet = currencyMap.get(currency.getCurrencyCode());
+				MyWallet wallet = currencyMap.get(currency.getCurrencyCode());
 				if (wallet == null) {
 					Balance balance = toExchange.getAccountService().getAccountInfo().getWallet().getBalance(currency);
 					if (BigDecimal.ZERO.equals(balance.getAvailable())) {
 						LOG.warn("Currency not available : " + currency.getDisplayName() +  " for Exchange : " + exchangeName);
 					} else {
 						LOG.debug("New currency wallet for : " + exchangeName + " -> " + currency.getDisplayName());
-						wallet = new Wallet(balance.getAvailable());
+						wallet = new MyWallet(balance.getAvailable());
 						currencyMap.put(currency.getCurrencyCode(), wallet);
 					}
 				}
@@ -124,12 +127,12 @@ public class InitServiceImpl implements InitService {
 	/*
 	 * Creates a new wallets map from the list of exchanges and currencies
 	 */
-	private Map<String, Map<String, Wallet>> initWallets(List<Exchange> exchangeList, List<Currency> currencyList) throws IOException {
-		Map<String, Map<String, Wallet>> walletMap = new HashMap<>();
+	private Map<String, Map<String, MyWallet>> initWallets(List<Exchange> exchangeList, List<Currency> currencyList) throws IOException {
+		Map<String, Map<String, MyWallet>> walletMap = new HashMap<>();
 		
 		for (Exchange toExchange : exchangeList) {
 			String exchangeName = toExchange.getExchangeSpecification().getExchangeName();
-			HashMap<String, Wallet> currencyMap = new HashMap<>();
+			HashMap<String, MyWallet> currencyMap = new HashMap<>();
 			walletMap.put(exchangeName, currencyMap);
 			
 			for (Currency currency : currencyList) {
@@ -137,7 +140,7 @@ public class InitServiceImpl implements InitService {
 				if (BigDecimal.ZERO.equals(balance.getAvailable())) {
 					LOG.warn("Currency not available : " + currency.getDisplayName() +  " for Exchange : " + exchangeName);
 				} else {
-					Wallet wallet = new Wallet(balance.getAvailable());
+					MyWallet wallet = new MyWallet(balance.getAvailable());
 					currencyMap.put(currency.getCurrencyCode(), wallet);
 				}
 			}

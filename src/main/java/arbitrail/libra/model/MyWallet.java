@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-public class Wallet {
+public class MyWallet {
 
 	@JacksonXmlProperty(localName = "initialBalance")
 	private BigDecimal initialBalance;
@@ -27,15 +27,15 @@ public class Wallet {
 	@JacksonXmlProperty(localName = "label")
 	private String label;
 
-	public Wallet() {
+	public MyWallet() {
 		super();
 	}
 
-	public Wallet(BigDecimal initialBalance) {
+	public MyWallet(BigDecimal initialBalance) {
 		this(initialBalance, BigDecimal.ZERO, null, BigDecimal.ZERO, BigDecimal.ZERO);
 	}
 
-	public Wallet(BigDecimal initialBalance, BigDecimal minResidualBalance, String tag, BigDecimal depositFee, BigDecimal withdrawalFee) {
+	public MyWallet(BigDecimal initialBalance, BigDecimal minResidualBalance, String tag, BigDecimal depositFee, BigDecimal withdrawalFee) {
 		super();
 		this.initialBalance = initialBalance;
 		this.minResidualBalance = minResidualBalance;
@@ -74,7 +74,7 @@ public class Wallet {
 
 	@Override
 	public String toString() {
-		return "Wallet [initialBalance=" + initialBalance + ", minResidualBalance=" + minResidualBalance
+		return "MyWallet [initialBalance=" + initialBalance + ", minResidualBalance=" + minResidualBalance
 				+ ", minWithdrawalAmount=" + minWithdrawalAmount + ", tag=" + tag + ", depositFee=" + depositFee
 				+ ", withdrawalFee=" + withdrawalFee + ", label=" + label + "]";
 	}
