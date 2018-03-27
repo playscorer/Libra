@@ -57,8 +57,9 @@ public class PendingWithdrawalsService extends Thread {
 		super();
 	}
 	
-	public void init(ConcurrentMap<ExchCcy, Boolean> pendingWithdrawalsMap, ConcurrentMap<Integer, ExchStatus> transxIdToTargetExchMap, List<Exchange> exchanges) {
+	public void init(Wallets wallets, ConcurrentMap<ExchCcy, Boolean> pendingWithdrawalsMap, ConcurrentMap<Integer, ExchStatus> transxIdToTargetExchMap, List<Exchange> exchanges) {
 		this.exchanges = exchanges;
+		this.wallets = wallets;
 		this.transxIdToTargetExchMap = transxIdToTargetExchMap;
 		this.pendingWithdrawalsMap = pendingWithdrawalsMap;
 	}
@@ -219,10 +220,6 @@ public class PendingWithdrawalsService extends Thread {
 		}
 	}
 	
-	public void setExchanges(List<Exchange> exchanges) {
-		this.exchanges = exchanges;
-	}
-
 	public void setPendingWithdrawalsMap(ConcurrentMap<ExchCcy, Boolean> pendingWithdrawalsMap) {
 		this.pendingWithdrawalsMap = pendingWithdrawalsMap;
 	}

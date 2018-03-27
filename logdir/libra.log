@@ -32155,3 +32155,149 @@ INFO  22:10:13,139 BalancerService  - Balancer service has started!
 WARN  22:10:13,159 BalancerService  - No wallet config found for destination account : Bittrex
 INFO  22:10:13,159 BalancerService  - Skipping exchange : Bittrex
 INFO  22:10:13,159 BalancerService  - No balancing has been done yet for Binance -> Ripple
+INFO  23:58:08,285 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  23:58:08,455 Version  - HHH000412: Hibernate Core {5.2.13.Final}
+INFO  23:58:08,458 Environment  - HHH000206: hibernate.properties not found
+INFO  23:58:08,553 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  23:58:08,961 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+INFO  23:58:08,999 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
+INFO  23:58:10,374 Libra  - List of loaded currencies : [XRP, XVG, NEO]
+INFO  23:58:15,711 Libra  - List of loaded exchanges : [Bittrex#946448101, Binance#238590461, Hitbtc#2101891021]
+INFO  23:58:15,712 Libra  - Initialization of the wallets settings
+INFO  23:58:15,721 Libra  - Done.
+INFO  23:58:15,722 Libra  - Simulation mode : true
+INFO  23:58:15,722 Libra  - Loading the transaction Ids
+INFO  23:58:15,891 QueryTranslatorFactoryInitiator  - HHH000397: Using ASTQueryTranslatorFactory
+INFO  23:58:16,065 Libra  - Loading the status of the pending transactions
+INFO  23:58:16,084 PendingWithdrawalsService  - PendingWithdrawals service has started!
+INFO  23:58:16,084 BalancerService  - Balancer service has started!
+WARN  23:58:16,105 BalancerService  - No wallet config found for destination account : Bittrex
+INFO  23:58:16,105 BalancerService  - Skipping exchange : Bittrex
+INFO  23:58:16,105 BalancerService  - No balancing has been done yet for Binance -> Ripple
+DEBUG 23:58:16,549 PendingWithdrawalsService  - ##################################################################################################################################################
+DEBUG 23:58:16,549 PendingWithdrawalsService  - FundingRecords for exchange Bittrex :
+DEBUG 23:58:16,549 PendingWithdrawalsService  - [FundingRecord{address='DLw53WSqqb91RMwG2whXfKGhJQdqJN6K8U', date=Tue Feb 06 21:53:27 GMT 2018, currency=XVG, amount=55959.80594415, internalId=33261e1a-a041-4954-beda-b6ef1f4c6bcd, blockchainTransactionHash=2983074b16ea396127bcbf473b5242db7395f5e4e8a9b53db5243fcc1e43f3d6, description='null', type=WITHDRAWAL, status=COMPLETE, balance=null, fee=0.20000000}, FundingRecord{address='AP91W9A4U1ZY9ZDgkvut8TkJ3EjJQe2jox', date=Tue Feb 06 21:49:54 GMT 2018, currency=NEO, amount=6.00000000, internalId=9c7884b7-d888-49e8-ac7e-6a45fa5c381d, blockchainTransactionHash=0x019604c7db375e0798f8a429fa1b55a2c0e072abc4f32c65b2686f370f1cdec2, description='null', type=WITHDRAWAL, status=COMPLETE, balance=null, fee=0.02500000}]
+DEBUG 23:58:16,556 PendingWithdrawalsService  - ##################################################################################################################################################
+DEBUG 23:58:16,744 BalancerService  - Exchange : Binance -> Ripple / checkThresholdBalance = 2700.000000000000066613381477509392425417900085449218750000 / currentBalance = 465.44407200
+INFO  23:58:16,744 BalancerService  - ### Exchange needs to be balanced for currency : Binance -> Ripple
+WARN  23:58:16,744 BalancerService  - Could not find any wallet configuration for exchange : Bittrex
+INFO  23:58:16,745 BalancerService  - Skipping exchange : Bittrex
+INFO  00:11:55,338 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  00:11:55,509 Version  - HHH000412: Hibernate Core {5.2.13.Final}
+INFO  00:11:55,511 Environment  - HHH000206: hibernate.properties not found
+INFO  00:11:55,604 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  00:11:55,988 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+INFO  00:11:56,025 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
+INFO  00:11:57,411 Libra  - List of loaded currencies : [XRP, XVG, NEO]
+INFO  00:11:58,987 Libra  - List of loaded exchanges : [Bittrex#946448101, Binance#238590461, Hitbtc#2101891021]
+INFO  00:11:58,987 Libra  - Initialization of the wallets settings
+INFO  00:11:58,997 Libra  - Done.
+INFO  00:11:58,997 Libra  - Simulation mode : true
+INFO  00:11:58,997 Libra  - Loading the transaction Ids
+INFO  00:11:59,153 QueryTranslatorFactoryInitiator  - HHH000397: Using ASTQueryTranslatorFactory
+INFO  00:11:59,288 Libra  - Loading the status of the pending transactions
+INFO  00:11:59,308 PendingWithdrawalsService  - PendingWithdrawals service has started!
+INFO  00:11:59,308 BalancerService  - Balancer service has started!
+WARN  00:11:59,324 BalancerService  - No wallet config found for destination account : Bittrex
+INFO  00:11:59,325 BalancerService  - Skipping exchange : Bittrex
+INFO  00:11:59,325 BalancerService  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:11:59,833 PendingWithdrawalsService  - ##################################################################################################################################################
+DEBUG 00:11:59,834 PendingWithdrawalsService  - FundingRecords for exchange Bittrex :
+DEBUG 00:11:59,834 PendingWithdrawalsService  - [FundingRecord{address='DLw53WSqqb91RMwG2whXfKGhJQdqJN6K8U', date=Tue Feb 06 21:53:27 GMT 2018, currency=XVG, amount=55959.80594415, internalId=33261e1a-a041-4954-beda-b6ef1f4c6bcd, blockchainTransactionHash=2983074b16ea396127bcbf473b5242db7395f5e4e8a9b53db5243fcc1e43f3d6, description='null', type=WITHDRAWAL, status=COMPLETE, balance=null, fee=0.20000000}, FundingRecord{address='AP91W9A4U1ZY9ZDgkvut8TkJ3EjJQe2jox', date=Tue Feb 06 21:49:54 GMT 2018, currency=NEO, amount=6.00000000, internalId=9c7884b7-d888-49e8-ac7e-6a45fa5c381d, blockchainTransactionHash=0x019604c7db375e0798f8a429fa1b55a2c0e072abc4f32c65b2686f370f1cdec2, description='null', type=WITHDRAWAL, status=COMPLETE, balance=null, fee=0.02500000}]
+DEBUG 00:11:59,839 PendingWithdrawalsService  - ##################################################################################################################################################
+DEBUG 00:11:59,972 BalancerService  - Exchange : Binance -> Ripple / checkThresholdBalance = 2700.000000000000066613381477509392425417900085449218750000 / currentBalance = 465.44407200
+INFO  00:11:59,972 BalancerService  - ### Exchange needs to be balanced for currency : Binance -> Ripple
+WARN  00:11:59,972 BalancerService  - Could not find any wallet configuration for account : Bittrex
+INFO  00:11:59,973 BalancerService  - Skipping exchange : Bittrex
+INFO  00:13:13,118 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  00:13:13,279 Version  - HHH000412: Hibernate Core {5.2.13.Final}
+INFO  00:13:13,283 Environment  - HHH000206: hibernate.properties not found
+INFO  00:13:13,395 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  00:13:13,765 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+INFO  00:13:13,800 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
+INFO  00:13:15,185 Libra  - List of loaded currencies : [XRP, XVG, NEO]
+INFO  00:13:16,945 Libra  - List of loaded exchanges : [Bittrex#250177638, Binance#1275339119, Hitbtc#159883451]
+INFO  00:13:16,945 Libra  - Initialization of the wallets settings
+INFO  00:13:16,955 Libra  - Done.
+INFO  00:13:16,955 Libra  - Simulation mode : true
+INFO  00:13:16,955 Libra  - Loading the transaction Ids
+INFO  00:13:17,124 QueryTranslatorFactoryInitiator  - HHH000397: Using ASTQueryTranslatorFactory
+INFO  00:13:17,260 Libra  - Loading the status of the pending transactions
+INFO  00:13:17,278 PendingWithdrawalsService  - PendingWithdrawals service has started!
+INFO  00:13:17,278 BalancerService  - Balancer service has started!
+WARN  00:13:17,295 BalancerService  - No wallet config found for destination account : Bittrex
+INFO  00:13:17,295 BalancerService  - Skipping exchange : Bittrex
+INFO  00:13:17,295 BalancerService  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:13:17,748 PendingWithdrawalsService  - ##################################################################################################################################################
+DEBUG 00:13:17,748 PendingWithdrawalsService  - FundingRecords for exchange Bittrex :
+DEBUG 00:13:17,749 PendingWithdrawalsService  - [FundingRecord{address='DLw53WSqqb91RMwG2whXfKGhJQdqJN6K8U', date=Tue Feb 06 21:53:27 GMT 2018, currency=XVG, amount=55959.80594415, internalId=33261e1a-a041-4954-beda-b6ef1f4c6bcd, blockchainTransactionHash=2983074b16ea396127bcbf473b5242db7395f5e4e8a9b53db5243fcc1e43f3d6, description='null', type=WITHDRAWAL, status=COMPLETE, balance=null, fee=0.20000000}, FundingRecord{address='AP91W9A4U1ZY9ZDgkvut8TkJ3EjJQe2jox', date=Tue Feb 06 21:49:54 GMT 2018, currency=NEO, amount=6.00000000, internalId=9c7884b7-d888-49e8-ac7e-6a45fa5c381d, blockchainTransactionHash=0x019604c7db375e0798f8a429fa1b55a2c0e072abc4f32c65b2686f370f1cdec2, description='null', type=WITHDRAWAL, status=COMPLETE, balance=null, fee=0.02500000}]
+DEBUG 00:13:17,757 PendingWithdrawalsService  - ##################################################################################################################################################
+DEBUG 00:13:18,002 BalancerService  - Exchange : Binance -> Ripple / checkThresholdBalance = 2700.000000000000066613381477509392425417900085449218750000 / currentBalance = 465.44407200
+INFO  00:13:18,003 BalancerService  - ### Exchange needs to be balanced for currency : Binance -> Ripple
+WARN  00:13:18,003 BalancerService  - Could not find any wallet configuration for account : Bittrex
+INFO  00:13:18,003 BalancerService  - Skipping exchange : Bittrex
+INFO  00:17:53,310 LogHelper  - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+INFO  00:17:53,486 Version  - HHH000412: Hibernate Core {5.2.13.Final}
+INFO  00:17:53,488 Environment  - HHH000206: hibernate.properties not found
+INFO  00:17:53,584 Version  - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+INFO  00:17:53,995 Dialect  - HHH000400: Using dialect: org.hibernate.dialect.SQLiteDialect
+INFO  00:17:54,034 LobCreatorBuilderImpl  - HHH000423: Disabling contextual LOB creation as JDBC driver reported JDBC version [2] less than 4
+INFO  00:17:55,454 Libra  - List of loaded currencies : [XRP, XVG, NEO]
+INFO  00:17:57,401 Libra  - List of loaded exchanges : [Bittrex#753214674, Binance#946448101, Hitbtc#238590461]
+INFO  00:17:57,401 Libra  - Initialization of the wallets settings
+INFO  00:17:57,410 Libra  - Done.
+INFO  00:17:57,410 Libra  - Simulation mode : true
+INFO  00:17:57,410 Libra  - Loading the transaction Ids
+INFO  00:17:57,568 QueryTranslatorFactoryInitiator  - HHH000397: Using ASTQueryTranslatorFactory
+INFO  00:17:57,704 Libra  - Loading the status of the pending transactions
+INFO  00:17:57,725 PendingWithdrawalsService  - PendingWithdrawals service has started!
+INFO  00:17:57,725 BalancerService  - Balancer service has started!
+WARN  00:17:57,741 BalancerService  - No wallet config found for destination account : Bittrex
+INFO  00:17:57,742 BalancerService  - Skipping exchange : Bittrex
+INFO  00:17:57,742 BalancerService  - No balancing has been done yet for Binance -> Ripple
+DEBUG 00:17:58,173 PendingWithdrawalsService  - ##################################################################################################################################################
+DEBUG 00:17:58,174 PendingWithdrawalsService  - FundingRecords for exchange Bittrex :
+DEBUG 00:17:58,174 PendingWithdrawalsService  - [FundingRecord{address='DLw53WSqqb91RMwG2whXfKGhJQdqJN6K8U', date=Tue Feb 06 21:53:27 GMT 2018, currency=XVG, amount=55959.80594415, internalId=33261e1a-a041-4954-beda-b6ef1f4c6bcd, blockchainTransactionHash=2983074b16ea396127bcbf473b5242db7395f5e4e8a9b53db5243fcc1e43f3d6, description='null', type=WITHDRAWAL, status=COMPLETE, balance=null, fee=0.20000000}, FundingRecord{address='AP91W9A4U1ZY9ZDgkvut8TkJ3EjJQe2jox', date=Tue Feb 06 21:49:54 GMT 2018, currency=NEO, amount=6.00000000, internalId=9c7884b7-d888-49e8-ac7e-6a45fa5c381d, blockchainTransactionHash=0x019604c7db375e0798f8a429fa1b55a2c0e072abc4f32c65b2686f370f1cdec2, description='null', type=WITHDRAWAL, status=COMPLETE, balance=null, fee=0.02500000}]
+DEBUG 00:17:58,183 PendingWithdrawalsService  - ##################################################################################################################################################
+ERROR 00:17:58,183 PendingWithdrawalsService  - Could not find any wallet configuration for account : Bittrex
+WARN  00:17:58,183 PendingWithdrawalsService  - Skipping exchange : Bittrex
+ERROR 00:17:58,183 PendingWithdrawalsService  - Could not find any wallet configuration for account : Bittrex
+WARN  00:17:58,183 PendingWithdrawalsService  - Skipping exchange : Bittrex
+DEBUG 00:17:58,378 BalancerService  - Exchange : Binance -> Ripple / checkThresholdBalance = 2700.000000000000066613381477509392425417900085449218750000 / currentBalance = 465.44407200
+INFO  00:17:58,380 BalancerService  - ### Exchange needs to be balanced for currency : Binance -> Ripple
+WARN  00:17:58,380 BalancerService  - Could not find any wallet configuration for account : Bittrex
+INFO  00:17:58,380 BalancerService  - Skipping exchange : Bittrex
+DEBUG 00:17:58,991 PendingWithdrawalsService  - ##################################################################################################################################################
+DEBUG 00:17:58,991 PendingWithdrawalsService  - FundingRecords for exchange Binance :
+DEBUG 00:17:58,991 PendingWithdrawalsService  - [FundingRecord{address='rEb8TK3gBgk5auZkwc6sHnwrGVJH8DuaLh', date=Tue Mar 20 22:27:45 GMT 2018, currency=XRP, amount=456.550000000000000000, internalId=null, blockchainTransactionHash=8929D7E5CD8F20198A8B748E6DCA74488C3B259BCAC4475EAF9C85C93E0E82BF, description='null', type=DEPOSIT, status=COMPLETE, balance=null, fee=null}]
+DEBUG 00:17:58,992 PendingWithdrawalsService  - ##################################################################################################################################################
+ERROR 00:17:59,379 PendingWithdrawalsService  - Unexpected error when retrieving funding history : si.mazi.rescu.HttpStatusIOException: HTTP status code was not OK: 403
+WARN  00:17:59,379 PendingWithdrawalsService  - Skipping polling withdrawals / deposits status for exchange : Hitbtc
+DEBUG 00:17:59,379 PendingWithdrawalsService  - Persisting the transaction Ids : {}
+DEBUG 00:17:59,381 PendingWithdrawalsService  - Persisting the status of the pending transactions : {}
+DEBUG 00:17:59,382 PendingWithdrawalsService  - Sleeping for (ms) : 10000
+DEBUG 00:18:09,933 PendingWithdrawalsService  - ##################################################################################################################################################
+DEBUG 00:18:09,934 PendingWithdrawalsService  - FundingRecords for exchange Bittrex :
+DEBUG 00:18:09,934 PendingWithdrawalsService  - [FundingRecord{address='DLw53WSqqb91RMwG2whXfKGhJQdqJN6K8U', date=Tue Feb 06 21:53:27 GMT 2018, currency=XVG, amount=55959.80594415, internalId=33261e1a-a041-4954-beda-b6ef1f4c6bcd, blockchainTransactionHash=2983074b16ea396127bcbf473b5242db7395f5e4e8a9b53db5243fcc1e43f3d6, description='null', type=WITHDRAWAL, status=COMPLETE, balance=null, fee=0.20000000}, FundingRecord{address='AP91W9A4U1ZY9ZDgkvut8TkJ3EjJQe2jox', date=Tue Feb 06 21:49:54 GMT 2018, currency=NEO, amount=6.00000000, internalId=9c7884b7-d888-49e8-ac7e-6a45fa5c381d, blockchainTransactionHash=0x019604c7db375e0798f8a429fa1b55a2c0e072abc4f32c65b2686f370f1cdec2, description='null', type=WITHDRAWAL, status=COMPLETE, balance=null, fee=0.02500000}]
+DEBUG 00:18:09,934 PendingWithdrawalsService  - ##################################################################################################################################################
+ERROR 00:18:09,934 PendingWithdrawalsService  - Could not find any wallet configuration for account : Bittrex
+WARN  00:18:09,934 PendingWithdrawalsService  - Skipping exchange : Bittrex
+ERROR 00:18:09,934 PendingWithdrawalsService  - Could not find any wallet configuration for account : Bittrex
+WARN  00:18:09,935 PendingWithdrawalsService  - Skipping exchange : Bittrex
+DEBUG 00:18:10,695 PendingWithdrawalsService  - ##################################################################################################################################################
+DEBUG 00:18:10,695 PendingWithdrawalsService  - FundingRecords for exchange Binance :
+DEBUG 00:18:10,695 PendingWithdrawalsService  - [FundingRecord{address='rEb8TK3gBgk5auZkwc6sHnwrGVJH8DuaLh', date=Tue Mar 20 22:27:45 GMT 2018, currency=XRP, amount=456.550000000000000000, internalId=null, blockchainTransactionHash=8929D7E5CD8F20198A8B748E6DCA74488C3B259BCAC4475EAF9C85C93E0E82BF, description='null', type=DEPOSIT, status=COMPLETE, balance=null, fee=null}]
+DEBUG 00:18:10,695 PendingWithdrawalsService  - ##################################################################################################################################################
+ERROR 00:18:11,178 PendingWithdrawalsService  - Unexpected error when retrieving funding history : si.mazi.rescu.HttpStatusIOException: HTTP status code was not OK: 403
+WARN  00:18:11,179 PendingWithdrawalsService  - Skipping polling withdrawals / deposits status for exchange : Hitbtc
+DEBUG 00:18:11,179 PendingWithdrawalsService  - Persisting the transaction Ids : {}
+DEBUG 00:18:11,182 PendingWithdrawalsService  - Persisting the status of the pending transactions : {}
+DEBUG 00:18:11,183 PendingWithdrawalsService  - Sleeping for (ms) : 10000
