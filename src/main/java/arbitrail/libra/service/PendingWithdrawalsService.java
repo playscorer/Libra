@@ -68,6 +68,7 @@ public class PendingWithdrawalsService extends Thread {
 		for (Exchange exchange : exchanges) {
 			String exchangeName = exchange.getExchangeSpecification().getExchangeName();
 
+			// only needed to get the label - might be removed in the future TODO
 			Map<String, MyWallet> walletsForExchange = wallets.getWalletMap().get(exchangeName);
 			// no currencies set up for the exchange
 			if (walletsForExchange == null) {
@@ -79,10 +80,8 @@ public class PendingWithdrawalsService extends Thread {
 			try {
 				List<FundingRecord> fundingRecords = exchange.getAccountService().getFundingHistory(transxService.getTradeHistoryParams(exchange, wallets));
 				fundingRecords = transxService.retrieveLastTwoDaysOf(fundingRecords);
-				LOG.debug("##################################################################################################################################################");
 				LOG.debug("FundingRecords for exchange " + exchangeName + " :");
-				LOG.debug(fundingRecords);
-				LOG.debug("##################################################################################################################################################");
+				LOG.debug("### " + fundingRecords);
 				
 				// we are interested in the pending / cancelled withdrawals from the source exchange and the completed deposits from the target exchange
 				for (FundingRecord fundingRecord : fundingRecords) {
@@ -96,6 +95,7 @@ public class PendingWithdrawalsService extends Thread {
 					// check if the transactions are part of recent transactions handled by Libra
 					Currency currency = fundingRecord.getCurrency();
 					
+					// only needed to get the label - might be removed in the future TODO
 					MyWallet myWallet = walletsForExchange.get(currency.getCurrencyCode());
 					// this currency is not set up for the exchange
 					if (myWallet == null) {
@@ -114,7 +114,7 @@ public class PendingWithdrawalsService extends Thread {
 								continue;
 							}
 							// filter trades recorded before the withdrawal
-							if (!exchStatus.isLive(fundingRecord.getDate())) {
+							if (!exchStatus.isAlive(fundingRecord.getDate())) {
 								LOG.warn("Filtered a withdraw : " + exchangeName + " -> " + fundingRecord.getCurrency().getDisplayName());
 								continue;
 							}
@@ -160,8 +160,8 @@ public class PendingWithdrawalsService extends Thread {
 					if (transxIdToTargetExchMap.keySet().contains(depositHashkey)) {
 						// filter completed deposits
 						if (Type.DEPOSIT.equals(fundingRecord.getType())) {
-							// filter trades recorded before the withdrawal
-							if (!transxIdToTargetExchMap.get(depositHashkey).isLive(fundingRecord.getDate())) {
+							// filter trades recorded before the deposit
+							if (!transxIdToTargetExchMap.get(depositHashkey).isAlive(fundingRecord.getDate())) {
 								LOG.warn("Filtered a deposit : " + exchangeName + " -> " + fundingRecord.getCurrency().getDisplayName());
 								continue;
 							}

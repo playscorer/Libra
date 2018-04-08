@@ -22,8 +22,8 @@ public class ExchStatus {
 		return withdrawalTime;
 	}
 	
-	public boolean isLive(Date currentTime) {
-		return currentTime.after(withdrawalTime);
+	public boolean isAlive(Date transactionTime) {
+		return transactionTime.after(withdrawalTime);
 	}
 
 	public boolean isWithdrawalComplete() {

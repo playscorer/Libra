@@ -212,6 +212,16 @@ public class BalancerService extends Thread {
 		}
 	}
 	
+	private String getDepositAddress(Exchange toExchange, String exchangeName, MyWallet toWallet, String currency) {
+		String depositAddress;
+		if (ExchangeType.Bittrex.name().equals(exchangeName)) {
+			depositAddress = toWallet.getAddress();
+		} else {
+			depositAddress = toExchange.getAccountService().requestDepositAddress(currency);
+		}
+		return depositAddress;
+	}
+	
 	private String withdrawFunds(Exchange exchange, String withdrawAddress, Currency currency, BigDecimal amountToWithdraw, String paymentId, BigDecimal fee) throws IOException, InterruptedException {
 		String exchangeName = exchange.getExchangeSpecification().getExchangeName();
 		// TODO to check that code
@@ -238,7 +248,8 @@ public class BalancerService extends Thread {
 		else {
 			LOG.info("Sending withdraw order - address: " + withdrawAddress + " id: " + paymentId + " [" + exchangeName + " -> " + currency.getDisplayName() + "] amount: " + amountToWithdraw);
 			if (Currency.XRP.equals(currency)) {
-				return exchange.getAccountService().withdrawFunds(new RippleWithdrawFundsParams(withdrawAddress, currency, amountToWithdraw, paymentId));
+				return null;
+				//return exchange.getAccountService().withdrawFunds(new RippleWithdrawFundsParams(withdrawAddress, currency, amountToWithdraw, paymentId));
 			}
 			else {
 				return exchange.getAccountService().withdrawFunds(currency, amountToWithdraw, withdrawAddress);
@@ -269,7 +280,7 @@ public class BalancerService extends Thread {
 		BigDecimal balancedOffset = fromBalance.subtract(toBalance).divide(BigDecimal.valueOf(2));
 		BigDecimal allowedWithdrawableAmount = fromBalance.subtract(fromWallet.getMinResidualBalance());
 		BigDecimal amountToWithdraw = transxService.roundAmount(balancedOffset.min(allowedWithdrawableAmount), currency).add(fromWallet.getWithdrawalFee());
-		LOG.debug("amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (" + balancedOffset + ", " + allowedWithdrawableAmount + ")");
+		LOG.debug("### amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (" + balancedOffset + ", " + allowedWithdrawableAmount + ")");
 		
 		// amountToWithdraw must be higher than the minimum amount specified in the config
 		if (amountToWithdraw.compareTo(fromWallet.getMinWithdrawalAmount()) < 0) {
@@ -277,17 +288,17 @@ public class BalancerService extends Thread {
 			return false;
 		}
 		
-		// if fees > 0.05% x amountToWithdraw
+		// if fees > 0.05% x amountToWithdraw TODO disable for ETH/BTC
 		double percent = 0.05 / 100;
 		BigDecimal fees = fromWallet.getWithdrawalFee().add(toWallet.getDepositFee());
-		BigDecimal percentOfAmount = BigDecimal.valueOf(percent).multiply(amountToWithdraw);
+/*		BigDecimal percentOfAmount = BigDecimal.valueOf(percent).multiply(amountToWithdraw);
 		if (fees.compareTo(percentOfAmount) > 0) {
 			LOG.error("Withdraw not authorized : fees are too high!");
-			LOG.debug("fees / percentOfAmount : " + fees + " / " + percentOfAmount);
+			LOG.debug("fees > percentOfAmount : " + fees + " > " + percentOfAmount);
 			return false;
-		}
+		}*/
 		
-		LOG.info("amountToWithdraw [" + fromExchangeName + " -> " + toExchangeName + "] : " + amountToWithdraw);
+		LOG.info("### amountToWithdraw [" + fromExchangeName + " -> " + toExchangeName + "] : " + amountToWithdraw);
 		
  		String depositAddress = toExchange.getAccountService().requestDepositAddress(currency);
 		LOG.debug("Deposit address [" + toExchangeName + " -> " + currency.getDisplayName() + "] : " + depositAddress);
