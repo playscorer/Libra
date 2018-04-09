@@ -8,7 +8,7 @@ import javax.persistence.Id;
 @Entity
 public class TransxIdToTargetExchEntity {
 
-	@Id private String transxId;
+	@Id private Integer transxId;
 	private String exchangeName;
 	private boolean withdrawalComplete;
 	private Date withdrawalTime;
@@ -16,7 +16,7 @@ public class TransxIdToTargetExchEntity {
 	public TransxIdToTargetExchEntity() {
 	}
 
-	public TransxIdToTargetExchEntity(String transxId, String exchangeName, boolean withdrawalComplete, Date withdrawalTime) {
+	public TransxIdToTargetExchEntity(Integer transxId, String exchangeName, boolean withdrawalComplete, Date withdrawalTime) {
 		super();
 		this.transxId = transxId;
 		this.exchangeName = exchangeName;
@@ -24,7 +24,7 @@ public class TransxIdToTargetExchEntity {
 		this.withdrawalTime = withdrawalTime;
 	}
 
-	public String getTransxId() {
+	public Integer getTransxId() {
 		return transxId;
 	}
 

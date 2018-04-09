@@ -35,7 +35,7 @@ import arbitrail.libra.orm.service.WalletService;
 import si.mazi.rescu.HttpStatusIOException;
 
 @Component
-public class BalancerService extends Thread {
+public class BalancerService implements Runnable {
 	
 	private final static Logger LOG = Logger.getLogger(BalancerService.class);
 	
@@ -84,14 +84,14 @@ public class BalancerService extends Thread {
 			Map<String, MyWallet> walletsForExchange = walletMap.get(exchangeName);
 			// no currencies set up for the exchange
 			if (walletsForExchange == null) {
-				LOG.warn("Could not find any wallet configuration for account : " + exchangeName);
+				LOG.warn("Configuration error : Could not find any wallet configuration for account : " + exchangeName);
 				LOG.info("Skipping exchange : " + exchangeName);
 				continue;
 			}
 			MyWallet myWallet = walletsForExchange.get(currency.getCurrencyCode());
 			// this currency is not set up for the exchange
 			if (myWallet == null) {
-				LOG.warn("No wallet config found for this account for currency : " + exchangeName + " -> " + currency.getDisplayName());
+				LOG.warn("Configuration error : No wallet config found for this account for currency : " + exchangeName + " -> " + currency.getDisplayName());
 				LOG.info("Skipping currency for exchange : " + exchangeName + " -> " + currency.getDisplayName());
 				continue;
 			}
@@ -117,7 +117,7 @@ public class BalancerService extends Thread {
 			Map<String, MyWallet> toExchangeWallets = walletMap.get(toExchangeName);
 			// no currencies set up for the exchange
 			if (toExchangeWallets == null) {
-				LOG.warn("No wallet config found for destination account : " + toExchangeName);
+				LOG.warn("Configuration error : No wallet config found for destination account : " + toExchangeName);
 				LOG.info("Skipping exchange : " + toExchangeName);
 				continue;
 			}
@@ -127,7 +127,7 @@ public class BalancerService extends Thread {
 				MyWallet toWallet = toExchangeWallets.get(currencyCode);
 				// this currency is not set up for the exchange
 				if (toWallet == null) {
-					LOG.warn("No wallet config found for destination account for currency : " + toExchangeName + " -> " + currency.getDisplayName());
+					LOG.warn("Configuration error : No wallet config found for destination account for currency : " + toExchangeName + " -> " + currency.getDisplayName());
 					LOG.info("Skipping currency for exchange : " + toExchangeName + " -> " + currency.getDisplayName());
 					continue;
 				}
@@ -135,7 +135,7 @@ public class BalancerService extends Thread {
 				// do the rebalancing only if there is no pending withdrawal
 				Boolean pendingWithdrawal = pendingWithdrawalsMap.get(new ExchCcy(toExchangeName, currencyCode));
 				if (pendingWithdrawal != null && pendingWithdrawal) {
-					LOG.info("Pending withdrawal : Skipping currency for exchange : " + toExchangeName + " -> " + currency.getDisplayName());
+					LOG.info("# Pending withdrawal : Skipping currency for exchange : " + toExchangeName + " -> " + currency.getDisplayName());
 					continue;
 				}
 				
@@ -152,19 +152,19 @@ public class BalancerService extends Thread {
 				}
 				BigDecimal lastBalancedAmount = walletService.getLastBalancedAmount(toExchangeName, currencyCode);
 				BigDecimal checkThresholdBalance = toWallet.getInitialBalance().max(lastBalancedAmount).multiply(new BigDecimal(balanceCheckThreshold));
-				LOG.debug("Exchange : " + toExchangeName + " -> " + currency.getDisplayName() + " / checkThresholdBalance = " + checkThresholdBalance + " / currentBalance = " + currentBalance);
+				LOG.debug("# Exchange : " + toExchangeName + " -> " + currency.getDisplayName() + " / checkThresholdBalance = " + checkThresholdBalance + " / currentBalance = " + currentBalance);
 
 				// trigger the balancer
 				if (currentBalance.compareTo(checkThresholdBalance) < 0) {
 					LOG.info("### Exchange needs to be balanced for currency : " + toExchangeName + " -> " + currency.getDisplayName());
 					Exchange fromExchange = findMostFilledBalance(exchangeList, walletMap, currency);
 					if (fromExchange == null) {
-						LOG.error("Unexpected error : All the accounts balances are zero");
+						LOG.error("Balancing error : All the accounts balances are zero");
 						LOG.info("Skipping currency for exchange : " + toExchangeName + " -> " + currency.getDisplayName());
 						continue;
 					}
 					if (fromExchange.equals(toExchange)) {
-						LOG.error("Unexpected error : The source and the destination accounts are identical");
+						LOG.error("Balancing error : The source and the destination accounts are identical");
 						LOG.info("Skipping currency for exchange : " + toExchangeName + " -> " + currency.getDisplayName());
 						continue;
 					}
@@ -172,13 +172,13 @@ public class BalancerService extends Thread {
 					String fromExchangeName = fromExchange.getExchangeSpecification().getExchangeName();
 					Map<String, MyWallet> fromExchangeWallets = walletMap.get(fromExchangeName);
 					if (fromExchangeWallets == null) {
-						LOG.error("Unexpected error : Missing wallet config for source account : " + fromExchangeName);
+						LOG.warn("Configuration error : Missing wallet config for source account : " + fromExchangeName);
 						LOG.info("Skipping currency for exchange : " + toExchangeName + " -> " + currency.getDisplayName());
 						continue;
 					}
 					MyWallet fromWallet = fromExchangeWallets.get(currencyCode);
 					if (fromWallet == null) {
-						LOG.error("Unexpected error : Missing wallet config for source account for currency : " + fromExchangeName + " -> " + currency.getDisplayName());
+						LOG.warn("Configuration error : Missing wallet config for source account for currency : " + fromExchangeName + " -> " + currency.getDisplayName());
 						LOG.info("Skipping currency for exchange : " + toExchangeName + " -> " + currency.getDisplayName());
 						continue;
 					}
@@ -212,21 +212,10 @@ public class BalancerService extends Thread {
 		}
 	}
 	
-	private String getDepositAddress(Exchange toExchange, String exchangeName, MyWallet toWallet, String currency) {
-		String depositAddress;
-		if (ExchangeType.Bittrex.name().equals(exchangeName)) {
-			depositAddress = toWallet.getAddress();
-		} else {
-			depositAddress = toExchange.getAccountService().requestDepositAddress(currency);
-		}
-		return depositAddress;
-	}
-	
 	private String withdrawFunds(Exchange exchange, String withdrawAddress, Currency currency, BigDecimal amountToWithdraw, String paymentId, BigDecimal fee) throws IOException, InterruptedException {
 		String exchangeName = exchange.getExchangeSpecification().getExchangeName();
-		// TODO to check that code
 		if (ExchangeType.Hitbtc.name().equals(exchangeName)) {
-			HitbtcAccountService hitbtcAccountService = (HitbtcAccountService)exchange.getAccountService();
+			HitbtcAccountService hitbtcAccountService = (HitbtcAccountService) exchange.getAccountService();
 			hitbtcAccountService.transferToMain(currency, amountToWithdraw);
 			int nbTry = 3;
 			while (--nbTry > 0) {
@@ -248,8 +237,7 @@ public class BalancerService extends Thread {
 		else {
 			LOG.info("Sending withdraw order - address: " + withdrawAddress + " id: " + paymentId + " [" + exchangeName + " -> " + currency.getDisplayName() + "] amount: " + amountToWithdraw);
 			if (Currency.XRP.equals(currency)) {
-				return null;
-				//return exchange.getAccountService().withdrawFunds(new RippleWithdrawFundsParams(withdrawAddress, currency, amountToWithdraw, paymentId));
+				return exchange.getAccountService().withdrawFunds(new RippleWithdrawFundsParams(withdrawAddress, currency, amountToWithdraw, paymentId));
 			}
 			else {
 				return exchange.getAccountService().withdrawFunds(currency, amountToWithdraw, withdrawAddress);
@@ -300,7 +288,12 @@ public class BalancerService extends Thread {
 		
 		LOG.info("### amountToWithdraw [" + fromExchangeName + " -> " + toExchangeName + "] : " + amountToWithdraw);
 		
- 		String depositAddress = toExchange.getAccountService().requestDepositAddress(currency);
+ 		String depositAddress = walletService.getDepositAddress(toExchange, toExchangeName, toWallet, currency);
+ 		if (depositAddress == null) {
+			LOG.error("Unexpected error : The deposit address of the destination wallet is null");
+			LOG.info("Skipping currency for exchange : " + toExchangeName + " -> " + currency.getDisplayName());
+			return false;
+ 		}
 		LOG.debug("Deposit address [" + toExchangeName + " -> " + currency.getDisplayName() + "] : " + depositAddress);
 
 		if (!simulate) {
@@ -347,7 +340,6 @@ public class BalancerService extends Thread {
 		return false;
 	}
 
-
 	@Override
 	public void run() {
 		int nbOperations;
@@ -361,7 +353,7 @@ public class BalancerService extends Thread {
 				LOG.info("Sleeping for (ms) : " + frequency);
 				Thread.sleep(frequency);
 			} catch (InterruptedException | IOException e) {
-				LOG.error(e);
+				LOG.error("Unexpected error : " + e);
 			}
 		}
 	}

@@ -15,8 +15,8 @@ public class PendingTransxDao {
 	@PersistenceContext
 	private EntityManager em;
 
-	public void persist(PendingTransxEntity pendingTransx) {
-		em.persist(pendingTransx);
+	public void saveOrUpdate(PendingTransxEntity pendingTransx) {
+		em.merge(pendingTransx);
 	}
 
 	@SuppressWarnings("unchecked")

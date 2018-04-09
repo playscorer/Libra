@@ -3,7 +3,7 @@
     <Binance>
       <XRP>
         <initialBalance>600</initialBalance>
-        <minResidualBalance>350</minResidualBalance>
+        <minResidualBalance>250</minResidualBalance>
         <minWithdrawalAmount>20</minWithdrawalAmount>
         <address/>
         <tag>102449671</tag>
@@ -66,10 +66,10 @@
     </Hitbtc>
     <Bittrex>
       <XRP>
-        <initialBalance>50.00000000</initialBalance>
+        <initialBalance>250.00000000</initialBalance>
         <minResidualBalance>0</minResidualBalance>
         <minWithdrawalAmount/>
-        <address/>
+        <address>rPVMhWBsfF9iMXYj3aAzJVkPDTFNSyWdKy</address>
         <tag>673968277</tag>
         <depositFee>0</depositFee>
         <withdrawalFee>0</withdrawalFee>

@@ -36,7 +36,7 @@ public class ExchStatus {
 
 	@Override
 	public String toString() {
-		return "ExchStatus [exchangeName=" + exchangeName + ", withdrawalComplete=" + withdrawalComplete + "]";
+		return "ExchStatus [exchangeName=" + exchangeName + ", withdrawalComplete=" + withdrawalComplete + ", withdrawalTime=" + withdrawalTime + "]";
 	}
 
 }

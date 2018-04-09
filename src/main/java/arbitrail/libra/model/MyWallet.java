@@ -82,7 +82,7 @@ public class MyWallet {
 	@Override
 	public String toString() {
 		return "MyWallet [initialBalance=" + initialBalance + ", minResidualBalance=" + minResidualBalance
-				+ ", minWithdrawalAmount=" + minWithdrawalAmount + ", address=" + address + ", tag=" + tag 
+				+ ", minWithdrawalAmount=" + minWithdrawalAmount + ", address=" + address + ", tag=" + tag
 				+ ", depositFee=" + depositFee + ", withdrawalFee=" + withdrawalFee + ", label=" + label + "]";
 	}
 

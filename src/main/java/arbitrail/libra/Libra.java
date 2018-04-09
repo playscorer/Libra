@@ -22,12 +22,16 @@ import arbitrail.libra.orm.service.TransxIdToTargetExchService;
 import arbitrail.libra.service.BalancerService;
 import arbitrail.libra.service.FileService;
 import arbitrail.libra.service.InitService;
+import arbitrail.libra.service.LibraPoolService;
 import arbitrail.libra.service.PendingWithdrawalsService;
 
 @Component
 public class Libra {
 
 	private final static Logger LOG = Logger.getLogger(Libra.class);
+	
+	@Autowired
+	private LibraPoolService libraPoolService;
 	
 	@Autowired
 	private TransxIdToTargetExchService transxIdToTargetService;
@@ -99,12 +103,12 @@ public class Libra {
 			
 			LOG.info("Loading the status of the pending transactions");
 			pendingWithdrawalsMap = pendingTransxService.listAll();
-
+			
 			pendingWithdrawalsService.init(wallets, pendingWithdrawalsMap, transxIdToTargetExchMap, exchanges);
-			pendingWithdrawalsService.start();
+			libraPoolService.startService(pendingWithdrawalsService);
 			
 			balancerService.init(wallets, pendingWithdrawalsMap, transxIdToTargetExchMap, currencies, exchanges);
-			balancerService.start();
+			libraPoolService.startService(balancerService);
 		}
 	}
 

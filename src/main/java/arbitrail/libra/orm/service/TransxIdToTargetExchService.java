@@ -25,7 +25,7 @@ public class TransxIdToTargetExchService {
 		for (Entry<Integer, ExchStatus> entry : transxIdToTargetExchMqp.entrySet()) {
 			Integer transxId = entry.getKey();
 			ExchStatus exchStatus = entry.getValue();
-			transxIdToTargetExchDao.persist(new TransxIdToTargetExchEntity(transxId.toString(), exchStatus.getExchangeName(), exchStatus.isWithdrawalComplete(), exchStatus.getWithdrawalTime()));
+			transxIdToTargetExchDao.saveOrUpdate(new TransxIdToTargetExchEntity(transxId, exchStatus.getExchangeName(), exchStatus.isWithdrawalComplete(), exchStatus.getWithdrawalTime()));
 		}
 	}
 
@@ -35,7 +35,7 @@ public class TransxIdToTargetExchService {
 		
 		ConcurrentMap<Integer, ExchStatus> pendingTransIdToToExchMap = new ConcurrentHashMap<>();
 		for (TransxIdToTargetExchEntity entity : entityList) {
-			pendingTransIdToToExchMap.put(Integer.parseInt(entity.getTransxId()), new ExchStatus(entity.getExchangeName(), entity.isWithdrawalComplete(), entity.getWithdrawalTime()));
+			pendingTransIdToToExchMap.put(entity.getTransxId(), new ExchStatus(entity.getExchangeName(), entity.isWithdrawalComplete(), entity.getWithdrawalTime()));
 		}
 		
 		return pendingTransIdToToExchMap; 

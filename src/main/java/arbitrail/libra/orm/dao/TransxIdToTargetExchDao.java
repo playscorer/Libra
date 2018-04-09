@@ -15,8 +15,8 @@ public class TransxIdToTargetExchDao {
 	@PersistenceContext
 	private EntityManager em;
 
-	public void persist(TransxIdToTargetExchEntity transxIdToTargetExch) {
-		em.persist(transxIdToTargetExch);
+	public void saveOrUpdate(TransxIdToTargetExchEntity transxIdToTargetExch) {
+		em.merge(transxIdToTargetExch);
 	}
 
 	@SuppressWarnings("unchecked")
