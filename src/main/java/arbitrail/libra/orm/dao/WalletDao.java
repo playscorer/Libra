@@ -16,8 +16,8 @@ public class WalletDao {
 	@PersistenceContext
 	private EntityManager em;
 
-	public void persist(WalletEntity wallet) {
-		em.persist(wallet);
+	public void saveOrUpdate(WalletEntity wallet) {
+		em.merge(wallet);
 	}
 	
 	public WalletEntity find(String exchange, String currency) {

@@ -2,6 +2,7 @@ package arbitrail.libra.service;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.AbstractMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentMap;
@@ -46,7 +47,7 @@ public class PendingWithdrawalsService implements Runnable {
 	
 	private List<Exchange> exchanges;
 	private Wallets wallets;
-	private ConcurrentMap<ExchCcy, Boolean> pendingWithdrawalsMap;
+	private ConcurrentMap<ExchCcy, Object> pendingWithdrawalsMap;
 	private ConcurrentMap<Integer, ExchStatus> transxIdToTargetExchMap;
 	
 	@Value("${pending_withdrawals_frequency}")
@@ -56,7 +57,7 @@ public class PendingWithdrawalsService implements Runnable {
 		super();
 	}
 	
-	public void init(Wallets wallets, ConcurrentMap<ExchCcy, Boolean> pendingWithdrawalsMap, ConcurrentMap<Integer, ExchStatus> transxIdToTargetExchMap, List<Exchange> exchanges) {
+	public void init(Wallets wallets, ConcurrentMap<ExchCcy, Object> pendingWithdrawalsMap, ConcurrentMap<Integer, ExchStatus> transxIdToTargetExchMap, List<Exchange> exchanges) {
 		this.exchanges = exchanges;
 		this.wallets = wallets;
 		this.transxIdToTargetExchMap = transxIdToTargetExchMap;
@@ -86,7 +87,7 @@ public class PendingWithdrawalsService implements Runnable {
 				for (FundingRecord fundingRecord : fundingRecords) {
 					// compute hashkey for the withdrawal
 					Integer transxHashkey = transxService.transxHashkey(fundingRecord.getCurrency(), fundingRecord.getAmount(), fundingRecord.getAddress());
-					LOG.debug("@ Looking for withdrawal transxHashkey : " + transxHashkey + " : " + fundingRecord);
+					LOG.debug("@ Looking for withdrawal transxHashkey : " + transxHashkey + " = (" + fundingRecord.getCurrency() + ", " + fundingRecord.getAmount() + ", " + fundingRecord.getAddress() + ")");
 					if (transxHashkey == null) {
 						LOG.error("Unexpected error : transxHashkey is null");
 						LOG.warn("Skipping transaction from exchange : " + exchangeName + " -> " + fundingRecord.getCurrency().getDisplayName());
@@ -125,15 +126,23 @@ public class PendingWithdrawalsService implements Runnable {
 							
 							// pending withdrawals
 							if (Status.PROCESSING.equals(fundingRecord.getStatus())) {
-								LOG.debug("@ Pending withdrawal set to true in the map of pending withdrawals : " + exchCcy);
-								pendingWithdrawalsMap.put(exchCcy, true);
+								LOG.debug("@ Pending withdrawal added to the map of pending withdrawals : " + exchCcy);
+								pendingWithdrawalsMap.put(exchCcy, new Object());
+								LOG.debug("Saving the pending withdrawal...");
+								pendingTransxService.save(exchCcy);
+								
 							}
 							// withdrawals cancelled or failed
 							else if (Status.CANCELLED.equals(fundingRecord.getStatus()) || Status.FAILED.equals(fundingRecord.getStatus())) {
-								LOG.debug("@ Pending withdrawal set to false in the map of pending withdrawals : " + exchCcy);
-								pendingWithdrawalsMap.put(exchCcy, false); 
-								LOG.debug("@ Cancelled/failed withdrawal removed from the map of pending transactions");
+								LOG.debug("@ Pending withdrawal removed from the map of pending withdrawals : " + exchCcy);
+								pendingWithdrawalsMap.remove(exchCcy); 
+								LOG.debug("Deleting the pending withdrawal...");
+								pendingTransxService.delete(exchCcy);								
+								
+								LOG.debug("@ Cancelled/failed withdrawal removed from the map of pending transactions : " + transxHashkey);
 								transxIdToTargetExchMap.remove(transxHashkey);
+								LOG.debug("Deleting the transaction Id...");
+								transxIdToTargetExchService.delete(new AbstractMap.SimpleEntry<Integer, ExchStatus>(transxHashkey, exchStatus));
 							}
 							// withdrawals completed : only do an update of the balances
 							else if (Status.COMPLETE.equals(fundingRecord.getStatus())) {
@@ -151,7 +160,7 @@ public class PendingWithdrawalsService implements Runnable {
 					BigDecimal roundedAmount = transxService.roundAmount(fundingRecord.getAmount(), fundingRecord.getCurrency());
 					String depositAddress = walletService.getDepositAddress(exchange, exchangeName, myWallet, currency);
 					Integer depositHashkey = transxService.transxHashkey(fundingRecord.getCurrency(), roundedAmount, depositAddress);
-					LOG.debug("@ Looking for deposit transxHashkey : " + depositHashkey + " : " + fundingRecord);
+					LOG.debug("@ Looking for deposit transxHashkey : " + depositHashkey + " = (" + fundingRecord.getCurrency() + ", " + roundedAmount + ", " + depositAddress + ")");
 					if (depositHashkey == null) {
 						LOG.error("Unexpected error : depositHashkey is null");
 						LOG.warn("Skipping transaction from exchange : " + exchangeName + " -> " + fundingRecord.getCurrency().getDisplayName());
@@ -169,11 +178,18 @@ public class PendingWithdrawalsService implements Runnable {
 							LOG.warn("Detected a deposit : " + exchangeName + " -> " + fundingRecord.getCurrency().getDisplayName());
 							if (Status.COMPLETE.equals(fundingRecord.getStatus())) {
 								ExchCcy exchCcy = new ExchCcy(exchangeName, currency.getCurrencyCode());
-								LOG.debug("@ Pending withdrawal set to false in the map of pending withdrawals : " + exchCcy);
-								pendingWithdrawalsMap.put(exchCcy, false); 
-								LOG.debug("@ Complete withdrawal removed from the map of pending transactions");
-								transxIdToTargetExchMap.remove(depositHashkey);
+								LOG.debug("@ Pending withdrawal removed from the map of pending withdrawals : " + exchCcy);
+								pendingWithdrawalsMap.remove(exchCcy); 
+								LOG.debug("Deleting the pending withdrawal...");
+								pendingTransxService.delete(exchCcy);			
+								
+								LOG.debug("@ Complete withdrawal removed from the map of pending transactions : " + depositHashkey);
+								ExchStatus exchStatus = transxIdToTargetExchMap.remove(depositHashkey);
+								LOG.debug("Deleting the transaction Id...");
+								transxIdToTargetExchService.delete(new AbstractMap.SimpleEntry<Integer, ExchStatus>(depositHashkey, exchStatus));
+								
 								saveUpdatedBalance(exchange, exchangeName, myWallet.getLabel(), currency);
+								
 								// Hitbtc : transfer funds to the trading wallet
 								if (ExchangeType.Hitbtc.name().equals(exchangeName)) {
 									HitbtcAccountService hitbtcAccountService = (HitbtcAccountService) exchange.getAccountService();
@@ -196,14 +212,14 @@ public class PendingWithdrawalsService implements Runnable {
 		if (newBalance != null) {
 			LOG.info("newBalance for " + exchangeName + " -> " + currency.getDisplayName() + " : " + newBalance);
 			WalletEntity walletEntity = new WalletEntity(exchangeName, currency.getCurrencyCode(), newBalance);
-			LOG.debug("Persisting the updated balance...");
+			LOG.debug("Saving the updated balance...");
 			walletService.save(walletEntity);
 		} else {
 			LOG.error("cannot save balance for " + exchangeName + " -> " + currency.getDisplayName() + " : balance unavailable");
 		}
 	}
 
-	public void setPendingWithdrawalsMap(ConcurrentMap<ExchCcy, Boolean> pendingWithdrawalsMap) {
+	public void setPendingWithdrawalsMap(ConcurrentMap<ExchCcy, Object> pendingWithdrawalsMap) {
 		this.pendingWithdrawalsMap = pendingWithdrawalsMap;
 	}
 
@@ -218,11 +234,8 @@ public class PendingWithdrawalsService implements Runnable {
 			try {
 				pollPendingWithdrawals();
 				
-				LOG.debug("Persisting the transaction Ids : " + transxIdToTargetExchMap);
-				transxIdToTargetExchService.saveAll(transxIdToTargetExchMap);
-				
-				LOG.debug("Persisting the status of the pending transactions : " + pendingWithdrawalsMap);
-				pendingTransxService.saveAll(pendingWithdrawalsMap);
+				LOG.debug("transaction Ids : " + transxIdToTargetExchMap);
+				LOG.debug("pending transactions : " + pendingWithdrawalsMap);
 				
 				LOG.debug("Sleeping for (ms) : " + frequency);
 				Thread.sleep(frequency);

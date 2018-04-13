@@ -56,7 +56,7 @@ public class Libra {
 
 	@PostConstruct
 	public void start() {
-		ConcurrentMap<ExchCcy, Boolean> pendingWithdrawalsMap;
+		ConcurrentMap<ExchCcy, Object> pendingWithdrawalsMap;
 		ConcurrentMap<Integer, ExchStatus> transxIdToTargetExchMap;
 		
 		List<Currency> currencies = initService.listAllHandledCurrencies();
@@ -98,17 +98,19 @@ public class Libra {
 		} else {
 			LOG.info("Simulation mode : " + simulate);
 			
-			LOG.info("Loading the transaction Ids");
 			transxIdToTargetExchMap = transxIdToTargetService.listAll();
+			LOG.debug("Loaded transaction Ids : " + transxIdToTargetExchMap);
 			
-			LOG.info("Loading the status of the pending transactions");
 			pendingWithdrawalsMap = pendingTransxService.listAll();
+			LOG.debug("Loaded pending transactions : " + pendingWithdrawalsMap);
 			
 			pendingWithdrawalsService.init(wallets, pendingWithdrawalsMap, transxIdToTargetExchMap, exchanges);
 			libraPoolService.startService(pendingWithdrawalsService);
 			
 			balancerService.init(wallets, pendingWithdrawalsMap, transxIdToTargetExchMap, currencies, exchanges);
 			libraPoolService.startService(balancerService);
+			
+			libraPoolService.shutServices();
 		}
 	}
 

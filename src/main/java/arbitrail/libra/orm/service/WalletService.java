@@ -2,7 +2,6 @@ package arbitrail.libra.orm.service;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -29,16 +28,9 @@ public class WalletService {
 
 	@Transactional
 	public void save(WalletEntity wallet) {
-		walletDao.persist(wallet);
+		walletDao.saveOrUpdate(wallet);
 	}
 	
-	@Transactional
-	public void saveAll(Collection<WalletEntity> walletCollection) {
-		for (WalletEntity wallet : walletCollection) {
-			walletDao.persist(wallet);
-		}
-	}
-
 	@Transactional(readOnly = true)
 	public BigDecimal getLastBalancedAmount(String exchange, String currency) {
 		WalletEntity entity = walletDao.find(exchange, currency);

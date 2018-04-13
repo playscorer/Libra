@@ -18,6 +18,11 @@ public class PendingTransxDao {
 	public void saveOrUpdate(PendingTransxEntity pendingTransx) {
 		em.merge(pendingTransx);
 	}
+	
+	public void delete(PendingTransxEntity pendingTransx) {
+		PendingTransxEntity managed = em.merge(pendingTransx);
+		em.remove(managed);
+	}
 
 	@SuppressWarnings("unchecked")
 	public List<PendingTransxEntity> findAll() {

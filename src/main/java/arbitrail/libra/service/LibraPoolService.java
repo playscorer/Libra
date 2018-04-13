@@ -21,6 +21,10 @@ public class LibraPoolService {
 	public void startService(Runnable service) {
 		pool.execute(service);
 	}
+	
+	public void shutServices() {
+		pool.shutdown();
+	}
 
 	private static class ExceptionThreadFactory implements ThreadFactory {
 		

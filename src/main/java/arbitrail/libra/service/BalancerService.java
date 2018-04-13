@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.AbstractMap;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +32,8 @@ import arbitrail.libra.model.ExchStatus;
 import arbitrail.libra.model.ExchangeType;
 import arbitrail.libra.model.MyWallet;
 import arbitrail.libra.model.Wallets;
+import arbitrail.libra.orm.service.PendingTransxService;
+import arbitrail.libra.orm.service.TransxIdToTargetExchService;
 import arbitrail.libra.orm.service.WalletService;
 import si.mazi.rescu.HttpStatusIOException;
 
@@ -40,6 +43,12 @@ public class BalancerService implements Runnable {
 	private final static Logger LOG = Logger.getLogger(BalancerService.class);
 	
 	private int withdrawalWaitingDelay = 30000;
+	
+	@Autowired
+	private TransxIdToTargetExchService transxIdToTargetExchService;
+	
+	@Autowired
+	private PendingTransxService pendingTransxService;
 
 	@Autowired
 	private WalletService walletService;
@@ -59,14 +68,14 @@ public class BalancerService implements Runnable {
 	private Wallets wallets;
 	private List<Exchange> exchanges;
 	private List<Currency> currencies;
-	private ConcurrentMap<ExchCcy, Boolean> pendingWithdrawalsMap;
+	private ConcurrentMap<ExchCcy, Object> pendingWithdrawalsMap;
 	private ConcurrentMap<Integer, ExchStatus> transxIdToTargetExchMap;
 	
 	public BalancerService() {
 		super();
 	}
 
-	public void init(Wallets wallets, ConcurrentMap<ExchCcy, Boolean> pendingWithdrawalsMap, ConcurrentMap<Integer, ExchStatus> transxIdToTargetExchMap, List<Currency> currencies,
+	public void init(Wallets wallets, ConcurrentMap<ExchCcy, Object> pendingWithdrawalsMap, ConcurrentMap<Integer, ExchStatus> transxIdToTargetExchMap, List<Currency> currencies,
 			List<Exchange> exchanges) {
 		this.currencies = currencies;
 		this.exchanges = exchanges;
@@ -133,15 +142,10 @@ public class BalancerService implements Runnable {
 				}
 
 				// do the rebalancing only if there is no pending withdrawal
-				Boolean pendingWithdrawal = pendingWithdrawalsMap.get(new ExchCcy(toExchangeName, currencyCode));
-				if (pendingWithdrawal != null && pendingWithdrawal) {
+				ExchCcy exchCcy = new ExchCcy(toExchangeName, currencyCode);
+				if (pendingWithdrawalsMap.keySet().contains(exchCcy)) {
 					LOG.info("# Pending withdrawal : Skipping currency for exchange : " + toExchangeName + " -> " + currency.getDisplayName());
 					continue;
-				}
-				
-				// there has been no rebalancing yet and the pending service may not be running
-				else if (pendingWithdrawal == null) {
-					LOG.info("No balancing has been done yet for " + toExchangeName + " -> " + currency.getDisplayName());
 				}
 				
 				// the threshold represents the minimum amount from which the balance will be triggered
@@ -326,13 +330,17 @@ public class BalancerService implements Runnable {
 				}
 			} while (transxHashkey == -1);
 			
-			// set map pending transactions to true
+			// add pending transactions to the map
 			ExchCcy exchCcy = new ExchCcy(toExchangeName, currency.getCurrencyCode());
-			pendingWithdrawalsMap.put(exchCcy, true);
+			pendingWithdrawalsMap.put(exchCcy, new Object());
+			LOG.debug("Saving the pending withdrawal...");
+			pendingTransxService.save(exchCcy);
 
 			// add mapping destination exchange to transactionId
 			ExchStatus exchStatus = new ExchStatus(toExchangeName, false, Calendar.getInstance().getTime());
 			transxIdToTargetExchMap.put(transxHashkey, exchStatus);
+			LOG.debug("Saving the transaction Id...");
+			transxIdToTargetExchService.save(new AbstractMap.SimpleEntry<Integer, ExchStatus>(transxHashkey, exchStatus));
 			
 			return true;
 		}

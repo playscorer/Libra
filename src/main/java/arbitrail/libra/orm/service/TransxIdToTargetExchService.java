@@ -1,7 +1,6 @@
 package arbitrail.libra.orm.service;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -21,12 +20,17 @@ public class TransxIdToTargetExchService {
 	private TransxIdToTargetExchDao transxIdToTargetExchDao;
 	
 	@Transactional
-	public void saveAll(Map<Integer, ExchStatus> transxIdToTargetExchMqp) {
-		for (Entry<Integer, ExchStatus> entry : transxIdToTargetExchMqp.entrySet()) {
-			Integer transxId = entry.getKey();
-			ExchStatus exchStatus = entry.getValue();
-			transxIdToTargetExchDao.saveOrUpdate(new TransxIdToTargetExchEntity(transxId, exchStatus.getExchangeName(), exchStatus.isWithdrawalComplete(), exchStatus.getWithdrawalTime()));
-		}
+	public void save(Entry<Integer, ExchStatus> entry) {
+		Integer transxId = entry.getKey();
+		ExchStatus exchStatus = entry.getValue();
+		transxIdToTargetExchDao.save(new TransxIdToTargetExchEntity(transxId, exchStatus.getExchangeName(), exchStatus.isWithdrawalComplete(), exchStatus.getWithdrawalTime()));
+	}
+
+	@Transactional
+	public void delete(Entry<Integer, ExchStatus> entry) {
+		Integer transxId = entry.getKey();
+		ExchStatus exchStatus = entry.getValue();
+		transxIdToTargetExchDao.delete(new TransxIdToTargetExchEntity(transxId, exchStatus.getExchangeName(), exchStatus.isWithdrawalComplete(), exchStatus.getWithdrawalTime()));
 	}
 
 	@Transactional(readOnly = true)

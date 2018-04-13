@@ -15,8 +15,13 @@ public class TransxIdToTargetExchDao {
 	@PersistenceContext
 	private EntityManager em;
 
-	public void saveOrUpdate(TransxIdToTargetExchEntity transxIdToTargetExch) {
-		em.merge(transxIdToTargetExch);
+	public void save(TransxIdToTargetExchEntity transxIdToTargetExch) {
+		em.persist(transxIdToTargetExch);
+	}
+
+	public void delete(TransxIdToTargetExchEntity transxIdToTargetExch) {
+		TransxIdToTargetExchEntity managed = em.merge(transxIdToTargetExch);
+		em.remove(managed);
 	}
 
 	@SuppressWarnings("unchecked")

@@ -12,16 +12,14 @@ public class PendingTransxEntity {
 
 	@Id private String exchangeName;
 	@Id private String currencyCode;
-	private boolean pending;
 
 	public PendingTransxEntity() {
 	}
 
-	public PendingTransxEntity(String exchangeName, String currencyCode, boolean pending) {
+	public PendingTransxEntity(String exchangeName, String currencyCode) {
 		super();
 		this.exchangeName = exchangeName;
 		this.currencyCode = currencyCode;
-		this.pending = pending;
 	}
 
 	public String getExchangeName() {
@@ -32,14 +30,9 @@ public class PendingTransxEntity {
 		return currencyCode;
 	}
 
-	public boolean isPending() {
-		return pending;
-	}
-
 	@Override
 	public String toString() {
-		return "PendingTransxEntity [exchangeName=" + exchangeName + ", currencyCode=" + currencyCode + ", pending="
-				+ pending + "]";
+		return "PendingTransxEntity [exchangeName=" + exchangeName + ", currencyCode=" + currencyCode + "]";
 	}
 
 }
