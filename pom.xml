@@ -28,6 +28,12 @@
 		<hibernate.version>5.2.13.Final</hibernate.version>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
+		
+		<!-- Deployment properties for AWS -->
+		<aws.user>ec2-user</aws.user>
+		<aws.host>54.202.68.108</aws.host>
+		<package.name>${project.artifactId}-${project.version}-deploy.zip</package.name>
+		
 	</properties>
 
 	<dependencies>
@@ -121,6 +127,13 @@
 	</dependencies>
 
 	<build>
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-ssh</artifactId>
+                <version>3.0.0</version>
+            </extension>
+        </extensions>
 		<plugins>
 		    <!-- configure JAR build -->
             <plugin>
@@ -179,7 +192,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!-- resources -->
+			<!-- libra resources into config directory -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
@@ -197,7 +210,7 @@
 								<resource>
 									<directory>src/main/resources</directory>
 									<includes>
-										<include>libra-${spring.profiles.active}.properties</include>
+										<include>${artifactId}-${spring.profiles.active}.properties</include>
 									</includes>
 								</resource>
 								<resource>
@@ -217,6 +230,7 @@
 					</execution>
 				</executions>
 			</plugin>
+			<!-- Create directory for database -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-antrun-plugin</artifactId>
@@ -235,6 +249,7 @@
 					</execution>
 				</executions>
 			</plugin>
+			<!-- Package zip -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
@@ -249,6 +264,40 @@
 							<descriptors>
 								<descriptor>assembly/deploy.xml</descriptor>
 							</descriptors>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>wagon-maven-plugin</artifactId>
+				<version>2.0.0</version>
+				<configuration>
+					<serverId>ec2-node</serverId>
+					<fromDir>${basedir}/target</fromDir>
+					<includes>*.zip</includes>
+					<url>scp://${aws.user}@${aws.host}</url>
+					<toDir>/home/ec2-user</toDir>
+				</configuration>
+				<executions>
+					<execution>
+						<id>upload-libra-zip</id>
+						<phase>install</phase>
+						<goals>
+							<goal>upload</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>unzip-libra</id>
+						<phase>install</phase>
+						<goals>
+							<goal>sshexec</goal>
+						</goals>
+						<configuration>
+							<commands>
+								<command>unzip -o ${package.name}</command>
+								<command>rm ${package.name}</command>
+							</commands>
 						</configuration>
 					</execution>
 				</executions>
