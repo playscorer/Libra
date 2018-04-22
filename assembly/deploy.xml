@@ -21,5 +21,9 @@
 			<directory>target/config/</directory>
 			<outputDirectory>config/</outputDirectory>
 		</fileSet>
+		<fileSet>
+			<directory>target/database/</directory>
+			<outputDirectory>database/</outputDirectory>
+		</fileSet>
 	</fileSets>
 </assembly>
