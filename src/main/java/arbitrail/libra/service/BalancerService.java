@@ -360,7 +360,7 @@ public class BalancerService implements Runnable {
 				LOG.info("Number of rebalancing operations : " + nbOperations + " performed in (ms) : " + ChronoUnit.MILLIS.between(before, after));
 				LOG.info("Sleeping for (ms) : " + frequency);
 				Thread.sleep(frequency);
-			} catch (InterruptedException | IOException e) {
+			} catch (Exception e) {
 				LOG.error("Unexpected error : " + e);
 			}
 		}

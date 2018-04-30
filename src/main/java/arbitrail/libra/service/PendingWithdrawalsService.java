@@ -199,7 +199,7 @@ public class PendingWithdrawalsService implements Runnable {
 						}
 					}
 				}
-			} catch (IOException e) {
+			} catch (Exception e) {
 				LOG.error("Unexpected error when retrieving funding history : " + e);
 				LOG.warn("Skipping polling withdrawals / deposits status for exchange : " + exchangeName);
 				continue;

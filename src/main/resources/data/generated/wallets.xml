@@ -68,7 +68,7 @@
       <XRP>
         <initialBalance>600.00000000</initialBalance>
         <minResidualBalance>0</minResidualBalance>
-        <minWithdrawalAmount/>
+        <minWithdrawalAmount>0</minWithdrawalAmount>
         <address>rPVMhWBsfF9iMXYj3aAzJVkPDTFNSyWdKy</address>
         <tag>673968277</tag>
         <depositFee>0</depositFee>

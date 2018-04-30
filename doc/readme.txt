@@ -30,5 +30,5 @@ inside settings.xml this server was added to <server> section in order maven to 
 command to launch maven : 
 	mvn clean install -Dspring.profiles.active=prod
 
-command to run Libra :
-	 java -Dspring.profiles.active=prod -jar libra-0.0.2-SNAPSHOT.jar
+command to run Libra on aws :
+	 nohup java -Dspring.profiles.active=prod -jar libra-0.0.2-SNAPSHOT.jar &
