@@ -156,7 +156,7 @@ public class BalancerService implements Runnable {
 				}
 				BigDecimal lastBalancedAmount = walletService.getLastBalancedAmount(toExchangeName, currencyCode);
 				BigDecimal checkThresholdBalance = toWallet.getInitialBalance().max(lastBalancedAmount).multiply(new BigDecimal(balanceCheckThreshold));
-				LOG.debug("# Exchange : " + toExchangeName + " -> " + currency.getDisplayName() + " / checkThresholdBalance = " + checkThresholdBalance + " / currentBalance = " + currentBalance);
+				LOG.debug("# Exchange : " + toExchangeName + " -> " + currency.getDisplayName() + " : currentBalance = " + currentBalance + " / checkThresholdBalance = " + checkThresholdBalance);
 
 				// trigger the balancer
 				if (currentBalance.compareTo(checkThresholdBalance) < 0) {
