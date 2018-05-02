@@ -324,7 +324,7 @@ public class BalancerService implements Runnable {
 					}
 				} catch (Exception e) {
 					LOG.fatal("Unexpected error : Cannot monitor pending withdrawal for " + fromExchangeName + " -> " + currency.getDisplayName() + " with transactionId = " + internalId);
-					LOG.fatal("Exception : " + e);
+					LOG.fatal("Unexpected exception : ", e);
 					LOG.fatal("Libra has stopped!");
 					System.exit(-1);
 				}
@@ -361,7 +361,7 @@ public class BalancerService implements Runnable {
 				LOG.info("Sleeping for (ms) : " + frequency);
 				Thread.sleep(frequency);
 			} catch (Exception e) {
-				LOG.error("Unexpected error : " + e);
+				LOG.fatal("Unexpected exception : ", e);
 			}
 		}
 	}

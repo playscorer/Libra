@@ -240,7 +240,7 @@ public class PendingWithdrawalsService implements Runnable {
 				LOG.debug("Sleeping for (ms) : " + frequency);
 				Thread.sleep(frequency);
 			} catch (InterruptedException e) {
-				LOG.error("Unexpected error : " + e);
+				LOG.fatal("Unexpected exception : ", e);
 			}
 		}
 	}
