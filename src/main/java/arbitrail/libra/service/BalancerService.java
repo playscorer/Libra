@@ -220,11 +220,11 @@ public class BalancerService implements Runnable {
 					LOG.info("Sending withdraw order - address: " + withdrawAddress + " id: " + paymentId + " ["
 							+ exchangeName + " -> " + currency.getDisplayName() + "] amount: " + amountToWithdraw);
 					return hitbtcAccountService.withdrawFundsRaw(currency, amountToWithdraw.subtract(fee), withdrawAddress, paymentId);
-				} catch (HttpStatusIOException exc) {
+				} catch (HttpStatusIOException hse) {
 					if (nbTry == 1) {
 						// revert the withdraw
 						hitbtcAccountService.transferToTrading(currency, amountToWithdraw);
-						throw exc;
+						throw hse;
 					}
 					Thread.sleep(2000);
 				}
@@ -307,6 +307,9 @@ public class BalancerService implements Runnable {
 					if (numAttempts == 10) {
 						throw new Exception("Maximum number of attempts reached: " + numAttempts);
 					}
+				} catch (HttpStatusIOException hse) {
+					LOG.error("Exchange exception : ", hse);
+					
 				} catch (Exception e) {
 					LOG.fatal("Unexpected error : Cannot monitor pending withdrawal for " + fromExchangeName + " -> " + currency.getDisplayName() + " with transactionId = " + internalId);
 					LOG.fatal("Unexpected exception : ", e);
