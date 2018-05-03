@@ -105,9 +105,6 @@ public class BalancerService implements Runnable {
 				continue;
 			}
 			BigDecimal balance = walletService.getAvailableBalance(exchange, myWallet.getLabel(), currency);
-			if (balance == null) {
-				continue;
-			}
 			if (maxBalance.compareTo(balance) < 0) {
 				maxExchange = exchange;
 				maxBalance = balance;
@@ -150,10 +147,6 @@ public class BalancerService implements Runnable {
 				
 				// the threshold represents the minimum amount from which the balance will be triggered
 				BigDecimal currentBalance = walletService.getAvailableBalance(toExchange, toWallet.getLabel(), currency);
-				if (currentBalance == null) {
-					LOG.info("Source exchange [" + toExchangeName + " -> " + currency.getDisplayName() + "] balance unavailable ");
-					continue;
-				}
 				BigDecimal lastBalancedAmount = walletService.getLastBalancedAmount(toExchangeName, currencyCode);
 				BigDecimal checkThresholdBalance = toWallet.getInitialBalance().max(lastBalancedAmount).multiply(new BigDecimal(balanceCheckThreshold));
 				LOG.debug("# Exchange : " + toExchangeName + " -> " + currency.getDisplayName() + " : currentBalance = " + currentBalance + " / checkThresholdBalance = " + checkThresholdBalance);
@@ -255,15 +248,7 @@ public class BalancerService implements Runnable {
 		String fromExchangeName = fromExchange.getExchangeSpecification().getExchangeName();
 		
 		BigDecimal toBalance = walletService.getAvailableBalance(toExchange, toWallet.getLabel(), currency);
-		if (toBalance == null) {
-			LOG.info("Source exchange [" + toExchangeName + " -> " + currency.getDisplayName() + "] balance unavailable ");
-			return false;
-		}
 		BigDecimal fromBalance = walletService.getAvailableBalance(fromExchange, fromWallet.getLabel(), currency);
-		if (fromBalance == null) {
-			LOG.info("Source exchange [" + fromExchangeName + " -> " + currency.getDisplayName() + "] balance unavailable ");
-			return false;
-		}
 		
 		LOG.info("Source exchange [" + fromExchangeName + " -> " + currency.getDisplayName() + "] balance : "
 				+ fromBalance + " / Destination exchange [" + toExchangeName + " -> "

@@ -57,7 +57,7 @@ public class WalletService {
 		}
 		// return the available balance if it is not zero
 		Balance balance = wallet.getBalance(currency);
-		return BigDecimal.ZERO.equals(balance.getAvailable()) ? null : balance.getAvailable();
+		return balance.getAvailable();
 	}
 	
 	/**
