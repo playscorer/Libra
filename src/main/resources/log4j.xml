@@ -16,6 +16,15 @@
         <param name="ConversionPattern" value="%-5p %d{HH:mm:ss,SSS} %c{1} - %L - %m%n" />
     </layout>
   </appender>
+
+  <appender name="html" class="org.apache.log4j.DailyRollingFileAppender">
+    <param name="file" value="logdir/libra.html"/>
+    <param name="DatePattern" value="'.'yyyy-MM-dd" />
+	<layout class="org.apache.log4j.HTMLLayout">
+		<param name="LocationInfo" value="true"/>
+		<param name="Title" value="Libra Log Messages"/>
+	</layout>
+  </appender>
   
   <logger name="arbitrail.libra">
   	<level value="debug"/>
@@ -25,6 +34,7 @@
     <priority value="INFO" /> 
     <appender-ref ref="console" />
     <appender-ref ref="file" /> 
+    <appender-ref ref="html" /> 
   </root>
   
 </log4j:configuration>
