@@ -1,7 +1,7 @@
 Notes about Libra
 =================
 
-conf.properties : general properties of Libra
+libra.properties : general properties of Libra
 accounts.xml : list of all handled exchanges with connection details
 currencies.xml : list of all handled currencies
 wallets.xml auto-generated file containing the list of currencies by exchange
