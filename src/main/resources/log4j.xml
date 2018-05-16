@@ -23,6 +23,7 @@
 	<layout class="arbitrail.libra.utils.LibraPatternLayout">
 		<param name="LocationInfo" value="true"/>
 		<param name="Title" value="Libra Log Messages"/>
+		<param name="TimestampFormat" value="dd-MMM-yyyy-HH:mm:ss" />
 	</layout>
   </appender>
   
