@@ -37,6 +37,9 @@ public class LibraPatternLayout extends HTMLLayout {
 	    sbuf.append("<html>" + Layout.LINE_SEP);
 	    sbuf.append("<head>" + Layout.LINE_SEP);
 	    sbuf.append("<meta http-equiv=\"refresh\" content=\"" + REFRESH + "\">"  + Layout.LINE_SEP);
+	    sbuf.append("<script type=\"text/javascript\">" + Layout.LINE_SEP); 
+		sbuf.append("window.scrollTo(0, document.body.scrollHeight);" + Layout.LINE_SEP); 
+	    sbuf.append("</script>" + Layout.LINE_SEP);
 	    sbuf.append("<title>" + getTitle() + "</title>" + Layout.LINE_SEP);
 	    sbuf.append("<style type=\"text/css\">"  + Layout.LINE_SEP);
 	    sbuf.append("body, table {font-family: arial,sans-serif; font-size: x-small;}" + Layout.LINE_SEP);
