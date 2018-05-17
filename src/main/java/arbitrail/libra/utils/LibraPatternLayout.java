@@ -37,11 +37,6 @@ public class LibraPatternLayout extends HTMLLayout {
 	    sbuf.append("<html>" + Layout.LINE_SEP);
 	    sbuf.append("<head>" + Layout.LINE_SEP);
 	    sbuf.append("<meta http-equiv=\"refresh\" content=\"" + REFRESH + "\">"  + Layout.LINE_SEP);
-	    sbuf.append("<script type=\"text/javascript\">" + Layout.LINE_SEP);
-	    sbuf.append("function scrollBottom() {"  + Layout.LINE_SEP);
-		sbuf.append("window.scrollTo(0, document.body.scrollHeight);" + Layout.LINE_SEP); 
-		sbuf.append("}"  + Layout.LINE_SEP);
-	    sbuf.append("</script>" + Layout.LINE_SEP);
 	    sbuf.append("<title>" + getTitle() + "</title>" + Layout.LINE_SEP);
 	    sbuf.append("<style type=\"text/css\">"  + Layout.LINE_SEP);
 	    sbuf.append("body, table {font-family: arial,sans-serif; font-size: x-small;}" + Layout.LINE_SEP);
@@ -49,7 +44,7 @@ public class LibraPatternLayout extends HTMLLayout {
 	    sbuf.append("</style>" + Layout.LINE_SEP);
 	    sbuf.append("</head>" + Layout.LINE_SEP);
 	    sbuf.append("<body bgcolor=\"#FFFFFF\" topmargin=\"6\" leftmargin=\"6\">" + Layout.LINE_SEP);
-	    sbuf.append("<button onclick=\"scrollBottom()\">Bottom</button>" + Layout.LINE_SEP);
+	    sbuf.append("<button onclick=\"window.scrollTo(0, document.body.scrollHeight)\">Bottom</button>" + Layout.LINE_SEP);
 	    sbuf.append("<hr size=\"1\" noshade>" + Layout.LINE_SEP);
 	    sbuf.append("Log session start time " + new java.util.Date() + "<br>" + Layout.LINE_SEP);
 	    sbuf.append("<br>" + Layout.LINE_SEP);
