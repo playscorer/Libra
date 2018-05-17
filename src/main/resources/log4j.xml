@@ -17,7 +17,7 @@
     </layout>
   </appender>
 
-  <appender name="html" class="org.apache.log4j.DailyRollingFileAppender">
+<!--   <appender name="html" class="org.apache.log4j.DailyRollingFileAppender">
     <param name="file" value="logdir/libra.html"/>
     <param name="DatePattern" value="'.'yyyy-MM-dd" />
 	<layout class="arbitrail.libra.utils.LibraPatternLayout">
@@ -25,7 +25,23 @@
 		<param name="Title" value="Libra Log Messages"/>
 		<param name="TimestampFormat" value="dd-MMM-yyyy-HH:mm:ss" />
 	</layout>
-  </appender>
+  </appender> -->
+  
+  <appender name="html" class="org.apache.log4j.rolling.RollingFileAppender">
+    <rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
+        <param name="ActiveFileName" value="logdir/libra.html" />
+        <param name="FileNamePattern" value="logdir/libra.%d{HH-mm}.%i.html.gz" />
+    </rollingPolicy>
+    <triggeringPolicy
+        class="org.apache.log4j.rolling.SizeBasedTriggeringPolicy">
+        <param name="MaxFileSize" value="5000000" />
+    </triggeringPolicy>
+	<layout class="arbitrail.libra.utils.LibraPatternLayout">
+		<param name="LocationInfo" value="true"/>
+		<param name="Title" value="Libra Log Messages"/>
+		<param name="TimestampFormat" value="dd-MMM-yyyy-HH:mm:ss" />
+	</layout>
+</appender>
   
   <logger name="arbitrail.libra">
   	<level value="debug"/>
