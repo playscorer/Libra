@@ -34,14 +34,14 @@
     </rollingPolicy>
     <triggeringPolicy
         class="org.apache.log4j.rolling.SizeBasedTriggeringPolicy">
-        <param name="MaxFileSize" value="5000000" />
+        <param name="MaxFileSize" value="20000000" />
     </triggeringPolicy>
 	<layout class="arbitrail.libra.utils.LibraPatternLayout">
 		<param name="LocationInfo" value="true"/>
 		<param name="Title" value="Libra Log Messages"/>
 		<param name="TimestampFormat" value="dd-MMM-yyyy HH:mm:ss,SSS" />
 	</layout>
-</appender>
+  </appender>
   
   <logger name="arbitrail.libra">
   	<level value="debug"/>
