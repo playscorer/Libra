@@ -30,7 +30,7 @@
   <appender name="html" class="org.apache.log4j.rolling.RollingFileAppender">
     <rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
         <param name="ActiveFileName" value="logdir/libra.html" />
-        <param name="FileNamePattern" value="logdir/libra.%d{HH-mm}.%i.html.gz" />
+        <param name="FileNamePattern" value="logdir/libra.%d{yyyyMMdd_HH:mm:ss}.html.gz" />
     </rollingPolicy>
     <triggeringPolicy
         class="org.apache.log4j.rolling.SizeBasedTriggeringPolicy">
