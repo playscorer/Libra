@@ -30,6 +30,9 @@ public class InitServiceImpl implements InitService {
 	
 	@Autowired
 	private FileService fileService;
+	
+	@Autowired
+	private CipherService cipherService;
 
 	@Override
 	public List<Currency> listAllHandledCurrencies() {
@@ -49,14 +52,14 @@ public class InitServiceImpl implements InitService {
 	}
 	
 	@Override
-	public List<Exchange> listAllHandledAccounts() {
+	public List<Exchange> listAllHandledAccounts(boolean encryptedKeys) {
 		List<Exchange> exchangeList = new ArrayList<>();
 		
 		try {
 			Accounts accounts = fileService.parseAccounts();
 			for (Account account : accounts.getAccount()) {
 				BaseExchange exchange = Transformer.fromAccount(account);
-				exchangeList.add(createExchange(exchange, account.getUsername(), account.getApiKey(), account.getKey()));
+				exchangeList.add(createExchange(exchange, account.getUsername(), account.getApiKey(), encryptedKeys ? cipherService.decrypt(account.getKey(), account.getApiKey()) : account.getKey()));
 			}
 			
 		} catch (IOException e) {

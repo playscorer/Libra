@@ -42,6 +42,9 @@ public class Libra {
 	@Value("${simulate}")
 	private boolean simulate;
 	
+	@Value("${encrypted}")
+	private boolean encrypted;
+	
 	@Autowired
 	private InitService initService;
 	
@@ -67,7 +70,7 @@ public class Libra {
 		}
 		LOG.info("List of loaded currencies : " + currencies);
 
-		List<Exchange> exchanges = initService.listAllHandledAccounts();
+		List<Exchange> exchanges = initService.listAllHandledAccounts(encrypted);
 		if (exchanges.isEmpty()) {
 			LOG.fatal("Exchange list is empty - please check the accounts file!");
 			LOG.fatal("Libra has stopped!");

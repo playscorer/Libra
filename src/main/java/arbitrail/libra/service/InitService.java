@@ -21,7 +21,7 @@ public interface InitService {
 	
 	List<Currency> listAllHandledCurrencies();
 	
-	List<Exchange> listAllHandledAccounts();
+	List<Exchange> listAllHandledAccounts(boolean encryptedKeys);
 	
 	Wallets loadAllWallets(List<Exchange> exchangeList, List<Currency> currencyList, boolean init);
 	
