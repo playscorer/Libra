@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>arbitrail</groupId>
 	<artifactId>libra</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.0.3-SNAPSHOT</version>
 	<name>Libra</name>
 
 	<repositories>
@@ -221,7 +221,8 @@
 								<resource>
 									<directory>src/main/resources/data</directory>
 									<includes>
-										<include>*.xml</include>
+										<include>accounts-prod.xml</include>
+										<include>currencies.xml</include>
 									</includes>
 								</resource>
 								<resource>
