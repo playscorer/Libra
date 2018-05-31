@@ -41,18 +41,20 @@ Releasing
 Branch the development branch into a release branch. Following git-flow rules, I make a release branch 1.0.
 
 Update the POM version of the development branch. Update the version to the next release version. 
-For example mvn versions:set -DnewVersion=2.0-SNAPSHOT. Commit and push. Now you can put resources developing towards the next release version.
+For example mvn versions:set -DnewVersion=2.0-SNAPSHOT -DgenerateBackupPoms=false. Commit and push. 
+Now you can put resources developing towards the next release version.
 
 Update the POM version of the release branch. Update the version to the standard CR version. 
-For example mvn versions:set -DnewVersion=1.0.CR-SNAPSHOT. Commit and push.
+For example mvn versions:set -DnewVersion=1.0.CR-SNAPSHOT -DgenerateBackupPoms=false. Commit and push.
 
 Run tests on the release branch. Run all the tests. If one or more fail, fix them first.
 
 Create a candidate release from the release branch.
-
 Use the Maven version plugin to update your POM’s versions. For example mvn versions:set -DnewVersion=1.0.CR1. Commit and push.
 
 Make a tag on git.
+git tag -a 0.0.1 -m "libra-monitor v0.0.1"
+git push origin 0.0.1
 
 Use the Maven version plugin to update your POM’s versions back to the standard CR version. For example mvn versions:set -DnewVersion=1.0.CR-SNAPSHOT.
 

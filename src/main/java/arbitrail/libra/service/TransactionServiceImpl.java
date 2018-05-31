@@ -99,7 +99,7 @@ public class TransactionServiceImpl implements TransactionService {
 		if (ExchangeType.Hitbtc.name().equals(exchangeName)) {
 			HitbtcFundingHistoryParams.Builder builder = new HitbtcFundingHistoryParams.Builder();
 			return builder.offset(0).limit(100).build();
-		} else if (ExchangeType.Bitfinex.name().equals(exchangeName)) {
+		} else if (ExchangeType.Bitfinex.name().equalsIgnoreCase(exchangeName)) {
 			// TODO: Support multi-currency TradeHistoryParams. in the meantime we return
 			// the first on the list
 			for (String currencyName : wallets.getWalletMap().get(exchangeName).keySet()) {
