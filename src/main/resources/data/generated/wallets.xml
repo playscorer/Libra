@@ -2,91 +2,136 @@
   <walletMap>
     <Binance>
       <XRP>
-        <initialBalance>300</initialBalance>
-        <minResidualBalance>0</minResidualBalance>
-        <minWithdrawalAmount>20</minWithdrawalAmount>
-        <address/>
-        <tag>102449671</tag>
+        <initialBalance>4568.35831</initialBalance>
+        <minResidualBalance>2000</minResidualBalance>
+        <minWithdrawalAmount>1000</minWithdrawalAmount>
+        <address>rEb8TK3gBgk5auZkwc6sHnwrGVJH8DuaLh</address>
+        <tag>109750021</tag>
         <depositFee>0</depositFee>
         <withdrawalFee>0.25</withdrawalFee>
-        <label/>
       </XRP>
       <XVG>
-        <initialBalance>80000</initialBalance>
+        <initialBalance>47281.13155631</initialBalance>
         <minResidualBalance>25000</minResidualBalance>
         <minWithdrawalAmount>30000</minWithdrawalAmount>
-        <address/>
-        <tag/>
         <depositFee>0</depositFee>
         <withdrawalFee>0.1</withdrawalFee>
-        <label/>
       </XVG>
+      <ETH>
+        <initialBalance>10</initialBalance>
+        <minResidualBalance>3</minResidualBalance>
+        <minWithdrawalAmount>8</minWithdrawalAmount>
+        <depositFee>0</depositFee>
+        <withdrawalFee>0.01</withdrawalFee>
+      </ETH>
       <NEO>
-        <initialBalance>20</initialBalance>
+        <initialBalance>10.6113937975</initialBalance>
         <minResidualBalance>5</minResidualBalance>
         <minWithdrawalAmount>5</minWithdrawalAmount>
-        <address/>
-        <tag/>
         <depositFee>0</depositFee>
         <withdrawalFee>0</withdrawalFee>
-        <label/>
       </NEO>
+      <BTC>
+        <initialBalance>1</initialBalance>
+        <minResidualBalance>0.15</minResidualBalance>
+        <minWithdrawalAmount>0.85</minWithdrawalAmount>
+        <depositFee>0</depositFee>
+        <withdrawalFee>0.0005</withdrawalFee>
+      </BTC>
     </Binance>
     <Hitbtc>
       <XRP>
-        <initialBalance>2000</initialBalance>
-        <minResidualBalance>200</minResidualBalance>
-        <minWithdrawalAmount>20</minWithdrawalAmount>
-        <address/>
-        <tag>3375351602</tag>
+        <initialBalance>4568.35831</initialBalance>
+        <minResidualBalance>2000</minResidualBalance>
+        <minWithdrawalAmount>1000</minWithdrawalAmount>
+        <address>rhL5Va5tDbUUuozS9isvEuv7Uk1uuJaY1T</address>
+        <tag>1955192449</tag>
         <depositFee>0</depositFee>
         <withdrawalFee>0.509</withdrawalFee>
         <label>Trading</label>
       </XRP>
       <XVG>
-        <initialBalance>80000</initialBalance>
+        <initialBalance>47281.13155631</initialBalance>
         <minResidualBalance>25000</minResidualBalance>
         <minWithdrawalAmount>30000</minWithdrawalAmount>
-        <address/>
-        <tag/>
         <depositFee>0</depositFee>
         <withdrawalFee>1.5</withdrawalFee>
         <label>Trading</label>
       </XVG>
       <NEO>
-        <initialBalance>20</initialBalance>
+        <initialBalance>10.6113937975</initialBalance>
         <minResidualBalance>5</minResidualBalance>
         <minWithdrawalAmount>5</minWithdrawalAmount>
-        <address/>
-        <tag/>
         <depositFee>0</depositFee>
         <withdrawalFee>0</withdrawalFee>
         <label>Trading</label>
       </NEO>
+      <ETH>
+        <initialBalance>10</initialBalance>
+        <minResidualBalance>3</minResidualBalance>
+        <minWithdrawalAmount>8</minWithdrawalAmount>
+        <depositFee>0</depositFee>
+        <withdrawalFee>0.00958</withdrawalFee>
+		<label>Trading</label>
+      </ETH>
+      <BTC>
+        <initialBalance>1</initialBalance>
+        <minResidualBalance>0.15</minResidualBalance>
+        <minWithdrawalAmount>0.85</minWithdrawalAmount>
+        <depositFee>0.0006</depositFee>
+        <withdrawalFee>0.001</withdrawalFee>
+		<label>Trading</label>
+      </BTC>
     </Hitbtc>
     <Bittrex>
       <XRP>
-        <initialBalance>600.00000000</initialBalance>
-        <minResidualBalance>0</minResidualBalance>
-        <minWithdrawalAmount>0</minWithdrawalAmount>
+        <initialBalance>4568.35831</initialBalance>
+        <minResidualBalance>200</minResidualBalance>
+        <minWithdrawalAmount>100</minWithdrawalAmount>
         <address>rPVMhWBsfF9iMXYj3aAzJVkPDTFNSyWdKy</address>
-        <tag>673968277</tag>
+        <tag>1201494151</tag>
         <depositFee>0</depositFee>
-        <withdrawalFee>0</withdrawalFee>
-        <label/>
+        <withdrawalFee>1</withdrawalFee>
       </XRP>
+      <XVG>
+        <initialBalance>47281.13155631</initialBalance>
+        <minResidualBalance>25000</minResidualBalance>
+        <minWithdrawalAmount>30000</minWithdrawalAmount>
+        <depositFee>0</depositFee>
+        <withdrawalFee>10</withdrawalFee>
+      </XVG>
+      <NEO>
+        <initialBalance>10.6113937975</initialBalance>
+        <minResidualBalance>5</minResidualBalance>
+        <minWithdrawalAmount>5</minWithdrawalAmount>
+        <depositFee>0</depositFee>
+        <withdrawalFee>0.025</withdrawalFee>
+      </NEO>
+      <ETH>
+        <initialBalance>10</initialBalance>
+        <minResidualBalance>3</minResidualBalance>
+        <minWithdrawalAmount>8</minWithdrawalAmount>
+        <depositFee>0</depositFee>
+        <withdrawalFee>0.006</withdrawalFee>
+      </ETH>
+      <BTC>
+        <initialBalance>1</initialBalance>
+        <minResidualBalance>0.15</minResidualBalance>
+        <minWithdrawalAmount>0.85</minWithdrawalAmount>
+        <depositFee>0.0006</depositFee>
+        <withdrawalFee>0.0005</withdrawalFee>
+      </BTC>
     </Bittrex>
-    <BitFinex>
+    <!--BitFinex>
       <XRP>
-        <initialBalance>600.00000000</initialBalance>
-        <minResidualBalance>0</minResidualBalance>
-        <minWithdrawalAmount>0</minWithdrawalAmount>
-        <address>rPVMhWBsfF9iMXYj3aAzJVkPDTFNSyWdKy</address>
-        <tag></tag>
+        <initialBalance>4568.35831</initialBalance>
+        <minResidualBalance>2000</minResidualBalance>
+        <minWithdrawalAmount>1000</minWithdrawalAmount>
+        <address>?</address>
+        <tag>3353271445</tag>
         <depositFee>0</depositFee>
-        <withdrawalFee>0</withdrawalFee>
-        <label>exchange</label>
+        <withdrawalFee>0.02</withdrawalFee>
       </XRP>
-    </BitFinex>
+    </BitFinex-->
   </walletMap>
 </wallets>

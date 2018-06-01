@@ -3,7 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>arbitrail</groupId>
 	<artifactId>libra</artifactId>
+<<<<<<< HEAD
 	<version>0.0.3-SNAPSHOT</version>
+=======
+	<version>0.0.2</version>
+>>>>>>> 5142fb2b7c90b33bb7fb38ff451e97058759b18e
 	<name>Libra</name>
 
 	<repositories>
@@ -221,7 +225,7 @@
 								<resource>
 									<directory>src/main/resources/data</directory>
 									<includes>
-										<include>accounts-prod.xml</include>
+										<include>accounts-${spring.profiles.active}.xml</include>
 										<include>currencies.xml</include>
 									</includes>
 								</resource>

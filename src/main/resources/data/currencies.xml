@@ -2,6 +2,8 @@
 
 <currencies>
 	<currency code="XRP"/>
-<!-- 	<currency code="XVG"/>
-	<currency code="NEO"/> -->
+ 	<currency code="XVG"/>
+	<currency code="NEO"/>
+	<currency code="ETH"/>
+	<currency code="BTC"/>
 </currencies>
