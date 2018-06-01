@@ -18,9 +18,9 @@
         <withdrawalFee>0.1</withdrawalFee>
       </XVG>
       <ETH>
-        <initialBalance>12</initialBalance>
+        <initialBalance>10</initialBalance>
         <minResidualBalance>3</minResidualBalance>
-        <minWithdrawalAmount>10</minWithdrawalAmount>
+        <minWithdrawalAmount>8</minWithdrawalAmount>
         <depositFee>0</depositFee>
         <withdrawalFee>0.01</withdrawalFee>
       </ETH>
@@ -32,9 +32,9 @@
         <withdrawalFee>0</withdrawalFee>
       </NEO>
       <BTC>
-        <initialBalance>1.25</initialBalance>
+        <initialBalance>1</initialBalance>
         <minResidualBalance>0.15</minResidualBalance>
-        <minWithdrawalAmount>1.0</minWithdrawalAmount>
+        <minWithdrawalAmount>0.85</minWithdrawalAmount>
         <depositFee>0</depositFee>
         <withdrawalFee>0.0005</withdrawalFee>
       </BTC>
@@ -67,17 +67,17 @@
         <label>Trading</label>
       </NEO>
       <ETH>
-        <initialBalance>12</initialBalance>
+        <initialBalance>10</initialBalance>
         <minResidualBalance>3</minResidualBalance>
-        <minWithdrawalAmount>10</minWithdrawalAmount>
+        <minWithdrawalAmount>8</minWithdrawalAmount>
         <depositFee>0</depositFee>
         <withdrawalFee>0.00958</withdrawalFee>
 		<label>Trading</label>
       </ETH>
       <BTC>
-        <initialBalance>1.25</initialBalance>
+        <initialBalance>1</initialBalance>
         <minResidualBalance>0.15</minResidualBalance>
-        <minWithdrawalAmount>1.0</minWithdrawalAmount>
+        <minWithdrawalAmount>0.85</minWithdrawalAmount>
         <depositFee>0.0006</depositFee>
         <withdrawalFee>0.001</withdrawalFee>
 		<label>Trading</label>
@@ -108,16 +108,16 @@
         <withdrawalFee>0.025</withdrawalFee>
       </NEO>
       <ETH>
-        <initialBalance>12</initialBalance>
+        <initialBalance>10</initialBalance>
         <minResidualBalance>3</minResidualBalance>
-        <minWithdrawalAmount>10</minWithdrawalAmount>
+        <minWithdrawalAmount>8</minWithdrawalAmount>
         <depositFee>0</depositFee>
         <withdrawalFee>0.006</withdrawalFee>
       </ETH>
       <BTC>
-        <initialBalance>1.25</initialBalance>
+        <initialBalance>1</initialBalance>
         <minResidualBalance>0.15</minResidualBalance>
-        <minWithdrawalAmount>1.0</minWithdrawalAmount>
+        <minWithdrawalAmount>0.85</minWithdrawalAmount>
         <depositFee>0.0006</depositFee>
         <withdrawalFee>0.0005</withdrawalFee>
       </BTC>

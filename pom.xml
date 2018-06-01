@@ -221,7 +221,8 @@
 								<resource>
 									<directory>src/main/resources/data</directory>
 									<includes>
-										<include>*.xml</include>
+										<include>accounts-${spring.profiles.active}.xml</include>
+										<include>currencies.xml</include>
 									</includes>
 								</resource>
 								<resource>
