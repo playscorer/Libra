@@ -1,0 +1,23 @@
+<wallets>
+  <walletMap>
+    <Binance>
+      <BTC>
+        <initialBalance>1</initialBalance>
+        <minResidualBalance>0</minResidualBalance>
+        <minWithdrawalAmount>0</minWithdrawalAmount>
+        <depositFee>0</depositFee>
+        <withdrawalFee>0.0005</withdrawalFee>
+      </BTC>
+    </Binance>
+    <Hitbtc>
+      <BTC>
+        <initialBalance>1</initialBalance>
+        <minResidualBalance>0</minResidualBalance>
+        <minWithdrawalAmount>0</minWithdrawalAmount>
+        <depositFee>0.0006</depositFee>
+        <withdrawalFee>0.001</withdrawalFee>
+		<label>Trading</label>
+      </BTC>
+    </Hitbtc>
+  </walletMap>
+</wallets>
