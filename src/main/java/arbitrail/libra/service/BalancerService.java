@@ -209,7 +209,7 @@ public class BalancerService implements Runnable {
 		}
 	}
 	
-	private String withdrawFunds(Exchange exchange, String withdrawAddress, Currency currency, BigDecimal amountToWithdraw, String paymentId, BigDecimal fee) throws IOException, InterruptedException {
+	private String withdrawFunds(Exchange exchange, String withdrawAddress, Currency currency, BigDecimal amountToWithdraw, String paymentId, BigDecimal fees) throws IOException, InterruptedException {
 		String exchangeName = exchange.getExchangeSpecification().getExchangeName();
 		if (ExchangeType.Hitbtc.name().equals(exchangeName)) {
 			HitbtcAccountService hitbtcAccountService = (HitbtcAccountService) exchange.getAccountService();
@@ -217,9 +217,11 @@ public class BalancerService implements Runnable {
 			int nbTry = 3;
 			while (--nbTry > 0) {
 				try {
+					// the amount to withdraw from hitbtc does not contain the fees (sum of withdrawal and deposit fees)
+					BigDecimal amountDeducted = amountToWithdraw.subtract(fees);
 					LOG.info("Sending withdraw order - address: " + withdrawAddress + " id: " + paymentId + " ["
-							+ exchangeName + " -> " + currency.getDisplayName() + "] amount: " + amountToWithdraw);
-					return hitbtcAccountService.withdrawFundsRaw(currency, amountToWithdraw.subtract(fee), withdrawAddress, paymentId);
+							+ exchangeName + " -> " + currency.getDisplayName() + "] amount: " + amountDeducted);
+					return hitbtcAccountService.withdrawFundsRaw(currency, amountDeducted, withdrawAddress, paymentId);
 				} catch (HttpStatusIOException hse) {
 					if (nbTry == 1) {
 						// revert the withdraw
@@ -232,6 +234,7 @@ public class BalancerService implements Runnable {
 			return null;
 		}
 		else {
+			// the withdrawal fee has been added to the amount to withdraw
 			LOG.info("Sending withdraw order - address: " + withdrawAddress + " id: " + paymentId + " [" + exchangeName + " -> " + currency.getDisplayName() + "] amount: " + amountToWithdraw);
 			if (Currency.XRP.equals(currency)) {
 				return exchange.getAccountService().withdrawFunds(new RippleWithdrawFundsParams(withdrawAddress, currency, amountToWithdraw, paymentId));
@@ -256,8 +259,10 @@ public class BalancerService implements Runnable {
 		
 		BigDecimal balancedOffset = fromBalance.subtract(toBalance).divide(BigDecimal.valueOf(2));
 		BigDecimal allowedWithdrawableAmount = fromBalance.subtract(fromWallet.getMinResidualBalance());
+		// we add the withdrawal fee to the amount to withdraw as it will be deducted automatically in order to get the desired withdrawal amount
 		BigDecimal amountToWithdraw = transxService.roundAmount(balancedOffset.min(allowedWithdrawableAmount), currency).add(fromWallet.getWithdrawalFee());
-		LOG.debug("### amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) = min (" + balancedOffset + ", " + allowedWithdrawableAmount + ")");
+		LOG.debug("### amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) + withdrawalFee = min ("
+				+ balancedOffset + ", " + allowedWithdrawableAmount + ") + " + fromWallet.getWithdrawalFee());
 		
 		// amountToWithdraw must be higher than the minimum amount specified in the config
 		if (amountToWithdraw.compareTo(fromWallet.getMinWithdrawalAmount()) < 0) {
@@ -300,8 +305,10 @@ public class BalancerService implements Runnable {
 					List<FundingRecord> fundingRecords = fromExchange.getAccountService().getFundingHistory(getTradeHistoryParams(fromExchange, currency));	
 					Optional<FundingRecord> matchingFundingRecord = transxService.filterByInternalId(fundingRecords, internalId);
 					if (matchingFundingRecord.isPresent()){
-						BigDecimal roundedAmount = transxService.roundAmount(matchingFundingRecord.get().getAmount(), matchingFundingRecord.get().getCurrency());
-						transxHashkey = transxService.transxHashkey(matchingFundingRecord.get().getCurrency(), roundedAmount, depositAddress);
+						// the amount that will be deposited in the target account will be deducted from the deposit fee
+						BigDecimal depositAmount = transxService.roundAmount(matchingFundingRecord.get().getAmount(), matchingFundingRecord.get().getCurrency()).subtract(toWallet.getDepositFee());
+						transxHashkey = transxService.transxHashkey(matchingFundingRecord.get().getCurrency(), depositAmount, depositAddress);
+						LOG.debug("### transxHashkey : " + transxHashkey + " = (" + matchingFundingRecord.get().getCurrency() + ", " + depositAmount + ", " + depositAddress + ")");
 					}
 					numAttempts++;
 					if (numAttempts == 10) {

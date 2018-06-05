@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <currencies>
-	<currency code="XRP"/>
+<!-- 	<currency code="XRP"/>
  	<currency code="XVG"/>
 	<currency code="NEO"/>
-	<currency code="ETH"/>
+	<currency code="ETH"/> -->
 	<currency code="BTC"/>
 </currencies>

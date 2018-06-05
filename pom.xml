@@ -221,14 +221,13 @@
 								<resource>
 									<directory>src/main/resources/data</directory>
 									<includes>
-										<include>accounts-${spring.profiles.active}.xml</include>
-										<include>currencies.xml</include>
+										<include>*-${spring.profiles.active}.xml</include>
 									</includes>
 								</resource>
 								<resource>
 									<directory>src/main/resources/data/generated</directory>
 									<includes>
-										<include>wallets.xml</include>
+										<include>*-${spring.profiles.active}.xml</include>
 									</includes>
 								</resource>
 							</resources>
