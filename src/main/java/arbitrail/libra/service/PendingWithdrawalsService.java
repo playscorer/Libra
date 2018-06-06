@@ -117,7 +117,7 @@ public class PendingWithdrawalsService implements Runnable {
 							}
 							// filter trades recorded before the withdrawal
 							if (!exchStatus.isAlive(fundingRecord.getDate())) {
-								LOG.warn("Filtered a withdraw : " + exchangeName + " -> " + fundingRecord.getCurrency().getDisplayName());
+								LOG.warn("Filtered a withdraw : " + exchangeName + " -> " + fundingRecord.getCurrency().getDisplayName() + " : " + fundingRecord.getDate() + " < " + exchStatus.getWithdrawalTime());
 								continue;
 							}
 							LOG.warn("Detected a withdraw : " + exchangeName + " -> " + fundingRecord.getCurrency().getDisplayName());
@@ -157,10 +157,10 @@ public class PendingWithdrawalsService implements Runnable {
 					}				
 					
 					// compute hashkey for the deposit
-					BigDecimal roundedAmount = transxService.roundAmount(fundingRecord.getAmount(), fundingRecord.getCurrency());
+					//BigDecimal roundedAmount = transxService.roundAmount(fundingRecord.getAmount(), fundingRecord.getCurrency()); TODO test and remove
 					String depositAddress = walletService.getDepositAddress(exchange, exchangeName, myWallet, currency);
-					Integer depositHashkey = transxService.transxHashkey(fundingRecord.getCurrency(), roundedAmount, depositAddress);
-					LOG.debug("@ Looking for deposit transxHashkey : " + depositHashkey + " = (" + fundingRecord.getCurrency() + ", " + roundedAmount + ", " + depositAddress + ")");
+					Integer depositHashkey = transxService.transxHashkey(fundingRecord.getCurrency(), fundingRecord.getAmount(), depositAddress);
+					LOG.debug("@ Looking for deposit transxHashkey : " + depositHashkey + " = (" + fundingRecord.getCurrency() + ", " + fundingRecord.getAmount() + ", " + depositAddress + ")");
 					if (depositHashkey == null) {
 						LOG.error("Unexpected error : depositHashkey is null");
 						LOG.warn("Skipping transaction from exchange : " + exchangeName + " -> " + fundingRecord.getCurrency().getDisplayName());
@@ -172,7 +172,9 @@ public class PendingWithdrawalsService implements Runnable {
 						if (Type.DEPOSIT.equals(fundingRecord.getType())) {
 							// filter trades recorded before the deposit
 							if (!transxIdToTargetExchMap.get(depositHashkey).isAlive(fundingRecord.getDate())) {
-								LOG.warn("Filtered a deposit : " + exchangeName + " -> " + fundingRecord.getCurrency().getDisplayName());
+								LOG.warn("Filtered a deposit : " + exchangeName + " -> "
+										+ fundingRecord.getCurrency().getDisplayName() + " : " + fundingRecord.getDate()
+										+ " < " + transxIdToTargetExchMap.get(depositHashkey).getWithdrawalTime());
 								continue;
 							}
 							LOG.warn("Detected a deposit : " + exchangeName + " -> " + fundingRecord.getCurrency().getDisplayName());
@@ -192,6 +194,7 @@ public class PendingWithdrawalsService implements Runnable {
 								
 								// Hitbtc : transfer funds to the trading wallet
 								if (ExchangeType.Hitbtc.name().equals(exchangeName)) {
+									LOG.debug("@ Hitbtc -> transferring funds to the trading wallet");
 									HitbtcAccountService hitbtcAccountService = (HitbtcAccountService) exchange.getAccountService();
 									hitbtcAccountService.transferToTrading(currency, fundingRecord.getAmount());
 								}
