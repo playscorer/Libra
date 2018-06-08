@@ -6,4 +6,13 @@
 	<currency code="NEO"/>
 	<currency code="ETH"/>
 	<currency code="BTC"/>
+	<currency code="EOS"/>
+	<currency code="USDT"/>
+	<currency code="DASH"/>
+	<currency code="NANO"/>
+	<currency code="IOTA"/>
+	<currency code="XLM"/>
+	<currency code="LTC"/>
+	<currency code="TRX"/>
+	<currency code="XMR"/>
 </currencies>
