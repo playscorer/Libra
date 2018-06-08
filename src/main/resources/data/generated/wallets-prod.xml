@@ -169,7 +169,7 @@
         <withdrawalFee>0.03</withdrawalFee>
         <label>Trading</label>
       </DASH>
-      <NANO>
+<!--       <NANO>
         <initialBalance>249.95165438</initialBalance>
         <minResidualBalance>120</minResidualBalance>
         <minWithdrawalAmount>60</minWithdrawalAmount>
@@ -193,7 +193,7 @@
         <withdrawalFee>?</withdrawalFee>
         <label>Trading</label>
       </XLM>
-      <LTC>
+ -->      <LTC>
         <initialBalance>1.39828189</initialBalance>
         <minResidualBalance>0.25</minResidualBalance>
         <minWithdrawalAmount>0.5</minWithdrawalAmount>
