@@ -28,7 +28,7 @@ public class LibraPatternLayout extends HTMLLayout {
 	 
 	private SimpleDateFormat sdf = new SimpleDateFormat(timestampFormat);
 	
-	private static int REFRESH = 30; 
+	private static int REFRESH = 60; //seconds 
 
 	@Override
 	public String getHeader() {
