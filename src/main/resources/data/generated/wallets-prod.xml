@@ -174,7 +174,7 @@
         <minResidualBalance>120</minResidualBalance>
         <minWithdrawalAmount>60</minWithdrawalAmount>
         <depositFee>0</depositFee>
-        <withdrawalFee>?</withdrawalFee>
+        <withdrawalFee>0.01</withdrawalFee>
         <label>Trading</label>
       </NANO>
       <IOTA>
