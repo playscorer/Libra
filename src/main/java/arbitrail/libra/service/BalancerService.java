@@ -129,8 +129,8 @@ public class BalancerService implements Runnable {
 				LOG.info("No balances retrieved - skipping exchange : " + exchangeName);
 				continue;
 			}
-			
-			BigDecimal balance = balancesForExchange.get(currency).getAvailable();
+			Balance balanceForCurrency = balancesForExchange.get(currency);
+			BigDecimal balance = balanceForCurrency == null ? BigDecimal.ZERO : balanceForCurrency.getAvailable();
 			if (maxBalance.compareTo(balance) < 0) {
 				maxExchange = exchange;
 				maxBalance = balance;
