@@ -91,8 +91,14 @@ public class BalancerService implements Runnable {
 		Map<Exchange, Map<Currency, Balance>> balancesMap = new HashMap<>();
 		
 		for (Exchange exchange : exchangeMap.keySet()) {
-			Map<Currency, Balance> balancesForExchange = walletService.getAvailableBalances(exchange, exchangeMap.get(exchange));
-			balancesMap.put(exchange, balancesForExchange);
+			try {
+				Map<Currency, Balance> balancesForExchange = walletService.getAvailableBalances(exchange, exchangeMap.get(exchange));
+				balancesMap.put(exchange, balancesForExchange);
+			} catch (ExchangeException e) {
+				String exchangeName = exchange.getExchangeSpecification().getExchangeName();
+				LOG.error("Exception occured when trying to get the balances for exchange : " + exchangeName, e);
+				LOG.info("Skipping balances for exchange : " + exchangeName);
+			}
 		}
 		
 		return balancesMap;
@@ -137,6 +143,11 @@ public class BalancerService implements Runnable {
 		for (Exchange toExchange : exchangeMap.keySet()) {
 			String toExchangeName = toExchange.getExchangeSpecification().getExchangeName();
 			Map<Currency, Balance> balancesForExchange = balanceMap.get(toExchange);
+			if (balancesForExchange == null) {
+				LOG.info("No balances retrieved - skipping exchange : " + toExchangeName);
+				continue;
+			}
+			
 			Map<String, MyWallet> toExchangeWallets = walletMap.get(toExchangeName);
 			// no currencies set up for the exchange
 			if (toExchangeWallets == null) {
