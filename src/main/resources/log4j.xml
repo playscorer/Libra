@@ -41,7 +41,7 @@
     </layout>
   </appender>
   
-  <appender name="html" class="org.apache.log4j.rolling.RollingFileAppender">
+  <appender name="html" class="org.apache.log4j.RollingFileAppender">
     <param name="file" value="logdir/libra.html" />
     <param name="MaxFileSize" value="10KB" />
     <param name="MaxBackupIndex" value="1" />
