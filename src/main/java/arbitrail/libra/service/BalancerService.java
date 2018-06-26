@@ -180,7 +180,8 @@ public class BalancerService implements Runnable {
 				}
 				
 				// the threshold represents the minimum amount from which the balance will be triggered
-				BigDecimal currentBalance = balancesForExchange.get(currency).getAvailable();
+				Balance balanceForCurrency = balancesForExchange.get(currency);
+				BigDecimal currentBalance = balanceForCurrency == null ? BigDecimal.ZERO : balanceForCurrency.getAvailable();
 				BigDecimal lastBalancedAmount = walletService.getLastBalancedAmount(toExchangeName, currencyCode);
 				BigDecimal checkThresholdBalance = toWallet.getInitialBalance().max(lastBalancedAmount).multiply(new BigDecimal(balanceCheckThreshold));
 				LOG.debug("# Exchange : " + toExchangeName + " -> " + currency.getDisplayName() + " : currentBalance = " + currentBalance + " / checkThresholdBalance = " + checkThresholdBalance);
@@ -216,7 +217,7 @@ public class BalancerService implements Runnable {
 					
 					try {
 						// the rebalancing actually occured
-						if (balance(fromExchange, toExchange, balanceMap.get(fromExchange).get(currency), balancesForExchange.get(currency), currency, fromWallet, toWallet)) {
+						if (balance(fromExchange, toExchange, balanceMap.get(fromExchange).get(currency), balanceForCurrency, currency, fromWallet, toWallet)) {
 							BigDecimal newDecreasedBalance = walletService.getAvailableBalance(fromExchange, exchangeMap.get(fromExchange), currency);
 							LOG.info("new provisional balance for " + fromExchangeName + " -> " + currency.getDisplayName() + " : " + newDecreasedBalance);
 							nbOperations++;
