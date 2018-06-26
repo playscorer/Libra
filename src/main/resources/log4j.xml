@@ -43,7 +43,7 @@
   
   <appender name="html" class="org.apache.log4j.RollingFileAppender">
     <param name="file" value="logdir/libra.html" />
-    <param name="MaxFileSize" value="10KB" />
+    <param name="MaxFileSize" value="10000KB" />
     <param name="MaxBackupIndex" value="1" />
 	<layout class="arbitrail.libra.utils.LibraPatternLayout">
 		<param name="LocationInfo" value="true"/>
