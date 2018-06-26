@@ -126,7 +126,7 @@ public class BalancerService implements Runnable {
 			}
 			Map<Currency, Balance> balancesForExchange = balancesMap.get(exchange);
 			if (balancesForExchange == null) {
-				LOG.info("No balances retrieved - skipping exchange : " + exchangeName);
+				LOG.info("findMostFilledBalance : No balances retrieved for exchange : " + exchangeName);
 				continue;
 			}
 			Balance balanceForCurrency = balancesForExchange.get(currency);
@@ -289,8 +289,11 @@ public class BalancerService implements Runnable {
 				+ fromBalance + " / Destination exchange [" + toExchangeName + " -> "
 				+ currency.getDisplayName() + "] balance : " + toBalance);
 		
-		BigDecimal balancedOffset = fromBalance.getAvailable().subtract(toBalance.getAvailable()).divide(BigDecimal.valueOf(2));
-		BigDecimal allowedWithdrawableAmount = fromBalance.getAvailable().subtract(fromWallet.getMinResidualBalance());
+		BigDecimal fromBalanceAvailable = fromBalance == null ? BigDecimal.ZERO : fromBalance.getAvailable();
+		BigDecimal toBalanceAvailable = toBalance == null ? BigDecimal.ZERO : toBalance.getAvailable();
+		
+		BigDecimal balancedOffset = fromBalanceAvailable.subtract(toBalanceAvailable).divide(BigDecimal.valueOf(2));
+		BigDecimal allowedWithdrawableAmount = fromBalanceAvailable.subtract(fromWallet.getMinResidualBalance());
 		// we add the withdrawal fee to the amount to withdraw as it will be deducted automatically in order to get the desired withdrawal amount
 		BigDecimal amountToWithdraw = transxService.roundAmount(balancedOffset.min(allowedWithdrawableAmount), currency).add(fromWallet.getWithdrawalFee());
 		LOG.debug("### amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) + withdrawalFee = min ("
