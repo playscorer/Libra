@@ -6,14 +6,17 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.AbstractMap;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.concurrent.ConcurrentMap;
 
 import org.apache.log4j.Logger;
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.currency.Currency;
+import org.knowm.xchange.dto.account.Balance;
 import org.knowm.xchange.dto.account.FundingRecord;
 import org.knowm.xchange.exceptions.ExchangeException;
 import org.knowm.xchange.exceptions.NotAvailableFromExchangeException;
@@ -66,7 +69,7 @@ public class BalancerService implements Runnable {
 	private Double balanceCheckThreshold;
 	
 	private Wallets wallets;
-	private List<Exchange> exchanges;
+	private Map<Exchange, String> exchangeMap;
 	private List<Currency> currencies;
 	private ConcurrentMap<ExchCcy, Object> pendingWithdrawalsMap;
 	private ConcurrentMap<Integer, ExchStatus> transxIdToTargetExchMap;
@@ -76,19 +79,30 @@ public class BalancerService implements Runnable {
 	}
 
 	public void init(Wallets wallets, ConcurrentMap<ExchCcy, Object> pendingWithdrawalsMap, ConcurrentMap<Integer, ExchStatus> transxIdToTargetExchMap, List<Currency> currencies,
-			List<Exchange> exchanges) {
+			Map<Exchange, String> exchangeMap) {
 		this.currencies = currencies;
-		this.exchanges = exchanges;
+		this.exchangeMap = exchangeMap;
 		this.wallets = wallets;
 		this.pendingWithdrawalsMap = pendingWithdrawalsMap;
 		this.transxIdToTargetExchMap = transxIdToTargetExchMap;
 	}
 	
-	private Exchange findMostFilledBalance(List<Exchange> exchangeList, Map<String, Map<String, MyWallet>> walletMap, Currency currency) throws IOException {
+	private Map<Exchange, Map<Currency, Balance>> getAllBalances(Map<Exchange, String> exchangeMap) throws IOException {
+		Map<Exchange, Map<Currency, Balance>> balancesMap = new HashMap<>();
+		
+		for (Exchange exchange : exchangeMap.keySet()) {
+			Map<Currency, Balance> balancesForExchange = walletService.getAvailableBalances(exchange, exchangeMap.get(exchange));
+			balancesMap.put(exchange, balancesForExchange);
+		}
+		
+		return balancesMap;
+	}
+	
+	private Exchange findMostFilledBalance(Set<Exchange> exchangeSet, Map<Exchange, Map<Currency, Balance>> balancesMap, Map<String, Map<String, MyWallet>> walletMap, Currency currency) throws IOException {
 		Exchange maxExchange = null;
 		BigDecimal maxBalance = BigDecimal.ZERO;
 		
-		for (Exchange exchange : exchangeList) {
+		for (Exchange exchange : exchangeSet) {
 			String exchangeName = exchange.getExchangeSpecification().getExchangeName();
 			Map<String, MyWallet> walletsForExchange = walletMap.get(exchangeName);
 			// no currencies set up for the exchange
@@ -104,7 +118,7 @@ public class BalancerService implements Runnable {
 				LOG.info("Skipping currency for exchange : " + exchangeName + " -> " + currency.getDisplayName());
 				continue;
 			}
-			BigDecimal balance = walletService.getAvailableBalance(exchange, myWallet.getLabel(), currency);
+			BigDecimal balance = balancesMap.get(exchange).get(currency).getAvailable();
 			if (maxBalance.compareTo(balance) < 0) {
 				maxExchange = exchange;
 				maxBalance = balance;
@@ -114,12 +128,15 @@ public class BalancerService implements Runnable {
 		return maxExchange;
 	}
 	
-	private int balanceAccounts(List<Exchange> exchangeList, List<Currency> currencyList, Wallets wallets) throws IOException, InterruptedException {
+	private int balanceAccounts(Map<Exchange, String> exchangeMap, List<Currency> currencyList, Wallets wallets) throws IOException, InterruptedException {
+		// get all balances for wallet of currencies for each exchange - avoids multiple calls to getBalance per currency for a specific exchange
+		Map<Exchange, Map<Currency, Balance>> balanceMap = getAllBalances(exchangeMap);
 		Map<String, Map<String, MyWallet>> walletMap = wallets.getWalletMap();
 		int nbOperations = 0;
 		
-		for (Exchange toExchange : exchangeList) {
+		for (Exchange toExchange : exchangeMap.keySet()) {
 			String toExchangeName = toExchange.getExchangeSpecification().getExchangeName();
+			Map<Currency, Balance> balancesForExchange = balanceMap.get(toExchange);
 			Map<String, MyWallet> toExchangeWallets = walletMap.get(toExchangeName);
 			// no currencies set up for the exchange
 			if (toExchangeWallets == null) {
@@ -146,7 +163,7 @@ public class BalancerService implements Runnable {
 				}
 				
 				// the threshold represents the minimum amount from which the balance will be triggered
-				BigDecimal currentBalance = walletService.getAvailableBalance(toExchange, toWallet.getLabel(), currency);
+				BigDecimal currentBalance = balancesForExchange.get(currency).getAvailable();
 				BigDecimal lastBalancedAmount = walletService.getLastBalancedAmount(toExchangeName, currencyCode);
 				BigDecimal checkThresholdBalance = toWallet.getInitialBalance().max(lastBalancedAmount).multiply(new BigDecimal(balanceCheckThreshold));
 				LOG.debug("# Exchange : " + toExchangeName + " -> " + currency.getDisplayName() + " : currentBalance = " + currentBalance + " / checkThresholdBalance = " + checkThresholdBalance);
@@ -154,7 +171,7 @@ public class BalancerService implements Runnable {
 				// trigger the balancer
 				if (currentBalance.compareTo(checkThresholdBalance) < 0) {
 					LOG.info("### Exchange needs to be balanced for currency : " + toExchangeName + " -> " + currency.getDisplayName());
-					Exchange fromExchange = findMostFilledBalance(exchangeList, walletMap, currency);
+					Exchange fromExchange = findMostFilledBalance(exchangeMap.keySet(), balanceMap, walletMap, currency);
 					if (fromExchange == null) {
 						LOG.error("Balancing error : All the accounts balances are zero");
 						LOG.info("Skipping currency for exchange : " + toExchangeName + " -> " + currency.getDisplayName());
@@ -182,8 +199,8 @@ public class BalancerService implements Runnable {
 					
 					try {
 						// the rebalancing actually occured
-						if (balance(fromExchange, toExchange, currency, fromWallet, toWallet)) {
-							BigDecimal newDecreasedBalance = walletService.getAvailableBalance(fromExchange, fromWallet.getLabel(), currency);
+						if (balance(fromExchange, toExchange, balanceMap.get(fromExchange).get(currency), balancesForExchange.get(currency), currency, fromWallet, toWallet)) {
+							BigDecimal newDecreasedBalance = walletService.getAvailableBalance(fromExchange, exchangeMap.get(fromExchange), currency);
 							LOG.info("new provisional balance for " + fromExchangeName + " -> " + currency.getDisplayName() + " : " + newDecreasedBalance);
 							nbOperations++;
 						}
@@ -245,20 +262,17 @@ public class BalancerService implements Runnable {
 		}
 	}
 	
-	private boolean balance(Exchange fromExchange, Exchange toExchange, Currency currency, MyWallet fromWallet, MyWallet toWallet) 
+	private boolean balance(Exchange fromExchange, Exchange toExchange, Balance fromBalance, Balance toBalance, Currency currency, MyWallet fromWallet, MyWallet toWallet) 
 			throws NotAvailableFromExchangeException, NotYetImplementedForExchangeException, ExchangeException, IOException, InterruptedException {
 		String toExchangeName = toExchange.getExchangeSpecification().getExchangeName();
 		String fromExchangeName = fromExchange.getExchangeSpecification().getExchangeName();
-		
-		BigDecimal toBalance = walletService.getAvailableBalance(toExchange, toWallet.getLabel(), currency);
-		BigDecimal fromBalance = walletService.getAvailableBalance(fromExchange, fromWallet.getLabel(), currency);
 		
 		LOG.info("Source exchange [" + fromExchangeName + " -> " + currency.getDisplayName() + "] balance : "
 				+ fromBalance + " / Destination exchange [" + toExchangeName + " -> "
 				+ currency.getDisplayName() + "] balance : " + toBalance);
 		
-		BigDecimal balancedOffset = fromBalance.subtract(toBalance).divide(BigDecimal.valueOf(2));
-		BigDecimal allowedWithdrawableAmount = fromBalance.subtract(fromWallet.getMinResidualBalance());
+		BigDecimal balancedOffset = fromBalance.getAvailable().subtract(toBalance.getAvailable()).divide(BigDecimal.valueOf(2));
+		BigDecimal allowedWithdrawableAmount = fromBalance.getAvailable().subtract(fromWallet.getMinResidualBalance());
 		// we add the withdrawal fee to the amount to withdraw as it will be deducted automatically in order to get the desired withdrawal amount
 		BigDecimal amountToWithdraw = transxService.roundAmount(balancedOffset.min(allowedWithdrawableAmount), currency).add(fromWallet.getWithdrawalFee());
 		LOG.debug("### amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) + withdrawalFee = min ("
@@ -350,7 +364,7 @@ public class BalancerService implements Runnable {
 		while (true) {
 			try {
 				LocalDateTime before = LocalDateTime.now();
-				nbOperations = balanceAccounts(exchanges, currencies, wallets);
+				nbOperations = balanceAccounts(exchangeMap, currencies, wallets);
 				LocalDateTime after = LocalDateTime.now();
 				LOG.info("Number of rebalancing operations : " + nbOperations + " performed in (ms) : " + ChronoUnit.MILLIS.between(before, after));
 				LOG.info("Sleeping for (ms) : " + frequency);

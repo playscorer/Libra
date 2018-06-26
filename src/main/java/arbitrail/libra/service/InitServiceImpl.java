@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.knowm.xchange.BaseExchange;
@@ -52,39 +53,39 @@ public class InitServiceImpl implements InitService {
 	}
 	
 	@Override
-	public List<Exchange> listAllHandledAccounts(boolean encryptedKeys) {
-		List<Exchange> exchangeList = new ArrayList<>();
+	public Map<Exchange, String> listAllHandledAccounts(boolean encryptedKeys) {
+		Map<Exchange, String> exchangeMap = new HashMap<>();
 		
 		try {
 			Accounts accounts = fileService.parseAccounts();
 			for (Account account : accounts.getAccount()) {
 				BaseExchange exchange = Transformer.fromAccount(account);
-				exchangeList.add(createExchange(exchange, account.getUsername(), account.getApiKey(), encryptedKeys ? cipherService.decrypt(account.getKey(), account.getApiKey()) : account.getKey()));
+				exchangeMap.put(createExchange(exchange, account.getApiKey(), encryptedKeys ? cipherService.decrypt(account.getKey(), account.getApiKey()) : account.getKey()), account.getWallet());
 			}
 			
 		} catch (IOException e) {
 			LOG.error(e.getMessage(), e.getCause());
 		}
 		
-		return exchangeList;
+		return exchangeMap;
 	}
 	
 	@Override
-	public Wallets loadAllWallets(List<Exchange> exchangeList, List<Currency> currencyList, boolean init) {
+	public Wallets loadAllWallets(Set<Exchange> exchangeSet, List<Currency> currencyList, boolean init) {
 		Wallets wallets = null;
 		
 		try {
 			if (fileService.existsWalletsFile()) {
 				wallets = fileService.parseWallets();
 				if (init) {
-					addNewWallets(wallets, exchangeList, currencyList);
+					addNewWallets(wallets, exchangeSet, currencyList);
 				}
 			} else {
 				if (!init) {
 					LOG.error("The wallets file does not exist or could not be found - please check the file or run Libra in init mode");
 					return null;
 				}
-				Map<String, Map<String, MyWallet>> walletMap = initWallets(exchangeList, currencyList);
+				Map<String, Map<String, MyWallet>> walletMap = initWallets(exchangeSet, currencyList);
 				wallets = new Wallets(walletMap);
 			}
 
@@ -98,10 +99,10 @@ public class InitServiceImpl implements InitService {
 	/*
 	 * Adds only new wallets from the list of exchanges and currencies to the existing wallets map
 	 */
-	private void addNewWallets(Wallets wallets, List<Exchange> exchangeList, List<Currency> currencyList) throws IOException {
+	private void addNewWallets(Wallets wallets, Set<Exchange> exchangeSet, List<Currency> currencyList) throws IOException {
 		Map<String, Map<String, MyWallet>> walletMap = wallets.getWalletMap();
 		
-		for (Exchange toExchange : exchangeList) {
+		for (Exchange toExchange : exchangeSet) {
 			String exchangeName = toExchange.getExchangeSpecification().getExchangeName();
 			
 			Map<String, MyWallet> currencyMap = walletMap.get(exchangeName);
@@ -130,10 +131,10 @@ public class InitServiceImpl implements InitService {
 	/*
 	 * Creates a new wallets map from the list of exchanges and currencies
 	 */
-	private Map<String, Map<String, MyWallet>> initWallets(List<Exchange> exchangeList, List<Currency> currencyList) throws IOException {
+	private Map<String, Map<String, MyWallet>> initWallets(Set<Exchange> exchangeSet, List<Currency> currencyList) throws IOException {
 		Map<String, Map<String, MyWallet>> walletMap = new HashMap<>();
 		
-		for (Exchange toExchange : exchangeList) {
+		for (Exchange toExchange : exchangeSet) {
 			String exchangeName = toExchange.getExchangeSpecification().getExchangeName();
 			HashMap<String, MyWallet> currencyMap = new HashMap<>();
 			walletMap.put(exchangeName, currencyMap);

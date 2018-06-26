@@ -3,6 +3,7 @@ package arbitrail.libra.orm.service;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.knowm.xchange.Exchange;
@@ -58,6 +59,21 @@ public class WalletService {
 		// return the available balance if it is not zero
 		Balance balance = wallet.getBalance(currency);
 		return balance.getAvailable();
+	}
+
+	/**
+	 * Handles single and multiple wallets for all currencies of an exchange.
+	 */
+	public Map<Currency, Balance> getAvailableBalances(Exchange exchange, String walletId) throws IOException {
+		// find the wallet depending if it is an exchange with multiple wallets per currency
+		Wallet wallet;
+		if (walletId == null) {
+			wallet = exchange.getAccountService().getAccountInfo().getWallet();
+		} else {
+			wallet = exchange.getAccountService().getAccountInfo().getWallet(walletId);
+		}
+		// return the available balances for all currencies of an exchange
+		return wallet.getBalances();
 	}
 	
 	/**

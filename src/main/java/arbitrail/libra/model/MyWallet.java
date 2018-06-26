@@ -27,9 +27,6 @@ public class MyWallet {
 	@JacksonXmlProperty(localName = "withdrawalFee")
 	private BigDecimal withdrawalFee;
 	
-	@JacksonXmlProperty(localName = "label")
-	private String label;
-
 	public MyWallet() {
 		super();
 	}
@@ -75,15 +72,11 @@ public class MyWallet {
 		return withdrawalFee;
 	}
 	
-	public String getLabel() {
-		return label;
-	}
-
 	@Override
 	public String toString() {
 		return "MyWallet [initialBalance=" + initialBalance + ", minResidualBalance=" + minResidualBalance
 				+ ", minWithdrawalAmount=" + minWithdrawalAmount + ", address=" + address + ", tag=" + tag
-				+ ", depositFee=" + depositFee + ", withdrawalFee=" + withdrawalFee + ", label=" + label + "]";
+				+ ", depositFee=" + depositFee + ", withdrawalFee=" + withdrawalFee + "]";
 	}
 
 }

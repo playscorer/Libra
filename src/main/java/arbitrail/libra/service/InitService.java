@@ -1,6 +1,8 @@
 package arbitrail.libra.service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.ExchangeFactory;
@@ -11,9 +13,8 @@ import arbitrail.libra.model.Wallets;
 
 public interface InitService {
 
-	default Exchange createExchange(Exchange exchange, String username, String apiKey, String secretKey) {
+	default Exchange createExchange(Exchange exchange, String apiKey, String secretKey) {
 		ExchangeSpecification exSpec = exchange.getDefaultExchangeSpecification();
-		exSpec.setUserName(username);
 		exSpec.setApiKey(apiKey);
 		exSpec.setSecretKey(secretKey);
 		return ExchangeFactory.INSTANCE.createExchange(exSpec);
@@ -21,8 +22,8 @@ public interface InitService {
 	
 	List<Currency> listAllHandledCurrencies();
 	
-	List<Exchange> listAllHandledAccounts(boolean encryptedKeys);
+	Map<Exchange, String> listAllHandledAccounts(boolean encryptedKeys);
 	
-	Wallets loadAllWallets(List<Exchange> exchangeList, List<Currency> currencyList, boolean init);
+	Wallets loadAllWallets(Set<Exchange> exchangeSet, List<Currency> currencyList, boolean init);
 	
 }

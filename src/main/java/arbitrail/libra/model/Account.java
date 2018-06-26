@@ -6,12 +6,12 @@ public final class Account {
 	
 	@JacksonXmlProperty(localName = "name", isAttribute = true)
 	private String name;
-	@JacksonXmlProperty(localName = "username")
-	private String username;
 	@JacksonXmlProperty(localName = "apiKey")
 	private String apiKey;
 	@JacksonXmlProperty(localName = "key")
 	private String key;
+	@JacksonXmlProperty(localName = "wallet")
+	private String wallet;
 	
 	public Account() {
 		super();
@@ -22,12 +22,12 @@ public final class Account {
 		this.name = name;
 	}
 
-	public Account(String name, String username, String apiKey, String key) {
+	public Account(String name, String apiKey, String key, String wallet) {
 		super();
 		this.name = name;
-		this.username = username;
 		this.apiKey = apiKey;
 		this.key = key;
+		this.wallet = wallet;
 	}
 
 	public String getName() {
@@ -36,14 +36,6 @@ public final class Account {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
 	}
 
 	public String getApiKey() {
@@ -62,9 +54,17 @@ public final class Account {
 		this.key = key;
 	}
 
+	public String getWallet() {
+		return wallet;
+	}
+
+	public void setWallet(String wallet) {
+		this.wallet = wallet;
+	}
+
 	@Override
 	public String toString() {
-		return "Account [name=" + name + ", username=" + username + ", apiKey=" + apiKey + ", key=" + key + "]";
+		return "Account [name=" + name + ", apiKey=" + apiKey + ", key=" + key + ", wallet=" + wallet + "]";
 	}
 	
 }

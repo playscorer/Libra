@@ -45,7 +45,7 @@ public class PendingWithdrawalsService implements Runnable {
 	@Autowired
 	private TransactionService transxService;
 	
-	private List<Exchange> exchanges;
+	private Map<Exchange, String> exchangeMap;
 	private Wallets wallets;
 	private ConcurrentMap<ExchCcy, Object> pendingWithdrawalsMap;
 	private ConcurrentMap<Integer, ExchStatus> transxIdToTargetExchMap;
@@ -57,15 +57,15 @@ public class PendingWithdrawalsService implements Runnable {
 		super();
 	}
 	
-	public void init(Wallets wallets, ConcurrentMap<ExchCcy, Object> pendingWithdrawalsMap, ConcurrentMap<Integer, ExchStatus> transxIdToTargetExchMap, List<Exchange> exchanges) {
-		this.exchanges = exchanges;
+	public void init(Wallets wallets, ConcurrentMap<ExchCcy, Object> pendingWithdrawalsMap, ConcurrentMap<Integer, ExchStatus> transxIdToTargetExchMap, Map<Exchange, String> exchangeMap) {
+		this.exchangeMap = exchangeMap;
 		this.wallets = wallets;
 		this.transxIdToTargetExchMap = transxIdToTargetExchMap;
 		this.pendingWithdrawalsMap = pendingWithdrawalsMap;
 	}
 
 	private void pollPendingWithdrawals() {
-		for (Exchange exchange : exchanges) {
+		for (Exchange exchange : exchangeMap.keySet()) {
 			String exchangeName = exchange.getExchangeSpecification().getExchangeName();
 
 			// loads all wallets for the exchange : needed to get the label and depositAddress for XRP
@@ -150,14 +150,13 @@ public class PendingWithdrawalsService implements Runnable {
 								if (!exchStatus.isWithdrawalComplete()) {
 									LOG.debug("@ Pending withdrawal is complete - setting withdrawalComplete boolean to true");
 									exchStatus.setWithdrawalComplete(true);
-									saveUpdatedBalance(exchange, exchangeName, myWallet.getLabel(), currency);
+									saveUpdatedBalance(exchange, exchangeName, exchangeMap.get(exchange), currency);
 								}
 							}
 						}
 					}				
 					
 					// compute hashkey for the deposit
-					//BigDecimal roundedAmount = transxService.roundAmount(fundingRecord.getAmount(), fundingRecord.getCurrency()); TODO test and remove
 					String depositAddress = walletService.getDepositAddress(exchange, exchangeName, myWallet, currency);
 					Integer depositHashkey = transxService.transxHashkey(fundingRecord.getCurrency(), fundingRecord.getAmount(), depositAddress);
 					LOG.debug("@ Looking for deposit transxHashkey : " + depositHashkey + " = (" + fundingRecord.getCurrency() + ", " + fundingRecord.getAmount() + ", " + depositAddress + ")");
@@ -190,7 +189,7 @@ public class PendingWithdrawalsService implements Runnable {
 								LOG.debug("Deleting the transaction Id...");
 								transxIdToTargetExchService.delete(new AbstractMap.SimpleEntry<Integer, ExchStatus>(depositHashkey, exchStatus));
 								
-								saveUpdatedBalance(exchange, exchangeName, myWallet.getLabel(), currency);
+								saveUpdatedBalance(exchange, exchangeName, exchangeMap.get(exchange), currency);
 								
 								// Hitbtc : transfer funds to the trading wallet
 								if (ExchangeType.Hitbtc.name().equals(exchangeName)) {

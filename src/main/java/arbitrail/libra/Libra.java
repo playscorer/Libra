@@ -2,6 +2,7 @@ package arbitrail.libra;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentMap;
 
 import javax.annotation.PostConstruct;
@@ -70,19 +71,19 @@ public class Libra {
 		}
 		LOG.info("List of loaded currencies : " + currencies);
 
-		List<Exchange> exchanges = initService.listAllHandledAccounts(encrypted);
-		if (exchanges.isEmpty()) {
+		Map<Exchange, String> exchangesMap = initService.listAllHandledAccounts(encrypted);
+		if (exchangesMap.isEmpty()) {
 			LOG.fatal("Exchange list is empty - please check the accounts file!");
 			LOG.fatal("Libra has stopped!");
 			System.exit(-1);
 		}
-		LOG.info("List of loaded exchanges : " + exchanges);
+		LOG.info("List of loaded exchanges : " + exchangesMap.keySet());
 		
 		String initArg = System.getProperty("init");
 		boolean init = Boolean.valueOf(initArg);
 
 		LOG.info("Initialization of the wallets settings");
-		Wallets wallets = initService.loadAllWallets(exchanges, currencies, init);
+		Wallets wallets = initService.loadAllWallets(exchangesMap.keySet(), currencies, init);
 		if (wallets == null) {
 			LOG.fatal("Wallets settings could not be loaded - please check the wallets file!");
 			LOG.fatal("Libra has stopped!");
@@ -107,10 +108,10 @@ public class Libra {
 			pendingWithdrawalsMap = pendingTransxService.listAll();
 			LOG.debug("Loaded pending transactions : " + pendingWithdrawalsMap);
 			
-			pendingWithdrawalsService.init(wallets, pendingWithdrawalsMap, transxIdToTargetExchMap, exchanges);
+			pendingWithdrawalsService.init(wallets, pendingWithdrawalsMap, transxIdToTargetExchMap, exchangesMap);
 			libraPoolService.startService(pendingWithdrawalsService);
 			
-			balancerService.init(wallets, pendingWithdrawalsMap, transxIdToTargetExchMap, currencies, exchanges);
+			balancerService.init(wallets, pendingWithdrawalsMap, transxIdToTargetExchMap, currencies, exchangesMap);
 			libraPoolService.startService(balancerService);
 			
 			libraPoolService.shutServices();
