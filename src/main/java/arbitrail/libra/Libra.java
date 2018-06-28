@@ -108,7 +108,7 @@ public class Libra {
 			pendingWithdrawalsMap = pendingTransxService.listAll();
 			LOG.debug("Loaded pending transactions : " + pendingWithdrawalsMap);
 			
-			pendingWithdrawalsService.init(wallets, pendingWithdrawalsMap, transxIdToTargetExchMap, exchangesMap);
+			pendingWithdrawalsService.init(wallets, pendingWithdrawalsMap, transxIdToTargetExchMap, currencies, exchangesMap);
 			libraPoolService.startService(pendingWithdrawalsService);
 			
 			balancerService.init(wallets, pendingWithdrawalsMap, transxIdToTargetExchMap, currencies, exchangesMap);

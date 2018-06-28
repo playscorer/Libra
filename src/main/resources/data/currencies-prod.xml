@@ -14,5 +14,5 @@
 	<!-- <currency code="XLM"/> -->
 	<currency code="LTC"/>
 	<currency code="TRX"/>
-	<currency code="XMR"/>
+	<!-- <currency code="XMR"/> -->
 </currencies>

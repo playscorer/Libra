@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
 import org.knowm.xchange.Exchange;
@@ -11,6 +12,7 @@ import org.knowm.xchange.currency.Currency;
 import org.knowm.xchange.dto.account.Balance;
 import org.knowm.xchange.dto.account.Wallet;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +25,12 @@ import arbitrail.libra.orm.model.WalletEntity;
 public class WalletService {
 	
 	private final static Logger LOG = Logger.getLogger(WalletService.class);
+	
+	@Value( "${percent_fee}" )
+	private BigDecimal percentFee;
+
+	@Value( "${percent_balance}" )
+	private BigDecimal percentBalance;
 	
 	@Autowired
 	private WalletDao walletDao;
@@ -94,5 +102,23 @@ public class WalletService {
 			depositAddress = ((BitstampAccountService) exchange.getAccountService()).getRippleDepositAddress().getAddress();
 		}*/
 		return depositAddress;
+	}
+	
+	/**
+	 * The minWithdrawalAmount is the max(percent_balance * sumBalances / nbExchanges, fees / percentFee).
+	 */
+	public BigDecimal getMinWithdrawalAmount(MyWallet fromWallet, MyWallet toWallet, Currency currency, Map<Exchange, Map<Currency, Balance>> balanceMap) {
+		BigDecimal sumBalances = BigDecimal.ZERO;
+		int nbExchanges = 0;
+		
+		for (Entry<Exchange,Map<Currency,Balance>> entry : balanceMap.entrySet()) {
+			Balance balance = entry.getValue().get(currency);
+			BigDecimal balanceAvailable = balance == null ? BigDecimal.ZERO : balance.getAvailable();
+			sumBalances = sumBalances.add(balanceAvailable);
+			nbExchanges++;
+		}
+		sumBalances = percentBalance.multiply(sumBalances).divide(new BigDecimal(nbExchanges));
+		BigDecimal fees = fromWallet.getWithdrawalFee().add(toWallet.getDepositFee());
+		return sumBalances.max(fees.divide(percentFee));
 	}
 }

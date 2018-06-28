@@ -12,9 +12,6 @@ public class MyWallet {
 	@JacksonXmlProperty(localName = "minResidualBalance")
 	private BigDecimal minResidualBalance;
 	
-	@JacksonXmlProperty(localName = "minWithdrawalAmount")
-	private BigDecimal minWithdrawalAmount;
-
 	@JacksonXmlProperty(localName = "address")
 	private String address;
 
@@ -52,10 +49,6 @@ public class MyWallet {
 		return minResidualBalance;
 	}
 	
-	public BigDecimal getMinWithdrawalAmount() {
-		return minWithdrawalAmount;
-	}
-
 	public String getAddress() {
 		return address;
 	}
@@ -75,8 +68,8 @@ public class MyWallet {
 	@Override
 	public String toString() {
 		return "MyWallet [initialBalance=" + initialBalance + ", minResidualBalance=" + minResidualBalance
-				+ ", minWithdrawalAmount=" + minWithdrawalAmount + ", address=" + address + ", tag=" + tag
-				+ ", depositFee=" + depositFee + ", withdrawalFee=" + withdrawalFee + "]";
+				+ ", address=" + address + ", tag=" + tag + ", depositFee=" + depositFee + ", withdrawalFee="
+				+ withdrawalFee + "]";
 	}
 
 }
