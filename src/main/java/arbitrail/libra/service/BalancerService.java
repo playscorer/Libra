@@ -304,7 +304,7 @@ public class BalancerService implements Runnable {
 		// amountToWithdraw must be higher than the minimum amount specified in the config
 		BigDecimal minWithdrawalAmount = walletService.getMinWithdrawalAmount(fromWallet, toWallet, currency, balanceMap);
 		if (amountToWithdraw.compareTo(minWithdrawalAmount) < 0) {
-			LOG.error("Withdraw amount is too low - lower than minWithdrawAmount = " + minWithdrawalAmount + " for " + fromExchangeName + "$" + currency.getDisplayName());
+			LOG.error("Withdraw amount is lower than minWithdrawAmount = " + amountToWithdraw + " / " + minWithdrawalAmount + " for " + fromExchangeName + "$" + currency.getDisplayName());
 			return false;
 		}
 		LOG.info("### amountToWithdraw [" + fromExchangeName + " -> " + toExchangeName + "] : " + amountToWithdraw);

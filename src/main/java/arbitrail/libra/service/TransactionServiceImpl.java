@@ -44,6 +44,9 @@ public class TransactionServiceImpl implements TransactionService {
 	public List<FundingRecord> retrieveLastTwoDaysOf(List<FundingRecord> fundingRecords) {
 		// sorts the history descending by date
 		List<FundingRecord> sortedFundingRecords = fundingRecords.stream().sorted(Comparator.comparing(FundingRecord::getDate).reversed()).collect(Collectors.toList());
+		if (sortedFundingRecords.isEmpty()) {
+			return sortedFundingRecords;
+		}
 
 		// computes the date two days before the max date
 		Calendar calendar = Calendar.getInstance();

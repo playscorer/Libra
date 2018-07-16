@@ -4,6 +4,7 @@
 <!-- 	<currency code="XRP"/>
  	<currency code="XVG"/>
 	<currency code="NEO"/>
-	<currency code="ETH"/> -->
-	<currency code="BTC"/>
+	<currency code="ETH"/> 
+	<currency code="BTC"/> -->
+	<currency code="QTUM"/>
 </currencies>

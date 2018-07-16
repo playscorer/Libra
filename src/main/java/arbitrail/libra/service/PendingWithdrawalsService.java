@@ -103,7 +103,7 @@ public class PendingWithdrawalsService implements Runnable {
 					// check if the transactions are part of recent transactions handled by Libra
 					Currency currency = fundingRecord.getCurrency();
 					
-					// loads the wallet for the given Exch/Cur : needed to get the label and depositAddress for XRP
+					// loads the wallet for the given Exch/Cur : needed to get the depositAddress for XRP
 					MyWallet myWallet = walletsForExchange.get(currency.getCurrencyCode());
 					// this currency is not set up for the exchange
 					if (myWallet == null) {

@@ -59,7 +59,7 @@ public class WalletService {
 	public BigDecimal getAvailableBalance(Exchange exchange, String walletId, Currency currency) throws IOException {
 		// find the wallet depending if it is an exchange with multiple wallets per currency
 		Wallet wallet;
-		if (walletId == null) {
+		if (walletId == null || walletId.isEmpty()) {
 			wallet = exchange.getAccountService().getAccountInfo().getWallet();
 		} else {
 			wallet = exchange.getAccountService().getAccountInfo().getWallet(walletId);
@@ -75,7 +75,7 @@ public class WalletService {
 	public Map<Currency, Balance> getAvailableBalances(Exchange exchange, String walletId) throws IOException {
 		// find the wallet depending if it is an exchange with multiple wallets per currency
 		Wallet wallet;
-		if (walletId == null) {
+		if (walletId == null || walletId.isEmpty()) {
 			wallet = exchange.getAccountService().getAccountInfo().getWallet();
 		} else {
 			wallet = exchange.getAccountService().getAccountInfo().getWallet(walletId);
