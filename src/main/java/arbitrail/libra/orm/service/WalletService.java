@@ -2,6 +2,7 @@ package arbitrail.libra.orm.service;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -111,6 +112,7 @@ public class WalletService {
 	public BigDecimal getMinWithdrawalAmount(MyWallet fromWallet, MyWallet toWallet, Currency currency, Map<Exchange, Map<Currency, Balance>> balanceMap) {
 		BigDecimal sumBalances = BigDecimal.ZERO;
 		int nbExchanges = 0;
+		int scale = 3;
 		
 		for (Entry<Exchange,Map<Currency,Balance>> entry : balanceMap.entrySet()) {
 			String exchangeName = entry.getKey().getExchangeSpecification().getExchangeName();
@@ -119,7 +121,7 @@ public class WalletService {
 				balance = getBalancesForExchange(exchangeName, currency, entry.getValue());
 			} catch (Exception e) {
 				LOG.error("Unexpected exception : " + e.getMessage());
-				LOG.info("Skipping currency for exchange : " + exchangeName + "$" + currency.getCurrencyCode());
+				LOG.info("Skipping balances for currency for exchange : " + exchangeName + "$" + currency.getCurrencyCode());
 				continue;
 			}
 			
@@ -127,7 +129,7 @@ public class WalletService {
 			sumBalances = sumBalances.add(balanceAvailable);
 			nbExchanges++;
 		}
-		sumBalances = percentBalance.multiply(sumBalances).divide(new BigDecimal(nbExchanges));
+		sumBalances = percentBalance.multiply(sumBalances).divide(new BigDecimal(nbExchanges), scale, RoundingMode.FLOOR);
 		BigDecimal fees = fromWallet.getWithdrawalFee().add(toWallet.getDepositFee());
 		return sumBalances.max(fees.divide(percentFee));
 	}
