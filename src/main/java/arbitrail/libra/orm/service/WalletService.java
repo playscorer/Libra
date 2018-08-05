@@ -119,9 +119,9 @@ public class WalletService {
 	}
 	
 	/**
-	 * The minWithdrawalAmount is the max(percent_balance * sumBalances / nbExchanges, fees / percentFee).
+	 * The initial balance is the sumBalances / nbExchanges. 
 	 */
-	public BigDecimal getMinWithdrawalAmount(MyWallet fromWallet, MyWallet toWallet, Currency currency, Map<Exchange, Map<Currency, Balance>> balanceMap) {
+	public BigDecimal getInitialBalance(Currency currency, Map<Exchange, Map<Currency, Balance>> balanceMap) {
 		BigDecimal sumBalances = BigDecimal.ZERO;
 		int nbExchanges = 0;
 		int scale = 3;
@@ -141,7 +141,15 @@ public class WalletService {
 			sumBalances = sumBalances.add(balanceAvailable);
 			nbExchanges++;
 		}
-		sumBalances = percentBalance.multiply(sumBalances).divide(new BigDecimal(nbExchanges), scale, RoundingMode.FLOOR);
+		
+		return sumBalances.divide(new BigDecimal(nbExchanges), scale, RoundingMode.FLOOR);
+	}
+	
+	/**
+	 * The minWithdrawalAmount is the max(percent_balance * sumBalances / nbExchanges, fees / percentFee).
+	 */
+	public BigDecimal getMinWithdrawalAmount(MyWallet fromWallet, MyWallet toWallet, Currency currency, Map<Exchange, Map<Currency, Balance>> balanceMap) {
+		BigDecimal sumBalances = percentBalance.multiply(getInitialBalance(currency, balanceMap));
 		BigDecimal fees = fromWallet.getWithdrawalFee().add(toWallet.getDepositFee());
 		return sumBalances.max(fees.divide(percentFee));
 	}

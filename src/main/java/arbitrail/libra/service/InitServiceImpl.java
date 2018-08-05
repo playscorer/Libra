@@ -117,10 +117,10 @@ public class InitServiceImpl implements InitService {
 				if (wallet == null) {
 					Balance balance = toExchange.getAccountService().getAccountInfo().getWallet().getBalance(currency);
 					if (BigDecimal.ZERO.equals(balance.getAvailable())) {
-						LOG.warn("Currency not available : " + currency.getDisplayName() +  " for Exchange : " + exchangeName);
+						LOG.warn("Currency not available : " + currency.getCurrencyCode() +  " for Exchange : " + exchangeName);
 					} else {
-						LOG.debug("New currency wallet for : " + exchangeName + " -> " + currency.getDisplayName());
-						wallet = new MyWallet(balance.getAvailable());
+						LOG.debug("New currency wallet for : " + exchangeName + " -> " + currency.getCurrencyCode());
+						wallet = new MyWallet();
 						currencyMap.put(currency.getCurrencyCode(), wallet);
 					}
 				}
@@ -142,9 +142,9 @@ public class InitServiceImpl implements InitService {
 			for (Currency currency : currencyList) {
 				Balance balance = toExchange.getAccountService().getAccountInfo().getWallet().getBalance(currency);
 				if (BigDecimal.ZERO.equals(balance.getAvailable())) {
-					LOG.warn("Currency not available : " + currency.getDisplayName() +  " for Exchange : " + exchangeName);
+					LOG.warn("Currency not available : " + currency.getCurrencyCode() +  " for Exchange : " + exchangeName);
 				} else {
-					MyWallet wallet = new MyWallet(balance.getAvailable());
+					MyWallet wallet = new MyWallet();
 					currencyMap.put(currency.getCurrencyCode(), wallet);
 				}
 			}

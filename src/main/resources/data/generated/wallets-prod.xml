@@ -2,7 +2,6 @@
   <walletMap>
     <Binance>
       <XRP>
-        <initialBalance>4568.35831</initialBalance>
         <minResidualBalance>2000</minResidualBalance>
         <address>rEb8TK3gBgk5auZkwc6sHnwrGVJH8DuaLh</address>
         <tag>109750021</tag>
@@ -10,79 +9,66 @@
         <withdrawalFee>0.25</withdrawalFee>
       </XRP>
       <XVG>
-        <initialBalance>47281.13155631</initialBalance>
         <minResidualBalance>25000</minResidualBalance>
         <depositFee>0</depositFee>
         <withdrawalFee>0.1</withdrawalFee>
       </XVG>
       <ETH>
-        <initialBalance>10</initialBalance>
         <minResidualBalance>3</minResidualBalance>
         <depositFee>0</depositFee>
         <withdrawalFee>0.01</withdrawalFee>
       </ETH>
       <NEO>
-        <initialBalance>10.6113937975</initialBalance>
         <minResidualBalance>5</minResidualBalance>
         <depositFee>0</depositFee>
         <withdrawalFee>0</withdrawalFee>
       </NEO>
       <BTC>
-        <initialBalance>1</initialBalance>
         <minResidualBalance>0.15</minResidualBalance>
         <depositFee>0</depositFee>
         <withdrawalFee>0.0005</withdrawalFee>
       </BTC>
       <EOS>
-        <initialBalance>176.193327107</initialBalance>
         <minResidualBalance>80</minResidualBalance>
         <depositFee>0</depositFee>
         <withdrawalFee>0.3</withdrawalFee>
       </EOS>
       <USDT>
-        <initialBalance>2198.20722925</initialBalance>
         <minResidualBalance>1000</minResidualBalance>
         <depositFee>0</depositFee>
         <withdrawalFee>3.9</withdrawalFee>
       </USDT>
       <DASH>
-        <initialBalance>1.07047852</initialBalance>
         <minResidualBalance>0.15</minResidualBalance>
         <depositFee>0</depositFee>
         <withdrawalFee>0.002</withdrawalFee>
       </DASH>
       <NANO>
-        <initialBalance>249.95165438</initialBalance>
         <minResidualBalance>120</minResidualBalance>
         <depositFee>0</depositFee>
         <withdrawalFee>0.01</withdrawalFee>
       </NANO>
       <IOTA>
-        <initialBalance>1541.30666767</initialBalance>
         <minResidualBalance>750</minResidualBalance>
         <depositFee>0</depositFee>
         <withdrawalFee>0.5</withdrawalFee>
       </IOTA>
       <XLM>
-        <initialBalance>859.027228893</initialBalance>
         <minResidualBalance>400</minResidualBalance>
         <depositFee>0</depositFee>
         <withdrawalFee>0.01</withdrawalFee>
       </XLM>
       <LTC>
-        <initialBalance>1.39828189</initialBalance>
         <minResidualBalance>0.25</minResidualBalance>
         <depositFee>0</depositFee>
         <withdrawalFee>0.01</withdrawalFee>
       </LTC>
       <TRX>
-        <initialBalance>35915.023184683</initialBalance>
         <minResidualBalance>15000</minResidualBalance>
         <depositFee>0</depositFee>
         <withdrawalFee>61</withdrawalFee>
       </TRX>
 <!--       <XMR>
-        <initialBalance>2.020844995</initialBalance>
         <minResidualBalance>0.5</minResidualBalance>
         <tag>?</tag>
         <depositFee>0</depositFee>
@@ -91,7 +77,6 @@
     </Binance>
     <Hitbtc>
       <XRP>
-        <initialBalance>4568.35831</initialBalance>
         <minResidualBalance>2000</minResidualBalance>
         <address>rhL5Va5tDbUUuozS9isvEuv7Uk1uuJaY1T</address>
         <tag>1955192449</tag>
@@ -99,79 +84,66 @@
         <withdrawalFee>0.509</withdrawalFee>
       </XRP>
       <XVG>
-        <initialBalance>47281.13155631</initialBalance>
         <minResidualBalance>25000</minResidualBalance>
         <depositFee>0</depositFee>
         <withdrawalFee>1.5</withdrawalFee>
       </XVG>
       <NEO>
-        <initialBalance>10.6113937975</initialBalance>
         <minResidualBalance>5</minResidualBalance>
         <depositFee>0</depositFee>
         <withdrawalFee>0</withdrawalFee>
       </NEO>
       <ETH>
-        <initialBalance>10</initialBalance>
         <minResidualBalance>3</minResidualBalance>
         <depositFee>0</depositFee>
         <withdrawalFee>0.00958</withdrawalFee>
       </ETH>
       <BTC>
-        <initialBalance>1</initialBalance>
         <minResidualBalance>0.15</minResidualBalance>
         <depositFee>0.0006</depositFee>
         <withdrawalFee>0.001</withdrawalFee>
       </BTC>
       <EOS>
-        <initialBalance>176.193327107</initialBalance>
         <minResidualBalance>80</minResidualBalance>
         <depositFee>0</depositFee>
         <withdrawalFee>1.5</withdrawalFee>
       </EOS>
       <USDT>
-        <initialBalance>2198.20722925</initialBalance>
         <minResidualBalance>1000</minResidualBalance>
         <depositFee>0</depositFee>
         <withdrawalFee>100</withdrawalFee>
       </USDT>
       <DASH>
-        <initialBalance>1.07047852</initialBalance>
         <minResidualBalance>0.15</minResidualBalance>
         <depositFee>0</depositFee>
         <withdrawalFee>0.03</withdrawalFee>
       </DASH>
 <!--       <NANO>
-        <initialBalance>249.95165438</initialBalance>
         <minResidualBalance>120</minResidualBalance>
         <depositFee>0</depositFee>
         <withdrawalFee>0.01</withdrawalFee>
       </NANO>
       <IOTA>
-        <initialBalance>1541.30666767</initialBalance>
         <minResidualBalance>750</minResidualBalance>
         <depositFee>0</depositFee>
         <withdrawalFee>?</withdrawalFee>
       </IOTA>
       <XLM>
-        <initialBalance>859.027228893</initialBalance>
         <minResidualBalance>400</minResidualBalance>
         <depositFee>0</depositFee>
         <withdrawalFee>?</withdrawalFee>
       </XLM>
  -->      <LTC>
-        <initialBalance>1.39828189</initialBalance>
         <minResidualBalance>0.25</minResidualBalance>
         <depositFee>0</depositFee>
         <withdrawalFee>0.003</withdrawalFee>
       </LTC>
       <TRX>
-        <initialBalance>35915.023184683</initialBalance>
         <minResidualBalance>15000</minResidualBalance>
         <depositFee>0</depositFee>
         <withdrawalFee>270</withdrawalFee>
       </TRX>
 <!--       <XMR>
-        <initialBalance>2.020844995</initialBalance>
         <minResidualBalance>0.5</minResidualBalance>
         <tag>?</tag>
         <depositFee>0</depositFee>
@@ -180,7 +152,6 @@
     </Hitbtc>
     <Bittrex>
       <XRP>
-        <initialBalance>4568.35831</initialBalance>
         <minResidualBalance>200</minResidualBalance>
         <address>rPVMhWBsfF9iMXYj3aAzJVkPDTFNSyWdKy</address>
         <tag>1201494151</tag>
@@ -188,61 +159,51 @@
         <withdrawalFee>1</withdrawalFee>
       </XRP>
       <XVG>
-        <initialBalance>47281.13155631</initialBalance>
         <minResidualBalance>25000</minResidualBalance>
         <depositFee>0</depositFee>
         <withdrawalFee>10</withdrawalFee>
       </XVG>
       <NEO>
-        <initialBalance>10.6113937975</initialBalance>
         <minResidualBalance>5</minResidualBalance>
         <depositFee>0</depositFee>
         <withdrawalFee>0.025</withdrawalFee>
       </NEO>
       <ETH>
-        <initialBalance>10</initialBalance>
         <minResidualBalance>3</minResidualBalance>
         <depositFee>0</depositFee>
         <withdrawalFee>0.006</withdrawalFee>
       </ETH>
       <BTC>
-        <initialBalance>1</initialBalance>
         <minResidualBalance>0.15</minResidualBalance>
         <depositFee>0.0006</depositFee>
         <withdrawalFee>0.0005</withdrawalFee>
       </BTC>
       <USDT>
-        <initialBalance>2198.20722925</initialBalance>
         <minResidualBalance>1000</minResidualBalance>
         <depositFee>0</depositFee>
         <withdrawalFee>5</withdrawalFee>
       </USDT>
       <DASH>
-        <initialBalance>1.07047852</initialBalance>
         <minResidualBalance>0.15</minResidualBalance>
         <depositFee>0</depositFee>
         <withdrawalFee>0.002</withdrawalFee>
       </DASH>
       <XLM>
-        <initialBalance>859.027228893</initialBalance>
         <minResidualBalance>400</minResidualBalance>
         <depositFee>0</depositFee>
         <withdrawalFee>0.01</withdrawalFee>
       </XLM>
       <LTC>
-        <initialBalance>1.39828189</initialBalance>
         <minResidualBalance>0.25</minResidualBalance>
         <depositFee>0</depositFee>
         <withdrawalFee>0.01</withdrawalFee>
       </LTC>
       <TRX>
-        <initialBalance>35915.023184683</initialBalance>
         <minResidualBalance>15000</minResidualBalance>
         <depositFee>0</depositFee>
         <withdrawalFee>1</withdrawalFee>
       </TRX>
 <!--       <XMR>
-        <initialBalance>2.020844995</initialBalance>
         <minResidualBalance>0.5</minResidualBalance>
         <tag>?</tag>
         <depositFee>0</depositFee>
@@ -251,7 +212,6 @@
     </Bittrex>
     <!--BitFinex>
       <XRP>
-        <initialBalance>4568.35831</initialBalance>
         <minResidualBalance>2000</minResidualBalance>
         <address>?</address>
         <tag>3353271445</tag>
@@ -259,43 +219,36 @@
         <withdrawalFee>0.02</withdrawalFee>
       </XRP>
       <EOS>
-        <initialBalance>176.193327107</initialBalance>
         <minResidualBalance>80</minResidualBalance>
         <depositFee>?</depositFee>
         <withdrawalFee>?</withdrawalFee>
       </EOS>
       <USDT>
-        <initialBalance>2198.20722925</initialBalance>
         <minResidualBalance>1000</minResidualBalance>
         <depositFee>?</depositFee>
         <withdrawalFee>?</withdrawalFee>
       </USDT>
       <DASH>
-        <initialBalance>1.07047852</initialBalance>
         <minResidualBalance>0.15</minResidualBalance>
         <depositFee>?</depositFee>
         <withdrawalFee>?</withdrawalFee>
       </DASH>
       <IOTA>
-        <initialBalance>1541.30666767</initialBalance>
         <minResidualBalance>750</minResidualBalance>
         <depositFee>?</depositFee>
         <withdrawalFee>?</withdrawalFee>
       </IOTA>
       <XLM>
-        <initialBalance>859.027228893</initialBalance>
         <minResidualBalance>400</minResidualBalance>
         <depositFee>?</depositFee>
         <withdrawalFee>?</withdrawalFee>
       </XLM>
       <LTC>
-        <initialBalance>1.39828189</initialBalance>
         <minResidualBalance>0.25</minResidualBalance>
         <depositFee>?</depositFee>
         <withdrawalFee>?</withdrawalFee>
       </LTC>
       <XMR>
-        <initialBalance>2.020844995</initialBalance>
         <minResidualBalance>0.5</minResidualBalance>
         <tag>?</tag>
         <depositFee>?</depositFee>

@@ -151,7 +151,7 @@ public class BalancerService implements Runnable {
 		Map<Exchange, Map<Currency, Balance>> balanceMap = getAllBalances(exchangeMap);
 		Map<String, Map<String, MyWallet>> walletMap = wallets.getWalletMap();
 		int nbOperations = 0;
-		int scale = 3;
+		int setPrecision = 4;
 		
 		for (Exchange toExchange : exchangeMap.keySet()) {
 			String toExchangeName = toExchange.getExchangeSpecification().getExchangeName();
@@ -196,9 +196,8 @@ public class BalancerService implements Runnable {
 				}
 				
 				BigDecimal currentBalance = balanceForCurrency == null ? BigDecimal.ZERO : balanceForCurrency.getAvailable();
-				BigDecimal lastBalancedAmount = walletService.getLastBalancedAmount(toExchangeName, currencyCode);
 				// the threshold represents the minimum amount from which the balance will be triggered
-				BigDecimal checkThresholdBalance = toWallet.getInitialBalance().max(lastBalancedAmount).multiply(new BigDecimal(balanceCheckThreshold), new MathContext(scale, RoundingMode.FLOOR));
+				BigDecimal checkThresholdBalance = walletService.getInitialBalance(currency, balanceMap).multiply(new BigDecimal(balanceCheckThreshold), new MathContext(setPrecision, RoundingMode.FLOOR));
 				LOG.debug("# Exchange : " + toExchangeName + "$" + currency.getCurrencyCode() + " : currentBalance = " + currentBalance + " / checkThresholdBalance = " + checkThresholdBalance);
 
 				// trigger the balancer

@@ -6,9 +6,6 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 public class MyWallet {
 
-	@JacksonXmlProperty(localName = "initialBalance")
-	private BigDecimal initialBalance;
-
 	@JacksonXmlProperty(localName = "minResidualBalance")
 	private BigDecimal minResidualBalance;
 	
@@ -25,24 +22,14 @@ public class MyWallet {
 	private BigDecimal withdrawalFee;
 	
 	public MyWallet() {
-		super();
+		this(BigDecimal.ZERO, null, BigDecimal.ZERO, BigDecimal.ZERO);
 	}
 
-	public MyWallet(BigDecimal initialBalance) {
-		this(initialBalance, BigDecimal.ZERO, null, BigDecimal.ZERO, BigDecimal.ZERO);
-	}
-
-	public MyWallet(BigDecimal initialBalance, BigDecimal minResidualBalance, String tag, BigDecimal depositFee, BigDecimal withdrawalFee) {
-		super();
-		this.initialBalance = initialBalance;
+	public MyWallet(BigDecimal minResidualBalance, String tag, BigDecimal depositFee, BigDecimal withdrawalFee) {
 		this.minResidualBalance = minResidualBalance;
 		this.tag = tag;
 		this.depositFee = depositFee;
 		this.withdrawalFee = withdrawalFee;
-	}
-
-	public BigDecimal getInitialBalance() {
-		return initialBalance;
 	}
 
 	public BigDecimal getMinResidualBalance() {
@@ -67,9 +54,8 @@ public class MyWallet {
 	
 	@Override
 	public String toString() {
-		return "MyWallet [initialBalance=" + initialBalance + ", minResidualBalance=" + minResidualBalance
-				+ ", address=" + address + ", tag=" + tag + ", depositFee=" + depositFee + ", withdrawalFee="
-				+ withdrawalFee + "]";
+		return "MyWallet [minResidualBalance=" + minResidualBalance + ", address=" + address + ", tag=" + tag
+				+ ", depositFee=" + depositFee + ", withdrawalFee=" + withdrawalFee + "]";
 	}
 
 }

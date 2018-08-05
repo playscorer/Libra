@@ -2,7 +2,6 @@
   <walletMap>
     <Binance>
       <BTC>
-        <initialBalance>1</initialBalance>
         <minResidualBalance>0</minResidualBalance>
         <depositFee>0</depositFee>
         <withdrawalFee>0.0005</withdrawalFee>
@@ -10,13 +9,11 @@
     </Binance>
     <Hitbtc>
       <BTC>
-        <initialBalance>1</initialBalance>
         <minResidualBalance>0</minResidualBalance>
         <depositFee>0.0006</depositFee>
         <withdrawalFee>0.001</withdrawalFee>
       </BTC>
       <QTUM>
-        <initialBalance>18</initialBalance>
         <minResidualBalance>0</minResidualBalance>
         <depositFee>0</depositFee>
         <withdrawalFee>0.04</withdrawalFee>
@@ -24,7 +21,6 @@
     </Hitbtc>
     <BitFinex>
       <QTUM>
-        <initialBalance>18</initialBalance>
         <minResidualBalance>0</minResidualBalance>
         <depositFee>0</depositFee>
         <withdrawalFee>0.01</withdrawalFee>
