@@ -38,9 +38,9 @@ public interface TransactionService {
 	 * 
 	 */
 	public TradeHistoryParams getTradeHistoryParams(Exchange exchange, Currency currency);
-
+	
 	/**
 	 * 
 	 */
-	public TradeHistoryParams getTradeHistoryParams(Exchange exchange, Wallets wallets);
+	public List<TradeHistoryParams> getTradeHistoryParams(Exchange exchange, Wallets wallets);
 }

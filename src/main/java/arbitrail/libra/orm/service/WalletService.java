@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import arbitrail.libra.exchange.AliasCode;
 import arbitrail.libra.model.ExchangeType;
 import arbitrail.libra.model.MyWallet;
 import arbitrail.libra.orm.dao.WalletDao;
@@ -112,7 +113,16 @@ public class WalletService {
 		int nbExchanges = 0;
 		
 		for (Entry<Exchange,Map<Currency,Balance>> entry : balanceMap.entrySet()) {
-			Balance balance = entry.getValue().get(currency);
+			String exchangeName = entry.getKey().getExchangeSpecification().getExchangeName();
+			Balance balance;
+			try {
+				balance = getBalancesForExchange(exchangeName, currency, entry.getValue());
+			} catch (Exception e) {
+				LOG.error("Unexpected exception : " + e.getMessage());
+				LOG.info("Skipping currency for exchange : " + exchangeName + "$" + currency.getCurrencyCode());
+				continue;
+			}
+			
 			BigDecimal balanceAvailable = balance == null ? BigDecimal.ZERO : balance.getAvailable();
 			sumBalances = sumBalances.add(balanceAvailable);
 			nbExchanges++;
@@ -120,5 +130,20 @@ public class WalletService {
 		sumBalances = percentBalance.multiply(sumBalances).divide(new BigDecimal(nbExchanges));
 		BigDecimal fees = fromWallet.getWithdrawalFee().add(toWallet.getDepositFee());
 		return sumBalances.max(fees.divide(percentFee));
+	}
+	
+	/**
+	 * Handles the currency alias for bitfinex when retrieving the whole balances.
+	 */
+	public Balance getBalancesForExchange(String exchangeName, Currency currency, Map<Currency, Balance> balancesForExchange) throws Exception {
+		if (ExchangeType.BitFinex.name().equals(exchangeName)) {
+			String aliasCode = AliasCode.getBitfinexCode(currency.getCurrencyCode());
+			if (aliasCode == null) {
+				throw new Exception("Could not find the bitfinex alias code for currency : " + currency.getCurrencyCode());
+			}
+			return balancesForExchange.get(new Currency(aliasCode));
+		} else {
+			return balancesForExchange.get(currency);
+		}
 	}
 }

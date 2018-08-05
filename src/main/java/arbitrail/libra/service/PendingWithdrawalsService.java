@@ -3,6 +3,7 @@ package arbitrail.libra.service;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.AbstractMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentMap;
@@ -14,10 +15,12 @@ import org.knowm.xchange.dto.account.FundingRecord;
 import org.knowm.xchange.dto.account.FundingRecord.Status;
 import org.knowm.xchange.dto.account.FundingRecord.Type;
 import org.knowm.xchange.hitbtc.v2.service.HitbtcAccountService;
+import org.knowm.xchange.service.trade.params.TradeHistoryParams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import arbitrail.libra.exchange.AliasCode;
 import arbitrail.libra.model.ExchCcy;
 import arbitrail.libra.model.ExchStatus;
 import arbitrail.libra.model.ExchangeType;
@@ -80,38 +83,55 @@ public class PendingWithdrawalsService implements Runnable {
 			}
 
 			try {
-				List<FundingRecord> fundingRecords = exchange.getAccountService().getFundingHistory(transxService.getTradeHistoryParams(exchange, wallets));
+				List<FundingRecord> fundingRecords = new ArrayList<>();
+				// for Bitfinex there is a request per currency
+				List<TradeHistoryParams> tradeHistoryParams = transxService.getTradeHistoryParams(exchange, wallets);
+				for (TradeHistoryParams tradeHistoryParam : tradeHistoryParams) {
+					fundingRecords.addAll(exchange.getAccountService().getFundingHistory(tradeHistoryParam));
+				}
+				
 				fundingRecords = transxService.retrieveLastTwoDaysOf(fundingRecords);
 				LOG.debug("FundingRecords for exchange " + exchangeName + " :");
 				LOG.debug("@@ " + fundingRecords);
 				
 				// we are interested in the pending / cancelled withdrawals from the source exchange and the completed deposits from the target exchange
 				for (FundingRecord fundingRecord : fundingRecords) {
-					if (!currencyList.contains(fundingRecord.getCurrency())) {
+					Currency currency = fundingRecord.getCurrency();
+					// bitfinex currencies are not generic
+					if (ExchangeType.BitFinex.name().equals(exchangeName)) {
+						 String aliasCode = AliasCode.getGenericCode(fundingRecord.getCurrency().getCurrencyCode());
+						 if (aliasCode == null) {
+							 LOG.warn("Skipping currency because it could not find the generic alias code for bitfinex currency : " + fundingRecord.getCurrency().getCurrencyCode());
+							 continue;
+						 }
+						 currency = new Currency(aliasCode);
+					}
+					
+					if (!currencyList.contains(currency)) {
+						LOG.warn("Skipping not handled currency : " + currency);
 						// skip records for unhandled currencies
 						continue;
 					}
 					
 					// compute hashkey for the withdrawal
-					Integer transxHashkey = transxService.transxHashkey(fundingRecord.getCurrency(), fundingRecord.getAmount(), fundingRecord.getAddress());
-					LOG.debug("@ Looking for withdrawal transxHashkey : " + transxHashkey + " = (" + fundingRecord.getCurrency() + ", " + fundingRecord.getAmount() + ", " + fundingRecord.getAddress() + ")");
+					Integer transxHashkey = transxService.transxHashkey(currency, fundingRecord.getAmount(), fundingRecord.getAddress());
+					LOG.debug("@ Looking for withdrawal transxHashkey : " + transxHashkey + " = (" + currency + ", " + fundingRecord.getAmount() + ", " + fundingRecord.getAddress() + ")");
 					if (transxHashkey == null) {
 						LOG.error("Unexpected error : transxHashkey is null");
-						LOG.warn("Skipping transaction from exchange : " + exchangeName + "$" + fundingRecord.getCurrency().getDisplayName());
+						LOG.warn("Skipping transaction from exchange : " + exchangeName + "$" + currency.getCurrencyCode());
 						continue;
 					}					
-					// check if the transactions are part of recent transactions handled by Libra
-					Currency currency = fundingRecord.getCurrency();
 					
 					// loads the wallet for the given Exch/Cur : needed to get the depositAddress for XRP
 					MyWallet myWallet = walletsForExchange.get(currency.getCurrencyCode());
 					// this currency is not set up for the exchange
 					if (myWallet == null) {
-						LOG.warn("Configuration error : No wallet config found for this account for currency : " + exchangeName + "$" + currency.getDisplayName());
-						LOG.warn("Skipping currency for exchange : " + exchangeName + "$" + currency.getDisplayName());
+						LOG.warn("Configuration error : No wallet config found for this account for currency : " + exchangeName + "$" + currency.getCurrencyCode());
+						LOG.warn("Skipping currency for exchange : " + exchangeName + "$" + currency.getCurrencyCode());
 						continue;
 					}
 					
+					// check if the transactions are part of recent transactions handled by Libra
 					if (transxIdToTargetExchMap.keySet().contains(transxHashkey)) {
 						LOG.debug("@ Withdrawal transxHashkey found in the map of pending transactions : " + transxHashkey);
 						// filter pending withdrawals
@@ -119,15 +139,15 @@ public class PendingWithdrawalsService implements Runnable {
 							ExchStatus exchStatus = transxIdToTargetExchMap.get(transxHashkey);
 							if (exchStatus == null) {
 								LOG.error("Unexpected error : Missing mapping transactionId to destination exchange name");
-								LOG.warn("Skipping update of pending withdrawals status from exchange : " + exchangeName + "$" + currency.getDisplayName());
+								LOG.warn("Skipping update of pending withdrawals status from exchange : " + exchangeName + "$" + currency.getCurrencyCode());
 								continue;
 							}
 							// filter trades recorded before the withdrawal
 							if (!exchStatus.isAlive(fundingRecord.getDate())) {
-								LOG.warn("Filtered a withdraw : " + exchangeName + "$" + fundingRecord.getCurrency().getDisplayName() + " : " + fundingRecord.getDate() + " < " + exchStatus.getWithdrawalTime());
+								LOG.warn("Filtered a withdraw : " + exchangeName + "$" + currency.getCurrencyCode() + " : " + fundingRecord.getDate() + " < " + exchStatus.getWithdrawalTime());
 								continue;
 							}
-							LOG.warn("Detected a withdraw : " + exchangeName + "$" + fundingRecord.getCurrency().getDisplayName());
+							LOG.warn("Detected a withdraw : " + exchangeName + "$" + currency.getCurrencyCode());
 							String toExchangeName = exchStatus.getExchangeName();
 							ExchCcy exchCcy = new ExchCcy(toExchangeName, currency.getCurrencyCode());
 							
@@ -165,11 +185,11 @@ public class PendingWithdrawalsService implements Runnable {
 					
 					// compute hashkey for the deposit
 					String depositAddress = walletService.getDepositAddress(exchange, exchangeName, myWallet, currency);
-					Integer depositHashkey = transxService.transxHashkey(fundingRecord.getCurrency(), fundingRecord.getAmount(), depositAddress);
-					LOG.debug("@ Looking for deposit transxHashkey : " + depositHashkey + " = (" + fundingRecord.getCurrency() + ", " + fundingRecord.getAmount() + ", " + depositAddress + ")");
+					Integer depositHashkey = transxService.transxHashkey(currency, fundingRecord.getAmount(), depositAddress);
+					LOG.debug("@ Looking for deposit transxHashkey : " + depositHashkey + " = (" + currency + ", " + fundingRecord.getAmount() + ", " + depositAddress + ")");
 					if (depositHashkey == null) {
 						LOG.error("Unexpected error : depositHashkey is null");
-						LOG.warn("Skipping transaction from exchange : " + exchangeName + "$" + fundingRecord.getCurrency().getDisplayName());
+						LOG.warn("Skipping transaction from exchange : " + exchangeName + "$" + currency.getCurrencyCode());
 						continue;
 					}
 					if (transxIdToTargetExchMap.keySet().contains(depositHashkey)) {
@@ -179,11 +199,11 @@ public class PendingWithdrawalsService implements Runnable {
 							// filter trades recorded before the deposit
 							if (!transxIdToTargetExchMap.get(depositHashkey).isAlive(fundingRecord.getDate())) {
 								LOG.warn("Filtered a deposit : " + exchangeName + "$"
-										+ fundingRecord.getCurrency().getDisplayName() + " : " + fundingRecord.getDate()
+										+ currency.getCurrencyCode() + " : " + fundingRecord.getDate()
 										+ " < " + transxIdToTargetExchMap.get(depositHashkey).getWithdrawalTime());
 								continue;
 							}
-							LOG.warn("Detected a deposit : " + exchangeName + "$" + fundingRecord.getCurrency().getDisplayName());
+							LOG.warn("Detected a deposit : " + exchangeName + "$" + currency.getCurrencyCode());
 							if (Status.COMPLETE.equals(fundingRecord.getStatus())) {
 								ExchCcy exchCcy = new ExchCcy(exchangeName, currency.getCurrencyCode());
 								LOG.debug("@ Pending withdrawal removed from the map of pending withdrawals : " + exchCcy);
@@ -219,12 +239,11 @@ public class PendingWithdrawalsService implements Runnable {
 	private void saveUpdatedBalance(Exchange exchange, String exchangeName, String walletId, Currency currency) throws IOException {
 		BigDecimal newBalance = walletService.getAvailableBalance(exchange, walletId, currency);
 		if (newBalance != null) {
-			LOG.info("newBalance for " + exchangeName + "$" + currency.getDisplayName() + " : " + newBalance);
+			LOG.info("newBalance for " + exchangeName + "$" + currency.getCurrencyCode() + " : " + newBalance);
 			WalletEntity walletEntity = new WalletEntity(exchangeName, currency.getCurrencyCode(), newBalance);
 			LOG.debug("Saving the updated balance...");
 			walletService.save(walletEntity);
 		} else {
-			LOG.error("cannot save balance for " + exchangeName + "$" + currency.getDisplayName() + " : balance unavailable");
 		}
 	}
 

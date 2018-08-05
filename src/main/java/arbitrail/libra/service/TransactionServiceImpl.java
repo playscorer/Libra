@@ -2,6 +2,7 @@ package arbitrail.libra.service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
@@ -82,11 +83,10 @@ public class TransactionServiceImpl implements TransactionService {
 		amount = amount.setScale(scale, RoundingMode.FLOOR);
 		return amount;
 	}
-
+	
 	@Override
 	public TradeHistoryParams getTradeHistoryParams(Exchange exchange, Currency currency) {
 		String exchangeName = exchange.getExchangeSpecification().getExchangeName();
-		// TODO to check that code
 		if (ExchangeType.Hitbtc.name().equals(exchangeName)) {
 			HitbtcFundingHistoryParams.Builder builder = new HitbtcFundingHistoryParams.Builder();
 			return builder.currency(currency).offset(0).limit(100).build();
@@ -96,22 +96,22 @@ public class TransactionServiceImpl implements TransactionService {
 	}
 
 	@Override
-	public TradeHistoryParams getTradeHistoryParams(Exchange exchange, Wallets wallets) {
+	public List<TradeHistoryParams> getTradeHistoryParams(Exchange exchange, Wallets wallets) {
+		List<TradeHistoryParams> tradeHistoryParams = new ArrayList<>();
 		String exchangeName = exchange.getExchangeSpecification().getExchangeName();
-		// TODO to check that code
+
 		if (ExchangeType.Hitbtc.name().equals(exchangeName)) {
 			HitbtcFundingHistoryParams.Builder builder = new HitbtcFundingHistoryParams.Builder();
-			return builder.offset(0).limit(100).build();
-		} else if (ExchangeType.Bitfinex.name().equalsIgnoreCase(exchangeName)) {
-			// TODO: Support multi-currency TradeHistoryParams. in the meantime we return
-			// the first on the list
+			tradeHistoryParams.add(builder.offset(0).limit(100).build());
+		} else if (ExchangeType.BitFinex.name().equalsIgnoreCase(exchangeName)) {
 			for (String currencyName : wallets.getWalletMap().get(exchangeName).keySet()) {
-				return new DefaultTradeHistoryParamCurrency(new Currency(currencyName));
+				tradeHistoryParams.add(new DefaultTradeHistoryParamCurrency(new Currency(currencyName)));
 			}
-			return null;
 		} else {
-			return new DefaultTradeHistoryParamCurrency();
+			tradeHistoryParams.add(new DefaultTradeHistoryParamCurrency());
 		}
+		
+		return tradeHistoryParams;
 	}
 	
 }

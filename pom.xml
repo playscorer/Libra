@@ -22,6 +22,7 @@
 		<!-- Generic properties -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.9</java.version>
+		<xchange.version>4.3.8</xchange.version>
 
 		<!-- SPRING & HIBERNATE / JPA -->
 		<spring.version>5.0.4.RELEASE</spring.version>
@@ -68,17 +69,12 @@
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-core</artifactId>
-			<version>4.3.5</version>
-		</dependency>
-		<dependency>
-			<groupId>org.knowm.xchange</groupId>
-			<artifactId>xchange-hitbtc</artifactId>
-			<version>4.3.5</version>
+			<version>${xchange.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.knowm.xchange</groupId>
 			<artifactId>xchange-examples</artifactId>
-			<version>4.3.5</version>
+			<version>${xchange.version}</version>
 		</dependency>
 
 		<!-- Spring -->
@@ -127,6 +123,13 @@
 			<groupId>org.xerial</groupId>
 			<artifactId>sqlite-jdbc</artifactId>
 			<version>3.21.0.1</version>
+		</dependency>
+
+		<!-- Used for the rest client to test -->
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20180130</version>
 		</dependency>
 
 	</dependencies>
