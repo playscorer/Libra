@@ -15,6 +15,7 @@ import javax.crypto.spec.SecretKeySpec;
 import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -26,8 +27,11 @@ public class CipherService {
     public static final String KEY_ALGORITHM = "AES";
     public static final String PASS_HASH_ALGORITHM = "SHA-256";
     
-    public static final String SALT = "41dd7bd5cb3b47df9cdade879c46b674";
-    public static final String IV = "0e2df50cab4c43d8";
+    @Value( "${salt}" )
+    private String salt;
+
+    @Value( "${iv}" )
+    private String iv;
 
     public String encrypt(String data, String password) {
         try {
@@ -57,14 +61,14 @@ public class CipherService {
 
     private Cipher buildCipher(String password, int mode) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, UnsupportedEncodingException, InvalidAlgorithmParameterException {
         Cipher cipher = Cipher.getInstance(CIPHER_ALGORITHM);
-        IvParameterSpec ivParameterSpec = new IvParameterSpec(IV.getBytes(StandardCharsets.UTF_8));
+        IvParameterSpec ivParameterSpec = new IvParameterSpec(iv.getBytes(StandardCharsets.UTF_8));
         Key key = buildKey(password);
         cipher.init(mode, key, ivParameterSpec);
         return cipher;
     }
 
     private Key buildKey(String password) throws NoSuchAlgorithmException, UnsupportedEncodingException {
-		String passwordHash = sha256(sha256(password) + SALT);
+		String passwordHash = sha256(sha256(password) + salt);
 		byte[] key = hexStringToByteArray(passwordHash);
 		return new SecretKeySpec(key, KEY_ALGORITHM);
     }

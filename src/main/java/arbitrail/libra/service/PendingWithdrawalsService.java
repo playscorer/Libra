@@ -237,13 +237,19 @@ public class PendingWithdrawalsService implements Runnable {
 	}
 
 	private void saveUpdatedBalance(Exchange exchange, String exchangeName, String walletId, Currency currency) throws IOException {
-		BigDecimal newBalance = walletService.getAvailableBalance(exchange, walletId, currency);
-		if (newBalance != null) {
-			LOG.info("newBalance for " + exchangeName + "$" + currency.getCurrencyCode() + " : " + newBalance);
-			WalletEntity walletEntity = new WalletEntity(exchangeName, currency.getCurrencyCode(), newBalance);
-			LOG.debug("Saving the updated balance...");
-			walletService.save(walletEntity);
-		} else {
+		try {
+			BigDecimal newBalance = walletService.getAvailableBalance(exchange, walletId, currency);
+			if (newBalance != null) {
+				LOG.info("newBalance for " + exchangeName + "$" + currency.getCurrencyCode() + " : " + newBalance);
+				WalletEntity walletEntity = new WalletEntity(exchangeName, currency.getCurrencyCode(), newBalance);
+				LOG.debug("Saving the updated balance...");
+				walletService.save(walletEntity);
+			} else {
+				LOG.error("cannot save balance for " + exchangeName + "$" + currency.getCurrencyCode() + " : balance unavailable");
+			}
+		} catch (Exception e) {
+			LOG.error("Unexpected exception : " + e.getMessage());
+			LOG.error("cannot save balance for " + exchangeName + "$" + currency.getCurrencyCode() + " : balance unavailable");
 		}
 	}
 

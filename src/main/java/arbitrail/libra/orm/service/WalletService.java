@@ -57,8 +57,9 @@ public class WalletService {
 	/**
 	 * Handles single and multiple wallets per currency and exclude the zero balance
 	 * in order to avoid synchronization bugs with the exchange.
+	 * @throws Exception 
 	 */
-	public BigDecimal getAvailableBalance(Exchange exchange, String walletId, Currency currency) throws IOException {
+	public BigDecimal getAvailableBalance(Exchange exchange, String walletId, Currency currency) throws Exception {
 		// find the wallet depending if it is an exchange with multiple wallets per currency
 		Wallet wallet;
 		if (walletId == null || walletId.isEmpty()) {
@@ -66,8 +67,19 @@ public class WalletService {
 		} else {
 			wallet = exchange.getAccountService().getAccountInfo().getWallet(walletId);
 		}
+
+		Balance balance;
+		if (ExchangeType.BitFinex.name().equals(exchange.getExchangeSpecification().getExchangeName())) {
+			String aliasCode = AliasCode.getBitfinexCode(currency.getCurrencyCode());
+			if (aliasCode == null) {
+				throw new Exception("Could not find the bitfinex alias code for currency : " + currency.getCurrencyCode());
+			}
+			balance = wallet.getBalance(new Currency(aliasCode));
+		} else {
+			balance = wallet.getBalance(currency);
+		}
+		
 		// return the available balance if it is not zero
-		Balance balance = wallet.getBalance(currency);
 		return balance.getAvailable();
 	}
 

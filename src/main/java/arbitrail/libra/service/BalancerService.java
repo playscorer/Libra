@@ -21,8 +21,6 @@ import org.knowm.xchange.currency.Currency;
 import org.knowm.xchange.dto.account.Balance;
 import org.knowm.xchange.dto.account.FundingRecord;
 import org.knowm.xchange.exceptions.ExchangeException;
-import org.knowm.xchange.exceptions.NotAvailableFromExchangeException;
-import org.knowm.xchange.exceptions.NotYetImplementedForExchangeException;
 import org.knowm.xchange.hitbtc.v2.service.HitbtcAccountService;
 import org.knowm.xchange.service.trade.params.RippleWithdrawFundsParams;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -148,7 +146,7 @@ public class BalancerService implements Runnable {
 		return maxExchange;
 	}
 	
-	private int balanceAccounts() throws IOException, InterruptedException {
+	private int balanceAccounts() throws IOException {
 		// get all balances for wallet of currencies for each exchange - avoids multiple calls to getBalance per currency for a specific exchange
 		Map<Exchange, Map<Currency, Balance>> balanceMap = getAllBalances(exchangeMap);
 		Map<String, Map<String, MyWallet>> walletMap = wallets.getWalletMap();
@@ -240,8 +238,7 @@ public class BalancerService implements Runnable {
 							nbOperations++;
 						}
 						
-					} catch (NotAvailableFromExchangeException | NotYetImplementedForExchangeException
-							| ExchangeException | IOException | IllegalStateException e) {
+					} catch (Exception e) {
 						LOG.error("Exception occured when trying to balance accounts", e);
 					}
 				}
@@ -286,19 +283,12 @@ public class BalancerService implements Runnable {
 		}
 	}
 	
-	private boolean balance(Exchange fromExchange, Exchange toExchange, Currency currency, MyWallet fromWallet, MyWallet toWallet, Map<Exchange, Map<Currency, Balance>> balanceMap) 
-			throws NotAvailableFromExchangeException, NotYetImplementedForExchangeException, ExchangeException, IOException, InterruptedException {
+	private boolean balance(Exchange fromExchange, Exchange toExchange, Currency currency, MyWallet fromWallet, MyWallet toWallet, Map<Exchange, Map<Currency, Balance>> balanceMap) throws Exception {
 		String toExchangeName = toExchange.getExchangeSpecification().getExchangeName();
 		String fromExchangeName = fromExchange.getExchangeSpecification().getExchangeName();
 		
-		Balance fromBalance, toBalance;
-		try {
-			fromBalance = walletService.getBalancesForExchange(fromExchangeName, currency, balanceMap.get(fromExchange));
-			toBalance = walletService.getBalancesForExchange(toExchangeName, currency, balanceMap.get(toExchange));
-		} catch (Exception e) {
-			LOG.error("Unexpected exception : " + e.getMessage());
-			return false;
-		}
+		Balance	fromBalance = walletService.getBalancesForExchange(fromExchangeName, currency, balanceMap.get(fromExchange));
+		Balance	toBalance = walletService.getBalancesForExchange(toExchangeName, currency, balanceMap.get(toExchange));
 		
 		BigDecimal fromBalanceAvailable = fromBalance == null ? BigDecimal.ZERO : fromBalance.getAvailable();
 		BigDecimal toBalanceAvailable = toBalance == null ? BigDecimal.ZERO : toBalance.getAvailable();
