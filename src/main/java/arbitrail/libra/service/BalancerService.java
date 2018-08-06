@@ -197,7 +197,7 @@ public class BalancerService implements Runnable {
 				
 				BigDecimal currentBalance = balanceForCurrency == null ? BigDecimal.ZERO : balanceForCurrency.getAvailable();
 				// the threshold represents the minimum amount from which the balance will be triggered
-				BigDecimal checkThresholdBalance = walletService.getInitialBalance(currency, balanceMap).multiply(new BigDecimal(balanceCheckThreshold), new MathContext(setPrecision, RoundingMode.FLOOR));
+				BigDecimal checkThresholdBalance = walletService.getAvgBalance(currency, balanceMap).multiply(new BigDecimal(balanceCheckThreshold), new MathContext(setPrecision, RoundingMode.FLOOR));
 				LOG.debug("# Exchange : " + toExchangeName + "$" + currency.getCurrencyCode() + " : currentBalance = " + currentBalance + " / checkThresholdBalance = " + checkThresholdBalance);
 
 				// trigger the balancer
