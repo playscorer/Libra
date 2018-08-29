@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>arbitrail</groupId>
 	<artifactId>libra</artifactId>
-	<version>0.0.4-SNAPSHOT</version>
+	<version>0.0.4</version>
 	<name>Libra</name>
 
 	<repositories>
@@ -219,6 +219,7 @@
 									<directory>src/main/resources</directory>
 									<includes>
 										<include>${artifactId}-${spring.profiles.active}.properties</include>
+										<include>security.properties</include>
 									</includes>
 								</resource>
 								<resource>
