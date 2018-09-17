@@ -6,5 +6,5 @@
 	<currency code="NEO"/>
 	<currency code="ETH"/> 
 	<currency code="BTC"/> -->
-	<currency code="QTUM" test="true" maxTestAmount="1"/>
+	<currency code="QTUM" test="true" maxTestAmount="5"/>
 </currencies>

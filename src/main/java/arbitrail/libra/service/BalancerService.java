@@ -303,21 +303,27 @@ public class BalancerService implements Runnable {
 		BigDecimal allowedWithdrawableAmount = fromBalanceAvailable.subtract(fromWallet.getMinResidualBalance());
 		// we add the withdrawal fee to the amount to withdraw as it will be deducted automatically in order to get the desired withdrawal amount
 		BigDecimal amountToWithdraw = transxService.roundAmount(balancedOffset.min(allowedWithdrawableAmount), currency).add(fromWallet.getWithdrawalFee());
+		LOG.debug("### amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) + withdrawalFee = min ("
+				+ balancedOffset + ", " + allowedWithdrawableAmount + ") + " + fromWallet.getWithdrawalFee());
 		
 		// test mode - the withdrawal amount is bounded by the maxTestAmount
 		if (currencyAttribute.isTest()) {
+			if (currencyAttribute.getMaxTestAmount() == null) {
+				LOG.error("MaxTestAmount is null whereas the test mode is set to true - please provide a value for maxTestAmount for the currency : " + currency.getCurrencyCode());
+				return false;
+			}
 			amountToWithdraw = amountToWithdraw.min(currencyAttribute.getMaxTestAmount());
 			LOG.debug("--- Test mode enabled for this currency : " + currency.getCurrencyCode() + " - maxTestAmount: " + currencyAttribute.getMaxTestAmount());
 		}
 
-		LOG.debug("### amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) + withdrawalFee = min ("
-				+ balancedOffset + ", " + allowedWithdrawableAmount + ") + " + fromWallet.getWithdrawalFee());
-
-		// amountToWithdraw must be higher than the minimum amount specified in the config
-		BigDecimal minWithdrawalAmount = walletService.getMinWithdrawalAmount(fromWallet, toWallet, currency, balanceMap);
-		if (amountToWithdraw.compareTo(minWithdrawalAmount) < 0) {
-			LOG.error("Withdraw amount is lower than minWithdrawAmount = " + amountToWithdraw + " / " + minWithdrawalAmount + " for " + fromExchangeName + "$" + currency.getCurrencyCode());
-			return false;
+		// normal mode - the minWithdrawalAmount is computed
+		else {
+			// amountToWithdraw must be higher than the minimum amount specified in the config
+			BigDecimal minWithdrawalAmount = walletService.getMinWithdrawalAmount(fromWallet, toWallet, currency, balanceMap);
+			if (amountToWithdraw.compareTo(minWithdrawalAmount) < 0) {
+				LOG.error("Withdraw amount is lower than minWithdrawAmount = " + amountToWithdraw + " / " + minWithdrawalAmount + " for " + fromExchangeName + "$" + currency.getCurrencyCode());
+				return false;
+			}
 		}
 		LOG.info("### amountToWithdraw [" + fromExchangeName + " -> " + toExchangeName + "] : " + amountToWithdraw);
 		
