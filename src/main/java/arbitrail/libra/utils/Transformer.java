@@ -6,7 +6,7 @@ import org.knowm.xchange.currency.Currency;
 
 import arbitrail.libra.model.Account;
 import arbitrail.libra.model.ExchangeType;
-import arbitrail.libra.model.MyCurrency;
+import arbitrail.libra.model.CurrencyAttribute;
 
 public class Transformer {
 	
@@ -22,7 +22,7 @@ public class Transformer {
 		return exchange;
 	}
 	
-	public static Currency fromCurrency(MyCurrency currency) {
+	public static Currency fromCurrency(CurrencyAttribute currency) {
 		return Currency.getInstance(currency.getCode());
 	}
 	

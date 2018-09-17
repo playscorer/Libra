@@ -1,6 +1,7 @@
 package arbitrail.libra;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentMap;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Component;
 
 import arbitrail.libra.model.ExchCcy;
 import arbitrail.libra.model.ExchStatus;
+import arbitrail.libra.model.CurrencyAttribute;
 import arbitrail.libra.model.Wallets;
 import arbitrail.libra.orm.service.PendingTransxService;
 import arbitrail.libra.orm.service.TransxIdToTargetExchService;
@@ -62,8 +64,9 @@ public class Libra {
 	public void start() {
 		ConcurrentMap<ExchCcy, Object> pendingWithdrawalsMap;
 		ConcurrentMap<Integer, ExchStatus> transxIdToTargetExchMap;
+		Map<String, CurrencyAttribute> currencyAttributesMap = new HashMap<>();
 		
-		List<Currency> currencies = initService.listAllHandledCurrencies();
+		List<Currency> currencies = initService.listAllHandledCurrencies(currencyAttributesMap);
 		if (currencies.isEmpty()) {
 			LOG.fatal("Currency list is empty - please check the currencies file!");
 			LOG.fatal("Libra has stopped!");
@@ -111,7 +114,7 @@ public class Libra {
 			pendingWithdrawalsService.init(wallets, pendingWithdrawalsMap, transxIdToTargetExchMap, currencies, exchangesMap);
 			libraPoolService.startService(pendingWithdrawalsService);
 			
-			balancerService.init(wallets, pendingWithdrawalsMap, transxIdToTargetExchMap, currencies, exchangesMap);
+			balancerService.init(wallets, pendingWithdrawalsMap, transxIdToTargetExchMap, currencies, currencyAttributesMap, exchangesMap);
 			libraPoolService.startService(balancerService);
 			
 			libraPoolService.shutServices();

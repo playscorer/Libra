@@ -5,30 +5,30 @@ import java.util.Arrays;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
-@JacksonXmlRootElement(localName = "currencies") public final class Currencies {
+@JacksonXmlRootElement(localName = "currencies") public final class CurrencyAttributes {
 	
 	@JacksonXmlElementWrapper(localName = "currency", useWrapping = false)
-	private MyCurrency[] currency;
+	private CurrencyAttribute[] currency;
 
-	public Currencies() {
+	public CurrencyAttributes() {
 	}
 
-	public Currencies(MyCurrency[] currency) {
+	public CurrencyAttributes(CurrencyAttribute[] currency) {
 		super();
 		this.currency = currency;
 	}
 
-	public MyCurrency[] getCurrency() {
+	public CurrencyAttribute[] getCurrency() {
 		return currency;
 	}
 
-	public void setCurrency(MyCurrency[] currency) {
+	public void setCurrency(CurrencyAttribute[] currency) {
 		this.currency = currency;
 	}
 
 	@Override
 	public String toString() {
-		return "Currencies [currency=" + Arrays.toString(currency) + "]";
+		return "CurrencyAttributes [currency=" + Arrays.toString(currency) + "]";
 	}
 
 }

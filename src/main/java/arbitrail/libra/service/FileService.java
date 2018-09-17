@@ -17,7 +17,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 import arbitrail.libra.model.Accounts;
-import arbitrail.libra.model.Currencies;
+import arbitrail.libra.model.CurrencyAttributes;
 import arbitrail.libra.model.Wallets;
 
 @Component
@@ -32,11 +32,11 @@ public class FileService {
 	@Value( "${wallets_filepath}" )
 	private String WALLETS_FILEPATH;
 
-	public Currencies parseCurrencies() throws JsonParseException, JsonMappingException, IOException {
+	public CurrencyAttributes parseCurrencies() throws JsonParseException, JsonMappingException, IOException {
         ObjectMapper objectMapper = new XmlMapper();
-        Currencies currencies = objectMapper.readValue(
+        CurrencyAttributes currencies = objectMapper.readValue(
                 StringUtils.toEncodedString(Files.readAllBytes(Paths.get(CURRENCIES_FILEPATH)), StandardCharsets.UTF_8),
-                Currencies.class);
+                CurrencyAttributes.class);
         return currencies;
 	}
 	

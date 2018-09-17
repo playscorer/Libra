@@ -18,8 +18,8 @@ import org.springframework.stereotype.Component;
 
 import arbitrail.libra.model.Account;
 import arbitrail.libra.model.Accounts;
-import arbitrail.libra.model.Currencies;
-import arbitrail.libra.model.MyCurrency;
+import arbitrail.libra.model.CurrencyAttributes;
+import arbitrail.libra.model.CurrencyAttribute;
 import arbitrail.libra.model.MyWallet;
 import arbitrail.libra.model.Wallets;
 import arbitrail.libra.utils.Transformer;
@@ -36,13 +36,14 @@ public class InitServiceImpl implements InitService {
 	private CipherService cipherService;
 
 	@Override
-	public List<Currency> listAllHandledCurrencies() {
+	public List<Currency> listAllHandledCurrencies(Map<String, CurrencyAttribute> currencyAttributesMap) {
 		List<Currency> currencyList = new ArrayList<>();
 		
 		try {
-			Currencies currencies = fileService.parseCurrencies();
-			for (MyCurrency myCurrency : currencies.getCurrency()) {
+			CurrencyAttributes currencies = fileService.parseCurrencies();
+			for (CurrencyAttribute myCurrency : currencies.getCurrency()) {
 				currencyList.add(Transformer.fromCurrency(myCurrency));
+				currencyAttributesMap.put(myCurrency.getCode(), myCurrency);
 			}
 			
 		} catch (IOException e) {

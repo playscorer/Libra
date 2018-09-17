@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <currencies>
-<!-- 	<currency code="XRP"/>
  	<currency code="XVG"/>
+<!-- 	<currency code="XRP"/>
 	<currency code="NEO"/>
 	<currency code="ETH"/> 
 	<currency code="BTC"/> -->
-	<currency code="QTUM"/>
+	<currency code="QTUM" test="true" maxTestAmount="1"/>
 </currencies>

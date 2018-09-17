@@ -9,6 +9,7 @@ import org.knowm.xchange.ExchangeFactory;
 import org.knowm.xchange.ExchangeSpecification;
 import org.knowm.xchange.currency.Currency;
 
+import arbitrail.libra.model.CurrencyAttribute;
 import arbitrail.libra.model.Wallets;
 
 public interface InitService {
@@ -20,7 +21,7 @@ public interface InitService {
 		return ExchangeFactory.INSTANCE.createExchange(exSpec);
 	}
 	
-	List<Currency> listAllHandledCurrencies();
+	List<Currency> listAllHandledCurrencies(Map<String, CurrencyAttribute> currencyAttributesMap);
 	
 	Map<Exchange, String> listAllHandledAccounts(boolean encryptedKeys);
 	

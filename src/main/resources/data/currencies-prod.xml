@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <currencies>
-	<currency code="XRP"/>
- 	<currency code="XVG"/>
-	<currency code="NEO"/>
-	<currency code="ETH"/>
-	<currency code="BTC"/>
-	<currency code="EOS"/>
-	<currency code="USDT"/>
-	<currency code="DASH"/>
-	<currency code="NANO"/>
-	<currency code="IOTA"/>
-	<currency code="XLM"/>
-	<currency code="LTC"/>
-	<currency code="TRX"/>
-	<currency code="XMR"/>
+	<currency code="XRP" test="false"/>
+ 	<currency code="XVG" test="false"/>
+	<currency code="NEO" test="false"/>
+	<currency code="ETH" test="false"/>
+	<currency code="BTC" test="false"/>
+	<currency code="EOS" test="true" maxTestAmount="10"/>
+	<currency code="USDT" test="false"/>
+	<currency code="DASH" test="false"/>
+	<currency code="NANO" test="false"/>
+	<!-- <currency code="IOTA"/> -->
+	<currency code="XLM" test="true" maxTestAmount=""/>
+	<currency code="LTC" test="false"/>
+	<currency code="TRX" test="false"/>
+	<currency code="XMR" test="true" maxTestAmount=""/>
 </currencies>

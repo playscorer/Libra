@@ -28,6 +28,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import arbitrail.libra.exchange.AliasCode;
+import arbitrail.libra.model.CurrencyAttribute;
 import arbitrail.libra.model.ExchCcy;
 import arbitrail.libra.model.ExchStatus;
 import arbitrail.libra.model.ExchangeType;
@@ -69,6 +70,7 @@ public class BalancerService implements Runnable {
 	private Wallets wallets;
 	private Map<Exchange, String> exchangeMap;
 	private List<Currency> currencyList;
+	private Map<String, CurrencyAttribute> currencyAttributesMap;
 	private ConcurrentMap<ExchCcy, Object> pendingWithdrawalsMap;
 	private ConcurrentMap<Integer, ExchStatus> transxIdToTargetExchMap;
 	
@@ -77,10 +79,11 @@ public class BalancerService implements Runnable {
 	}
 
 	public void init(Wallets wallets, ConcurrentMap<ExchCcy, Object> pendingWithdrawalsMap, ConcurrentMap<Integer, ExchStatus> transxIdToTargetExchMap, List<Currency> currencies,
-			Map<Exchange, String> exchangeMap) {
+			Map<String, CurrencyAttribute> currencyAttributesMap, Map<Exchange, String> exchangeMap) {
 		this.currencyList = currencies;
 		this.exchangeMap = exchangeMap;
 		this.wallets = wallets;
+		this.currencyAttributesMap = currencyAttributesMap;
 		this.pendingWithdrawalsMap = pendingWithdrawalsMap;
 		this.transxIdToTargetExchMap = transxIdToTargetExchMap;
 	}
@@ -230,7 +233,7 @@ public class BalancerService implements Runnable {
 					}
 					
 					try {
-						if (balance(fromExchange, toExchange, currency, fromWallet, toWallet, balanceMap)) {
+						if (balance(fromExchange, toExchange, currency, currencyAttributesMap.get(currencyCode), fromWallet, toWallet, balanceMap)) {
 							// the rebalancing actually occured
 							BigDecimal newDecreasedBalance = walletService.getAvailableBalance(fromExchange, exchangeMap.get(fromExchange), currency);
 							LOG.info("new provisional balance for " + fromExchangeName + "$" + currency.getCurrencyCode() + " : " + newDecreasedBalance);
@@ -282,7 +285,7 @@ public class BalancerService implements Runnable {
 		}
 	}
 	
-	private boolean balance(Exchange fromExchange, Exchange toExchange, Currency currency, MyWallet fromWallet, MyWallet toWallet, Map<Exchange, Map<Currency, Balance>> balanceMap) throws Exception {
+	private boolean balance(Exchange fromExchange, Exchange toExchange, Currency currency, CurrencyAttribute currencyAttribute, MyWallet fromWallet, MyWallet toWallet, Map<Exchange, Map<Currency, Balance>> balanceMap) throws Exception {
 		String toExchangeName = toExchange.getExchangeSpecification().getExchangeName();
 		String fromExchangeName = fromExchange.getExchangeSpecification().getExchangeName();
 		
@@ -300,9 +303,16 @@ public class BalancerService implements Runnable {
 		BigDecimal allowedWithdrawableAmount = fromBalanceAvailable.subtract(fromWallet.getMinResidualBalance());
 		// we add the withdrawal fee to the amount to withdraw as it will be deducted automatically in order to get the desired withdrawal amount
 		BigDecimal amountToWithdraw = transxService.roundAmount(balancedOffset.min(allowedWithdrawableAmount), currency).add(fromWallet.getWithdrawalFee());
+		
+		// test mode - the withdrawal amount is bounded by the maxTestAmount
+		if (currencyAttribute.isTest()) {
+			amountToWithdraw = amountToWithdraw.min(currencyAttribute.getMaxTestAmount());
+			LOG.debug("--- Test mode enabled for this currency : " + currency.getCurrencyCode() + " - maxTestAmount: " + currencyAttribute.getMaxTestAmount());
+		}
+
 		LOG.debug("### amountToWithdraw = min (balancedOffset, allowedWithdrawableAmount) + withdrawalFee = min ("
 				+ balancedOffset + ", " + allowedWithdrawableAmount + ") + " + fromWallet.getWithdrawalFee());
-		
+
 		// amountToWithdraw must be higher than the minimum amount specified in the config
 		BigDecimal minWithdrawalAmount = walletService.getMinWithdrawalAmount(fromWallet, toWallet, currency, balanceMap);
 		if (amountToWithdraw.compareTo(minWithdrawalAmount) < 0) {
