@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>arbitrail</groupId>
 	<artifactId>libra</artifactId>
-	<version>0.0.6-SNAPSHOT</version>
+	<version>0.0.5</version>
 	<name>Libra</name>
 
 	<repositories>
