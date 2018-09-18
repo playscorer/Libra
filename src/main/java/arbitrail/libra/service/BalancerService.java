@@ -43,8 +43,8 @@ import si.mazi.rescu.HttpStatusIOException;
 public class BalancerService implements Runnable {
 	
 	private final static Logger LOG = Logger.getLogger(BalancerService.class);
-	
-	private int withdrawalWaitingDelay = 30000;
+
+	private static final int NUM_ATTEMPTS = 25;
 	
 	@Autowired
 	private TransxIdToTargetExchService transxIdToTargetExchService;
@@ -57,6 +57,9 @@ public class BalancerService implements Runnable {
 
 	@Autowired
 	private TransactionService transxService;
+
+	@Value( "${withdrawalWaitingDelay}" )
+	private Integer withdrawalWaitingDelay;
 
 	@Value( "${balancer_frequency}" )
 	private Integer frequency;
@@ -366,7 +369,7 @@ public class BalancerService implements Runnable {
 						LOG.debug("### transxHashkey : " + transxHashkey + " = (" + recordCurrency + ", " + depositAmount + ", " + depositAddress + ")");
 					}
 					numAttempts++;
-					if (numAttempts == 10) {
+					if (numAttempts == NUM_ATTEMPTS) {
 						throw new Exception("Maximum number of attempts reached: " + numAttempts);
 					}
 				} catch (HttpStatusIOException hse) {
