@@ -12,7 +12,7 @@
 	<currency code="NANO"/> -->
 	<!-- <currency code="IOTA"/> -->
 	<currency code="XLM" test="true" maxTestAmount="40"/>
-	<currency code="LTC"/>
+	<currency code="LTC" test="true" maxTestAmount="0.2"/>
 <!-- 	<currency code="TRX"/> -->
 	<currency code="XMR" test="true" maxTestAmount="0.2"/>
 </currencies>

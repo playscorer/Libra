@@ -451,9 +451,12 @@ public class BalancerService implements Runnable {
 				transxIdToTargetExchMap.put(transxHashkey, exchStatus);
 				LOG.debug("Saving the transaction Id...");
 				transxIdToTargetExchService.save(new AbstractMap.SimpleEntry<Integer, ExchStatus>(transxHashkey, exchStatus));
+				
+				return true;
+			} else {
+				LOG.warn("WARNING! There is no withdrawal to proceed. All currencies may be in test mode and the tests have been completed.");
+				return false;
 			}
-			
-			return true;
 		}
 		
 		return false;
