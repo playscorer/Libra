@@ -44,7 +44,7 @@ public final class CurrencyAttribute {
 
 	@Override
 	public String toString() {
-		return "Currency [code=" + code + ", test=" + test + ", maxTestAmount=" + testAmount + "]";
+		return code + " (test=" + test + ", testAmount=" + testAmount + ")";
 	}
 
 }
