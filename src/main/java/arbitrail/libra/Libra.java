@@ -32,6 +32,8 @@ import arbitrail.libra.service.PendingWithdrawalsService;
 public class Libra {
 
 	private final static Logger LOG = Logger.getLogger(Libra.class);
+
+	private static final String VERSION = "0.0.6";
 	
 	@Autowired
 	private LibraPoolService libraPoolService;
@@ -65,6 +67,8 @@ public class Libra {
 		ConcurrentMap<ExchCcy, Object> pendingWithdrawalsMap;
 		ConcurrentMap<Integer, ExchStatus> transxIdToTargetExchMap;
 		Map<String, CurrencyAttribute> currencyAttributesMap = new HashMap<>();
+		
+		LOG.info("Libra v" + VERSION);
 		
 		List<Currency> currencies = initService.listAllHandledCurrencies(currencyAttributesMap);
 		if (currencies.isEmpty()) {

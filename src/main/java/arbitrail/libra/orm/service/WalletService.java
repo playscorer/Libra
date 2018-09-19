@@ -99,16 +99,16 @@ public class WalletService {
 	}
 	
 	/**
-	 * Returns the deposit address for the specified wallet : for Bittrex with XRP it looks into the file config. 
+	 * Returns the deposit address for the specified wallet 
 	 */
 	public String getDepositAddress(Exchange toExchange, String exchangeName, MyWallet toWallet, Currency currency) throws IOException {
 		String depositAddress;
-		if (ExchangeType.Bittrex.name().equals(exchangeName) && Currency.XRP.equals(currency)) {
+		// use the deposit address from the config file if it is there
+		if (toWallet.getAddress() != null && !toWallet.getAddress().isEmpty()) {
 			depositAddress = toWallet.getAddress();
-			if (depositAddress == null) {
-				LOG.warn("Configuration error : Deposit address required for Bittrex with XRP");
-			}
-		} else {
+		} 
+		// otherwise let it be determined by the api
+		else {
 			depositAddress = toExchange.getAccountService().requestDepositAddress(currency);
 		}
 		// specific case for XRP and Bitstamp

@@ -220,7 +220,7 @@ public class PendingWithdrawalsService implements Runnable {
 								
 								// Hitbtc : transfer funds to the trading wallet
 								if (ExchangeType.Hitbtc.name().equals(exchangeName)) {
-									LOG.debug("@ Hitbtc -> transferring funds to the trading wallet");
+									LOG.debug("@@ Hitbtc -> transferring funds to the trading wallet");
 									HitbtcAccountService hitbtcAccountService = (HitbtcAccountService) exchange.getAccountService();
 									hitbtcAccountService.transferToTrading(currency, fundingRecord.getAmount());
 								}
