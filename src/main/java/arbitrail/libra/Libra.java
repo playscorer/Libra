@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentMap;
+import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 
@@ -77,6 +78,7 @@ public class Libra {
 			System.exit(-1);
 		}
 		LOG.info("List of loaded currencies : " + currencies);
+		LOG.info("List of currencies to test : " + currencyAttributesMap.values().stream().filter(attr -> attr.isTest()).collect(Collectors.toSet()));
 
 		Map<Exchange, String> exchangesMap = initService.listAllHandledAccounts(encrypted);
 		if (exchangesMap.isEmpty()) {

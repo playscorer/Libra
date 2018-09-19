@@ -12,8 +12,8 @@ public final class CurrencyAttribute {
 	@JacksonXmlProperty(localName = "test", isAttribute = true)
 	private boolean test;
 	
-	@JacksonXmlProperty(localName = "maxTestAmount", isAttribute = true)
-	private BigDecimal maxTestAmount;
+	@JacksonXmlProperty(localName = "testAmount", isAttribute = true)
+	private BigDecimal testAmount;
 
 	public CurrencyAttribute() {
 	}
@@ -23,11 +23,11 @@ public final class CurrencyAttribute {
 		this.code = code;
 	}
 
-	public CurrencyAttribute(String code, boolean test, BigDecimal maxTestAmount) {
+	public CurrencyAttribute(String code, boolean test, BigDecimal testAmount) {
 		super();
 		this.code = code;
 		this.test = test;
-		this.maxTestAmount = maxTestAmount;
+		this.testAmount = testAmount;
 	}
 
 	public String getCode() {
@@ -38,13 +38,13 @@ public final class CurrencyAttribute {
 		return test;
 	}
 
-	public BigDecimal getMaxTestAmount() {
-		return maxTestAmount;
+	public BigDecimal getTestAmount() {
+		return testAmount;
 	}
 
 	@Override
 	public String toString() {
-		return "Currency [code=" + code + ", test=" + test + ", maxTestAmount=" + maxTestAmount + "]";
+		return "Currency [code=" + code + ", test=" + test + ", maxTestAmount=" + testAmount + "]";
 	}
 
 }

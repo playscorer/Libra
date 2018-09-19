@@ -349,12 +349,12 @@ public class BalancerService implements Runnable {
 		
 		// test mode - the withdrawal amount is bounded by the maxTestAmount
 		if (currencyAttribute.isTest() && withdrawTestMap.get(currency.getCurrencyCode()).contains(fromExchangeName)) {
-			if (currencyAttribute.getMaxTestAmount() == null) {
-				LOG.error("MaxTestAmount is null whereas the test mode is set to true - please provide a value for maxTestAmount for the currency : " + currency.getCurrencyCode());
+			if (currencyAttribute.getTestAmount() == null) {
+				LOG.error("TestAmount is null whereas the test mode is set to true - please provide a value for testAmount for the currency : " + currency.getCurrencyCode());
 				return false;
 			}
-			amountToWithdraw = amountToWithdraw.min(currencyAttribute.getMaxTestAmount());
-			LOG.debug("--- Test mode enabled for this currency : " + currency.getCurrencyCode() + " - maxTestAmount: " + currencyAttribute.getMaxTestAmount());
+			amountToWithdraw = currencyAttribute.getTestAmount();
+			LOG.debug("--- Test mode enabled for this currency [" + fromExchangeName + "$" + currency.getCurrencyCode() + "]");
 		}
 
 		// normal mode - the minWithdrawalAmount is computed
